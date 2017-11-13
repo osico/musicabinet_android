@@ -18,6 +18,8 @@ android {
         targetSdkVersion versions.targetSdk
         versionCode versions.code
         versionName versions.name
+
+        buildConfigField "String", "API_ENDPOINT", '"https://api.musicabinet.com/platform/api"'
     }
 
     buildTypes {
