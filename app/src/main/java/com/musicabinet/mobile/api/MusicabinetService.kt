@@ -1,9 +1,16 @@
 package com.musicabinet.mobile.api
 
+import com.musicabinet.mobile.model.home.HomeData
+import io.reactivex.Observable
+import retrofit2.http.GET
+import retrofit2.http.Query
+
 /**
  * @author Kirchhoff-
  */
 interface MusicabinetService {
 
-    //Here will be api method's
+    @GET("/content/element")
+    fun getHomeItems(@Query("sectionIds") id: String, @Query("active") active: Boolean,
+                     @Query("start") start: Int, @Query("count") count: Int): Observable<HomeData>
 }
