@@ -24,7 +24,8 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Major Site Update" />
 
-        <TextView
+        <!-- Don't show correct ellipse in design but work normal on device/emulator(tnx Android team) -->
+        <com.musicabinet.mobile.ui.view.MultilineEllipsizedTextView
             android:id="@+id/tvText"
             android:layout_width="0dp"
             android:layout_height="0dp"
