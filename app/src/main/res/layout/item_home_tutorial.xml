@@ -8,7 +8,9 @@
     android:layout_marginEnd="16dp"
     android:layout_marginStart="16dp"
     app:cardBackgroundColor="@color/home_item_card_background"
-    tools:layout_height="200dp">
+    tools:layout_gravity="bottom"
+    tools:layout_height="200dp"
+    tools:layout_marginBottom="32dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,6 +22,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
             tools:text="Major Site Update" />
 
         <!-- Don't show correct ellipse in design but work normal on device/emulator(tnx Android team) -->
@@ -29,6 +32,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
+            android:textSize="14sp"
             tools:text="@string/stub_home_news_text" />
 
     </LinearLayout>
