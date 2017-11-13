@@ -2,39 +2,73 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.fabric'
+apply from: '../buildsystem/dependencies.gradle'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion versions.compileSdk
+    flavorDimensions "mode"
+
     defaultConfig {
         applicationId "com.musicabinet.mobile"
-        minSdkVersion 19
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.code
+        versionName versions.name
     }
+
     buildTypes {
+
+        debug {
+
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        prod {
+        }
+
+        mock {
+        }
+    }
+
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    //UI
+    implementation libraries.supportAppCompat
+    implementation libraries.supportRecyclerView
+    implementation libraries.supportCardView
+    implementation libraries.supportDesign
+    implementation libraries.constraintLayout
 
-    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
-        transitive = true;
-    }
+    //Kotlin & extensions
+    implementation libraries.kotlin
+    implementation libraries.kotlinStdLib
+    implementation libraries.anko
+
+    //Net
+    implementation libraries.retrofit
+    implementation libraries.gsonConverter
+    implementation libraries.rxJavaAdapter
+    implementation libraries.okHttpInterceptor
+
+    //Rx
+    implementation libraries.rxJava
+    implementation libraries.rxAndroid
+
+    //Dependencies for local unit tests
+    testImplementation libraries.jUnit
+    testImplementation libraries.mockito
+
+    //Crashlytics
+    implementation libraries.crashlytics
 }
