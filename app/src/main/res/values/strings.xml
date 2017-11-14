@@ -4,4 +4,5 @@
     <!-- String resources for HomeScreen -->
     <string name="how_to_use">How to use</string>
     <string name="error_loading_home_video">Error during loading home video</string>
+    <string name="error_loading_home_news">Error during loading home news</string>
 </resources>
