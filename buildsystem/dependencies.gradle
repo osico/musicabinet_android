@@ -18,6 +18,9 @@ ext.versions = [
         supportVersion     : '27.0.0',
         constraintLayout   : '1.0.2',
 
+        //Image loading
+        picasso            : '2.5.2',
+
         //Net
         okhttpVersion      : '3.9.0',
         retrofitVersion    : '2.3.0',
@@ -62,6 +65,9 @@ ext.libraries = [
         //Rx
         rxJava             : "io.reactivex.rxjava2:rxjava:$versions.rxjavaVersion",
         rxAndroid          : "io.reactivex.rxjava2:rxandroid:$versions.rxandroidVersion",
+
+        //Image loading
+        picasso            : "com.squareup.picasso:picasso:$versions.picasso",
 
         //Dependencies for local unit tests
         jUnit              : "junit:junit:$versions.junitVersion",

@@ -19,7 +19,7 @@ android {
         versionCode versions.code
         versionName versions.name
 
-        buildConfigField "String", "API_ENDPOINT", '"https://api.musicabinet.com/platform/api"'
+        buildConfigField "String", "API_ENDPOINT", '"https://api.musicabinet.com"'
     }
 
     buildTypes {
@@ -62,6 +62,9 @@ dependencies {
     implementation libraries.gsonConverter
     implementation libraries.rxJavaAdapter
     implementation libraries.okHttpInterceptor
+
+    //Image loading
+    implementation libraries.picasso
 
     //Rx
     implementation libraries.rxJava

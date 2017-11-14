@@ -38,8 +38,9 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View {
         presenter = HomeVideoPresenter(Injection.provideRepository(), this)
 
         recyclerView.setVisible(false)
-        tvError.setVisible(false)
+        cvError.setVisible(false)
         progressBar.setVisible(true)
+        presenter.loadItems()
     }
 
     override fun showLoading(visible: Boolean) {
@@ -51,7 +52,7 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View {
     }
 
     override fun showHomeVideoError() {
-        tvError.setVisible(true)
+        cvError.setVisible(true)
     }
 
     override fun showHomeVideoList(visible: Boolean) {
@@ -67,6 +68,8 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View {
         } else {
             homeVideoAdapter?.addItems(videoList)
         }
+
+        recyclerView.setVisible(true)
     }
 
 }
