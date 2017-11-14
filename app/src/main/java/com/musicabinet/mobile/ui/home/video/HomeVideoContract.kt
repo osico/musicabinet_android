@@ -9,11 +9,15 @@ interface HomeVideoContract {
 
     interface View {
 
-        fun showLoading(show: Boolean)
+        fun showLoading(visible: Boolean)
 
-        fun showPaginationLoading(show: Boolean)
+        fun showPaginationLoading(visible: Boolean)
 
-        fun showHomeVideo(videoList: List<HomeDataElement>)
+        fun showHomeVideoList(visible: Boolean)
+
+        fun showHomeVideoError()
+
+        fun setHomeVideoItem(videoList: List<HomeDataElement>)
     }
 
     interface Presenter {
