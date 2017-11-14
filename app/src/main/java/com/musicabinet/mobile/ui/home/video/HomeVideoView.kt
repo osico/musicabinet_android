@@ -2,6 +2,7 @@ package com.musicabinet.mobile.ui.home.video
 
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.PagerSnapHelper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -36,6 +37,9 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View {
         LayoutInflater.from(context).inflate(R.layout.view_home_video, this, true)
 
         presenter = HomeVideoPresenter(Injection.provideRepository(), this)
+
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(recyclerView)
 
         recyclerView.setVisible(false)
         cvError.setVisible(false)
