@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.musicabinet.mobile.ui.home.news.HomeNewsView
+    <com.musicabinet.mobile.ui.home.tutorial.HomeTutorialView
         android:layout_width="368dp"
         android:layout_height="239dp"
         android:layout_marginBottom="8dp"

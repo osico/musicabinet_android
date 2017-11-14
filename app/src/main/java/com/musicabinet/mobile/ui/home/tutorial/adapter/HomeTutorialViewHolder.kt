@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.home
+package com.musicabinet.mobile.ui.home.tutorial.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

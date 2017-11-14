@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.home.news
+package com.musicabinet.mobile.ui.home.tutorial
 
 /**
  * @author Kirchhoff-
@@ -11,20 +11,20 @@ import io.reactivex.disposables.CompositeDisposable
 /**
  * @author Kirchhoff-
  */
-class HomeNewsPresenter(private val repository: MusicabinetRepository,
-                        private val view: HomeNewsContract.View) : HomeNewsContract.Presenter {
+class HomeTutorialPresenter(private val repository: MusicabinetRepository,
+                            private val view: HomeTutorialContract.View) : HomeTutorialContract.Presenter {
 
     private val subscriptions = CompositeDisposable()
-    private var homeNewsLoaded = 0
-    private var homeNewsMaxSize = 0
+    private var homeTutorialLoaded = 0
+    private var homeTutorialMaxSize = 0
 
 
     override fun loadItems() {
 
-        subscriptions.add(repository.getHomeNews(homeNewsLoaded)
+        subscriptions.add(repository.getHomeTutorial(homeTutorialLoaded)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {
-                    if (homeNewsLoaded == 0)
+                    if (homeTutorialLoaded == 0)
                         view.showLoading(true)
                     else
                         view.showPaginationLoading(true)
@@ -33,14 +33,14 @@ class HomeNewsPresenter(private val repository: MusicabinetRepository,
             view.showPaginationLoading(false)
         }.subscribe({ homeData: HomeData? ->
             if (homeData != null && !homeData.fields.isEmpty()) {
-                view.setHomeNewsItem(homeData.fields)
-                homeNewsLoaded = homeData.partCount
-                homeNewsMaxSize = homeData.totalCount
+                view.setHomeTutorialItem(homeData.fields)
+                homeTutorialLoaded = homeData.partCount
+                homeTutorialMaxSize = homeData.totalCount
             } else {
-                view.showHomeNewsError()
+                view.showHomeTutorialError()
             }
         }, { t: Throwable? ->
-            view.showHomeNewsError()
+            view.showHomeTutorialError()
         }))
     }
 
