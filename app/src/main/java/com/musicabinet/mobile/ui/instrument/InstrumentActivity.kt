@@ -2,8 +2,6 @@ package com.musicabinet.mobile.ui.instrument
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.PagerSnapHelper
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
@@ -16,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_instrument.*
  */
 class InstrumentActivity : AppCompatActivity(), InstrumentContract.View {
 
-    private var instrumentAdapter: InstrumentAdapter? = null
+    private lateinit var instrumentAdapter: InstrumentAdapter
     private lateinit var presenter: InstrumentContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +22,6 @@ class InstrumentActivity : AppCompatActivity(), InstrumentContract.View {
         setContentView(R.layout.activity_instrument)
 
         presenter = InstrumentPresenter(Injection.provideRepository(), this)
-
-        val snapHelper = PagerSnapHelper()
-        snapHelper.attachToRecyclerView(recyclerView)
 
         presenter.loadInstrumentList()
     }
@@ -41,18 +36,13 @@ class InstrumentActivity : AppCompatActivity(), InstrumentContract.View {
     }
 
     override fun showInstrumentList(visible: Boolean) {
-        recyclerView.setVisible(visible)
+        viewPager.setVisible(visible)
     }
 
     override fun setInstrumentList(instrumentList: List<InstrumentDataElement>) {
-        if (instrumentAdapter == null) {
-            instrumentAdapter = InstrumentAdapter(instrumentList)
-            recyclerView.layoutManager = LinearLayoutManager(this,
-                    LinearLayoutManager.HORIZONTAL, false)
-            recyclerView.adapter = instrumentAdapter
-        } else {
-            instrumentAdapter?.addItems(instrumentList)
-        }
+        instrumentAdapter = InstrumentAdapter(instrumentList)
+        viewPager.adapter = instrumentAdapter
+        viewPager.currentItem = instrumentAdapter.count / 2
     }
 
 }

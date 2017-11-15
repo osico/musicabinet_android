@@ -1,24 +1,28 @@
 package com.musicabinet.mobile.ui.instrument.adapter
 
+import android.support.v4.view.PagerAdapter
+import android.view.View
 import android.view.ViewGroup
-import com.musicabinet.mobile.R
-import com.musicabinet.mobile.extensions.inflate
 import com.musicabinet.mobile.model.instrument.InstrumentDataElement
-import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 
 /**
  * @author Kirchhoff-
  */
-class InstrumentAdapter(items: List<InstrumentDataElement>)
-    : BaseRecyclerAdapter<InstrumentViewHolder, InstrumentDataElement>(items) {
+class InstrumentAdapter(private val instrumentList: List<InstrumentDataElement>) : PagerAdapter() {
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            InstrumentViewHolder(parent.inflate(R.layout.item_instrument))
-
-    override fun onBindViewHolder(holder: InstrumentViewHolder, position: Int) {
-        super.onBindViewHolder(holder, position)
-        holder.bind(getItem(position))
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        val instrumentView = InstrumentView(container.context)
+        instrumentView.bind(instrumentList[position])
+        container.addView(instrumentView)
+        return instrumentView
     }
+
+    override fun destroyItem(container: ViewGroup, position: Int, view: Any) {
+        container.removeView(view as View)
+    }
+
+    override fun getCount() = instrumentList.size
+
+    override fun isViewFromObject(view: View, `object`: Any) = view === `object`
 
 }
