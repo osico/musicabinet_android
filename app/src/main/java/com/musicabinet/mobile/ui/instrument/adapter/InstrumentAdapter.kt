@@ -13,6 +13,7 @@ class InstrumentAdapter(private val instrumentList: List<InstrumentDataElement>)
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val instrumentView = InstrumentView(container.context)
         instrumentView.bind(instrumentList[position])
+        instrumentView.tag = position
         container.addView(instrumentView)
         return instrumentView
     }
@@ -24,5 +25,8 @@ class InstrumentAdapter(private val instrumentList: List<InstrumentDataElement>)
     override fun getCount() = instrumentList.size
 
     override fun isViewFromObject(view: View, `object`: Any) = view === `object`
+
+    override fun getItemPosition(`object`: Any) = PagerAdapter.POSITION_NONE
+
 
 }
