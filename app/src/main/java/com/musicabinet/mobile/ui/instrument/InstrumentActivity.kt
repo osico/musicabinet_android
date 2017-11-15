@@ -21,6 +21,10 @@ class InstrumentActivity : AppCompatActivity(), InstrumentContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_instrument)
 
+        val pagerPadding = resources.getDimensionPixelSize(R.dimen.instrument_item_padding)
+        viewPager.clipToPadding = false
+        viewPager.setPadding(pagerPadding, 0, pagerPadding, 0)
+
         presenter = InstrumentPresenter(Injection.provideRepository(), this)
 
         presenter.loadInstrumentList()
