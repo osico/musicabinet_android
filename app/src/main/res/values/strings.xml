@@ -8,4 +8,9 @@
     <string name="error_loading_home_tutorial">Error during loading home tutorial</string>
     <string name="news_tab">News</string>
     <string name="tutorial_tab">Tutorial</string>
+
+
+    <!-- String resources for InstrumentScreen -->
+    <string name="select_instrument">Select the instrument</string>
+    <string name="error_loading_instrument_list">Error during loading instrument list</string>
 </resources>

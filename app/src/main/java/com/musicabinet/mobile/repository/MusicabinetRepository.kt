@@ -1,6 +1,7 @@
 package com.musicabinet.mobile.repository
 
 import com.musicabinet.mobile.model.home.HomeData
+import com.musicabinet.mobile.model.instrument.InstrumentData
 import io.reactivex.Observable
 
 /**
@@ -13,4 +14,6 @@ interface MusicabinetRepository {
     fun getHomeTutorial(start: Int): Observable<HomeData>
 
     fun getHomeVideo(start: Int): Observable<HomeData>
+
+    fun getInstrumentList(): Observable<InstrumentData>
 }

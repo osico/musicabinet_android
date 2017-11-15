@@ -1,8 +1,6 @@
 package com.musicabinet.mobile.repository
 
 import com.musicabinet.mobile.api.ApiFactory
-import com.musicabinet.mobile.model.home.HomeData
-import io.reactivex.Observable
 
 /**
  * @author Kirchhoff-
@@ -17,9 +15,12 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
     override fun getHomeNews(start: Int) =
             ApiFactory.service.getHomeItems(HOME_NEWS_ID, true, start, REQUEST_ITEM_COUNT)
 
-    override fun getHomeTutorial(start: Int): Observable<HomeData> =
+    override fun getHomeTutorial(start: Int) =
             ApiFactory.service.getHomeItems(HOME_TUTORIALS_ID, true, start, REQUEST_ITEM_COUNT)
 
-    override fun getHomeVideo(start: Int): Observable<HomeData> =
+    override fun getHomeVideo(start: Int) =
             ApiFactory.service.getHomeItems(HOME_VIDEO_ID, true, start, REQUEST_ITEM_COUNT)
+
+    override fun getInstrumentList() =
+            ApiFactory.service.getInstrumentList()
 }

@@ -8,4 +8,8 @@ import com.google.gson.annotations.SerializedName
 data class InstrumentDataElement(@SerializedName("active") val active: Boolean,
                                  @SerializedName("nameLocalized") val nameLocalized: String,
                                  @SerializedName("logo") val logo: String,
-                                 @SerializedName("sortOrder") val sortOrder: Int)
+                                 @SerializedName("sortOrder") val sortOrder: Int) : Comparable<InstrumentDataElement> {
+
+    override fun compareTo(other: InstrumentDataElement) = sortOrder - other.sortOrder
+
+}
