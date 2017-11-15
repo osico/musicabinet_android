@@ -5,6 +5,8 @@
     <color name="colorPrimaryStatusBarkDark">#243127</color>
     <color name="colorAccent">#f6b322</color>
 
+    <color name="white">#FFFFFF</color>
+    <color name="red">#d91111</color>
 
     <color name="home_item_card_background">#1AFFFFFF</color>
 </resources>
