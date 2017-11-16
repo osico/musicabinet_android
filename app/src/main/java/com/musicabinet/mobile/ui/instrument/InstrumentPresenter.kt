@@ -22,6 +22,7 @@ class InstrumentPresenter(private val repository: MusicabinetRepository,
                     view.showLoading(true)
                     view.showError(false)
                     view.showInstrumentList(false)
+                    view.showPageIndicator(false)
                 }
                 .doOnTerminate {
                     view.showLoading(false)
@@ -36,6 +37,7 @@ class InstrumentPresenter(private val repository: MusicabinetRepository,
                     else {
                         view.setInstrumentList(instrumentList)
                         view.showInstrumentList(true)
+                        view.showPageIndicator(true)
                     }
                 },
                         { t: Throwable? ->

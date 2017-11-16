@@ -15,6 +15,8 @@ interface InstrumentContract {
 
         fun showInstrumentList(visible: Boolean)
 
+        fun showPageIndicator(visible: Boolean)
+
         fun setInstrumentList(instrumentList: List<InstrumentDataElement>)
 
     }

@@ -21,10 +21,6 @@ class InstrumentActivity : AppCompatActivity(), InstrumentContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_instrument)
 
-        val pagerPadding = resources.getDimensionPixelSize(R.dimen.instrument_item_padding)
-        viewPager.clipToPadding = false
-        viewPager.setPadding(pagerPadding, 0, pagerPadding, 0)
-
         presenter = InstrumentPresenter(Injection.provideRepository(), this)
 
         presenter.loadInstrumentList()
@@ -43,12 +39,16 @@ class InstrumentActivity : AppCompatActivity(), InstrumentContract.View {
         viewPager.setVisible(visible)
     }
 
+    override fun showPageIndicator(visible: Boolean) {
+        pageIndicator.setVisible(visible)
+    }
+
     override fun setInstrumentList(instrumentList: List<InstrumentDataElement>) {
         instrumentAdapter = InstrumentAdapter(instrumentList)
         viewPager.adapter = instrumentAdapter
         viewPager.currentItem = instrumentAdapter.count / 2
-
-        viewPager.showItem()
+        pageIndicator.setViewPager(viewPager)
+        pageIndicator.selection = instrumentAdapter.count / 2
     }
 
 }
