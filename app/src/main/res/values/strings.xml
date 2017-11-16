@@ -6,6 +6,7 @@
     <string name="home">Home</string>
     <string name="musicabinet">Musicabinet</string>
     <string name="virtual_institute">virtual institute</string>
+    <string name="my_account">My account</string>
 
     <!-- String resources for HomeScreen -->
     <string name="how_to_use">How to use</string>

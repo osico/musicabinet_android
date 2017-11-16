@@ -47,6 +47,8 @@
 
             <include layout="@layout/view_slide_header" />
 
+            <include layout="@layout/view_slide_menu" />
+
         </LinearLayout>
 
     </android.support.design.widget.NavigationView>
