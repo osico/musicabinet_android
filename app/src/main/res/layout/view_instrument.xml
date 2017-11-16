@@ -14,16 +14,13 @@
         android:layout_height="match_parent"
         tools:src="@drawable/ic_instrument_drums" />
 
-
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:gravity="center"
         android:textAllCaps="true"
         android:textSize="26sp"
         tools:text="drums" />
-
 
 </LinearLayout>
