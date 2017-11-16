@@ -24,6 +24,11 @@
         <activity
             android:name=".ui.instrument.InstrumentActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".ui.slidemenu.SlideMenuActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
