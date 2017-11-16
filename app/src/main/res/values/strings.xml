@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Musicabinet</string>
 
+    <!-- String resources for SlideMenu -->
+    <string name="education">Education</string>
+    <string name="home">Home</string>
+    <string name="musicabinet">Musicabinet</string>
+    <string name="virtual_institute">virtual institute</string>
+
     <!-- String resources for HomeScreen -->
     <string name="how_to_use">How to use</string>
     <string name="error_loading_home_video">Error during loading home video</string>
