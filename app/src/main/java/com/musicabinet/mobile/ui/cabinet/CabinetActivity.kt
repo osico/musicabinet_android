@@ -7,6 +7,7 @@ import android.view.View
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.ui.slidemenu.SlideMenuActivity
 import kotlinx.android.synthetic.main.activity_cabinet.*
+import org.jetbrains.anko.toast
 
 /**
  * @author Kirchhoff-
@@ -18,6 +19,10 @@ class CabinetActivity : SlideMenuActivity() {
 
         viewPager.adapter = CabinetAdapter(this)
         tabLayout.setupWithViewPager(viewPager)
+
+        tvSignIn.setOnClickListener {
+            toast("Move to SignUp Screen")
+        }
     }
 
     override fun inflateLayout(): View {
