@@ -6,6 +6,7 @@ import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.ui.cabinet.CabinetActivity
 import com.musicabinet.mobile.ui.home.HomeActivity
 import com.musicabinet.mobile.ui.instrument.InstrumentActivity
 import kotlinx.android.synthetic.main.activity_slide_menu.*
@@ -31,6 +32,7 @@ abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
 
         educationLayout.setOnClickListener { presenter.onEducationClick() }
         homeLayout.setOnClickListener { presenter.onHomeClick() }
+        accountLayout.setOnClickListener { presenter.onMyAccountClick() }
     }
 
     protected abstract fun inflateLayout(): View
@@ -63,6 +65,15 @@ abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
     }
 
     override fun moveToMyAccount() {
+        drawer.closeDrawers()
+
+        if (this !is CabinetActivity) {
+            handler.postDelayed({
+                val intent = Intent(this, CabinetActivity::class.java)
+                startActivity(intent)
+                finish()
+            }, OPEN_SCREEN_DELAY)
+        }
     }
 
 }

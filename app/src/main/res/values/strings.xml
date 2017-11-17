@@ -24,4 +24,8 @@
     <!-- Resources for CabinetScreen -->
     <string name="enter_email_hint">Enter your e-mail</string>
     <string name="next">Next</string>
+    <string name="sign_in_text">Use email or social profile to sign in</string>
+    <string name="create_new_account"><a href="">Create a New Account</a></string>
+    <string name="email_tab">Email</string>
+    <string name="social_profile_tab">Social profile</string>
 </resources>
