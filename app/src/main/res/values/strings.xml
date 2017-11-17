@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">Musicabinet</string>
 
-    <!-- String resources for SlideMenu -->
+    <!-- Resources for SlideMenu -->
     <string name="education">Education</string>
     <string name="home">Home</string>
     <string name="musicabinet">Musicabinet</string>
     <string name="virtual_institute">virtual institute</string>
     <string name="my_account">My account</string>
 
-    <!-- String resources for HomeScreen -->
+    <!-- Resources for HomeScreen -->
     <string name="how_to_use">How to use</string>
     <string name="error_loading_home_video">Error during loading home video</string>
     <string name="error_loading_home_news">Error during loading home news</string>
@@ -16,8 +16,12 @@
     <string name="news_tab">News</string>
     <string name="tutorial_tab">Tutorial</string>
 
-
-    <!-- String resources for InstrumentScreen -->
+    <!-- Resources for InstrumentScreen -->
     <string name="select_instrument">Select the instrument</string>
     <string name="error_loading_instrument_list">Error during loading instrument list</string>
+
+
+    <!-- Resources for CabinetScreen -->
+    <string name="enter_email_hint">Enter your e-mail</string>
+    <string name="next">Next</string>
 </resources>
