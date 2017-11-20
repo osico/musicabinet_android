@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.getString
 import com.musicabinet.mobile.utils.TextWatcherAdapter
 import kotlinx.android.synthetic.main.view_enter_email.view.*
 
@@ -43,7 +44,7 @@ class EnterEmailView : LinearLayout, EnterEmailContract.View {
     private val emailTextWatcher = object : TextWatcherAdapter() {
 
         override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-            presenter.onUserTypeEmail(edEmail.text.toString())
+            presenter.onUserTypeEmail(edEmail.getString())
         }
     }
 }

@@ -7,7 +7,7 @@ class SignUpUserPresenter(private val view: SignUpUserContract.View) : SignUpUse
 
 
     override fun onUserType(name: String, surname: String, mail: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view.enableNextButton(!name.isEmpty() && !surname.isEmpty() && !mail.isEmpty())
     }
 
 }

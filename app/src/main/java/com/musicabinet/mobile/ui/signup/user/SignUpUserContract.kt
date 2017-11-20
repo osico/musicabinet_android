@@ -7,12 +7,6 @@ interface SignUpUserContract {
 
     interface View {
 
-        fun showEmptyNameError()
-
-        fun showEmptySurnameError()
-
-        fun showEmptyMailError()
-
         fun showMailError()
 
         fun enableNextButton(enable: Boolean)
