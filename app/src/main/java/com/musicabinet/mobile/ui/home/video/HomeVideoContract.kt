@@ -17,7 +17,7 @@ interface HomeVideoContract {
 
         fun showHomeVideoError()
 
-        fun setHomeVideoItem(videoList: List<HomeDataElement>)
+        fun setHomeVideoItem(videoList: List<HomeDataElement>, enablePagination: Boolean)
     }
 
     interface Presenter {

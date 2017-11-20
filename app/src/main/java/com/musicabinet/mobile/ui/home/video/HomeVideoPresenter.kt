@@ -35,7 +35,7 @@ class HomeVideoPresenter(private val repository: MusicabinetRepository,
                     if (homeVideoLoaded >= homeVideoMaxSize)
                         view.disablePaginationLoading()
 
-                    view.setHomeVideoItem(homeData.fields)
+                    view.setHomeVideoItem(homeData.fields, homeVideoLoaded < homeVideoMaxSize)
                 } else {
                     view.showHomeVideoError()
                 }

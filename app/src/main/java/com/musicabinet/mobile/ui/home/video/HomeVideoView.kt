@@ -80,9 +80,9 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View {
         recyclerView.setVisible(visible)
     }
 
-    override fun setHomeVideoItem(videoList: List<HomeDataElement>) {
+    override fun setHomeVideoItem(videoList: List<HomeDataElement>, enablePagination: Boolean) {
         if (homeVideoAdapter == null) {
-            homeVideoAdapter = HomeVideoAdapter(videoList)
+            homeVideoAdapter = HomeVideoAdapter(videoList, enablePagination)
             recyclerView.layoutManager = linearLayoutManager
             recyclerView.adapter = homeVideoAdapter
         } else {
