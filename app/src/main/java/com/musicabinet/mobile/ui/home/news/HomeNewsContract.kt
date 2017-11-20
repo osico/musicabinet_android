@@ -11,13 +11,13 @@ interface HomeNewsContract {
 
         fun showLoading(visible: Boolean)
 
-        fun showPaginationLoading(visible: Boolean)
+        fun disablePaginationLoading()
 
         fun showHomeNewsList(visible: Boolean)
 
         fun showHomeNewsError()
 
-        fun setHomeNewsItem(videoList: List<HomeDataElement>)
+        fun setHomeNewsItem(videoList: List<HomeDataElement>, enablePagination: Boolean)
     }
 
     interface Presenter {

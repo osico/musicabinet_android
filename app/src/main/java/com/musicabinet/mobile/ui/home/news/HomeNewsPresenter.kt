@@ -16,32 +16,36 @@ class HomeNewsPresenter(private val repository: MusicabinetRepository,
 
     private val subscriptions = CompositeDisposable()
     private var homeNewsLoaded = 0
-    private var homeNewsMaxSize = 0
+    private var homeNewsMaxSize = 1
 
 
     override fun loadItems() {
 
-        subscriptions.add(repository.getHomeNews(homeNewsLoaded)
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {
-                    if (homeNewsLoaded == 0)
-                        view.showLoading(true)
-                    else
-                        view.showPaginationLoading(true)
-                }.doOnTerminate {
-            view.showLoading(false)
-            view.showPaginationLoading(false)
-        }.subscribe({ homeData: HomeData? ->
-            if (homeData != null && !homeData.fields.isEmpty()) {
-                view.setHomeNewsItem(homeData.fields)
-                homeNewsLoaded = homeData.partCount
-                homeNewsMaxSize = homeData.totalCount
-            } else {
+        if (homeNewsLoaded < homeNewsMaxSize) {
+            subscriptions.add(repository.getHomeNews(homeNewsLoaded)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe {
+                        if (homeNewsLoaded == 0)
+                            view.showLoading(true)
+                    }.doOnTerminate {
+                view.showLoading(false)
+            }.subscribe({ homeData: HomeData? ->
+                if (homeData != null && !homeData.fields.isEmpty()) {
+
+                    homeNewsLoaded = homeData.partCount
+                    homeNewsMaxSize = homeData.totalCount
+
+                    if (homeNewsLoaded >= homeNewsMaxSize)
+                        view.disablePaginationLoading()
+
+                    view.setHomeNewsItem(homeData.fields, homeNewsLoaded < homeNewsMaxSize)
+                } else {
+                    view.showHomeNewsError()
+                }
+            }, { t: Throwable? ->
                 view.showHomeNewsError()
-            }
-        }, { t: Throwable? ->
-            view.showHomeNewsError()
-        }))
+            }))
+        }
     }
 
 }

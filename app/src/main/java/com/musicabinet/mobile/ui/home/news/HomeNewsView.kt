@@ -3,6 +3,7 @@ package com.musicabinet.mobile.ui.home.news
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PagerSnapHelper
+import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -18,8 +19,11 @@ import kotlinx.android.synthetic.main.view_home_news.view.*
  */
 class HomeNewsView : FrameLayout, HomeNewsContract.View {
 
-    private var homeVideoAdapter: HomeNewsAdapter? = null
+    private var homeNewsAdapter: HomeNewsAdapter? = null
     private lateinit var presenter: HomeNewsContract.Presenter
+    private var loading: Boolean = false
+    private val linearLayoutManager = LinearLayoutManager(context,
+            LinearLayoutManager.HORIZONTAL, false)
 
     constructor(context: Context) : super(context) {
         init()
@@ -44,15 +48,28 @@ class HomeNewsView : FrameLayout, HomeNewsContract.View {
         recyclerView.setVisible(false)
         cvError.setVisible(false)
         progressBar.setVisible(true)
-        // presenter.loadItems()
+        presenter.loadItems()
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (!loading && linearLayoutManager.itemCount
+                        <= (linearLayoutManager.findLastVisibleItemPosition() + 1)) {
+                    loading = true
+                    presenter.loadItems()
+                }
+            }
+        })
     }
 
     override fun showLoading(visible: Boolean) {
         progressBar.setVisible(visible)
     }
 
-    override fun showPaginationLoading(visible: Boolean) {
-
+    override fun disablePaginationLoading() {
+        homeNewsAdapter?.disablePaginationLoading()
     }
 
     override fun showHomeNewsError() {
@@ -63,14 +80,13 @@ class HomeNewsView : FrameLayout, HomeNewsContract.View {
         recyclerView.setVisible(visible)
     }
 
-    override fun setHomeNewsItem(videoList: List<HomeDataElement>) {
-        if (homeVideoAdapter == null) {
-            homeVideoAdapter = HomeNewsAdapter(videoList)
-            recyclerView.layoutManager = LinearLayoutManager(context,
-                    LinearLayoutManager.HORIZONTAL, false)
-            recyclerView.adapter = homeVideoAdapter
+    override fun setHomeNewsItem(videoList: List<HomeDataElement>, enablePagination: Boolean) {
+        if (homeNewsAdapter == null) {
+            homeNewsAdapter = HomeNewsAdapter(videoList, enablePagination)
+            recyclerView.layoutManager = linearLayoutManager
+            recyclerView.adapter = homeNewsAdapter
         } else {
-            homeVideoAdapter?.addItems(videoList)
+            homeNewsAdapter?.addItems(videoList)
         }
 
         recyclerView.setVisible(true)
