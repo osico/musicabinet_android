@@ -1,13 +1,14 @@
 package com.musicabinet.mobile.ui.cabinet
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.ui.signup.user.SignUpUserActivity
 import com.musicabinet.mobile.ui.slidemenu.SlideMenuActivity
 import kotlinx.android.synthetic.main.activity_cabinet.*
-import org.jetbrains.anko.toast
 
 /**
  * @author Kirchhoff-
@@ -21,7 +22,8 @@ class CabinetActivity : SlideMenuActivity() {
         tabLayout.setupWithViewPager(viewPager)
 
         tvSignIn.setOnClickListener {
-            toast("Move to SignUp Screen")
+            intent = Intent(this, SignUpUserActivity::class.java)
+            startActivity(intent)
         }
     }
 
