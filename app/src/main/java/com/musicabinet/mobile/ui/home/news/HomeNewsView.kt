@@ -47,7 +47,7 @@ class HomeNewsView : FrameLayout, HomeNewsContract.View {
 
         recyclerView.setVisible(false)
         cvError.setVisible(false)
-        progressBar.setVisible(true)
+        cvLoading.setVisible(true)
         presenter.loadItems()
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -65,7 +65,7 @@ class HomeNewsView : FrameLayout, HomeNewsContract.View {
     }
 
     override fun showLoading(visible: Boolean) {
-        progressBar.setVisible(visible)
+        cvLoading.setVisible(visible)
     }
 
     override fun disablePaginationLoading() {
