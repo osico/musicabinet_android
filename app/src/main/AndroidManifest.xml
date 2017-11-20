@@ -45,6 +45,11 @@
             android:name=".ui.signup.password.SignUpPasswordActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.signup.SignUpFinishActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="55b4ddc0b0d079482c57d654d6e008482ea5b58d" />

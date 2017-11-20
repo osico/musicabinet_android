@@ -43,4 +43,10 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="password_mismatch_error">Password mismatch error</string>
+
+
+    <!-- Resources for SignUpFinishScreen -->
+    <string name="thanks_for_registration">Thanks for \nregistration</string>
+    <string name="check_email">Check your email to activate \naccount</string>
+    <string name="enter_my_cabinet">enter to my cabinet</string>
 </resources>

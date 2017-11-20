@@ -1,10 +1,12 @@
 package com.musicabinet.mobile.ui.signup.password
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.disableErrorOnType
 import com.musicabinet.mobile.extensions.getString
+import com.musicabinet.mobile.ui.signup.SignUpFinishActivity
 import com.musicabinet.mobile.utils.TextWatcherAdapter
 import kotlinx.android.synthetic.main.activity_sign_up_password.*
 
@@ -41,6 +43,8 @@ class SignUpPasswordActivity : AppCompatActivity(), SignUpPasswordContract.View 
     }
 
     override fun moveToFinishRegistration() {
+        intent = Intent(this, SignUpFinishActivity::class.java)
+        startActivity(intent)
     }
 
     override fun enableNextButton(enable: Boolean) {
