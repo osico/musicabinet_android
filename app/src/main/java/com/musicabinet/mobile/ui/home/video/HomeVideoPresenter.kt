@@ -24,16 +24,18 @@ class HomeVideoPresenter(private val repository: MusicabinetRepository,
                     .doOnSubscribe {
                         if (homeVideoLoaded == 0)
                             view.showLoading(true)
-                        else
-                            view.showPaginationLoading(true)
                     }.doOnTerminate {
                 view.showLoading(false)
-                view.showPaginationLoading(false)
             }.subscribe({ homeData: HomeData? ->
                 if (homeData != null && !homeData.fields.isEmpty()) {
-                    view.setHomeVideoItem(homeData.fields)
+
                     homeVideoLoaded += homeData.partCount
                     homeVideoMaxSize = homeData.totalCount
+
+                    if (homeVideoLoaded >= homeVideoMaxSize)
+                        view.disablePaginationLoading()
+
+                    view.setHomeVideoItem(homeData.fields)
                 } else {
                     view.showHomeVideoError()
                 }

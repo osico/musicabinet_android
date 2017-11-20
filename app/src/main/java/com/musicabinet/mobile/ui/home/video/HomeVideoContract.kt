@@ -11,7 +11,7 @@ interface HomeVideoContract {
 
         fun showLoading(visible: Boolean)
 
-        fun showPaginationLoading(visible: Boolean)
+        fun disablePaginationLoading()
 
         fun showHomeVideoList(visible: Boolean)
 

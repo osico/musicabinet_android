@@ -3,6 +3,7 @@ package com.musicabinet.mobile.ui.home.video
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PagerSnapHelper
+import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -20,6 +21,9 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View {
 
     private var homeVideoAdapter: HomeVideoAdapter? = null
     private lateinit var presenter: HomeVideoContract.Presenter
+    private var loading: Boolean = false
+    private val linearLayoutManager = LinearLayoutManager(context,
+            LinearLayoutManager.HORIZONTAL, false)
 
     constructor(context: Context) : super(context) {
         init()
@@ -45,14 +49,27 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View {
         cvError.setVisible(false)
         progressBar.setVisible(true)
         presenter.loadItems()
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (!loading && linearLayoutManager.itemCount
+                        <= (linearLayoutManager.findLastVisibleItemPosition() + 1)) {
+                    loading = true
+                    presenter.loadItems()
+                }
+            }
+        })
     }
 
     override fun showLoading(visible: Boolean) {
         progressBar.setVisible(visible)
     }
 
-    override fun showPaginationLoading(visible: Boolean) {
-
+    override fun disablePaginationLoading() {
+        homeVideoAdapter?.disablePaginationLoading()
     }
 
     override fun showHomeVideoError() {
@@ -66,11 +83,11 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View {
     override fun setHomeVideoItem(videoList: List<HomeDataElement>) {
         if (homeVideoAdapter == null) {
             homeVideoAdapter = HomeVideoAdapter(videoList)
-            recyclerView.layoutManager = LinearLayoutManager(context,
-                    LinearLayoutManager.HORIZONTAL, false)
+            recyclerView.layoutManager = linearLayoutManager
             recyclerView.adapter = homeVideoAdapter
         } else {
             homeVideoAdapter?.addItems(videoList)
+            loading = false
         }
 
         recyclerView.setVisible(true)

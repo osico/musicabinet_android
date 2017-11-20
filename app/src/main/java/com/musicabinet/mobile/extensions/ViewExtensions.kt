@@ -22,7 +22,8 @@ fun View.setVisible(visible: Boolean) {
 
 
 fun ImageView.loadImage(url: String?) {
-    Picasso.with(context).load(url).into(this)
+    if (!url.isNullOrEmpty())
+        Picasso.with(context).load(url).into(this)
 }
 
 fun TextView.setColorText(@ColorRes color: Int) {

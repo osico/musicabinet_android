@@ -47,7 +47,7 @@ class HomeTutorialView : FrameLayout, HomeTutorialContract.View {
         recyclerView.setVisible(false)
         cvError.setVisible(false)
         progressBar.setVisible(true)
-        presenter.loadItems()
+        // presenter.loadItems()
     }
 
     override fun showLoading(visible: Boolean) {
