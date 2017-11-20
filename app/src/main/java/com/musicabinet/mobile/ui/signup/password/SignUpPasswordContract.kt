@@ -7,6 +7,8 @@ interface SignUpPasswordContract {
 
     interface View {
 
+        fun enableNextButton(enable: Boolean)
+
         fun showPasswordMismatchError()
 
         fun moveToFinishRegistration()

@@ -8,11 +8,16 @@ class SignUpPasswordPresenter(private val view: SignUpPasswordContract.View)
 
 
     override fun onUserType(password: String, confirmPassword: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view.enableNextButton(!password.isEmpty() && !confirmPassword.isEmpty())
     }
 
     override fun registerUser(password: String, confirmPassword: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (password != confirmPassword) {
+            view.showPasswordMismatchError()
+            return
+        }
+
+        view.moveToFinishRegistration()
     }
 
 }
