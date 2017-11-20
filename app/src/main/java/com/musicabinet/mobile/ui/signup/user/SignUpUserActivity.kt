@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.disableErrorOnType
 import com.musicabinet.mobile.extensions.getString
 import com.musicabinet.mobile.utils.TextWatcherAdapter
 import kotlinx.android.synthetic.main.activity_sign_up_user.*
@@ -29,10 +30,17 @@ class SignUpUserActivity : AppCompatActivity(), SignUpUserContract.View {
         edEmail.addTextChangedListener(userInformationTextWatcher)
 
         bNext.isEnabled = false
+        edEmail.disableErrorOnType(ilEmail)
+
+        bNext.setOnClickListener {
+            presenter.setUserData(edUserName.getString(), edUserSurname.getString(),
+                    edEmail.getString())
+        }
     }
 
     override fun showMailError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        ilEmail.isErrorEnabled = true
+        ilEmail.error = getString(R.string.email_error)
     }
 
     override fun enableNextButton(enable: Boolean) {
@@ -40,7 +48,6 @@ class SignUpUserActivity : AppCompatActivity(), SignUpUserContract.View {
     }
 
     override fun moveToSetPassword() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

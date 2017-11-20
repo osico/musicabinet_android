@@ -17,5 +17,7 @@ interface SignUpUserContract {
     interface Presenter {
 
         fun onUserType(name: String, surname: String, mail: String)
+
+        fun setUserData(name: String, surname: String, mail: String)
     }
 }
