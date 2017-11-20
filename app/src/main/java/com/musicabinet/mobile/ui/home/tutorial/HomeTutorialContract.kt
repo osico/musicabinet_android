@@ -11,13 +11,13 @@ interface HomeTutorialContract {
 
         fun showLoading(visible: Boolean)
 
-        fun showPaginationLoading(visible: Boolean)
+        fun disablePaginationLoading()
 
         fun showHomeTutorialList(visible: Boolean)
 
         fun showHomeTutorialError()
 
-        fun setHomeTutorialItem(videoList: List<HomeDataElement>)
+        fun setHomeTutorialItem(videoList: List<HomeDataElement>, enablePagination: Boolean)
     }
 
     interface Presenter {

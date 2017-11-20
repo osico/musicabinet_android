@@ -47,6 +47,6 @@ class HomeNewsAdapter(items: List<HomeDataElement>, private var shouldShowPagina
         if (position == itemCount - 1)
             return ITEM_FOOTER
 
-        return super.getItemViewType(position);
+        return super.getItemViewType(position)
     }
 }

@@ -87,6 +87,7 @@ class HomeNewsView : FrameLayout, HomeNewsContract.View {
             recyclerView.adapter = homeNewsAdapter
         } else {
             homeNewsAdapter?.addItems(videoList)
+            loading = false
         }
 
         recyclerView.setVisible(true)

@@ -16,32 +16,37 @@ class HomeTutorialPresenter(private val repository: MusicabinetRepository,
 
     private val subscriptions = CompositeDisposable()
     private var homeTutorialLoaded = 0
-    private var homeTutorialMaxSize = 0
+    private var homeTutorialMaxSize = 1
 
 
     override fun loadItems() {
 
-        subscriptions.add(repository.getHomeTutorial(homeTutorialLoaded)
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {
-                    if (homeTutorialLoaded == 0)
-                        view.showLoading(true)
-                    else
-                        view.showPaginationLoading(true)
-                }.doOnTerminate {
-            view.showLoading(false)
-            view.showPaginationLoading(false)
-        }.subscribe({ homeData: HomeData? ->
-            if (homeData != null && !homeData.fields.isEmpty()) {
-                view.setHomeTutorialItem(homeData.fields)
-                homeTutorialLoaded = homeData.partCount
-                homeTutorialMaxSize = homeData.totalCount
-            } else {
+        if (homeTutorialLoaded < homeTutorialMaxSize) {
+            subscriptions.add(repository.getHomeTutorial(homeTutorialLoaded)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe {
+                        if (homeTutorialLoaded == 0)
+                            view.showLoading(true)
+                    }.doOnTerminate {
+                view.showLoading(false)
+            }.subscribe({ homeData: HomeData? ->
+                if (homeData != null && !homeData.fields.isEmpty()) {
+
+                    homeTutorialLoaded += homeData.partCount
+                    homeTutorialMaxSize = homeData.totalCount
+
+                    if (homeTutorialLoaded >= homeTutorialMaxSize)
+                        view.disablePaginationLoading()
+
+                    view.setHomeTutorialItem(homeData.fields, homeTutorialLoaded < homeTutorialMaxSize)
+
+                } else {
+                    view.showHomeTutorialError()
+                }
+            }, { t: Throwable? ->
                 view.showHomeTutorialError()
-            }
-        }, { t: Throwable? ->
-            view.showHomeTutorialError()
-        }))
+            }))
+        }
     }
 
 }

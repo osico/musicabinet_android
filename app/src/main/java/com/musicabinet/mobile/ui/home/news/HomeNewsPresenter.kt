@@ -32,7 +32,7 @@ class HomeNewsPresenter(private val repository: MusicabinetRepository,
             }.subscribe({ homeData: HomeData? ->
                 if (homeData != null && !homeData.fields.isEmpty()) {
 
-                    homeNewsLoaded = homeData.partCount
+                    homeNewsLoaded += homeData.partCount
                     homeNewsMaxSize = homeData.totalCount
 
                     if (homeNewsLoaded >= homeNewsMaxSize)

@@ -6,6 +6,7 @@ package com.musicabinet.mobile.ui.home.tutorial
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PagerSnapHelper
+import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -21,8 +22,12 @@ import kotlinx.android.synthetic.main.view_home_tutorial.view.*
  */
 class HomeTutorialView : FrameLayout, HomeTutorialContract.View {
 
-    private var homeVideoAdapter: HomeTutorialAdapter? = null
+    private var homeTutorialAdapter: HomeTutorialAdapter? = null
     private lateinit var presenter: HomeTutorialContract.Presenter
+    private var loading: Boolean = false
+    private val linearLayoutManager = LinearLayoutManager(context,
+            LinearLayoutManager.HORIZONTAL, false)
+
 
     constructor(context: Context) : super(context) {
         init()
@@ -47,15 +52,28 @@ class HomeTutorialView : FrameLayout, HomeTutorialContract.View {
         recyclerView.setVisible(false)
         cvError.setVisible(false)
         progressBar.setVisible(true)
-        // presenter.loadItems()
+        presenter.loadItems()
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (!loading && linearLayoutManager.itemCount
+                        <= (linearLayoutManager.findLastVisibleItemPosition() + 1)) {
+                    loading = true
+                    presenter.loadItems()
+                }
+            }
+        })
     }
 
     override fun showLoading(visible: Boolean) {
         progressBar.setVisible(visible)
     }
 
-    override fun showPaginationLoading(visible: Boolean) {
-
+    override fun disablePaginationLoading() {
+        homeTutorialAdapter?.disablePaginationLoading()
     }
 
     override fun showHomeTutorialError() {
@@ -66,14 +84,14 @@ class HomeTutorialView : FrameLayout, HomeTutorialContract.View {
         recyclerView.setVisible(visible)
     }
 
-    override fun setHomeTutorialItem(videoList: List<HomeDataElement>) {
-        if (homeVideoAdapter == null) {
-            homeVideoAdapter = HomeTutorialAdapter(videoList)
-            recyclerView.layoutManager = LinearLayoutManager(context,
-                    LinearLayoutManager.HORIZONTAL, false)
-            recyclerView.adapter = homeVideoAdapter
+    override fun setHomeTutorialItem(videoList: List<HomeDataElement>, enablePagination: Boolean) {
+        if (homeTutorialAdapter == null) {
+            homeTutorialAdapter = HomeTutorialAdapter(videoList, enablePagination)
+            recyclerView.layoutManager = linearLayoutManager
+            recyclerView.adapter = homeTutorialAdapter
         } else {
-            homeVideoAdapter?.addItems(videoList)
+            homeTutorialAdapter?.addItems(videoList)
+            loading = false
         }
 
         recyclerView.setVisible(true)
