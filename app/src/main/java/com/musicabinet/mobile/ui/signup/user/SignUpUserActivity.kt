@@ -1,11 +1,13 @@
 package com.musicabinet.mobile.ui.signup.user
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.disableErrorOnType
 import com.musicabinet.mobile.extensions.getString
+import com.musicabinet.mobile.ui.signup.password.SignUpPasswordActivity
 import com.musicabinet.mobile.utils.TextWatcherAdapter
 import kotlinx.android.synthetic.main.activity_sign_up_user.*
 
@@ -48,6 +50,8 @@ class SignUpUserActivity : AppCompatActivity(), SignUpUserContract.View {
     }
 
     override fun moveToSetPassword() {
+        intent = Intent(this, SignUpPasswordActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
