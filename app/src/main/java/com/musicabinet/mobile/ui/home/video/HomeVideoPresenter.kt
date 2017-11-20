@@ -13,32 +13,34 @@ class HomeVideoPresenter(private val repository: MusicabinetRepository,
 
     private val subscriptions = CompositeDisposable()
     private var homeVideoLoaded = 0
-    private var homeVideoMaxSize = 0
+    private var homeVideoMaxSize = 1
 
 
     override fun loadItems() {
 
-        subscriptions.add(repository.getHomeVideo(homeVideoLoaded)
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {
-                    if (homeVideoLoaded == 0)
-                        view.showLoading(true)
-                    else
-                        view.showPaginationLoading(true)
-                }.doOnTerminate {
-            view.showLoading(false)
-            view.showPaginationLoading(false)
-        }.subscribe({ homeData: HomeData? ->
-            if (homeData != null && !homeData.fields.isEmpty()) {
-                view.setHomeVideoItem(homeData.fields)
-                homeVideoLoaded = homeData.partCount
-                homeVideoMaxSize = homeData.totalCount
-            } else {
+        if (homeVideoLoaded < homeVideoMaxSize) {
+            subscriptions.add(repository.getHomeVideo(homeVideoLoaded)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe {
+                        if (homeVideoLoaded == 0)
+                            view.showLoading(true)
+                        else
+                            view.showPaginationLoading(true)
+                    }.doOnTerminate {
+                view.showLoading(false)
+                view.showPaginationLoading(false)
+            }.subscribe({ homeData: HomeData? ->
+                if (homeData != null && !homeData.fields.isEmpty()) {
+                    view.setHomeVideoItem(homeData.fields)
+                    homeVideoLoaded += homeData.partCount
+                    homeVideoMaxSize = homeData.totalCount
+                } else {
+                    view.showHomeVideoError()
+                }
+            }, { t: Throwable? ->
                 view.showHomeVideoError()
-            }
-        }, { t: Throwable? ->
-            view.showHomeVideoError()
-        }))
+            }))
+        }
     }
 
 }
