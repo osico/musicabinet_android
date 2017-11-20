@@ -6,6 +6,7 @@
     <color name="colorAccent">#f6b322</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="white_transparent_30">#4dfafafa</color>
     <color name="red">#d91111</color>
     <color name="colorPrimaryAlpha">#1A12c382</color>
     <color name="slideMenuHeaderBackground">#0fa36d</color>

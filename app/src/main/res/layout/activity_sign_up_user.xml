@@ -15,7 +15,6 @@
         android:textSize="22sp"
         android:textStyle="bold" />
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,12 +22,12 @@
         android:text="@string/personal_data_text"
         android:textSize="16sp" />
 
-
     <android.support.design.widget.TextInputLayout
         android:id="@+id/ilUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:theme="@style/TextInputLayout">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edUserName"
@@ -39,15 +38,16 @@
             android:hint="@string/user_name"
             android:inputType="text"
             android:maxLength="50"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="@color/white" />
 
     </android.support.design.widget.TextInputLayout>
-
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/ilUserSurname"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/TextInputLayout">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edUserSurname"
@@ -58,14 +58,16 @@
             android:hint="@string/user_surname"
             android:inputType="text"
             android:maxLength="50"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="@color/white" />
 
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/ilEmail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/TextInputLayout">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edEmail"
@@ -76,7 +78,8 @@
             android:hint="@string/enter_email_hint"
             android:inputType="textEmailAddress"
             android:maxLength="50"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="@color/white" />
 
     </android.support.design.widget.TextInputLayout>
 
