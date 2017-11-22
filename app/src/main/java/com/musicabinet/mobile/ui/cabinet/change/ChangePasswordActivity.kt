@@ -1,11 +1,13 @@
 package com.musicabinet.mobile.ui.cabinet.change
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.disableErrorOnType
 import com.musicabinet.mobile.extensions.getString
+import com.musicabinet.mobile.ui.cabinet.SuccessChangePasswordActivity
 import com.musicabinet.mobile.utils.TextWatcherAdapter
 import kotlinx.android.synthetic.main.activity_change_password.*
 import org.jetbrains.anko.toast
@@ -53,7 +55,8 @@ class ChangePasswordActivity : AppCompatActivity(), ChangePasswordContract.View 
     }
 
     override fun moveToChangePasswordSuccessScreen() {
-        //Here should be moving to SuccessChangePasswordScreen
+        val intent = Intent(this, SuccessChangePasswordActivity::class.java)
+        startActivity(intent)
     }
 
 

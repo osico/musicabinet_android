@@ -61,4 +61,9 @@
     <string name="send">Send</string>
     <string name="email_change_text">Enter your email, we\'ll send you a link to \nchange your password</string>
     <string name="email_not_exist_error">Email don\'t exist in system</string>
+
+
+    <!-- Resources for SuccessChangePasswordScreen -->
+    <string name="check_your_email">Check your email</string>
+    <string name="send_recovery_email">We sent a recovery email</string>
 </resources>
