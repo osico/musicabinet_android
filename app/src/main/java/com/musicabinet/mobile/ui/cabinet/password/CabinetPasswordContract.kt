@@ -23,6 +23,8 @@ interface CabinetPasswordContract {
 
         fun onUserType(password: String)
 
+        fun forgotPassword()
+
         fun loginUser(email: String, password: String)
     }
 }

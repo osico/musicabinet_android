@@ -49,4 +49,10 @@
     <string name="thanks_for_registration">Thanks for \nregistration</string>
     <string name="check_email">Check your email to activate \naccount</string>
     <string name="enter_my_cabinet">enter to my cabinet</string>
+
+
+    <!-- Resources for CabinetPasswordScreen -->
+    <string name="enter_password">Enter your password</string>
+    <string name="miss_password"><a href="">I don\'t know my password</a></string>
+    <string name="wrong_password_error">Wrong password error</string>
 </resources>
