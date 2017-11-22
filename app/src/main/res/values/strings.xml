@@ -55,4 +55,10 @@
     <string name="enter_password">Enter your password</string>
     <string name="miss_password"><a href="">I don\'t know my password</a></string>
     <string name="wrong_password_error">Wrong password error</string>
+
+
+    <!-- Resources for ChangePasswordScreen -->
+    <string name="send">Send</string>
+    <string name="email_change_text">Enter your email, we\'ll send you a link to \nchange your password</string>
+    <string name="email_not_exist_error">Email don\'t exist in system</string>
 </resources>

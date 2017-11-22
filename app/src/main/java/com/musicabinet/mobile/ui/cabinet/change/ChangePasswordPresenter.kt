@@ -8,9 +8,14 @@ class ChangePasswordPresenter(private val view: ChangePasswordContract.View)
 
 
     override fun onUserType(email: String) {
+        view.enableSendButton(!email.isEmpty())
     }
 
     override fun changePassword(email: String) {
+        if (email == "password@mail.ru")
+            view.moveToChangePasswordSuccessScreen()
+        else
+            view.showMailError()
     }
 
 }
