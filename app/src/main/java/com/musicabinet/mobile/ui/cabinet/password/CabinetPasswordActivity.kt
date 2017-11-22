@@ -1,11 +1,13 @@
 package com.musicabinet.mobile.ui.cabinet.password
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.disableErrorOnType
 import com.musicabinet.mobile.extensions.getString
+import com.musicabinet.mobile.ui.cabinet.change.ChangePasswordActivity
 import com.musicabinet.mobile.utils.TextWatcherAdapter
 import kotlinx.android.synthetic.main.activity_cabinet_password.*
 
@@ -39,6 +41,10 @@ class CabinetPasswordActivity : AppCompatActivity(), CabinetPasswordContract.Vie
 
         edPassword.addTextChangedListener(userPasswordInformationTextWatcher)
         edPassword.disableErrorOnType(ilPassword)
+
+        tvMissPassword.setOnClickListener {
+            presenter.forgotPassword()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -53,7 +59,8 @@ class CabinetPasswordActivity : AppCompatActivity(), CabinetPasswordContract.Vie
     }
 
     override fun moveToForgotPasswordScreen() {
-        // Here should be moving to ForgotPasswordScreen
+        val intent = Intent(this, ChangePasswordActivity::class.java)
+        startActivity(intent)
     }
 
     override fun showPasswordError() {
