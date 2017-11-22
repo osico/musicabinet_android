@@ -15,7 +15,12 @@ class CabinetPasswordPresenter(private val view: CabinetPasswordContract.View)
     }
 
     override fun loginUser(email: String, password: String) {
-        view.moveToHomeScreen()
+        if (password == "password")
+            view.showPasswordError()
+        else if (password == "password1")
+            view.showEmailError()
+        else if (password == "password2")
+            view.moveToHomeScreen()
     }
 
 }

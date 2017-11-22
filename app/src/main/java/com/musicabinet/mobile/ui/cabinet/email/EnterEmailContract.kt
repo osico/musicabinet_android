@@ -9,10 +9,13 @@ interface EnterEmailContract {
 
         fun enableNextButton(enable: Boolean)
 
+        fun moveToEnterPassword()
     }
 
     interface Presenter {
 
         fun onUserTypeEmail(email: String)
+
+        fun onNextClick()
     }
 }

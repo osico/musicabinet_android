@@ -1,11 +1,14 @@
 package com.musicabinet.mobile.ui.cabinet.email
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.getString
+import com.musicabinet.mobile.ui.cabinet.password.CabinetPasswordActivity
 import com.musicabinet.mobile.utils.TextWatcherAdapter
 import kotlinx.android.synthetic.main.view_enter_email.view.*
 
@@ -34,6 +37,8 @@ class EnterEmailView : LinearLayout, EnterEmailContract.View {
         presenter = EnterEmailPresenter(this)
         bNext.isEnabled = false
 
+        bNext.setOnClickListener { presenter.onNextClick() }
+
         edEmail.addTextChangedListener(emailTextWatcher)
     }
 
@@ -46,5 +51,11 @@ class EnterEmailView : LinearLayout, EnterEmailContract.View {
         override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
             presenter.onUserTypeEmail(edEmail.getString())
         }
+    }
+
+    override fun moveToEnterPassword() {
+        val intent = Intent(context, CabinetPasswordActivity::class.java)
+        intent.putExtra(CabinetPasswordActivity.EMAIL_ARG, edEmail.getString())
+        (context as Activity).startActivityForResult(intent, CabinetPasswordActivity.PASSWORD_REQUEST_CODE)
     }
 }
