@@ -40,9 +40,11 @@ class CabinetActivity : SlideMenuActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CabinetPasswordActivity.PASSWORD_REQUEST_CODE) {
 
-            if (resultCode == CabinetPasswordActivity.RESULT_LOGIN)
-                toast("Success")
-            else if (resultCode == CabinetPasswordActivity.RESULT_ERROR)
+            if (resultCode == CabinetPasswordActivity.RESULT_LOGIN) {
+                intent = Intent(this, SignUpUserActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else if (resultCode == CabinetPasswordActivity.RESULT_ERROR)
                 toast("Error")
         }
     }

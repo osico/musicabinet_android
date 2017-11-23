@@ -1,10 +1,17 @@
 package com.musicabinet.mobile.ui.cabinet.password
 
+import com.musicabinet.mobile.repository.MusicabinetRepository
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+
 /**
  * @author Kirchhoff-
  */
-class CabinetPasswordPresenter(private val view: CabinetPasswordContract.View)
+class CabinetPasswordPresenter(private val repository: MusicabinetRepository,
+                               private val view: CabinetPasswordContract.View)
     : CabinetPasswordContract.Presenter {
+
+    private val subscriptions = CompositeDisposable()
 
     override fun onUserType(password: String) {
         view.enableNextButton(!password.isEmpty())
@@ -15,12 +22,15 @@ class CabinetPasswordPresenter(private val view: CabinetPasswordContract.View)
     }
 
     override fun loginUser(email: String, password: String) {
-        if (password == "password")
-            view.showPasswordError()
-        else if (password == "password1")
-            view.showEmailError()
-        else if (password == "password2")
-            view.moveToHomeScreen()
+
+        subscriptions.add(repository.login(email, password)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    view.moveToHomeScreen()
+                }, { t: Throwable? ->
+                    view.showEmailError()
+                }))
+
     }
 
 }

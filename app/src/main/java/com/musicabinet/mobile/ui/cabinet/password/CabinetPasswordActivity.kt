@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.disableErrorOnType
 import com.musicabinet.mobile.extensions.getString
@@ -30,7 +31,7 @@ class CabinetPasswordActivity : ActivityWithBackButton(), CabinetPasswordContrac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        presenter = CabinetPasswordPresenter(this)
+        presenter = CabinetPasswordPresenter(Injection.provideRepository(), this)
 
         bNext.isEnabled = false
         bNext.setOnClickListener {
