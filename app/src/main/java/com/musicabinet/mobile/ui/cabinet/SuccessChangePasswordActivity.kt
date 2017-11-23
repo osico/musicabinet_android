@@ -1,21 +1,24 @@
 package com.musicabinet.mobile.ui.cabinet
 
+import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.ui.ActivityWithBackButton
 
 /**
  * @author Kirchhoff-
  */
-class SuccessChangePasswordActivity : AppCompatActivity() {
+class SuccessChangePasswordActivity : ActivityWithBackButton() {
 
+    override fun inflateLayout(): View {
+        val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_success_change_password)
+        return inflater.inflate(R.layout.activity_success_change_password, null, false)
     }
 
+    override fun showCompanyIcon() = true
 
     override fun onBackPressed() {
         intent = Intent(this, CabinetActivity::class.java)

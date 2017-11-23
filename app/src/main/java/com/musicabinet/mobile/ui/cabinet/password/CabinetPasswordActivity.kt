@@ -1,12 +1,14 @@
 package com.musicabinet.mobile.ui.cabinet.password
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
+import android.view.LayoutInflater
+import android.view.View
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.disableErrorOnType
 import com.musicabinet.mobile.extensions.getString
+import com.musicabinet.mobile.ui.ActivityWithBackButton
 import com.musicabinet.mobile.ui.cabinet.change.ChangePasswordActivity
 import com.musicabinet.mobile.utils.TextWatcherAdapter
 import kotlinx.android.synthetic.main.activity_cabinet_password.*
@@ -14,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_cabinet_password.*
 /**
  * @author Kirchhoff-
  */
-class CabinetPasswordActivity : AppCompatActivity(), CabinetPasswordContract.View {
+class CabinetPasswordActivity : ActivityWithBackButton(), CabinetPasswordContract.View {
 
     companion object {
         const val PASSWORD_REQUEST_CODE = 1001
@@ -27,10 +29,6 @@ class CabinetPasswordActivity : AppCompatActivity(), CabinetPasswordContract.Vie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cabinet_password)
-
-        supportActionBar?.setHomeButtonEnabled(true)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         presenter = CabinetPasswordPresenter(this)
 
@@ -47,12 +45,13 @@ class CabinetPasswordActivity : AppCompatActivity(), CabinetPasswordContract.Vie
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == android.R.id.home)
-            onBackPressed()
+    override fun inflateLayout(): View {
+        val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-        return super.onOptionsItemSelected(item)
+        return inflater.inflate(R.layout.activity_cabinet_password, null, false)
     }
+
+    override fun showCompanyIcon() = true
 
     override fun enableNextButton(enable: Boolean) {
         bNext.isEnabled = enable
