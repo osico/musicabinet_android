@@ -3,7 +3,11 @@ package com.musicabinet.mobile.ui.slidemenu
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.content.ContextCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.graphics.drawable.DrawerArrowDrawable
+import android.view.Gravity
 import android.view.View
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.ui.cabinet.CabinetActivity
@@ -33,6 +37,27 @@ abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
         educationLayout.setOnClickListener { presenter.onEducationClick() }
         homeLayout.setOnClickListener { presenter.onHomeClick() }
         accountLayout.setOnClickListener { presenter.onMyAccountClick() }
+
+        ivDrawer.setOnClickListener { drawer.openDrawer(Gravity.START, true) }
+
+        val arrowDrawable = DrawerArrowDrawable(this)
+        arrowDrawable.color = ContextCompat.getColor(this, R.color.white)
+        ivDrawer.setImageDrawable(arrowDrawable)
+
+        drawer.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerStateChanged(newState: Int) {
+            }
+
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                arrowDrawable.progress = slideOffset
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+            }
+
+            override fun onDrawerOpened(drawerView: View) {
+            }
+        })
     }
 
     protected abstract fun inflateLayout(): View
