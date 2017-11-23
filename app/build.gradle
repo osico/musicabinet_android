@@ -63,6 +63,7 @@ dependencies {
     implementation libraries.gsonConverter
     implementation libraries.rxJavaAdapter
     implementation libraries.okHttpInterceptor
+    implementation libraries.persistentCookie
 
     //Image loading
     implementation libraries.picasso

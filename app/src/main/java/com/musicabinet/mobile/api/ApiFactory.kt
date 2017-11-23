@@ -1,6 +1,11 @@
 package com.musicabinet.mobile.api
 
+import com.franmontiel.persistentcookiejar.ClearableCookieJar
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.musicabinet.mobile.BuildConfig
+import com.musicabinet.mobile.MusicabinetApp
 import com.musicabinet.mobile.api.interceptor.LogginingInterceptor
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
@@ -13,8 +18,12 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 object ApiFactory {
 
+    private var cookieJar: ClearableCookieJar = PersistentCookieJar(SetCookieCache(),
+            SharedPrefsCookiePersistor(MusicabinetApp.get()))
+
     private fun buildClient(): OkHttpClient =
             OkHttpClient.Builder()
+                    .cookieJar(cookieJar)
                     .addInterceptor(LogginingInterceptor())
                     .build()
 
@@ -29,10 +38,13 @@ object ApiFactory {
                 .build()
     }
 
-    public var service: MusicabinetService
+    var service: MusicabinetService
 
     init {
         service = retrofit.create(MusicabinetService::class.java)
     }
 
+    public fun clearCookie() {
+        cookieJar.clear()
+    }
 }
