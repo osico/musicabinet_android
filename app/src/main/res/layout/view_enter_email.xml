@@ -21,7 +21,8 @@
             android:hint="@string/enter_email_hint"
             android:inputType="text"
             android:maxLength="50"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="@color/white" />
 
     </android.support.design.widget.TextInputLayout>
 
