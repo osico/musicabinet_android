@@ -52,6 +52,7 @@ dependencies {
     implementation libraries.supportDesign
     implementation libraries.constraintLayout
     implementation libraries.pageIndicatorView
+    implementation libraries.mkLoader
 
     //Kotlin & extensions
     implementation libraries.kotlin

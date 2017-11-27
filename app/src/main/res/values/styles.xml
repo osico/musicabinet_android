@@ -23,4 +23,8 @@
         <item name="android:textColorHint">@color/white_transparent_30</item>
         <item name="colorControlNormal">@color/white</item>
     </style>
+
+    <style name="LoadingDialog" parent="Base.Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+    </style>
 </resources>
