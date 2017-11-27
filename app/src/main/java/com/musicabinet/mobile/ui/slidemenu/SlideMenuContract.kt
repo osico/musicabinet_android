@@ -15,6 +15,9 @@ interface SlideMenuContract {
 
         fun moveToMyAccount()
 
+        fun showLoginUserMenu()
+
+        fun showNotLoginUserMenu()
     }
 
     interface Presenter {
@@ -26,6 +29,8 @@ interface SlideMenuContract {
         fun onLogOutClick()
 
         fun onMyAccountClick()
+
+        fun configMenuVisibility()
     }
 
 }

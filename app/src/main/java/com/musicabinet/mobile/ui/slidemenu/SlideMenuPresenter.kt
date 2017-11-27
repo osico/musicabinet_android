@@ -1,9 +1,12 @@
 package com.musicabinet.mobile.ui.slidemenu
 
+import com.musicabinet.mobile.repository.keyvalue.KeyValueStorage
+
 /**
  * @author Kirchhoff-
  */
-class SlideMenuPresenter(private val view: SlideMenuContract.View) : SlideMenuContract.Presenter {
+class SlideMenuPresenter(private val view: SlideMenuContract.View,
+                         private val storage: KeyValueStorage) : SlideMenuContract.Presenter {
 
     override fun onEducationClick() {
         view.moveToEducation()
@@ -19,6 +22,13 @@ class SlideMenuPresenter(private val view: SlideMenuContract.View) : SlideMenuCo
 
     override fun onMyAccountClick() {
         view.moveToMyAccount()
+    }
+
+    override fun configMenuVisibility() {
+        if (storage.isUserExist())
+            view.showLoginUserMenu()
+        else
+            view.showNotLoginUserMenu()
     }
 
 }

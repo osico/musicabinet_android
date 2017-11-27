@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.graphics.drawable.DrawerArrowDrawable
 import android.view.Gravity
 import android.view.View
+import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.ui.cabinet.CabinetActivity
 import com.musicabinet.mobile.ui.home.HomeActivity
 import com.musicabinet.mobile.ui.instrument.InstrumentActivity
@@ -32,7 +34,7 @@ abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
 
         contentLayout.addView(inflateLayout())
 
-        presenter = SlideMenuPresenter(this)
+        presenter = SlideMenuPresenter(this, Injection.provideStorage())
 
         educationLayout.setOnClickListener { presenter.onEducationClick() }
         homeLayout.setOnClickListener { presenter.onHomeClick() }
@@ -58,6 +60,11 @@ abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
             override fun onDrawerOpened(drawerView: View) {
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.configMenuVisibility()
     }
 
     protected abstract fun inflateLayout(): View
@@ -99,6 +106,16 @@ abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
                 finish()
             }, OPEN_SCREEN_DELAY)
         }
+    }
+
+    override fun showLoginUserMenu() {
+        logOutElement.setVisible(true)
+        accountElement.setVisible(false)
+    }
+
+    override fun showNotLoginUserMenu() {
+        logOutElement.setVisible(false)
+        accountElement.setVisible(true)
     }
 
 }
