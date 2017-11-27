@@ -2,6 +2,7 @@ package com.musicabinet.mobile.repository
 
 import com.musicabinet.mobile.model.home.HomeData
 import com.musicabinet.mobile.model.instrument.InstrumentData
+import com.musicabinet.mobile.model.profile.UserProfile
 import io.reactivex.Completable
 import io.reactivex.Observable
 
@@ -19,4 +20,6 @@ interface MusicabinetRepository {
     fun getInstrumentList(): Observable<InstrumentData>
 
     fun login(email: String, password: String): Completable
+
+    fun getUserProfile(): Observable<UserProfile>
 }

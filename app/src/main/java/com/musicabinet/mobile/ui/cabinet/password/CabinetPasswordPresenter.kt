@@ -1,6 +1,8 @@
 package com.musicabinet.mobile.ui.cabinet.password
 
+import com.musicabinet.mobile.model.profile.UserProfile
 import com.musicabinet.mobile.repository.MusicabinetRepository
+import com.musicabinet.mobile.repository.keyvalue.KeyValueStorage
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
@@ -8,6 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
  * @author Kirchhoff-
  */
 class CabinetPasswordPresenter(private val repository: MusicabinetRepository,
+                               private val storage: KeyValueStorage,
                                private val view: CabinetPasswordContract.View)
     : CabinetPasswordContract.Presenter {
 
@@ -28,11 +31,24 @@ class CabinetPasswordPresenter(private val repository: MusicabinetRepository,
                 .doOnSubscribe { view.showLoading(true) }
                 .doOnTerminate { view.showLoading(false) }
                 .subscribe({
-                    view.moveToHomeScreen()
+                    getUserProfile()
                 }, { t: Throwable? ->
                     view.showEmailError()
                 }))
 
+    }
+
+    private fun getUserProfile() {
+        subscriptions.add(repository.getUserProfile()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { view.showLoading(true) }
+                .doOnTerminate { view.showLoading(false) }
+                .subscribe({ profile: UserProfile ->
+                    storage.saveUserInformation(profile)
+                    view.moveToHomeScreen()
+                }, { t: Throwable? ->
+                    view.showEmailError()
+                }))
     }
 
 }

@@ -2,6 +2,7 @@ package com.musicabinet.mobile.repository.keyvalue
 
 import android.preference.PreferenceManager
 import com.musicabinet.mobile.MusicabinetApp
+import com.musicabinet.mobile.model.profile.UserProfile
 
 /**
  * @author Kirchhoff-
@@ -10,10 +11,10 @@ object MusicabinetKeyValueStorage : KeyValueStorage {
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(MusicabinetApp.get())
 
-    override fun saveUserInformation(userName: String, email: String) {
+    override fun saveUserInformation(userProfile: UserProfile) {
         val editor = preferences.edit()
-        editor.putString(KeyValueStorage.USER_NAME_KEY, userName)
-        editor.putString(KeyValueStorage.USER_EMAIL_KEY, email)
+        editor.putString(KeyValueStorage.USER_NAME_KEY, userProfile.formattedUserName)
+        editor.putString(KeyValueStorage.USER_EMAIL_KEY, userProfile.email)
         editor.apply()
     }
 

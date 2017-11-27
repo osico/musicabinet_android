@@ -34,7 +34,8 @@ class CabinetPasswordActivity : ActivityWithBackButton(), CabinetPasswordContrac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        presenter = CabinetPasswordPresenter(Injection.provideRepository(), this)
+        presenter = CabinetPasswordPresenter(Injection.provideRepository(),
+                Injection.provideStorage(), this)
 
         bNext.isEnabled = false
         bNext.setOnClickListener {
@@ -47,8 +48,6 @@ class CabinetPasswordActivity : ActivityWithBackButton(), CabinetPasswordContrac
         tvMissPassword.setOnClickListener {
             presenter.forgotPassword()
         }
-
-        showLoading(true)
     }
 
     override fun inflateLayout(): View {

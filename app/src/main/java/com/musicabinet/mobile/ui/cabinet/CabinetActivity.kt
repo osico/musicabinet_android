@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.ui.cabinet.password.CabinetPasswordActivity
+import com.musicabinet.mobile.ui.home.HomeActivity
 import com.musicabinet.mobile.ui.signup.user.SignUpUserActivity
 import com.musicabinet.mobile.ui.slidemenu.SlideMenuActivity
 import kotlinx.android.synthetic.main.activity_cabinet.*
@@ -41,7 +42,7 @@ class CabinetActivity : SlideMenuActivity() {
         if (requestCode == CabinetPasswordActivity.PASSWORD_REQUEST_CODE) {
 
             if (resultCode == CabinetPasswordActivity.RESULT_LOGIN) {
-                intent = Intent(this, SignUpUserActivity::class.java)
+                intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
             } else if (resultCode == CabinetPasswordActivity.RESULT_ERROR)

@@ -29,4 +29,7 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     override fun login(email: String, password: String) =
             ApiFactory.service.login(LoginRequestBody(LOGIN_TYPE_EMAIL, email, password))
+
+    override fun getUserProfile() =
+            ApiFactory.service.getUserProfile()
 }

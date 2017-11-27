@@ -1,5 +1,7 @@
 package com.musicabinet.mobile.repository.keyvalue
 
+import com.musicabinet.mobile.model.profile.UserProfile
+
 /**
  * @author Kirchhoff-
  */
@@ -10,7 +12,7 @@ interface KeyValueStorage {
         const val USER_EMAIL_KEY = "USER_EMAIL_KEY"
     }
 
-    fun saveUserInformation(userName: String, email: String)
+    fun saveUserInformation(userProfile: UserProfile)
 
     fun getUserName(): String
 
