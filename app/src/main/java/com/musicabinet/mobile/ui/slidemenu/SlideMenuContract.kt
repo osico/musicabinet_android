@@ -15,7 +15,7 @@ interface SlideMenuContract {
 
         fun moveToMyAccount()
 
-        fun showLoginUserMenu()
+        fun showLoginUserMenu(userName: String, email: String)
 
         fun showNotLoginUserMenu()
     }

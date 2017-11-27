@@ -26,7 +26,7 @@ class SlideMenuPresenter(private val view: SlideMenuContract.View,
 
     override fun configMenuVisibility() {
         if (storage.isUserExist())
-            view.showLoginUserMenu()
+            view.showLoginUserMenu(storage.getUserName(), storage.getUserEmail())
         else
             view.showNotLoginUserMenu()
     }

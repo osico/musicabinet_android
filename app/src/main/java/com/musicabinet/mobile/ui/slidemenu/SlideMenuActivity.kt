@@ -16,6 +16,7 @@ import com.musicabinet.mobile.ui.cabinet.CabinetActivity
 import com.musicabinet.mobile.ui.home.HomeActivity
 import com.musicabinet.mobile.ui.instrument.InstrumentActivity
 import kotlinx.android.synthetic.main.activity_slide_menu.*
+import kotlinx.android.synthetic.main.view_slide_header.*
 import kotlinx.android.synthetic.main.view_slide_menu.*
 
 /**
@@ -108,14 +109,20 @@ abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
         }
     }
 
-    override fun showLoginUserMenu() {
+    override fun showLoginUserMenu(userName: String, email: String) {
         logOutElement.setVisible(true)
         accountElement.setVisible(false)
+        musicabinetElement.setVisible(false)
+        userElement.setVisible(true)
+        tvUserName.text = userName
+        tvEmail.text = email
     }
 
     override fun showNotLoginUserMenu() {
         logOutElement.setVisible(false)
         accountElement.setVisible(true)
+        musicabinetElement.setVisible(true)
+        userElement.setVisible(false)
     }
 
 }
