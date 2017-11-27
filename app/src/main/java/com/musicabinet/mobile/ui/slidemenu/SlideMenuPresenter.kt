@@ -17,6 +17,7 @@ class SlideMenuPresenter(private val view: SlideMenuContract.View,
     }
 
     override fun onLogOutClick() {
+        storage.clear()
         view.logout()
     }
 

@@ -40,6 +40,7 @@ abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
         educationLayout.setOnClickListener { presenter.onEducationClick() }
         homeLayout.setOnClickListener { presenter.onHomeClick() }
         accountLayout.setOnClickListener { presenter.onMyAccountClick() }
+        logOutLayout.setOnClickListener { presenter.onLogOutClick() }
 
         ivDrawer.setOnClickListener { drawer.openDrawer(Gravity.START, true) }
 
@@ -95,6 +96,13 @@ abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
     }
 
     override fun logout() {
+        drawer.closeDrawers()
+
+        handler.postDelayed({
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, OPEN_SCREEN_DELAY)
     }
 
     override fun moveToMyAccount() {
@@ -110,8 +118,8 @@ abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
     }
 
     override fun showLoginUserMenu(userName: String, email: String) {
-        logOutElement.setVisible(true)
-        accountElement.setVisible(false)
+        logOutLayout.setVisible(true)
+        accountLayout.setVisible(false)
         musicabinetElement.setVisible(false)
         userElement.setVisible(true)
         tvUserName.text = userName
@@ -119,8 +127,8 @@ abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
     }
 
     override fun showNotLoginUserMenu() {
-        logOutElement.setVisible(false)
-        accountElement.setVisible(true)
+        logOutLayout.setVisible(false)
+        accountLayout.setVisible(true)
         musicabinetElement.setVisible(true)
         userElement.setVisible(false)
     }

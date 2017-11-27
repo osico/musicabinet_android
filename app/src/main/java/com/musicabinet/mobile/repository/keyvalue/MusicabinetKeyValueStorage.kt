@@ -24,4 +24,8 @@ object MusicabinetKeyValueStorage : KeyValueStorage {
 
     override fun isUserExist() = preferences.contains(KeyValueStorage.USER_NAME_KEY)
 
+    override fun clear() {
+        preferences.edit().clear().apply()
+    }
+
 }

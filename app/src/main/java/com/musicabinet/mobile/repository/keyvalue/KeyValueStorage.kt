@@ -19,4 +19,6 @@ interface KeyValueStorage {
     fun getUserEmail(): String
 
     fun isUserExist(): Boolean
+
+    fun clear()
 }
