@@ -25,6 +25,8 @@ class CabinetPasswordPresenter(private val repository: MusicabinetRepository,
 
         subscriptions.add(repository.login(email, password)
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { view.showLoading(true) }
+                .doOnTerminate { view.showLoading(false) }
                 .subscribe({
                     view.moveToHomeScreen()
                 }, { t: Throwable? ->

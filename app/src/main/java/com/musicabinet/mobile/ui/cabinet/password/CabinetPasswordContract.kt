@@ -9,6 +9,8 @@ interface CabinetPasswordContract {
 
         fun enableNextButton(enable: Boolean)
 
+        fun showLoading(show: Boolean)
+
         fun moveToForgotPasswordScreen()
 
         fun showPasswordError()

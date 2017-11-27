@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Musicabinet</string>
 
+    <!-- General resources -->
+    <string name="loading">Loading…</string>
+
     <!-- Resources for SlideMenu -->
     <string name="education">Education</string>
     <string name="home">Home</string>

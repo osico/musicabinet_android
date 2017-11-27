@@ -11,6 +11,7 @@ import com.musicabinet.mobile.extensions.disableErrorOnType
 import com.musicabinet.mobile.extensions.getString
 import com.musicabinet.mobile.ui.ActivityWithBackButton
 import com.musicabinet.mobile.ui.cabinet.change.ChangePasswordActivity
+import com.musicabinet.mobile.ui.view.LoadingDialog
 import com.musicabinet.mobile.utils.TextWatcherAdapter
 import kotlinx.android.synthetic.main.activity_cabinet_password.*
 
@@ -28,6 +29,8 @@ class CabinetPasswordActivity : ActivityWithBackButton(), CabinetPasswordContrac
 
     private lateinit var presenter: CabinetPasswordContract.Presenter
 
+    private var loadingDialog: LoadingDialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,6 +47,8 @@ class CabinetPasswordActivity : ActivityWithBackButton(), CabinetPasswordContrac
         tvMissPassword.setOnClickListener {
             presenter.forgotPassword()
         }
+
+        showLoading(true)
     }
 
     override fun inflateLayout(): View {
@@ -57,6 +62,16 @@ class CabinetPasswordActivity : ActivityWithBackButton(), CabinetPasswordContrac
     override fun enableNextButton(enable: Boolean) {
         bNext.isEnabled = enable
     }
+
+    override fun showLoading(show: Boolean) {
+        loadingDialog?.dismiss()
+
+        if (show) {
+            loadingDialog = LoadingDialog()
+            loadingDialog?.show(supportFragmentManager, "TAG")
+        }
+    }
+
 
     override fun moveToForgotPasswordScreen() {
         val intent = Intent(this, ChangePasswordActivity::class.java)
