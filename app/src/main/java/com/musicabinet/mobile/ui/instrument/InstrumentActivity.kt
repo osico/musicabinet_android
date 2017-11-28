@@ -1,6 +1,7 @@
 package com.musicabinet.mobile.ui.instrument
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.InstrumentDataElement
+import com.musicabinet.mobile.ui.courses.CoursesActivity
 import com.musicabinet.mobile.ui.instrument.adapter.InstrumentAdapter
 import com.musicabinet.mobile.ui.slidemenu.SlideMenuActivity
 import kotlinx.android.synthetic.main.activity_instrument.*
@@ -15,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_instrument.*
 /**
  * @author Kirchhoff-
  */
-class InstrumentActivity : SlideMenuActivity(), InstrumentContract.View {
+class InstrumentActivity : SlideMenuActivity(), InstrumentContract.View, InstrumentAdapter.OnInstrumentClickListener {
 
     private lateinit var instrumentAdapter: InstrumentAdapter
     private lateinit var presenter: InstrumentContract.Presenter
@@ -56,6 +58,12 @@ class InstrumentActivity : SlideMenuActivity(), InstrumentContract.View {
         viewPager.currentItem = instrumentAdapter.count / 2
         pageIndicator.setViewPager(viewPager)
         pageIndicator.selection = instrumentAdapter.count / 2
+
+        instrumentAdapter.setOnInstrumentClickListener(this)
     }
 
+    override fun onInstrumentSelected(instrument: InstrumentDataElement) {
+        val intent = Intent(this, CoursesActivity::class.java)
+        startActivity(intent)
+    }
 }

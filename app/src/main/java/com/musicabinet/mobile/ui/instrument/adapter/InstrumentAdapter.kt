@@ -10,10 +10,15 @@ import com.musicabinet.mobile.model.instrument.InstrumentDataElement
  */
 class InstrumentAdapter(private val instrumentList: List<InstrumentDataElement>) : PagerAdapter() {
 
+    private var instrumentClickListener: OnInstrumentClickListener? = null
+
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val instrumentView = InstrumentView(container.context)
         instrumentView.bind(instrumentList[position])
         instrumentView.tag = position
+        instrumentView.setOnClickListener {
+            instrumentClickListener?.onInstrumentSelected(instrumentList[position])
+        }
         container.addView(instrumentView)
         return instrumentView
     }
@@ -28,5 +33,13 @@ class InstrumentAdapter(private val instrumentList: List<InstrumentDataElement>)
 
     override fun getItemPosition(`object`: Any) = PagerAdapter.POSITION_NONE
 
+    fun setOnInstrumentClickListener(listener: OnInstrumentClickListener) {
+        instrumentClickListener = listener
+    }
+
+    interface OnInstrumentClickListener {
+
+        fun onInstrumentSelected(instrument: InstrumentDataElement)
+    }
 
 }
