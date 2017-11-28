@@ -32,4 +32,7 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     override fun getUserProfile() =
             ApiFactory.service.getUserProfile()
+
+    override fun getInstrumentMatrix(instrumentId: String) =
+            ApiFactory.service.getInstrumentMatrix(instrumentId)
 }

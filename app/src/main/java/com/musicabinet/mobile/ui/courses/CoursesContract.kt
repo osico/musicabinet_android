@@ -11,5 +11,7 @@ interface CoursesContract {
 
     interface Presenter {
 
+        fun loadInstrumentMatrix(instrumentId: String)
+
     }
 }

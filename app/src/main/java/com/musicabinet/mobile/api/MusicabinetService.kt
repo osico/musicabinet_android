@@ -2,14 +2,12 @@ package com.musicabinet.mobile.api
 
 import com.musicabinet.mobile.model.home.HomeData
 import com.musicabinet.mobile.model.instrument.InstrumentData
+import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.profile.UserProfile
 import com.musicabinet.mobile.model.request.LoginRequestBody
 import io.reactivex.Completable
 import io.reactivex.Observable
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * @author Kirchhoff-
@@ -28,4 +26,7 @@ interface MusicabinetService {
 
     @POST("/platform/api/user/logged")
     fun getUserProfile(): Observable<UserProfile>
+
+    @GET("/api/instrument/{id}/matrix")
+    fun getInstrumentMatrix(@Path("id") instrumentId: String): Observable<InstrumentMatrixResponse>
 }

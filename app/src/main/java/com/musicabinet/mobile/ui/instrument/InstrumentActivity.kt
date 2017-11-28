@@ -64,6 +64,8 @@ class InstrumentActivity : SlideMenuActivity(), InstrumentContract.View, Instrum
 
     override fun onInstrumentSelected(instrument: InstrumentDataElement) {
         val intent = Intent(this, CoursesActivity::class.java)
+        intent.putExtra(CoursesActivity.INSTRUMENT_NAME_ARG, instrument.nameLocalized)
+        intent.putExtra(CoursesActivity.INSTRUMENT_ID_ARG, instrument.id)
         startActivity(intent)
     }
 }
