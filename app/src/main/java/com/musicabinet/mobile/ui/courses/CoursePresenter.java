@@ -61,7 +61,8 @@ public class CoursePresenter implements CoursesContract.Presenter {
                             }
 
                             instrumentCourseList.add(new InstrumentCourse(lessonCourseList.get(i).getName(),
-                                    lessonCourseList.get(i).getProductPrice(), instrumentGroupList));
+                                    lessonCourseList.get(i).getProductPrice(),
+                                    lessonCourseList.get(i).getPercent(), instrumentGroupList));
 
                         }
 
