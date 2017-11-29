@@ -35,4 +35,8 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     override fun getInstrumentMatrix(instrumentId: String) =
             ApiFactory.service.getInstrumentMatrix(instrumentId)
+
+    override fun getInstrumentMatrixFilter(instrumentId: String) =
+            ApiFactory.service.getInstrumentMatrixFilter(instrumentId, true,
+                    0, REQUEST_ITEM_COUNT)
 }

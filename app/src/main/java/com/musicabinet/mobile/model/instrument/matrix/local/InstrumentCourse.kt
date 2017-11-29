@@ -1,7 +1,10 @@
 package com.musicabinet.mobile.model.instrument.matrix.local
 
+import java.io.Serializable
+
 /**
  * @author Kirchhoff-
  */
 data class InstrumentCourse(val name: String, var productPrice: Float,
-                            val percent: Float?, val lessonGroups: List<InstrumentGroup>)
+                            val id: String, val percent: Float?,
+                            val lessonGroups: List<InstrumentGroup>) : Serializable

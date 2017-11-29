@@ -3,6 +3,7 @@ package com.musicabinet.mobile.repository
 import com.musicabinet.mobile.model.home.HomeData
 import com.musicabinet.mobile.model.instrument.InstrumentData
 import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
+import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
 import com.musicabinet.mobile.model.profile.UserProfile
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -25,4 +26,6 @@ interface MusicabinetRepository {
     fun getUserProfile(): Observable<UserProfile>
 
     fun getInstrumentMatrix(instrumentId: String): Observable<InstrumentMatrixResponse>
+
+    fun getInstrumentMatrixFilter(instrumentId: String): Observable<InstrumentFilterResponse>
 }
