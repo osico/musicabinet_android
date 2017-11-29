@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.courses
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -11,12 +12,14 @@ import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
 import com.musicabinet.mobile.ui.courses.adapter.CourseAdapter
+import com.musicabinet.mobile.ui.lesson.list.LessonListActivity
+import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_courses.*
 
 /**
  * @author Kirchhoff-
  */
-class CoursesActivity : AppCompatActivity(), CoursesContract.View {
+class CoursesActivity : AppCompatActivity(), CoursesContract.View, BaseRecyclerAdapter.OnItemClickListener<InstrumentCourse> {
 
     companion object {
         const val INSTRUMENT_ID_ARG = "INSTRUMENT_ID_ARG"
@@ -72,7 +75,12 @@ class CoursesActivity : AppCompatActivity(), CoursesContract.View {
         divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.white_divider)!!)
         recyclerView.addItemDecoration(divider)
         recyclerView.adapter = coursesAdapter
+        coursesAdapter.setOnItemClickListener(this)
     }
 
+    override fun onItemClick(item: InstrumentCourse) {
+        val intent = Intent(this, LessonListActivity::class.java)
+        startActivity(intent)
+    }
 
 }
