@@ -14,6 +14,8 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
@@ -22,7 +24,6 @@ import io.reactivex.functions.Function;
  */
 
 public class CoursePresenter implements CoursesContract.Presenter {
-
 
     private final CoursesContract.View view;
     private final MusicabinetRepository repository;
@@ -37,11 +38,24 @@ public class CoursePresenter implements CoursesContract.Presenter {
         disposable = new CompositeDisposable();
     }
 
-
     @Override
     public void loadInstrumentMatrix(@NotNull String instrumentId) {
         disposable.add(repository.getInstrumentMatrix(instrumentId)
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        view.showLoading(true);
+                        view.showCourseError(false);
+                        view.showCourseList(false);
+                    }
+                })
+                .doOnTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        view.showLoading(false);
+                    }
+                })
                 .map(new Function<InstrumentMatrixResponse, List<InstrumentCourse>>() {
                     @Override
                     public List<InstrumentCourse> apply(InstrumentMatrixResponse response) throws Exception {
@@ -72,13 +86,16 @@ public class CoursePresenter implements CoursesContract.Presenter {
                 .subscribe(new Consumer<List<InstrumentCourse>>() {
                                @Override
                                public void accept(List<InstrumentCourse> instrumentCourses) throws Exception {
-                                   view.showSuccess(instrumentCourses);
+                                   view.showCourseError(false);
+                                   view.showCourseList(true);
+                                   view.showCourses(instrumentCourses);
                                }
                            },
                         new Consumer<Throwable>() {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
-                                view.showError();
+                                view.showCourseError(true);
+                                view.showCourseList(false);
                             }
                         }));
     }

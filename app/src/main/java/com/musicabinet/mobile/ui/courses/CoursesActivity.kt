@@ -1,13 +1,17 @@
 package com.musicabinet.mobile.ui.courses
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
-import org.jetbrains.anko.toast
+import com.musicabinet.mobile.ui.courses.adapter.CourseAdapter
+import kotlinx.android.synthetic.main.activity_courses.*
 
 /**
  * @author Kirchhoff-
@@ -19,6 +23,7 @@ class CoursesActivity : AppCompatActivity(), CoursesContract.View {
         const val INSTRUMENT_NAME_ARG = "INSTRUMENT_NAME_ARG"
     }
 
+    private lateinit var coursesAdapter: CourseAdapter
     private lateinit var presenter: CoursesContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +34,12 @@ class CoursesActivity : AppCompatActivity(), CoursesContract.View {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = intent.getStringExtra(INSTRUMENT_NAME_ARG)
 
-        presenter = CoursePresenter(this, Injection.provideRepository())
 
+        recyclerView.setVisible(false)
+        tvError.setVisible(false)
+        progressBar.setVisible(true)
+
+        presenter = CoursePresenter(this, Injection.provideRepository())
         presenter.loadInstrumentMatrix(intent.getStringExtra(INSTRUMENT_ID_ARG))
     }
 
@@ -41,16 +50,29 @@ class CoursesActivity : AppCompatActivity(), CoursesContract.View {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun showSuccess(list: List<InstrumentCourse>) {
-        toast("Success")
-        for (item in list) {
-            Log.d("TAG", "Name = " + item.name + " Price = " + item.productPrice +
-                    ", Size = " + item.lessonGroups.size);
-        }
+    override fun showLoading(visible: Boolean) {
+        progressBar.setVisible(visible)
     }
 
-    override fun showError() {
-        toast("Error")
+    override fun showCourseError(visible: Boolean) {
+        tvError.setVisible(visible)
     }
+
+    override fun showCourseList(visible: Boolean) {
+        recyclerView.setVisible(visible)
+    }
+
+    override fun showCourses(list: List<InstrumentCourse>) {
+
+        coursesAdapter = CourseAdapter(list)
+        recyclerView.layoutManager = LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false)
+        val divider = DividerItemDecoration(this,
+                LinearLayoutManager.VERTICAL)
+        divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.white_divider)!!)
+        recyclerView.addItemDecoration(divider)
+        recyclerView.adapter = coursesAdapter
+    }
+
 
 }

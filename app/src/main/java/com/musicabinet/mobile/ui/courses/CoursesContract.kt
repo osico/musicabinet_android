@@ -9,9 +9,13 @@ interface CoursesContract {
 
     interface View {
 
-        fun showSuccess(list: List<InstrumentCourse>)
+        fun showLoading(visible: Boolean)
 
-        fun showError()
+        fun showCourseError(visible: Boolean)
+
+        fun showCourseList(visible: Boolean)
+
+        fun showCourses(list: List<InstrumentCourse>)
     }
 
     interface Presenter {

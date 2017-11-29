@@ -70,4 +70,9 @@
     <!-- Resources for SuccessChangePasswordScreen -->
     <string name="check_your_email">Check your email</string>
     <string name="send_recovery_email">We sent a recovery email</string>
+
+
+    <!-- Resources for CoursesActivity -->
+    <string name="courses">Courses</string>
+    <string name="courses_error">Error during loading courses</string>
 </resources>

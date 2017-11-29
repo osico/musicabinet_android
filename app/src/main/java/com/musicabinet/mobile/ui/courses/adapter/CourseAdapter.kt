@@ -9,13 +9,13 @@ import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 /**
  * @author Kirchhoff-
  */
-class CourseLessonAdapter(items: List<InstrumentCourse>)
-    : BaseRecyclerAdapter<CourseLessonViewHolder, InstrumentCourse>(items) {
+class CourseAdapter(items: List<InstrumentCourse>)
+    : BaseRecyclerAdapter<CourseViewHolder, InstrumentCourse>(items) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            CourseLessonViewHolder(parent.inflate(R.layout.item_lesson))
+            CourseViewHolder(parent.inflate(R.layout.item_course))
 
-    override fun onBindViewHolder(holder: CourseLessonViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
         holder.bind(getItem(position))
     }
