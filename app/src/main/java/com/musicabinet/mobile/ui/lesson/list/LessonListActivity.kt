@@ -6,8 +6,8 @@ import android.view.MenuItem
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
-import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterItem
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
+import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
 import kotlinx.android.synthetic.main.activity_lesson_list.*
 import org.jetbrains.anko.toast
 
@@ -18,6 +18,7 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View {
 
     companion object {
         const val INSTRUMENT_COURSE_ARG = "INSTRUMENT_COURSE_ARG"
+        const val INSTRUMENT_ID_ARG = "INSTRUMENT_ID_ARG"
     }
 
     private lateinit var instrumentCourse: InstrumentCourse
@@ -36,8 +37,8 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View {
 
         lessonLayout.setVisible(false)
 
-        presenter = LessonListPresenter(this, Injection.provideRepository())
-        presenter.getFilters(instrumentCourse.id)
+        presenter = LessonListPresenter(this, Injection.provideRepository(), instrumentCourse)
+        presenter.getFilters(intent.getStringExtra(INSTRUMENT_ID_ARG))
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -51,7 +52,7 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View {
         progressBar.setVisible(visible)
     }
 
-    override fun showLessonFilter(list: List<InstrumentFilterItem>) {
+    override fun showLessonFilter(list: List<InstrumentLessonList>) {
         progressBar.setVisible(false)
 
         viewPager.adapter = LessonListPagerAdapter(this, list)

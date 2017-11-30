@@ -7,4 +7,25 @@ import java.io.Serializable
 /**
  * @author Kirchhoff-
  */
-data class InstrumentGroup(val lessonList: List<LessonItem>, val module: Modules) : Serializable
+data class InstrumentGroup(val lessonList: List<LessonItem>, val module: Modules) : Serializable {
+
+    fun isContainsFilter(filterId: String): Boolean {
+        if (lessonList.isEmpty())
+            return false
+
+        for (lesson in lessonList) {
+
+            if (lesson.programs.isEmpty())
+                return false
+
+            for (program in lesson.programs) {
+                if (program == filterId)
+                    return true
+            }
+
+        }
+
+        return false
+    }
+
+}

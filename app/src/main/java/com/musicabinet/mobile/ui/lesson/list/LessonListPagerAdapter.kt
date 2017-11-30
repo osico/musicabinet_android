@@ -4,16 +4,17 @@ import android.content.Context
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
-import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterItem
+import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
 
 /**
  * @author Kirchhoff-
  */
 class LessonListPagerAdapter(private val context: Context,
-                             private val lessonGroup: List<InstrumentFilterItem>) : PagerAdapter() {
+                             private val lessonGroup: List<InstrumentLessonList>) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val lessonListView = LessonListView(context)
+        lessonListView.setLessonList(lessonGroup[position].items)
         container.addView(lessonListView)
         return lessonListView
     }

@@ -81,6 +81,7 @@ class CoursesActivity : AppCompatActivity(), CoursesContract.View, BaseRecyclerA
     override fun onItemClick(item: InstrumentCourse) {
         val intent = Intent(this, LessonListActivity::class.java)
         intent.putExtra(LessonListActivity.INSTRUMENT_COURSE_ARG, item)
+        intent.putExtra(LessonListActivity.INSTRUMENT_ID_ARG, this.intent.getStringExtra(INSTRUMENT_ID_ARG))
         startActivity(intent)
     }
 

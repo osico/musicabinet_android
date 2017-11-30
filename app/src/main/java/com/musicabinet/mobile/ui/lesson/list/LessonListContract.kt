@@ -1,6 +1,6 @@
 package com.musicabinet.mobile.ui.lesson.list
 
-import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterItem
+import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
 
 /**
  * @author Kirchhoff-
@@ -11,7 +11,7 @@ interface LessonListContract {
 
         fun showLoading(visible: Boolean)
 
-        fun showLessonFilter(list: List<InstrumentFilterItem>)
+        fun showLessonFilter(list: List<InstrumentLessonList>)
 
         fun showError()
     }
