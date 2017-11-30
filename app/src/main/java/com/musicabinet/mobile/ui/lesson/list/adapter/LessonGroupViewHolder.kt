@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.item_lesson_group.view.*
 class LessonGroupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(group: InstrumentGroup) {
+        itemView.container.removeAllViews();
         val lessonTitleView = LessonTitleView(itemView.context)
         lessonTitleView.bind(group.module)
 
