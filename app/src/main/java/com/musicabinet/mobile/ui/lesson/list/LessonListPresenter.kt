@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.lesson.list
 
+import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -17,7 +18,11 @@ class LessonListPresenter(private val view: LessonListContract.View,
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading(true) }
                 .doOnTerminate { view.showLoading(false) }
-                .subscribe({ view.showSuccess() }, { view.showError() }))
+                .subscribe({ response: InstrumentFilterResponse ->
+                    view.showLessonFilter(response.filterList)
+                }, {
+                    view.showError()
+                }))
     }
 
 }
