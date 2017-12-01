@@ -41,13 +41,4 @@ class InstrumentView : LinearLayout {
             ivInstrument.bindInstrumentImage(logo)
         }
     }
-
-
-    fun showElement() {
-        itemBackground.alpha = 1f
-    }
-
-    fun hideElement() {
-        itemBackground.alpha = 0.3f
-    }
 }

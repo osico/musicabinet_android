@@ -17,7 +17,8 @@ class InstrumentAdapter(private val instrumentList: List<InstrumentDataElement>)
         instrumentView.bind(instrumentList[position])
         instrumentView.tag = position
         instrumentView.setOnClickListener {
-            instrumentClickListener?.onInstrumentSelected(instrumentList[position])
+            if (instrumentList[position].active)
+                instrumentClickListener?.onInstrumentSelected(instrumentList[position])
         }
         container.addView(instrumentView)
         return instrumentView
