@@ -18,4 +18,13 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="AppTheme.AppBarWithoutShadow">
+        <item name="actionBarStyle">@style/ActionBarWithoutShadow</item>
+    </style>
+
+    <style name="ActionBarWithoutShadow" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@color/colorPrimary</item>
+        <item name="elevation">0dp</item>
+    </style>
 </resources>

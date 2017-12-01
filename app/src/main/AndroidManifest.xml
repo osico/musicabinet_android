@@ -73,7 +73,8 @@
 
         <activity
             android:name=".ui.lesson.list.LessonListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppBarWithoutShadow" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
