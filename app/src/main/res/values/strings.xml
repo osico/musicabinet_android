@@ -75,4 +75,8 @@
     <!-- Resources for CoursesActivity -->
     <string name="courses">Courses</string>
     <string name="courses_error">Error during loading courses</string>
+
+
+    <!-- Resources for LessonListActivity-->
+    <string name="price_buy">buy $%.2f</string>
 </resources>

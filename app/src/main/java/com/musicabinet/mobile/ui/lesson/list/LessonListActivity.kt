@@ -55,7 +55,7 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View {
     override fun showLessonFilter(list: List<InstrumentLessonList>) {
         progressBar.setVisible(false)
 
-        viewPager.adapter = LessonListPagerAdapter(this, list)
+        viewPager.adapter = LessonListPagerAdapter(this, list, instrumentCourse)
         tabLayout.setupWithViewPager(viewPager)
         lessonLayout.setVisible(true)
     }

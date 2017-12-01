@@ -19,6 +19,5 @@ interface LessonListContract {
     interface Presenter {
 
         fun getFilters(instrumentId: String)
-
     }
 }
