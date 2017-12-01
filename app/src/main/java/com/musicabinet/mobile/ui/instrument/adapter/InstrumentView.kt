@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.bindInstrumentImage
-import com.musicabinet.mobile.extensions.setColorText
+import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.InstrumentDataElement
 import kotlinx.android.synthetic.main.view_instrument.view.*
 
@@ -29,15 +29,13 @@ class InstrumentView : LinearLayout {
 
     fun init() {
         LayoutInflater.from(context).inflate(R.layout.view_instrument, this, true)
+        isClickable = true
     }
 
     fun bind(instrument: InstrumentDataElement) {
         with(instrument) {
             tvName.text = nameLocalized
-            if (active)
-                tvName.setColorText(R.color.white)
-            else
-                tvName.setColorText(R.color.red)
+            tvNotAvailable.setVisible(!active)
             ivInstrument.bindInstrumentImage(logo)
         }
     }

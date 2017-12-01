@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/ivInstrument"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:src="@drawable/ic_instrument_drums" />
 
     <TextView
@@ -22,5 +22,14 @@
         android:textAllCaps="true"
         android:textSize="26sp"
         tools:text="drums" />
+
+    <TextView
+        android:id="@+id/tvNotAvailable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="@string/instrument_not_available"
+        android:textColor="@color/red" />
 
 </LinearLayout>

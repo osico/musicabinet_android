@@ -23,6 +23,7 @@
     <!-- Resources for InstrumentScreen -->
     <string name="select_instrument">Select the instrument</string>
     <string name="error_loading_instrument_list">Error during loading instrument list</string>
+    <string name="instrument_not_available">Sorry, instrument is temporarily unavailable</string>
 
 
     <!-- Resources for CabinetScreen -->
