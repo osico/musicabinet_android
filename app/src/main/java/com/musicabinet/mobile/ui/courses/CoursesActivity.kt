@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
-import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
@@ -42,8 +41,8 @@ class CoursesActivity : AppCompatActivity(), CoursesContract.View, BaseRecyclerA
         tvError.setVisible(false)
         progressBar.setVisible(true)
 
-        presenter = CoursePresenter(this, Injection.provideRepository())
-        presenter.loadInstrumentMatrix(intent.getStringExtra(INSTRUMENT_ID_ARG))
+        //  presenter = CoursePresenter(this, Injection.provideRepository())
+        // presenter.loadInstrumentMatrix(intent.getStringExtra(INSTRUMENT_ID_ARG))
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

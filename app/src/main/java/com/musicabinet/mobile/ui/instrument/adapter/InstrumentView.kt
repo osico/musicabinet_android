@@ -37,6 +37,9 @@ class InstrumentView : LinearLayout {
             tvName.text = nameLocalized
             tvNotAvailable.setVisible(!active)
             ivInstrument.bindInstrumentImage(logo)
+
+            if (!active)
+                isEnabled = false
         }
     }
 }
