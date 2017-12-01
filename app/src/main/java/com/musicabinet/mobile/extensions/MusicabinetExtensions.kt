@@ -1,6 +1,8 @@
 package com.musicabinet.mobile.extensions
 
 import android.widget.ImageView
+import android.widget.TextView
+import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 
 /**
@@ -24,5 +26,20 @@ fun ImageView.bindInstrumentImage(instrument: String) {
         INSTRUMENT_SAXOPHONE -> setImageResource(R.drawable.ic_instrument_sux)
         INSTRUMENT_VOCAL -> setImageResource(R.drawable.ic_instrument_vocal)
         INSTRUMENT_COMPOSITION -> setImageResource(R.drawable.ic_instrument_note)
+    }
+}
+
+
+fun TextView.setCompletedPercent(percent: Float) {
+    if (Injection.provideStorage().isUserExist()) {
+        setVisible(true)
+        text = percent.toString() + "%"
+
+        alpha = if (percent == 0f)
+            0.5f
+        else
+            1f
+    } else {
+        setVisible(false)
     }
 }

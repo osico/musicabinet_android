@@ -5,6 +5,7 @@ import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.setCompletedPercent
 import com.musicabinet.mobile.model.instrument.matrix.LessonItem
 import kotlinx.android.synthetic.main.view_lesson.view.*
 
@@ -32,7 +33,7 @@ class LessonItemView : ConstraintLayout {
     fun bind(element: LessonItem) {
         with(element) {
             tvName.text = nameLocalized
-            tvPercent.text = progress.toString()
+            tvPercent.setCompletedPercent(progress)
         }
     }
 }
