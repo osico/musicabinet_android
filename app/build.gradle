@@ -69,6 +69,9 @@ dependencies {
     //Image loading
     implementation libraries.picasso
 
+    //Payments
+    implementation libraries.brainTree
+
     //Rx
     implementation libraries.rxJava
     implementation libraries.rxAndroid
