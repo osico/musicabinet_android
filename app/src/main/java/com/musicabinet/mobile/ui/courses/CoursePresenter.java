@@ -48,6 +48,7 @@ public class CoursePresenter implements CoursesContract.Presenter {
                         view.showLoading(true);
                         view.showCourseError(false);
                         view.showCourseList(false);
+                        view.showBuyButton(false);
                     }
                 })
                 .doOnTerminate(new Action() {

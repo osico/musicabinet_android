@@ -65,6 +65,10 @@ class CoursesActivity : AppCompatActivity(), CoursesContract.View, BaseRecyclerA
         recyclerView.setVisible(visible)
     }
 
+    override fun showBuyButton(visible: Boolean) {
+        bBuy.setVisible(visible)
+    }
+
     override fun showCourses(list: List<InstrumentCourse>) {
 
         coursesAdapter = CourseAdapter(list)

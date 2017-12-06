@@ -15,6 +15,8 @@ interface CoursesContract {
 
         fun showCourseList(visible: Boolean)
 
+        fun showBuyButton(visible: Boolean)
+
         fun showCourses(list: List<InstrumentCourse>)
     }
 
