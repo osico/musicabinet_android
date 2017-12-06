@@ -18,7 +18,8 @@ class LessonListPagerAdapter(private val context: Context,
         val lessonListView = LessonListView(context)
         lessonListView.setLessonList(lessonGroup[position].items)
         lessonListView.setProductName(instrumentCourse.name)
-        lessonListView.setProductPrice(instrumentCourse.productPrice)
+        lessonListView.setProductPrice(instrumentCourse.productPrice,
+                instrumentCourse.productActive, instrumentCourse.productAvailable)
         container.addView(lessonListView)
         return lessonListView
     }

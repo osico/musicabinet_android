@@ -42,12 +42,12 @@ class LessonListView : FrameLayout {
         lessonRecyclerView.adapter = lessonAdapter
     }
 
-    fun setProductPrice(price: Float) {
-        if (price == 0f) {
-            layoutBuy.setVisible(false)
-        } else {
-            layoutBuy.setVisible(true)
+    fun setProductPrice(price: Float, productActive: Boolean, productAvailable: Boolean?) {
+        if (productActive && productAvailable != null && !productAvailable && price != 0f) {
+            bPrice.setVisible(true)
             bPrice.text = resources.getString(R.string.price_buy, price)
+        } else {
+            bPrice.setVisible(false)
         }
     }
 
