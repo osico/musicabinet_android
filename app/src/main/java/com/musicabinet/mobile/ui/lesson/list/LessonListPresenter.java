@@ -108,7 +108,6 @@ public class LessonListPresenter implements LessonListContract.Presenter {
 
     @Override
     public void buyLesson(@NotNull String lessonId) {
-        orderId = lessonId;
         disposable.add(repository.createOrder(lessonId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -124,6 +123,7 @@ public class LessonListPresenter implements LessonListContract.Presenter {
                 }).subscribe(new Consumer<OrderIdResponse>() {
                     @Override
                     public void accept(OrderIdResponse orderIdResponse) throws Exception {
+                        orderId = orderIdResponse.getId();
                         executePayment(orderIdResponse.getId());
                     }
                 }, new Consumer<Throwable>() {
