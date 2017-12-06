@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.lesson.list
 
+import android.content.Intent
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
 
 /**
@@ -18,6 +19,10 @@ interface LessonListContract {
         fun showSuccess()
 
         fun showBuyLoading(show: Boolean)
+
+        fun moveToPaymentScreen(id: String, requestCode: Int)
+
+        fun showSuccessPayment()
     }
 
     interface Presenter {
@@ -25,5 +30,7 @@ interface LessonListContract {
         fun getFilters(instrumentId: String)
 
         fun buyLesson(lessonId: String)
+
+        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
     }
 }

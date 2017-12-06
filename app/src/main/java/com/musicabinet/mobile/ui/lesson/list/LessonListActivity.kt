@@ -1,8 +1,10 @@
 package com.musicabinet.mobile.ui.lesson.list
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.braintreepayments.api.dropin.DropInRequest
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
@@ -24,6 +26,7 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
 
     private lateinit var instrumentCourse: InstrumentCourse
     private lateinit var presenter: LessonListContract.Presenter
+    private lateinit var adapter: LessonListPagerAdapter
 
     private var loadingDialog: LoadingDialog? = null
 
@@ -58,7 +61,8 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
     override fun showLessonFilter(list: List<InstrumentLessonList>) {
         progressBar.setVisible(false)
 
-        viewPager.adapter = LessonListPagerAdapter(this, list, instrumentCourse, this)
+        adapter = LessonListPagerAdapter(this, list, instrumentCourse, this)
+        viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
         lessonLayout.setVisible(true)
     }
@@ -82,5 +86,21 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
             loadingDialog = LoadingDialog()
             loadingDialog?.show(supportFragmentManager, "TAG")
         }
+    }
+
+    override fun moveToPaymentScreen(id: String, requestCode: Int) {
+        val dropInRequest = DropInRequest().clientToken(getString(R.string.test_payments_token))
+        startActivityForResult(dropInRequest.getIntent(this), requestCode)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        presenter.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun showSuccessPayment() {
+        instrumentCourse.productAvailable = true
+        instrumentCourse.productActive = true
+        adapter.notifyDataSetChanged()
     }
 }
