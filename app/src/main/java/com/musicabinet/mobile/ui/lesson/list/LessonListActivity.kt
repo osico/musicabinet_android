@@ -8,6 +8,7 @@ import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
+import com.musicabinet.mobile.ui.view.LoadingDialog
 import kotlinx.android.synthetic.main.activity_lesson_list.*
 import org.jetbrains.anko.toast
 
@@ -23,6 +24,8 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
 
     private lateinit var instrumentCourse: InstrumentCourse
     private lateinit var presenter: LessonListContract.Presenter
+
+    private var loadingDialog: LoadingDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +67,20 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
         toast("Error")
     }
 
+    override fun showSuccess() {
+        toast("Success")
+    }
+
     override fun onBuyButtonClick() {
-        toast("OnBuyButtonClick")
+        presenter.buyLesson(instrumentCourse.id)
+    }
+
+    override fun showBuyLoading(show: Boolean) {
+        loadingDialog?.dismiss()
+
+        if (show) {
+            loadingDialog = LoadingDialog()
+            loadingDialog?.show(supportFragmentManager, "TAG")
+        }
     }
 }

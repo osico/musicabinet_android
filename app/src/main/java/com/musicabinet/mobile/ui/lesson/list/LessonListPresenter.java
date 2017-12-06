@@ -4,6 +4,8 @@ import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterRes
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse;
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentGroup;
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList;
+import com.musicabinet.mobile.model.order.OrderIdResponse;
+import com.musicabinet.mobile.model.order.execute.OrderExecuteResponse;
 import com.musicabinet.mobile.repository.MusicabinetRepository;
 
 import org.jetbrains.annotations.NotNull;
@@ -84,6 +86,61 @@ public class LessonListPresenter implements LessonListContract.Presenter {
                     @Override
                     public void accept(List<InstrumentLessonList> instrumentFilterResponse) throws Exception {
                         view.showLessonFilter(instrumentFilterResponse);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        view.showError();
+                    }
+                }));
+    }
+
+    @Override
+    public void buyLesson(@NotNull String lessonId) {
+        disposable.add(repository.createOrder(lessonId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        view.showBuyLoading(true);
+                    }
+                }).doOnTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        view.showBuyLoading(false);
+                    }
+                }).subscribe(new Consumer<OrderIdResponse>() {
+                    @Override
+                    public void accept(OrderIdResponse orderIdResponse) throws Exception {
+                        executePayment(orderIdResponse.getId());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        view.showError();
+                    }
+                }));
+    }
+
+
+    private void executePayment(String id) {
+        disposable.add(repository.executeOrder(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        view.showBuyLoading(true);
+                    }
+                }).doOnTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        view.showBuyLoading(false);
+                    }
+                })
+                .subscribe(new Consumer<OrderExecuteResponse>() {
+                    @Override
+                    public void accept(OrderExecuteResponse orderExecuteResponse) throws Exception {
+                        view.showSuccess();
                     }
                 }, new Consumer<Throwable>() {
                     @Override

@@ -14,10 +14,16 @@ interface LessonListContract {
         fun showLessonFilter(list: List<InstrumentLessonList>)
 
         fun showError()
+
+        fun showSuccess()
+
+        fun showBuyLoading(show: Boolean)
     }
 
     interface Presenter {
 
         fun getFilters(instrumentId: String)
+
+        fun buyLesson(lessonId: String)
     }
 }
