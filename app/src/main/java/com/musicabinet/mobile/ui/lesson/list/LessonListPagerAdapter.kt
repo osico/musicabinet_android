@@ -12,7 +12,8 @@ import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
  */
 class LessonListPagerAdapter(private val context: Context,
                              private val lessonGroup: List<InstrumentLessonList>,
-                             private val instrumentCourse: InstrumentCourse) : PagerAdapter() {
+                             private val instrumentCourse: InstrumentCourse,
+                             private val buyButtonListener: LessonListView.LessonBuyButtonListener) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val lessonListView = LessonListView(context)
@@ -20,6 +21,7 @@ class LessonListPagerAdapter(private val context: Context,
         lessonListView.setProductName(instrumentCourse.name)
         lessonListView.setProductPrice(instrumentCourse.productPrice,
                 instrumentCourse.productActive, instrumentCourse.productAvailable)
+        lessonListView.setBuyButtonListener(buyButtonListener)
         container.addView(lessonListView)
         return lessonListView
     }

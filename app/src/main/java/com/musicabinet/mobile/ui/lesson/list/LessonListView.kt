@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.view_lesson_list.view.*
 class LessonListView : FrameLayout {
 
     private lateinit var lessonAdapter: LessonAdapter
+    private var buyButtonListener: LessonBuyButtonListener? = null
 
     constructor(context: Context) : super(context) {
         init()
@@ -35,6 +36,10 @@ class LessonListView : FrameLayout {
         lessonRecyclerView.layoutManager = LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false)
         lessonRecyclerView.isNestedScrollingEnabled = false
+
+        bBuy.setOnClickListener {
+            buyButtonListener?.onBuyButtonClick()
+        }
     }
 
     fun setLessonList(list: List<InstrumentGroup>) {
@@ -44,14 +49,23 @@ class LessonListView : FrameLayout {
 
     fun setProductPrice(price: Float, productActive: Boolean, productAvailable: Boolean?) {
         if (productActive && productAvailable != null && !productAvailable && price != 0f) {
-            bPrice.setVisible(true)
-            bPrice.text = resources.getString(R.string.price_buy, price)
+            bBuy.setVisible(true)
+            bBuy.text = resources.getString(R.string.price_buy, price)
         } else {
-            bPrice.setVisible(false)
+            bBuy.setVisible(false)
         }
     }
 
     fun setProductName(name: String) {
         tvName.text = name
+    }
+
+    fun setBuyButtonListener(listener: LessonBuyButtonListener) {
+        buyButtonListener = listener
+    }
+
+    interface LessonBuyButtonListener {
+
+        fun onBuyButtonClick()
     }
 }

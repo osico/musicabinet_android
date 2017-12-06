@@ -14,7 +14,7 @@ import org.jetbrains.anko.toast
 /**
  * @author Kirchhoff-
  */
-class LessonListActivity : AppCompatActivity(), LessonListContract.View {
+class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonListView.LessonBuyButtonListener {
 
     companion object {
         const val INSTRUMENT_COURSE_ARG = "INSTRUMENT_COURSE_ARG"
@@ -55,12 +55,16 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View {
     override fun showLessonFilter(list: List<InstrumentLessonList>) {
         progressBar.setVisible(false)
 
-        viewPager.adapter = LessonListPagerAdapter(this, list, instrumentCourse)
+        viewPager.adapter = LessonListPagerAdapter(this, list, instrumentCourse, this)
         tabLayout.setupWithViewPager(viewPager)
         lessonLayout.setVisible(true)
     }
 
     override fun showError() {
         toast("Error")
+    }
+
+    override fun onBuyButtonClick() {
+        toast("OnBuyButtonClick")
     }
 }

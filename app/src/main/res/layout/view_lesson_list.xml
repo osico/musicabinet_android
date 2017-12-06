@@ -34,7 +34,7 @@
                     tools:text="basic" />
 
                 <Button
-                    android:id="@+id/bPrice"
+                    android:id="@+id/bBuy"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
