@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.lesson.list
+package com.musicabinet.mobile.ui.lesson.list.pager
 
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
