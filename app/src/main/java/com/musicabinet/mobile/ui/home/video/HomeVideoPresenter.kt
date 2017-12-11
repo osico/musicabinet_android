@@ -1,6 +1,7 @@
 package com.musicabinet.mobile.ui.home.video
 
 import com.musicabinet.mobile.model.home.HomeData
+import com.musicabinet.mobile.model.home.HomeDataElement
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -43,6 +44,11 @@ class HomeVideoPresenter(private val repository: MusicabinetRepository,
                 view.showHomeVideoError()
             }))
         }
+    }
+
+    override fun onVideoClick(videoItem: HomeDataElement) {
+        if (videoItem.dataField.url != null)
+            view.openVideo(videoItem.dataField.url!!)
     }
 
 }

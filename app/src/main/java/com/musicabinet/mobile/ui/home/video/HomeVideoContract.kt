@@ -18,11 +18,14 @@ interface HomeVideoContract {
         fun showHomeVideoError()
 
         fun setHomeVideoItem(videoList: List<HomeDataElement>, enablePagination: Boolean)
+
+        fun openVideo(url: String)
     }
 
     interface Presenter {
 
         fun loadItems()
 
+        fun onVideoClick(videoItem: HomeDataElement)
     }
 }

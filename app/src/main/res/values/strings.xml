@@ -19,6 +19,7 @@
     <string name="error_loading_home_video">Error during loading home video</string>
     <string name="error_loading_home_news">Error during loading home news</string>
     <string name="error_loading_home_tutorial">Error during loading home tutorial</string>
+    <string name="error_open_video">There are no application for open video</string>
     <string name="news_tab">News</string>
     <string name="tutorial_tab">Tutorial</string>
 
