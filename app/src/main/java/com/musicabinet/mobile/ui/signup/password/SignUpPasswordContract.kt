@@ -12,12 +12,17 @@ interface SignUpPasswordContract {
         fun showPasswordMismatchError()
 
         fun moveToFinishRegistration()
+
+        fun showLoading(show: Boolean)
+
+        fun showError()
     }
 
     interface Presenter {
 
         fun onUserType(password: String, confirmPassword: String)
 
-        fun registerUser(password: String, confirmPassword: String)
+        fun registerUser(email: String, name: String, surname: String, password: String,
+                         confirmPassword: String)
     }
 }

@@ -58,6 +58,9 @@ class SignUpUserActivity : ActivityWithBackButton(), SignUpUserContract.View {
 
     override fun moveToSetPassword() {
         intent = Intent(this, SignUpPasswordActivity::class.java)
+        intent.putExtra(SignUpPasswordActivity.SIGN_UP_EMAIL_ARG, edEmail.getString())
+        intent.putExtra(SignUpPasswordActivity.SIGN_UP_NAME_ARG, edUserName.getString())
+        intent.putExtra(SignUpPasswordActivity.SIGN_UP_SURNAME_ARG, edUserSurname.getString())
         startActivity(intent)
     }
 
