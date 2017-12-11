@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.model.request
+package com.musicabinet.mobile.model.login
 
 /**
  * @author Kirchhoff-

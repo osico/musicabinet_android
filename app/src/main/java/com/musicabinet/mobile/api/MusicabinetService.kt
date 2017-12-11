@@ -4,13 +4,13 @@ import com.musicabinet.mobile.model.home.HomeData
 import com.musicabinet.mobile.model.instrument.InstrumentData
 import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
+import com.musicabinet.mobile.model.login.LoginRequestBody
 import com.musicabinet.mobile.model.order.OrderIdResponse
 import com.musicabinet.mobile.model.order.execute.OrderExecuteBody
 import com.musicabinet.mobile.model.order.execute.OrderExecuteResponse
 import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteBody
 import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteResponse
 import com.musicabinet.mobile.model.profile.UserProfile
-import com.musicabinet.mobile.model.request.LoginRequestBody
 import io.reactivex.Completable
 import io.reactivex.Observable
 import retrofit2.http.*

@@ -1,13 +1,13 @@
 package com.musicabinet.mobile.repository
 
 import com.musicabinet.mobile.api.ApiFactory
+import com.musicabinet.mobile.model.login.LoginRequestBody
 import com.musicabinet.mobile.model.order.execute.OrderExecuteBody
 import com.musicabinet.mobile.model.order.execute.OrderExecuteParams
 import com.musicabinet.mobile.model.order.execute.OrderExecuteResponse
 import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteBody
 import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteParams
 import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteResponse
-import com.musicabinet.mobile.model.request.LoginRequestBody
 import io.reactivex.Observable
 
 /**
