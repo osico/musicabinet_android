@@ -37,4 +37,6 @@ interface MusicabinetRepository {
     fun executeOrder(orderId: String): Observable<OrderExecuteResponse>
 
     fun finishExecuteOrder(orderId: String, nonce: String): Observable<OrderFinishExecuteResponse>
+
+    fun registerUser(email: String, password: String, name: String, surname: String): Completable
 }

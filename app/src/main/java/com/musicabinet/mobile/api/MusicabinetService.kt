@@ -11,6 +11,7 @@ import com.musicabinet.mobile.model.order.execute.OrderExecuteResponse
 import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteBody
 import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteResponse
 import com.musicabinet.mobile.model.profile.UserProfile
+import com.musicabinet.mobile.model.register.RegisterRequestBody
 import io.reactivex.Completable
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -50,4 +51,7 @@ interface MusicabinetService {
 
     @POST("/platform/api/order/execute")
     fun finishExecuteOrder(@Body body: OrderFinishExecuteBody): Observable<OrderFinishExecuteResponse>
+
+    @POST("/platform/api/user/register")
+    fun registerUser(@Body registerBody: RegisterRequestBody): Completable
 }

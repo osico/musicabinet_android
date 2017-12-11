@@ -8,6 +8,8 @@ import com.musicabinet.mobile.model.order.execute.OrderExecuteResponse
 import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteBody
 import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteParams
 import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteResponse
+import com.musicabinet.mobile.model.register.RegisterRequestBody
+import com.musicabinet.mobile.model.register.UserInfo
 import io.reactivex.Observable
 
 /**
@@ -63,4 +65,7 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
         val orderFinishExecuteParams = OrderFinishExecuteParams(EXECUTE_ACTION_CHECKOUT, nonce)
         return ApiFactory.service.finishExecuteOrder(OrderFinishExecuteBody(orderId, BRAIN_TREE_ID, orderFinishExecuteParams))
     }
+
+    override fun registerUser(email: String, password: String, name: String, surname: String) =
+            ApiFactory.service.registerUser(RegisterRequestBody(email, password, UserInfo(name, surname)))
 }
