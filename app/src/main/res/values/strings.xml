@@ -84,4 +84,8 @@
 
     <!-- Resources for LessonListActivity-->
     <string name="price_buy">buy $%.2f</string>
+
+
+    <!-- Resources for DialogLessonSelect -->
+    <string name="choose_lesson">Choose lesson</string>
 </resources>
