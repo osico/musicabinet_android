@@ -9,7 +9,9 @@ import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
+import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentGroup
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
+import com.musicabinet.mobile.ui.lessons.lesson.LessonActivity
 import com.musicabinet.mobile.ui.lessons.list.pager.LessonListPagerAdapter
 import com.musicabinet.mobile.ui.lessons.list.pager.LessonListView
 import com.musicabinet.mobile.ui.view.LoadingDialog
@@ -81,6 +83,10 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
         presenter.buyLesson(instrumentCourse.id)
     }
 
+    override fun onItemClick(item: InstrumentGroup) {
+        presenter.onLessonClick(item)
+    }
+
     override fun showBuyLoading(show: Boolean) {
         loadingDialog?.dismiss()
 
@@ -93,6 +99,11 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
     override fun moveToPaymentScreen(id: String, requestCode: Int) {
         val dropInRequest = DropInRequest().clientToken(getString(R.string.test_payments_token))
         startActivityForResult(dropInRequest.getIntent(this), requestCode)
+    }
+
+    override fun moveToLesson() {
+        val intent = Intent(this, LessonActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

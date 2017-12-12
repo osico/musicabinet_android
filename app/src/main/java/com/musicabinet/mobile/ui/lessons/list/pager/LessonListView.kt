@@ -9,12 +9,13 @@ import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentGroup
 import com.musicabinet.mobile.ui.lessons.list.adapter.LessonAdapter
+import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 import kotlinx.android.synthetic.main.view_lesson_list.view.*
 
 /**
  * @author Kirchhoff-
  */
-class LessonListView : FrameLayout {
+class LessonListView : FrameLayout, BaseRecyclerAdapter.OnItemClickListener<InstrumentGroup> {
 
     private lateinit var lessonAdapter: LessonAdapter
     private var buyButtonListener: LessonBuyButtonListener? = null
@@ -42,9 +43,14 @@ class LessonListView : FrameLayout {
         }
     }
 
+    override fun onItemClick(item: InstrumentGroup) {
+        buyButtonListener?.onItemClick(item)
+    }
+
     fun setLessonList(list: List<InstrumentGroup>) {
         lessonAdapter = LessonAdapter(list)
         lessonRecyclerView.adapter = lessonAdapter
+        lessonAdapter.setOnItemClickListener(this)
     }
 
     fun setProductPrice(price: Float, productActive: Boolean, productAvailable: Boolean?) {
@@ -67,5 +73,7 @@ class LessonListView : FrameLayout {
     interface LessonBuyButtonListener {
 
         fun onBuyButtonClick()
+
+        fun onItemClick(item: InstrumentGroup)
     }
 }

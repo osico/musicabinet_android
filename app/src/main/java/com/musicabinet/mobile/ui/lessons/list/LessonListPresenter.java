@@ -207,4 +207,9 @@ public class LessonListPresenter implements LessonListContract.Presenter {
             }
         }
     }
+
+    @Override
+    public void onLessonClick(@NotNull InstrumentGroup item) {
+        view.moveToLesson();
+    }
 }
