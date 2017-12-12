@@ -24,6 +24,12 @@
         <item name="actionBarStyle">@style/ActionBarWithoutShadow</item>
     </style>
 
+    <style name="AppTheme.NoActionBar.Translucent">
+        <item name="android:windowBackground">@color/black_transparent_99</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
     <style name="ActionBarWithoutShadow" parent="@style/Widget.AppCompat.ActionBar">
         <item name="background">@color/colorPrimary</item>
         <item name="elevation">0dp</item>

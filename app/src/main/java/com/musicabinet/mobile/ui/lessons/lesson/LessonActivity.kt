@@ -1,13 +1,16 @@
 package com.musicabinet.mobile.ui.lessons.lesson
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.model.lesson.Lesson
+import com.musicabinet.mobile.ui.lessons.lesson.dialog.LessonSelectActivity
 import kotlinx.android.synthetic.main.toolbar_lesson.*
 import org.jetbrains.anko.toast
+import java.io.Serializable
 
 /**
  * @author Kirchhoff-
@@ -43,6 +46,8 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
     }
 
     override fun showLessonsDialog(lessonList: List<Lesson>) {
-        toast("Show Lesson Dialog")
+        val intent = Intent(this, LessonSelectActivity::class.java)
+        intent.putExtra(LessonSelectActivity.LESSON_LIST_ARG, lessonList as Serializable)
+        startActivity(intent)
     }
 }

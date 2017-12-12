@@ -9,9 +9,11 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="white_transparent_30">#4dfafafa</color>
+    <color name="black_transparent_99">#99000000</color>
     <color name="red">#d91111</color>
     <color name="colorPrimaryAlpha">#1A12c382</color>
     <color name="slideMenuHeaderBackground">#0fa36d</color>
 
     <color name="home_item_card_background">#1AFFFFFF</color>
+    <color name="grey_f2f2fe">#f2f2f2</color>
 </resources>

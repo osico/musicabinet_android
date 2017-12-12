@@ -80,6 +80,11 @@
             android:name=".ui.lessons.lesson.LessonActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.lessons.lesson.dialog.LessonSelectActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.Translucent" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="55b4ddc0b0d079482c57d654d6e008482ea5b58d" />
