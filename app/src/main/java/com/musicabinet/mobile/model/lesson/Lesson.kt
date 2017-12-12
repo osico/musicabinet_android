@@ -6,4 +6,9 @@ import com.google.gson.annotations.SerializedName
  * @author Kirchhoff-
  */
 data class Lesson(@SerializedName("id") val id: String,
-                  @SerializedName("nameLocalized") val name: String)
+                  @SerializedName("nameLocalized") val name: String,
+                  @SerializedName("sortOrder") val sortOrder: Int) : Comparable<Lesson> {
+
+    override fun compareTo(other: Lesson) = sortOrder - other.sortOrder
+
+}
