@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.lesson.list
+package com.musicabinet.mobile.ui.lessons.list
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +10,8 @@ import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
-import com.musicabinet.mobile.ui.lesson.list.pager.LessonListPagerAdapter
-import com.musicabinet.mobile.ui.lesson.list.pager.LessonListView
+import com.musicabinet.mobile.ui.lessons.list.pager.LessonListPagerAdapter
+import com.musicabinet.mobile.ui.lessons.list.pager.LessonListView
 import com.musicabinet.mobile.ui.view.LoadingDialog
 import kotlinx.android.synthetic.main.activity_lesson_list.*
 import org.jetbrains.anko.toast

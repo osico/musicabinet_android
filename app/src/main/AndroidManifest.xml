@@ -72,7 +72,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.lesson.list.LessonListActivity"
+            android:name=".ui.lessons.list.LessonListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.AppBarWithoutShadow" />
 

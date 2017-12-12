@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.lesson.list.pager
+package com.musicabinet.mobile.ui.lessons.list.pager
 
 import android.content.Context
 import android.support.v4.view.PagerAdapter

@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.lesson.list.pager
+package com.musicabinet.mobile.ui.lessons.list.pager
 
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentGroup
-import com.musicabinet.mobile.ui.lesson.list.adapter.LessonAdapter
+import com.musicabinet.mobile.ui.lessons.list.adapter.LessonAdapter
 import kotlinx.android.synthetic.main.view_lesson_list.view.*
 
 /**

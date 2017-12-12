@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.lesson.list
+package com.musicabinet.mobile.ui.lessons.list
 
 import android.content.Intent
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList

@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.lesson.list;
+package com.musicabinet.mobile.ui.lessons.list;
 
 import android.app.Activity;
 import android.content.Intent;

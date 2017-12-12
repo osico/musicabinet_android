@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.lesson.list.adapter
+package com.musicabinet.mobile.ui.lessons.list.adapter
 
 import android.view.ViewGroup
 import com.musicabinet.mobile.R

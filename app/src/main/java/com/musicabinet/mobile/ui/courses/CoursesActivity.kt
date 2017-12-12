@@ -12,7 +12,7 @@ import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
 import com.musicabinet.mobile.ui.courses.adapter.CourseAdapter
-import com.musicabinet.mobile.ui.lesson.list.LessonListActivity
+import com.musicabinet.mobile.ui.lessons.list.LessonListActivity
 import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_courses.*
 
