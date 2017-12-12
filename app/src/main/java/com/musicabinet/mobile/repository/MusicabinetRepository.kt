@@ -4,6 +4,7 @@ import com.musicabinet.mobile.model.home.HomeData
 import com.musicabinet.mobile.model.instrument.InstrumentData
 import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
+import com.musicabinet.mobile.model.lesson.LessonGroup
 import com.musicabinet.mobile.model.order.OrderIdResponse
 import com.musicabinet.mobile.model.order.execute.OrderExecuteResponse
 import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteResponse
@@ -39,4 +40,6 @@ interface MusicabinetRepository {
     fun finishExecuteOrder(orderId: String, nonce: String): Observable<OrderFinishExecuteResponse>
 
     fun registerUser(email: String, password: String, name: String, surname: String): Completable
+
+    fun getLessonGroup(id: String): Observable<LessonGroup>
 }

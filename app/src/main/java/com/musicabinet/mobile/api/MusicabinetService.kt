@@ -4,6 +4,7 @@ import com.musicabinet.mobile.model.home.HomeData
 import com.musicabinet.mobile.model.instrument.InstrumentData
 import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
+import com.musicabinet.mobile.model.lesson.LessonGroup
 import com.musicabinet.mobile.model.login.LoginRequestBody
 import com.musicabinet.mobile.model.order.OrderIdResponse
 import com.musicabinet.mobile.model.order.execute.OrderExecuteBody
@@ -54,4 +55,8 @@ interface MusicabinetService {
 
     @POST("/platform/api/user/register")
     fun registerUser(@Body registerBody: RegisterRequestBody): Completable
+
+    @GET("/api/lesson")
+    fun getLessonGroup(@Query("lessonGroupId") id: String,
+                       @Query("count") count: Int): Observable<LessonGroup>
 }
