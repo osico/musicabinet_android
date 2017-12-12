@@ -101,8 +101,9 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
         startActivityForResult(dropInRequest.getIntent(this), requestCode)
     }
 
-    override fun moveToLesson() {
+    override fun moveToLesson(id: String) {
         val intent = Intent(this, LessonActivity::class.java)
+        intent.putExtra(LessonActivity.LESSON_ID_ARG, id)
         startActivity(intent)
     }
 

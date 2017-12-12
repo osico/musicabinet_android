@@ -210,6 +210,6 @@ public class LessonListPresenter implements LessonListContract.Presenter {
 
     @Override
     public void onLessonClick(@NotNull InstrumentGroup item) {
-        view.moveToLesson();
+        view.moveToLesson(item.getLessonList().get(0).getId());
     }
 }

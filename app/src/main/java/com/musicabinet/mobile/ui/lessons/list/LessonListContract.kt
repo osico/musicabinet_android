@@ -23,7 +23,7 @@ interface LessonListContract {
 
         fun moveToPaymentScreen(id: String, requestCode: Int)
 
-        fun moveToLesson()
+        fun moveToLesson(id: String)
 
         fun showSuccessPayment()
     }

@@ -6,6 +6,7 @@ import java.io.Serializable
 /**
  * @author Kirchhoff-
  */
-data class LessonItem(@SerializedName("nameLocalized") val nameLocalized: String,
+data class LessonItem(@SerializedName("id") val id: String,
+                      @SerializedName("nameLocalized") val nameLocalized: String,
                       @SerializedName("progress") val progress: Float,
                       @SerializedName("programs") val programs: List<String>) : Serializable

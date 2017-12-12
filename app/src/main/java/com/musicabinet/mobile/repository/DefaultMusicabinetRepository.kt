@@ -28,6 +28,8 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     private const val LOGIN_TYPE_EMAIL = "email"
 
+    private const val LESSON_REQUEST_COUNT = 100
+
     override fun getHomeNews(start: Int) =
             ApiFactory.service.getHomeItems(HOME_NEWS_ID, true, start, REQUEST_ITEM_COUNT)
 
@@ -68,4 +70,7 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     override fun registerUser(email: String, password: String, name: String, surname: String) =
             ApiFactory.service.registerUser(RegisterRequestBody(email, password, UserInfo(name, surname)))
+
+    override fun getLessonGroup(id: String) =
+            ApiFactory.service.getLessonGroup(id, LESSON_REQUEST_COUNT)
 }
