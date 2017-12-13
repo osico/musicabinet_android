@@ -9,9 +9,16 @@ import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 /**
  * @author Kirchhoff-
  */
-class LessonSelectAdapter(items: List<Lesson>)
-    : BaseRecyclerAdapter<LessonSelectViewHolder, Lesson>(items) {
+class LessonSelectAdapter
+    : BaseRecyclerAdapter<LessonSelectViewHolder, Lesson>, BaseRecyclerAdapter.OnItemClickWithPositionListener<Lesson> {
 
+    private var selectedList: MutableList<Boolean>
+
+    constructor(items: List<Lesson>) : super(items) {
+        selectedList = MutableList(items.size, { false })
+        selectedList[0] = true
+        setOnItemClickWithPosition(this)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             LessonSelectViewHolder(parent.inflate(R.layout.item_lesson_select))
@@ -19,6 +26,15 @@ class LessonSelectAdapter(items: List<Lesson>)
 
     override fun onBindViewHolder(holder: LessonSelectViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), selectedList[position])
     }
+
+    override fun onItemClick(item: Lesson, position: Int) {
+        if (!selectedList[position]) {
+            selectedList = MutableList(getDataSet().size, { false })
+            selectedList[position] = true
+            notifyDataSetChanged()
+        }
+    }
+
 }
