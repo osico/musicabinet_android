@@ -30,6 +30,8 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     private const val LESSON_REQUEST_COUNT = 100
 
+    private const val PREPARED_LESSON_STATUS = true
+
     override fun getHomeNews(start: Int) =
             ApiFactory.service.getHomeItems(HOME_NEWS_ID, true, start, REQUEST_ITEM_COUNT)
 
@@ -73,4 +75,7 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     override fun getLessonGroup(id: String) =
             ApiFactory.service.getLessonGroup(id, LESSON_REQUEST_COUNT)
+
+    override fun getNextLesson(id: String) =
+            ApiFactory.service.getNextLesson(id, PREPARED_LESSON_STATUS)
 }
