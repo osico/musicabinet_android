@@ -14,6 +14,8 @@ interface LessonContract {
 
         fun showError()
 
+        fun showLoading(show: Boolean)
+
         fun showSelectLesson(lessonList: List<Lesson>, requestCode: Int,
                              resultId: String, resultName: String)
 
@@ -23,6 +25,8 @@ interface LessonContract {
     interface Presenter {
 
         fun getLessonGroup(id: String)
+
+        fun getLessonInformation(id: String)
 
         fun selectLessonClick()
 

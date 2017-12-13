@@ -21,7 +21,6 @@ class LessonPresenter(private val view: LessonContract.View,
         private const val REQUEST_LESSON_ID_RESULT = "REQUEST_LESSON_ID_RESULT"
     }
 
-
     private val subscriptions = CompositeDisposable()
     private var lessonList: List<Lesson>? = null
 
@@ -37,6 +36,15 @@ class LessonPresenter(private val view: LessonContract.View,
                     view.showSuccess()
                 }, { view.showError() }))
     }
+
+    override fun getLessonInformation(id: String) {
+        subscriptions.add(repository.getNextLesson(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { view.showLoading(true) }
+                .doOnTerminate { view.showLoading(false) }
+                .subscribe({ view.showSuccess() }, { view.showError() }))
+    }
+
 
     override fun selectLessonClick() {
         if (lessonList != null)
