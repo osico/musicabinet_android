@@ -28,6 +28,7 @@
         <item name="android:windowBackground">@color/black_transparent_99</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorControlHighlight">@color/black_transparent_99</item>
     </style>
 
     <style name="ActionBarWithoutShadow" parent="@style/Widget.AppCompat.ActionBar">
