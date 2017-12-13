@@ -4,8 +4,8 @@ import com.musicabinet.mobile.model.home.HomeData
 import com.musicabinet.mobile.model.instrument.InstrumentData
 import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
-import com.musicabinet.mobile.model.lesson.LessonGroup
-import com.musicabinet.mobile.model.lesson.LessonResponse
+import com.musicabinet.mobile.model.lesson.lesson.LessonGroup
+import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.order.OrderIdResponse
 import com.musicabinet.mobile.model.order.execute.OrderExecuteResponse
 import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteResponse

@@ -3,7 +3,7 @@ package com.musicabinet.mobile.ui.lessons.lesson.dialog.adapter
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.musicabinet.mobile.extensions.setVisible
-import com.musicabinet.mobile.model.lesson.Lesson
+import com.musicabinet.mobile.model.lesson.lesson.Lesson
 import kotlinx.android.synthetic.main.item_lesson_select.view.*
 
 /**

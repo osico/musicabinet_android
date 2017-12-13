@@ -2,7 +2,7 @@ package com.musicabinet.mobile.ui.lessons.lesson
 
 import android.app.Activity
 import android.content.Intent
-import com.musicabinet.mobile.model.lesson.Lesson
+import com.musicabinet.mobile.model.lesson.lesson.Lesson
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.model.lesson
+package com.musicabinet.mobile.model.lesson.lesson
 
 import com.google.gson.annotations.SerializedName
 

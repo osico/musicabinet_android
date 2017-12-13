@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Window
 import com.musicabinet.mobile.R
-import com.musicabinet.mobile.model.lesson.Lesson
+import com.musicabinet.mobile.model.lesson.lesson.Lesson
 import com.musicabinet.mobile.ui.lessons.lesson.dialog.adapter.LessonSelectAdapter
 import kotlinx.android.synthetic.main.activity_lesson_select.*
 

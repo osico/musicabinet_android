@@ -3,7 +3,7 @@ package com.musicabinet.mobile.ui.lessons.lesson.dialog.adapter
 import android.view.ViewGroup
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.inflate
-import com.musicabinet.mobile.model.lesson.Lesson
+import com.musicabinet.mobile.model.lesson.lesson.Lesson
 import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 
 /**

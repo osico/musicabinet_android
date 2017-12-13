@@ -1,7 +1,7 @@
 package com.musicabinet.mobile.ui.lessons.lesson
 
 import android.content.Intent
-import com.musicabinet.mobile.model.lesson.Lesson
+import com.musicabinet.mobile.model.lesson.lesson.Lesson
 
 /**
  * @author Kirchhoff-
