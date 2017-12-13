@@ -45,9 +45,19 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
         toast("Error")
     }
 
-    override fun showLessonsDialog(lessonList: List<Lesson>) {
+    override fun showSelectLesson(lessonList: List<Lesson>, requestCode: Int,
+                                  resultId: String, resultName: String) {
         val intent = Intent(this, LessonSelectActivity::class.java)
         intent.putExtra(LessonSelectActivity.LESSON_LIST_ARG, lessonList as Serializable)
-        startActivity(intent)
+        startActivityForResult(intent, requestCode)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        presenter.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onLessonSelected() {
+        toast("On LessonSelected")
     }
 }

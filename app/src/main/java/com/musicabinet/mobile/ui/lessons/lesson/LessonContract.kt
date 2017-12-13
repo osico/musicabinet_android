@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.lessons.lesson
 
+import android.content.Intent
 import com.musicabinet.mobile.model.lesson.Lesson
 
 /**
@@ -13,7 +14,10 @@ interface LessonContract {
 
         fun showError()
 
-        fun showLessonsDialog(lessonList: List<Lesson>)
+        fun showSelectLesson(lessonList: List<Lesson>, requestCode: Int,
+                             resultId: String, resultName: String)
+
+        fun onLessonSelected()
     }
 
     interface Presenter {
@@ -21,5 +25,7 @@ interface LessonContract {
         fun getLessonGroup(id: String)
 
         fun selectLessonClick()
+
+        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
     }
 }
