@@ -1,7 +1,9 @@
 package com.musicabinet.mobile.extensions
 
+import android.os.Build
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,3 +34,11 @@ fun TextView.setColorText(@ColorRes color: Int) {
 }
 
 fun EditText.getString() = text.toString()
+
+fun TextView.displayHtmlText(text: String) {
+    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+        setText(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY))
+    } else {
+        setText(Html.fromHtml(text))
+    }
+}
