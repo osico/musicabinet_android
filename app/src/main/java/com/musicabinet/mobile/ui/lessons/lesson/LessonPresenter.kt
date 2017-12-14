@@ -48,7 +48,7 @@ class LessonPresenter(private val view: LessonContract.View,
                     val methodList = ArrayList<MethodItem>()
                     for (lessonPart in lessonResponse.lessonParts) {
                         if (lessonPart.video != null && lessonPart.video!!.video != null)
-                            methodList.add(MethodItem(lessonPart.description, lessonPart.video!!.video!!))
+                            methodList.add(MethodItem(lessonPart.video!!.description, lessonPart.video!!.video!!))
                     }
 
                     methodList
