@@ -7,4 +7,4 @@ import com.google.gson.annotations.SerializedName
  */
 data class Video(@SerializedName("id") val id: String,
                  @SerializedName("nameLocalized") val name: String,
-                 @SerializedName("storedFile") val video: StoredFile)
+                 @SerializedName("storedFile") var video: StoredFile?)

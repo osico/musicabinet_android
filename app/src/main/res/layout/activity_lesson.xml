@@ -13,5 +13,10 @@
         app:mk_color="@color/colorPrimary"
         app:mk_type="ClassicSpinner" />
 
+    <com.musicabinet.mobile.ui.lessons.lesson.view.MethodView
+        android:id="@+id/methodView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </FrameLayout>

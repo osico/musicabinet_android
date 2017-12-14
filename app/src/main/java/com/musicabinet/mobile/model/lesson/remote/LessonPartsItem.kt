@@ -8,5 +8,5 @@ import com.google.gson.annotations.SerializedName
 data class LessonPartsItem(@SerializedName("id") val id: String,
                            @SerializedName("nameLocalized") val name: String,
                            @SerializedName("descriptionLocalized") val description: String,
-                           @SerializedName("video") val video: Video,
+                           @SerializedName("video") var video: Video?,
                            @SerializedName("exercises") val exercisesList: List<ExerciseItem>)

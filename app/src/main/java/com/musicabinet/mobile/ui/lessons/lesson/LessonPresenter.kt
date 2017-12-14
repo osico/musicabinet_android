@@ -3,6 +3,8 @@ package com.musicabinet.mobile.ui.lessons.lesson
 import android.app.Activity
 import android.content.Intent
 import com.musicabinet.mobile.model.lesson.lesson.Lesson
+import com.musicabinet.mobile.model.lesson.local.MethodItem
+import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -42,7 +44,20 @@ class LessonPresenter(private val view: LessonContract.View,
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading(true) }
                 .doOnTerminate { view.showLoading(false) }
-                .subscribe({ view.showSuccess() }, { view.showError() }))
+                .map({ lessonResponse: LessonResponse ->
+                    val methodList = ArrayList<MethodItem>()
+                    for (lessonPart in lessonResponse.lessonParts) {
+                        if (lessonPart.video != null && lessonPart.video!!.video != null)
+                            methodList.add(MethodItem(lessonPart.description, lessonPart.video!!.video!!))
+                    }
+
+                    methodList
+                })
+                .subscribe({ methodList: ArrayList<MethodItem>? ->
+                    view.showSuccess()
+                    if (methodList != null)
+                        view.showMethod(methodList)
+                }, { view.showError() }))
     }
 
 
