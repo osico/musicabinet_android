@@ -1,14 +1,12 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.support.v7.widget.LinearLayoutManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import android.widget.Toast
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.openVideoIntent
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.ui.lessons.lesson.view.adapter.MethodViewAdapter
 import com.musicabinet.mobile.utils.BaseRecyclerAdapter
@@ -51,16 +49,6 @@ class MethodView : FrameLayout, MethodViewContract.View, BaseRecyclerAdapter.OnI
     }
 
     override fun openVideo(url: String) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        intent.setDataAndType(Uri.parse(url), "video/mp4")
-
-        val packageManager = context.packageManager
-        val infos = packageManager.queryIntentActivities(intent, 0)
-
-        if (infos.size > 0) {
-            context.startActivity(intent)
-        } else {
-            Toast.makeText(context, R.string.error_open_video, Toast.LENGTH_LONG).show()
-        }
+        context.openVideoIntent(url)
     }
 }
