@@ -33,6 +33,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
         presenter.getLessonInformation(intent.getStringExtra(LESSON_ID_ARG))
 
         tvLesson.setOnClickListener { presenter.selectLessonClick() }
+        ivBack.setOnClickListener { onBackPressed() }
     }
 
     override fun showSuccess() {
