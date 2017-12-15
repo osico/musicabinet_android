@@ -93,4 +93,7 @@
     <!-- Resources for LessonActivity -->
     <string name="lesson_tab">Lesson</string>
     <string name="method_tab">Method</string>
+    <string name="sound_drums">Drums</string>
+    <string name="sound_bass">Bass</string>
+    <string name="sound_keys">Keys</string>
 </resources>
