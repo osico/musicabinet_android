@@ -88,4 +88,9 @@
 
     <!-- Resources for DialogLessonSelect -->
     <string name="choose_lesson">Choose lesson</string>
+
+
+    <!-- Resources for LessonActivity -->
+    <string name="lesson_tab">Lesson</string>
+    <string name="method_tab">Method</string>
 </resources>

@@ -64,6 +64,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <FrameLayout
@@ -78,10 +79,11 @@
                 app:mk_color="@color/colorPrimary"
                 app:mk_type="ClassicSpinner" />
 
-            <com.musicabinet.mobile.ui.lessons.lesson.view.MethodView
-                android:id="@+id/methodView"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
         </FrameLayout>
 
     </android.support.v4.widget.NestedScrollView>

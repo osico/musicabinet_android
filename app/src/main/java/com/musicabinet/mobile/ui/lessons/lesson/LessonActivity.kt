@@ -23,6 +23,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
     }
 
     private lateinit var presenter: LessonContract.Presenter
+    private val adapter = LessonAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +66,8 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
     }
 
     override fun showMethod(methodList: List<MethodItem>) {
-        methodView.setMethodList(methodList)
+        viewPager.adapter = adapter
+        adapter.setMethodList(methodList)
     }
 
     override fun showLessonTitle(title: String) {

@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setCompletedPercent
 import com.musicabinet.mobile.model.instrument.matrix.LessonItem
-import kotlinx.android.synthetic.main.view_lesson.view.*
+import kotlinx.android.synthetic.main.view_lesson_item.view.*
 
 /**
  * @author Kirchhoff-
@@ -27,7 +27,7 @@ class LessonItemView : ConstraintLayout {
     }
 
     private fun init() {
-        LayoutInflater.from(context).inflate(R.layout.view_lesson, this, true)
+        LayoutInflater.from(context).inflate(R.layout.view_lesson_item, this, true)
     }
 
     fun bind(element: LessonItem) {

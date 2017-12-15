@@ -38,7 +38,7 @@ class MethodView : FrameLayout, MethodViewContract.View, BaseRecyclerAdapter.OnI
                 false)
     }
 
-    public fun setMethodList(methodList: List<MethodItem>) {
+    fun setMethodList(methodList: List<MethodItem>) {
         val adapter = MethodViewAdapter(methodList)
         recyclerView.adapter = adapter
         adapter.setOnItemClickListener(this)
