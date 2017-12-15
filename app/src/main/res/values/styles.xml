@@ -44,4 +44,17 @@
         <item name="android:textColor">@color/white_transparent_30</item>
         <item name="textAllCaps">true</item>
     </style>
+
+    <style name="LessonTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabTextAppearance">@style/LessonTabPage</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="LessonTabPage" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white_transparent_30</item>
+        <item name="textAllCaps">true</item>
+    </style>
 </resources>

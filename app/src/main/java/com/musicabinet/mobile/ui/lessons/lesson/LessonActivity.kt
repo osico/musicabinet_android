@@ -67,6 +67,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
 
     override fun showMethod(methodList: List<MethodItem>) {
         viewPager.adapter = adapter
+        tabLayout.setupWithViewPager(viewPager)
         adapter.setMethodList(methodList)
     }
 
