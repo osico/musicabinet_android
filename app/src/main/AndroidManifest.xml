@@ -78,12 +78,12 @@
 
         <activity
             android:name=".ui.lessons.lesson.LessonActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".ui.lessons.lesson.dialog.LessonSelectActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
 
         <meta-data
