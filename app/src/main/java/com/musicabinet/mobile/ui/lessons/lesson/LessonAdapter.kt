@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.ui.lessons.lesson.view.LessonView
-import com.musicabinet.mobile.ui.lessons.lesson.view.MethodView
+import com.musicabinet.mobile.ui.lessons.lesson.view.method.MethodView
 
 /**
  * @author Kirchhoff-

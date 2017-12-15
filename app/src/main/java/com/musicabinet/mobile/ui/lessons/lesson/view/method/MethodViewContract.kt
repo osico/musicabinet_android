@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.lessons.lesson.view
+package com.musicabinet.mobile.ui.lessons.lesson.view.method
 
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 
