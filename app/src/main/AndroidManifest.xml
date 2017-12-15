@@ -78,7 +78,8 @@
 
         <activity
             android:name=".ui.lessons.lesson.LessonActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".ui.lessons.lesson.dialog.LessonSelectActivity"

@@ -17,6 +17,8 @@ interface LessonContract {
 
         fun showLoading(show: Boolean)
 
+        fun showLessonTitle(title: String)
+
         fun showSelectLesson(lessonList: List<Lesson>, requestCode: Int,
                              resultId: String, resultName: String)
 
