@@ -3,6 +3,7 @@ package com.musicabinet.mobile.ui.lessons.lesson
 import android.app.Activity
 import android.content.Intent
 import com.musicabinet.mobile.model.lesson.lesson.Lesson
+import com.musicabinet.mobile.model.lesson.local.LessonScreenData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.repository.MusicabinetRepository
@@ -51,12 +52,12 @@ class LessonPresenter(private val view: LessonContract.View,
                             methodList.add(MethodItem(lessonPart.video!!.description, lessonPart.video!!.video!!))
                     }
 
-                    methodList
+                    LessonScreenData(lessonResponse.name, methodList)
                 })
-                .subscribe({ methodList: ArrayList<MethodItem>? ->
+                .subscribe({ screenData: LessonScreenData ->
                     view.showSuccess()
-                    if (methodList != null)
-                        view.showMethod(methodList)
+                    view.showMethod(screenData.methodList)
+                    view.showLessonTitle(screenData.title)
                 }, { view.showError() }))
     }
 
