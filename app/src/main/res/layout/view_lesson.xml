@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <com.musicabinet.mobile.ui.lessons.lesson.view.SoundView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/grey_f2f2ea"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/ivLesson1"
+            android:layout_width="match_parent"
+            android:layout_height="180dp" />
+
+        <ImageView
+            android:id="@+id/ivLesson2"
+            android:layout_width="match_parent"
+            android:layout_height="128dp" />
+
+        <ImageView
+            android:id="@+id/ivLesson3"
+            android:layout_width="match_parent"
+            android:layout_height="128dp" />
+
+        <ImageView
+            android:id="@+id/ivLesson4"
+            android:layout_width="match_parent"
+            android:layout_height="128dp" />
+
+    </LinearLayout>
+
+
+</ScrollView>

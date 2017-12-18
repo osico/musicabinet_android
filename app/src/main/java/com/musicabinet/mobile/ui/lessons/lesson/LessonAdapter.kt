@@ -47,4 +47,8 @@ class LessonAdapter(private val context: Context) : PagerAdapter() {
     fun setMethodList(list: List<MethodItem>) {
         methodView?.setMethodList(list)
     }
+
+    fun showLessonImagesList(imagesList: List<List<String>>) {
+        lessonView?.setLessonImages(imagesList)
+    }
 }

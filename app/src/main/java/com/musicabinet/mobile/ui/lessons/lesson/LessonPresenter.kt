@@ -47,17 +47,27 @@ class LessonPresenter(private val view: LessonContract.View,
                 .doOnTerminate { view.showLoading(false) }
                 .map({ lessonResponse: LessonResponse ->
                     val methodList = ArrayList<MethodItem>()
+                    val lessonImageList = ArrayList<List<String>>()
                     for (lessonPart in lessonResponse.lessonParts) {
                         if (lessonPart.video != null && lessonPart.video!!.video != null)
                             methodList.add(MethodItem(lessonPart.video!!.description, lessonPart.video!!.video!!))
                     }
 
-                    LessonScreenData(lessonResponse.name, methodList)
+                    for (i in lessonResponse.lessonParts.indices) {
+                        val images = ArrayList<String>()
+                        for (exercise in lessonResponse.lessonParts[i].exercisesList)
+                            images.add(exercise.stave.file.id)
+
+                        lessonImageList.add(images)
+                    }
+
+                    LessonScreenData(lessonResponse.name, methodList, lessonImageList)
                 })
                 .subscribe({ screenData: LessonScreenData ->
                     view.showSuccess()
                     view.showMethod(screenData.methodList)
                     view.showLessonTitle(screenData.title)
+                    view.showLessonImages(screenData.lessonImages)
                 }, { view.showError() }))
     }
 

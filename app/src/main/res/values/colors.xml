@@ -16,4 +16,5 @@
 
     <color name="home_item_card_background">#1AFFFFFF</color>
     <color name="grey_f2f2fe">#f2f2f2</color>
+    <color name="grey_f2f2ea">#f2f2ea</color>
 </resources>

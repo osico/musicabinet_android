@@ -24,6 +24,8 @@ interface LessonContract {
 
         fun showMethod(methodList: List<MethodItem>)
 
+        fun showLessonImages(lessonImagesList: List<List<String>>)
+
         fun onLessonSelected()
     }
 

@@ -4,6 +4,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
+import com.squareup.picasso.Picasso
 
 /**
  * @author Kirchhoff-
@@ -16,6 +17,9 @@ const val INSTRUMENT_GUITAR = "guitar"
 const val INSTRUMENT_SAXOPHONE = "saxophone"
 const val INSTRUMENT_VOCAL = "vocal"
 const val INSTRUMENT_COMPOSITION = "composition"
+
+const val LESSON_IMAGE_URL = "https://api.musicabinet.com/platform/api/file-storage/"
+const val DOWNLOAD = "/download"
 
 fun ImageView.bindInstrumentImage(instrument: String) {
     when (instrument) {
@@ -42,4 +46,9 @@ fun TextView.setCompletedPercent(percent: Float) {
     } else {
         setVisible(false)
     }
+}
+
+fun ImageView.loadLessonImage(url: String?) {
+    if (!url.isNullOrEmpty())
+        Picasso.with(context).load(LESSON_IMAGE_URL + url + DOWNLOAD).into(this)
 }

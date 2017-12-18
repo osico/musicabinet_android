@@ -71,6 +71,10 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
         adapter.setMethodList(methodList)
     }
 
+    override fun showLessonImages(lessonImagesList: List<List<String>>) {
+        adapter.showLessonImagesList(lessonImagesList)
+    }
+
     override fun showLessonTitle(title: String) {
         tvLesson.text = title
     }
