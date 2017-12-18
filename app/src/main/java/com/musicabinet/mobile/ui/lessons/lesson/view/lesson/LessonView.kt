@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.lessons.lesson.view
+package com.musicabinet.mobile.ui.lessons.lesson.view.lesson
 
 import android.content.Context
 import android.util.AttributeSet

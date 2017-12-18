@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.model.lesson.local.MethodItem
-import com.musicabinet.mobile.ui.lessons.lesson.view.LessonView
+import com.musicabinet.mobile.ui.lessons.lesson.view.lesson.LessonView
 import com.musicabinet.mobile.ui.lessons.lesson.view.method.MethodView
 
 /**
