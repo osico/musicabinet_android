@@ -10,10 +10,14 @@ interface MethodViewContract {
     interface View {
 
         fun openVideo(url: String)
+
+        fun openInformation(information: String)
     }
 
     interface Presenter {
 
         fun onVideoClick(methodItem: MethodItem)
+
+        fun onInfoClick(information: String)
     }
 }

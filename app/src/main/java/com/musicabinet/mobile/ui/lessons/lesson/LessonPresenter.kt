@@ -50,7 +50,8 @@ class LessonPresenter(private val view: LessonContract.View,
                     val lessonImageList = ArrayList<List<String>>()
                     for (lessonPart in lessonResponse.lessonParts) {
                         if (lessonPart.video != null && lessonPart.video!!.video != null)
-                            methodList.add(MethodItem(lessonPart.video!!.description, lessonPart.video!!.video!!))
+                            methodList.add(MethodItem(lessonPart.video!!.description,
+                                    lessonPart.description, lessonPart.video!!.video!!))
                     }
 
                     for (i in lessonResponse.lessonParts.indices) {
