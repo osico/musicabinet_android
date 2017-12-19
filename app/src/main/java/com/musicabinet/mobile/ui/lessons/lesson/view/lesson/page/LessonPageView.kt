@@ -5,6 +5,7 @@ import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.musicabinet.mobile.R
+import kotlinx.android.synthetic.main.view_lesson_page.view.*
 
 /**
  * @author Kirchhoff-
@@ -25,6 +26,9 @@ class LessonPageView : ConstraintLayout {
 
     private fun init() {
         LayoutInflater.from(context).inflate(R.layout.view_lesson_page, this, true)
+
+        layoutPrevious.setOnClickListener { }
+        layoutNext.setOnClickListener { }
     }
 
 }

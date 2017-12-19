@@ -10,6 +10,10 @@
         android:background="@color/grey_f2f2ea"
         android:orientation="vertical">
 
+        <com.musicabinet.mobile.ui.lessons.lesson.view.lesson.page.LessonPageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <ImageView
             android:id="@+id/ivLesson1"
             android:layout_width="match_parent"
@@ -29,6 +33,10 @@
             android:id="@+id/ivLesson4"
             android:layout_width="match_parent"
             android:layout_height="180dp" />
+
+        <com.musicabinet.mobile.ui.lessons.lesson.view.lesson.page.LessonPageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
