@@ -7,6 +7,11 @@ class LessonPagePresenter(private val view: LessonPageContract.View) : LessonPag
 
     private var currentPage: Int = 1
     private var pagesList: List<List<String>>? = null
+    private var pageClickListener: OnPageClickListener? = null
+
+    public fun setOnPageClickListener(listener: OnPageClickListener) {
+        pageClickListener = listener
+    }
 
     override fun setPageList(list: List<List<String>>) {
         pagesList = list
@@ -31,6 +36,7 @@ class LessonPagePresenter(private val view: LessonPageContract.View) : LessonPag
         }
 
         view.showPreviousPageIndicator(true, (currentPage - 1).toString())
+        pageClickListener?.onNextPageClick(currentPage - 1)
     }
 
     override fun onPreviousPageClick() {
@@ -44,6 +50,15 @@ class LessonPagePresenter(private val view: LessonPageContract.View) : LessonPag
         }
 
         view.showNextPageIndicator(true, (currentPage + 1).toString())
+        pageClickListener?.onPreviousPageClick(currentPage - 1)
+    }
+
+
+    interface OnPageClickListener {
+
+        fun onNextPageClick(position: Int)
+
+        fun onPreviousPageClick(position: Int)
     }
 
 }

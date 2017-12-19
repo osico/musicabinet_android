@@ -7,12 +7,15 @@ import android.widget.FrameLayout
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.loadLessonImage
 import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.ui.lessons.lesson.view.lesson.page.LessonPagePresenter
 import kotlinx.android.synthetic.main.view_lesson.view.*
 
 /**
  * @author Kirchhoff-
  */
-class LessonView : FrameLayout {
+class LessonView : FrameLayout, LessonPagePresenter.OnPageClickListener {
+
+    private var images: List<List<String>>? = null
 
     constructor(context: Context) : super(context) {
         init()
@@ -32,36 +35,50 @@ class LessonView : FrameLayout {
 
 
     fun setLessonImages(lessonImages: List<List<String>>) {
+        images = lessonImages
+        showLessonImages(images!![0])
+        topPageView.setPageList(lessonImages)
+        bottomPageView.setPageList(lessonImages)
+        topPageView.setOnPageClickListener(this)
+        bottomPageView.setOnPageClickListener(this)
+    }
 
-        if (lessonImages[0].isNotEmpty()) {
+    override fun onNextPageClick(position: Int) {
+        showLessonImages(images!![position])
+    }
+
+    override fun onPreviousPageClick(position: Int) {
+        showLessonImages(images!![position])
+    }
+
+    private fun showLessonImages(lessonImages: List<String>) {
+        if (lessonImages.isNotEmpty()) {
             ivLesson1.setVisible(true)
-            ivLesson1.loadLessonImage(lessonImages[0][0])
+            ivLesson1.loadLessonImage(lessonImages[0])
         } else {
             ivLesson1.setVisible(false)
         }
 
-        if (lessonImages[0].size > 1) {
+        if (lessonImages.size > 1) {
             ivLesson2.setVisible(true)
-            ivLesson2.loadLessonImage(lessonImages[0][1])
+            ivLesson2.loadLessonImage(lessonImages[1])
         } else {
             ivLesson2.setVisible(false)
         }
 
-        if (lessonImages[0].size > 2) {
+        if (lessonImages.size > 2) {
             ivLesson3.setVisible(true)
-            ivLesson3.loadLessonImage(lessonImages[0][2])
+            ivLesson3.loadLessonImage(lessonImages[2])
         } else {
             ivLesson3.setVisible(false)
         }
 
-        if (lessonImages[0].size > 3) {
+        if (lessonImages.size > 3) {
             ivLesson4.setVisible(true)
-            ivLesson4.loadLessonImage(lessonImages[0][3])
+            ivLesson4.loadLessonImage(lessonImages[3])
         } else {
             ivLesson4.setVisible(false)
         }
 
-        topPageView.setPageList(lessonImages)
-        bottomPageView.setPageList(lessonImages)
     }
 }

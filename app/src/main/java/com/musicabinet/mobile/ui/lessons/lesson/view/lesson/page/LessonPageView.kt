@@ -61,4 +61,8 @@ class LessonPageView : ConstraintLayout, LessonPageContract.View {
         presenter.setPageList(list)
     }
 
+    fun setOnPageClickListener(listener: LessonPagePresenter.OnPageClickListener) {
+        presenter.setOnPageClickListener(listener)
+    }
+
 }
