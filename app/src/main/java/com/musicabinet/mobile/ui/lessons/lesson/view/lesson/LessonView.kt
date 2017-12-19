@@ -60,5 +60,8 @@ class LessonView : FrameLayout {
         } else {
             ivLesson4.setVisible(false)
         }
+
+        topPageView.setPageList(lessonImages)
+        bottomPageView.setPageList(lessonImages)
     }
 }

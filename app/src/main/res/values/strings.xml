@@ -100,4 +100,5 @@
 
     <!-- Resources for LessonInformationActivity -->
     <string name="lesson_information_title">Lesson information</string>
+    <string name="page">page %s</string>
 </resources>
