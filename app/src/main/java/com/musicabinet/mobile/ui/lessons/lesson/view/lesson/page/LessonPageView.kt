@@ -49,20 +49,16 @@ class LessonPageView : ConstraintLayout, LessonPageContract.View {
         tvCurrentPage.setTextFromResource(R.string.page, position)
     }
 
-    override fun onNextPageClick() {
-        presenter.onNextPageClick()
-    }
-
-    override fun onPreviousPageClick() {
-        presenter.onPreviousPageClick()
-    }
-
     fun setPageList(list: List<List<String>>) {
         presenter.setPageList(list)
     }
 
     fun setOnPageClickListener(listener: LessonPagePresenter.OnPageClickListener) {
         presenter.setOnPageClickListener(listener)
+    }
+
+    override fun setCurrentPage(position: Int) {
+        presenter.setCurrentPage(position)
     }
 
 }

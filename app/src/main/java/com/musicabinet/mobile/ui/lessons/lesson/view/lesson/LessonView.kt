@@ -43,12 +43,10 @@ class LessonView : FrameLayout, LessonPagePresenter.OnPageClickListener {
         bottomPageView.setOnPageClickListener(this)
     }
 
-    override fun onNextPageClick(position: Int) {
-        showLessonImages(images!![position])
-    }
-
-    override fun onPreviousPageClick(position: Int) {
-        showLessonImages(images!![position])
+    override fun onPageChange(position: Int) {
+        bottomPageView.setCurrentPage(position)
+        topPageView.setCurrentPage(position)
+        showLessonImages(images!![position - 1])
     }
 
     private fun showLessonImages(lessonImages: List<String>) {

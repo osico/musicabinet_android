@@ -13,15 +13,15 @@ interface LessonPageContract {
 
         fun showCurrentPage(position: String)
 
-        fun onNextPageClick()
-
-        fun onPreviousPageClick()
+        fun setCurrentPage(position: Int)
 
     }
 
     interface Presenter {
 
         fun setPageList(list: List<List<String>>)
+
+        fun setCurrentPage(position: Int)
 
         fun onNextPageClick()
 
