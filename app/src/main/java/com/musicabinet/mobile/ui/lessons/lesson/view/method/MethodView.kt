@@ -1,14 +1,15 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.method
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import android.widget.Toast
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.openVideoIntent
 import com.musicabinet.mobile.model.lesson.local.MethodItem
+import com.musicabinet.mobile.ui.lessons.lesson.info.LessonInformationActivity
 import com.musicabinet.mobile.ui.lessons.lesson.view.adapter.MethodViewAdapter
 import com.musicabinet.mobile.ui.lessons.lesson.view.adapter.MethodViewHolder
 import kotlinx.android.synthetic.main.view_method.view.*
@@ -49,7 +50,9 @@ class MethodView : FrameLayout, MethodViewContract.View, MethodViewHolder.OnMeth
     }
 
     override fun openInformation(information: String) {
-        Toast.makeText(context, "OnInformationClick", Toast.LENGTH_SHORT).show()
+        val intent = Intent(context, LessonInformationActivity::class.java)
+        intent.putExtra(LessonInformationActivity.INFORMATION_ARG, information)
+        context.startActivity(intent)
     }
 
     override fun onVideoClick(methodItem: MethodItem) {

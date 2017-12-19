@@ -86,6 +86,11 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
 
+        <activity
+            android:name=".ui.lessons.lesson.info.LessonInformationActivity"
+            android:label="@string/lesson_information_title"
+            android:screenOrientation="landscape" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="55b4ddc0b0d079482c57d654d6e008482ea5b58d" />

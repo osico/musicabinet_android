@@ -96,4 +96,8 @@
     <string name="sound_drums">Drums</string>
     <string name="sound_bass">Bass</string>
     <string name="sound_keys">Keys</string>
+
+
+    <!-- Resources for LessonInformationActivity -->
+    <string name="lesson_information_title">Lesson information</string>
 </resources>
