@@ -1,9 +1,7 @@
 package com.musicabinet.mobile.extensions
 
 import android.os.Build
-import android.support.annotation.ColorRes
 import android.support.annotation.StringRes
-import android.support.v4.content.ContextCompat
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -28,10 +26,6 @@ fun View.setVisible(visible: Boolean) {
 fun ImageView.loadImage(url: String?) {
     if (!url.isNullOrEmpty())
         Picasso.with(context).load(url).into(this)
-}
-
-fun TextView.setColorText(@ColorRes color: Int) {
-    this.setTextColor(ContextCompat.getColor(context, color))
 }
 
 fun TextView.setFormatText(string: String, formatArgs: Any) {
