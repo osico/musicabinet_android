@@ -57,4 +57,18 @@
         <item name="android:textColor">@color/white_transparent_30</item>
         <item name="textAllCaps">true</item>
     </style>
+
+    <style name="MetronomeImageView">
+        <item name="android:theme">@style/GreyRippleTheme</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="GreyRippleTheme">
+        <item name="colorControlHighlight">@color/grey_969692</item>
+    </style>
+
 </resources>

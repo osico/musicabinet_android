@@ -102,4 +102,10 @@
     <!-- Resources for LessonInformationActivity -->
     <string name="lesson_information_title">Lesson information</string>
     <string name="page">page %s</string>
+
+
+    <!-- Resources for Metronome -->
+    <string name="metronome">Metronome</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
 </resources>

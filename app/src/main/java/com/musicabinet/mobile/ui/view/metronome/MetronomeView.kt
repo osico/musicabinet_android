@@ -5,6 +5,7 @@ import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.musicabinet.mobile.R
+import kotlinx.android.synthetic.main.view_metronome.view.*
 
 /**
  * @author Kirchhoff-
@@ -27,5 +28,8 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
 
     fun init() {
         LayoutInflater.from(context).inflate(R.layout.view_metronome, this, true)
+
+        ivPlus.setOnClickListener {}
+        ivMinus.setOnClickListener {}
     }
 }
