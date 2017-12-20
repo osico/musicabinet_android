@@ -7,9 +7,22 @@ interface MetronomeContract {
 
     interface View {
 
+        fun showPeriod(period: String)
+
+        fun showStartActionButton()
+
+        fun showStopActionButton()
     }
 
     interface Presenter {
+
+        fun subscribe()
+
+        fun addPeriod()
+
+        fun subPeriod()
+
+        fun actionClick()
 
     }
 }

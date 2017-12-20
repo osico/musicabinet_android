@@ -1,7 +1,9 @@
 package com.musicabinet.mobile.ui.view.metronome
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.support.constraint.ConstraintLayout
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.musicabinet.mobile.R
@@ -29,7 +31,24 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
     fun init() {
         LayoutInflater.from(context).inflate(R.layout.view_metronome, this, true)
 
-        ivPlus.setOnClickListener {}
-        ivMinus.setOnClickListener {}
+        ivPlus.setOnClickListener { presenter.addPeriod() }
+        ivMinus.setOnClickListener { presenter.subPeriod() }
+        bAction.setOnClickListener { presenter.actionClick() }
+
+        presenter.subscribe()
+    }
+
+    override fun showPeriod(period: String) {
+        tvPeriod.text = period
+    }
+
+    override fun showStartActionButton() {
+        bAction.setText(R.string.start)
+        bAction.background.setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY)
+    }
+
+    override fun showStopActionButton() {
+        bAction.setText(R.string.stop)
+        bAction.background.setColorFilter(ContextCompat.getColor(context, R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
     }
 }
