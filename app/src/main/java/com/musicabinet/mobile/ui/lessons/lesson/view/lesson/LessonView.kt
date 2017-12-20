@@ -7,6 +7,7 @@ import android.widget.FrameLayout
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.loadLessonImage
 import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.ui.lessons.lesson.view.lesson.page.LessonPagePresenter
 import kotlinx.android.synthetic.main.view_lesson.view.*
 
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.view_lesson.view.*
  */
 class LessonView : FrameLayout, LessonPagePresenter.OnPageClickListener {
 
-    private var images: List<List<String>>? = null
+    private var images: List<LessonData>? = null
 
     constructor(context: Context) : super(context) {
         init()
@@ -34,9 +35,9 @@ class LessonView : FrameLayout, LessonPagePresenter.OnPageClickListener {
     }
 
 
-    fun setLessonImages(lessonImages: List<List<String>>) {
+    fun setLessonImages(lessonImages: List<LessonData>) {
         images = lessonImages
-        showLessonImages(images!![0])
+        showLessonImages(images!![0].lessonImages)
         topPageView.setPageList(lessonImages)
         bottomPageView.setPageList(lessonImages)
         topPageView.setOnPageClickListener(this)
@@ -46,7 +47,7 @@ class LessonView : FrameLayout, LessonPagePresenter.OnPageClickListener {
     override fun onPageChange(position: Int) {
         bottomPageView.setCurrentPage(position)
         topPageView.setCurrentPage(position)
-        showLessonImages(images!![position - 1])
+        showLessonImages(images!![position - 1].lessonImages)
     }
 
     private fun showLessonImages(lessonImages: List<String>) {

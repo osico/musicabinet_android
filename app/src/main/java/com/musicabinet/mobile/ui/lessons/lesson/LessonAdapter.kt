@@ -5,6 +5,7 @@ import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.ui.lessons.lesson.view.lesson.LessonView
 import com.musicabinet.mobile.ui.lessons.lesson.view.method.MethodView
@@ -48,7 +49,7 @@ class LessonAdapter(private val context: Context) : PagerAdapter() {
         methodView?.setMethodList(list)
     }
 
-    fun showLessonImagesList(imagesList: List<List<String>>) {
+    fun showLessonImagesList(imagesList: List<LessonData>) {
         lessonView?.setLessonImages(imagesList)
     }
 }

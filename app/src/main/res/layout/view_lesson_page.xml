@@ -14,12 +14,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textAllCaps="true"
+        android:ellipsize="end"
         android:textColor="@color/grey_969692"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/layoutNext"
+        app:layout_constraintStart_toEndOf="@+id/layoutPrevious"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="page 2" />
 

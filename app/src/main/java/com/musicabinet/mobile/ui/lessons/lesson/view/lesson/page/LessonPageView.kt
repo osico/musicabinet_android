@@ -4,9 +4,10 @@ import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setTextFromResource
-import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.model.lesson.local.LessonData
 import kotlinx.android.synthetic.main.view_lesson_page.view.*
 
 /**
@@ -37,19 +38,25 @@ class LessonPageView : ConstraintLayout, LessonPageContract.View {
 
     override fun showPreviousPageIndicator(show: Boolean, position: String) {
         tvPreviousPage.setTextFromResource(R.string.page, position)
-        layoutPrevious.setVisible(show)
+        if (show)
+            layoutPrevious.visibility = View.VISIBLE
+        else
+            layoutPrevious.visibility = View.INVISIBLE
     }
 
     override fun showNextPageIndicator(show: Boolean, position: String) {
         tvNextPage.setTextFromResource(R.string.page, position)
-        layoutNext.setVisible(show)
+        if (show)
+            layoutNext.visibility = View.VISIBLE
+        else
+            layoutNext.visibility = View.INVISIBLE
     }
 
     override fun showCurrentPage(position: String) {
-        tvCurrentPage.setTextFromResource(R.string.page, position)
+        tvCurrentPage.text = position
     }
 
-    fun setPageList(list: List<List<String>>) {
+    fun setPageList(list: List<LessonData>) {
         presenter.setPageList(list)
     }
 

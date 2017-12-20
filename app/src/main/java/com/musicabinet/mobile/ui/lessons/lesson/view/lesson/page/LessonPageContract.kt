@@ -1,5 +1,7 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.lesson.page
 
+import com.musicabinet.mobile.model.lesson.local.LessonData
+
 /**
  * @author Kirchhoff-
  */
@@ -19,7 +21,7 @@ interface LessonPageContract {
 
     interface Presenter {
 
-        fun setPageList(list: List<List<String>>)
+        fun setPageList(list: List<LessonData>)
 
         fun setCurrentPage(position: Int)
 

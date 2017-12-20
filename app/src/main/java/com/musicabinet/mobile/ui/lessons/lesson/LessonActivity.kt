@@ -7,6 +7,7 @@ import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.lesson.Lesson
+import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.ui.lessons.lesson.dialog.LessonSelectActivity
 import kotlinx.android.synthetic.main.activity_lesson.*
@@ -71,7 +72,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
         adapter.setMethodList(methodList)
     }
 
-    override fun showLessonImages(lessonImagesList: List<List<String>>) {
+    override fun showLessonImages(lessonImagesList: List<LessonData>) {
         adapter.showLessonImagesList(lessonImagesList)
     }
 

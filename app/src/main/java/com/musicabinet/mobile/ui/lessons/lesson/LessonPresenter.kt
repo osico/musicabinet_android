@@ -3,6 +3,7 @@ package com.musicabinet.mobile.ui.lessons.lesson
 import android.app.Activity
 import android.content.Intent
 import com.musicabinet.mobile.model.lesson.lesson.Lesson
+import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.LessonScreenData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
@@ -47,7 +48,7 @@ class LessonPresenter(private val view: LessonContract.View,
                 .doOnTerminate { view.showLoading(false) }
                 .map({ lessonResponse: LessonResponse ->
                     val methodList = ArrayList<MethodItem>()
-                    val lessonImageList = ArrayList<List<String>>()
+                    val lessonImageList = ArrayList<LessonData>()
                     for (lessonPart in lessonResponse.lessonParts) {
                         if (lessonPart.video != null && lessonPart.video!!.video != null)
                             methodList.add(MethodItem(lessonPart.video!!.description,
@@ -59,7 +60,7 @@ class LessonPresenter(private val view: LessonContract.View,
                         for (exercise in lessonResponse.lessonParts[i].exercisesList)
                             images.add(exercise.stave.file.id)
 
-                        lessonImageList.add(images)
+                        lessonImageList.add(LessonData(lessonResponse.lessonParts[i].name, images))
                     }
 
                     LessonScreenData(lessonResponse.name, methodList, lessonImageList)

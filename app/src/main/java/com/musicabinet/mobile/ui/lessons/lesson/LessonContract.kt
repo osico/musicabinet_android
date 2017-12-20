@@ -2,6 +2,7 @@ package com.musicabinet.mobile.ui.lessons.lesson
 
 import android.content.Intent
 import com.musicabinet.mobile.model.lesson.lesson.Lesson
+import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 
 /**
@@ -24,7 +25,7 @@ interface LessonContract {
 
         fun showMethod(methodList: List<MethodItem>)
 
-        fun showLessonImages(lessonImagesList: List<List<String>>)
+        fun showLessonImages(lessonImagesList: List<LessonData>)
 
         fun onLessonSelected()
     }
