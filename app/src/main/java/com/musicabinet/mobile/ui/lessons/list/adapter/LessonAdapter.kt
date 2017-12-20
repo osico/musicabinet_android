@@ -9,7 +9,7 @@ import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 /**
  * @author Kirchhoff-
  */
-class LessonAdapter(items: List<InstrumentGroup>)
+class LessonAdapter(items: List<InstrumentGroup>, private val listener: LessonItemView.OnLessonItemClickListener)
     : BaseRecyclerAdapter<LessonGroupViewHolder, InstrumentGroup>(items) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -17,6 +17,6 @@ class LessonAdapter(items: List<InstrumentGroup>)
 
     override fun onBindViewHolder(holder: LessonGroupViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), listener)
     }
 }

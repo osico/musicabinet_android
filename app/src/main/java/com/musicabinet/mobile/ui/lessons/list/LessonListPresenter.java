@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.braintreepayments.api.dropin.DropInActivity;
 import com.braintreepayments.api.dropin.DropInResult;
+import com.musicabinet.mobile.model.instrument.matrix.LessonItem;
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse;
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse;
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentGroup;
@@ -209,7 +210,7 @@ public class LessonListPresenter implements LessonListContract.Presenter {
     }
 
     @Override
-    public void onLessonClick(@NotNull InstrumentGroup item) {
-        view.moveToLesson(item.getLessonList().get(0).getId());
+    public void onLessonClick(@NotNull LessonItem item) {
+        view.moveToLesson(item.getId());
     }
 }

@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_lesson_group.view.*
  */
 class LessonGroupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(group: InstrumentGroup) {
+    fun bind(group: InstrumentGroup, listener: LessonItemView.OnLessonItemClickListener) {
         itemView.container.removeAllViews();
         val lessonTitleView = LessonTitleView(itemView.context)
         lessonTitleView.bind(group.module)
@@ -19,7 +19,7 @@ class LessonGroupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
         for (item in group.lessonList) {
             val lessonView = LessonItemView(itemView.context)
-            lessonView.bind(item)
+            lessonView.bind(item, listener)
             itemView.container.addView(lessonView)
         }
     }

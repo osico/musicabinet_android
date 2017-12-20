@@ -8,8 +8,8 @@ import com.braintreepayments.api.dropin.DropInRequest
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.model.instrument.matrix.LessonItem
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
-import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentGroup
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
 import com.musicabinet.mobile.ui.lessons.lesson.LessonActivity
 import com.musicabinet.mobile.ui.lessons.list.pager.LessonListPagerAdapter
@@ -83,7 +83,7 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
         presenter.buyLesson(instrumentCourse.id)
     }
 
-    override fun onItemClick(item: InstrumentGroup) {
+    override fun onItemClick(item: LessonItem) {
         presenter.onLessonClick(item)
     }
 

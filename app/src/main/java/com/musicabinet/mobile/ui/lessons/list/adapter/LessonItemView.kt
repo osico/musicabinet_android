@@ -30,10 +30,17 @@ class LessonItemView : ConstraintLayout {
         LayoutInflater.from(context).inflate(R.layout.view_lesson_item, this, true)
     }
 
-    fun bind(element: LessonItem) {
+    fun bind(element: LessonItem, listener: OnLessonItemClickListener?) {
         with(element) {
             tvName.text = nameLocalized
             tvPercent.setCompletedPercent(progress)
+            setOnClickListener { listener?.onItemClick(element) }
         }
+    }
+
+
+    interface OnLessonItemClickListener {
+
+        fun onItemClick(element: LessonItem)
     }
 }

@@ -1,7 +1,7 @@
 package com.musicabinet.mobile.ui.lessons.list
 
 import android.content.Intent
-import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentGroup
+import com.musicabinet.mobile.model.instrument.matrix.LessonItem
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
 
 /**
@@ -34,7 +34,7 @@ interface LessonListContract {
 
         fun buyLesson(lessonId: String)
 
-        fun onLessonClick(item: InstrumentGroup)
+        fun onLessonClick(item: LessonItem)
 
         fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
     }
