@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="slide_menu_header_height">170dp</dimen>
+    <dimen name="metronome_popup_y_margin">32dp</dimen>
+    <dimen name="metronome_popup_x_margin">48dp</dimen>
 </resources>

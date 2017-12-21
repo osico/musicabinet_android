@@ -3,6 +3,9 @@ package com.musicabinet.mobile.ui.lessons.lesson
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Gravity
+import android.view.ViewGroup
+import android.widget.PopupWindow
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
@@ -10,6 +13,7 @@ import com.musicabinet.mobile.model.lesson.lesson.Lesson
 import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.ui.lessons.lesson.dialog.LessonSelectActivity
+import com.musicabinet.mobile.ui.view.metronome.MetronomeView
 import kotlinx.android.synthetic.main.activity_lesson.*
 import org.jetbrains.anko.toast
 import java.io.Serializable
@@ -25,6 +29,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
 
     private lateinit var presenter: LessonContract.Presenter
     private val adapter = LessonAdapter(this)
+    private var metronomePopup: PopupWindow? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +41,12 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
 
         tvLesson.setOnClickListener { presenter.selectLessonClick() }
         ivBack.setOnClickListener { onBackPressed() }
+        ivMetronome.setOnClickListener {
+            if (metronomePopup == null || !metronomePopup!!.isShowing)
+                showMetronomePopup()
+            else
+                metronomePopup!!.dismiss()
+        }
     }
 
     override fun showSuccess() {
@@ -80,4 +91,14 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
         tvLesson.text = title
     }
 
+    private fun showMetronomePopup() {
+        val popupView = MetronomeView(this)
+        metronomePopup = PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, false)
+        metronomePopup!!.animationStyle = android.R.style.Animation_Dialog
+        //metronomePopup!!.showAsDropDown(ivMetronome)
+        metronomePopup!!.showAtLocation(ivMetronome, Gravity.END,
+                resources.getDimensionPixelSize(R.dimen.metronome_popup_x_margin),
+                -resources.getDimensionPixelSize(R.dimen.metronome_popup_y_margin))
+    }
 }
