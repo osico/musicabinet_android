@@ -1,6 +1,8 @@
 package com.musicabinet.mobile.ui.lessons.lesson
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
@@ -45,6 +47,11 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
             if (metronomePopup == null || !metronomePopup!!.isShowing)
                 showMetronomePopup()
             else
+                metronomePopup!!.dismiss()
+        }
+
+        appBar.addOnOffsetChangedListener { _, _ ->
+            if (metronomePopup != null && metronomePopup!!.isShowing)
                 metronomePopup!!.dismiss()
         }
     }
@@ -94,9 +101,10 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
     private fun showMetronomePopup() {
         val popupView = MetronomeView(this)
         metronomePopup = PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT, false)
+                ViewGroup.LayoutParams.WRAP_CONTENT, true)
         metronomePopup!!.animationStyle = android.R.style.Animation_Dialog
-        //metronomePopup!!.showAsDropDown(ivMetronome)
+        metronomePopup!!.isOutsideTouchable
+        metronomePopup!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
         metronomePopup!!.showAtLocation(ivMetronome, Gravity.END,
                 resources.getDimensionPixelSize(R.dimen.metronome_popup_x_margin),
                 -resources.getDimensionPixelSize(R.dimen.metronome_popup_y_margin))
