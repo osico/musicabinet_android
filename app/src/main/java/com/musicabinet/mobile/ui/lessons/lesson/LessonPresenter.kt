@@ -81,8 +81,9 @@ class LessonPresenter(private val view: LessonContract.View,
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_LESSON_CODE && resultCode == Activity.RESULT_OK) {
-            view.onLessonSelected()
+        if (requestCode == REQUEST_LESSON_CODE && resultCode == Activity.RESULT_OK &&
+                data != null) {
+            view.onLessonSelected(data.getStringExtra(REQUEST_LESSON_ID_RESULT))
         }
     }
 

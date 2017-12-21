@@ -17,9 +17,9 @@ import kotlinx.android.synthetic.main.activity_lesson_select.*
 class LessonSelectActivity : AppCompatActivity(), LessonSelectContract.View {
 
     companion object {
-        public const val LESSON_LIST_ARG = "LESSON_LIST_ARG"
-        public const val LESSON_NAME_RESULT_ARG = "LESSON_NAME_RESULT_ARG"
-        public const val LESSON_ID_RESULT_ARG = "LESSON_ID_RESULT_ARG"
+        const val LESSON_LIST_ARG = "LESSON_LIST_ARG"
+        const val LESSON_NAME_RESULT_ARG = "LESSON_NAME_RESULT_ARG"
+        const val LESSON_ID_RESULT_ARG = "LESSON_ID_RESULT_ARG"
     }
 
     private val presenter = LessonSelectPresenter(this)
@@ -40,10 +40,10 @@ class LessonSelectActivity : AppCompatActivity(), LessonSelectContract.View {
     }
 
     override fun onLessonSelect(id: String, name: String) {
-        val intent = Intent()
-        intent.putExtra(intent.getStringExtra(LESSON_ID_RESULT_ARG), id)
-        intent.putExtra(intent.getStringExtra(LESSON_NAME_RESULT_ARG), name)
-        setResult(Activity.RESULT_OK, intent)
+        val finishIntent = Intent()
+        finishIntent.putExtra(intent.getStringExtra(LESSON_ID_RESULT_ARG), id)
+        finishIntent.putExtra(intent.getStringExtra(LESSON_NAME_RESULT_ARG), name)
+        setResult(Activity.RESULT_OK, finishIntent)
         finish()
     }
 }

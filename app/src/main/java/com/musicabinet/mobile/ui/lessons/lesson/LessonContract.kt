@@ -27,7 +27,7 @@ interface LessonContract {
 
         fun showLessonImages(lessonImagesList: List<LessonData>)
 
-        fun onLessonSelected()
+        fun onLessonSelected(id: String)
     }
 
     interface Presenter {

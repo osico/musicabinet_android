@@ -73,6 +73,8 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
                                   resultId: String, resultName: String) {
         val intent = Intent(this, LessonSelectActivity::class.java)
         intent.putExtra(LessonSelectActivity.LESSON_LIST_ARG, lessonList as Serializable)
+        intent.putExtra(LessonSelectActivity.LESSON_ID_RESULT_ARG, resultId)
+        intent.putExtra(LessonSelectActivity.LESSON_NAME_RESULT_ARG, resultName)
         startActivityForResult(intent, requestCode)
     }
 
@@ -85,8 +87,9 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
         progressBar.setVisible(show)
     }
 
-    override fun onLessonSelected() {
-        toast("On LessonSelected")
+    override fun onLessonSelected(id: String) {
+        presenter.getLessonGroup(id)
+        presenter.getLessonInformation(id)
     }
 
     override fun showMethod(methodList: List<MethodItem>) {
