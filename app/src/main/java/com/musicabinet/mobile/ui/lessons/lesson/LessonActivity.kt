@@ -4,13 +4,13 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.setTint
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.lesson.Lesson
 import com.musicabinet.mobile.model.lesson.local.LessonData
@@ -113,11 +113,9 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
 
     override fun metronomeStatusChange(enable: Boolean) {
         if (enable) {
-            ivMetronome.setColorFilter(ContextCompat.getColor(this, R.color.red),
-                    android.graphics.PorterDuff.Mode.MULTIPLY)
+            ivMetronome.setTint(R.color.red)
         } else {
-            ivMetronome.setColorFilter(ContextCompat.getColor(this, R.color.white),
-                    android.graphics.PorterDuff.Mode.MULTIPLY)
+            ivMetronome.setTint(R.color.white)
         }
     }
 

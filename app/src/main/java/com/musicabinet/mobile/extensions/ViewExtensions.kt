@@ -1,7 +1,9 @@
 package com.musicabinet.mobile.extensions
 
 import android.os.Build
+import android.support.annotation.ColorRes
 import android.support.annotation.StringRes
+import android.support.v4.content.ContextCompat
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -43,4 +45,9 @@ fun TextView.displayHtmlText(text: String) {
     } else {
         setText(Html.fromHtml(text))
     }
+}
+
+fun ImageView.setTint(@ColorRes colorRes: Int) {
+    setColorFilter(ContextCompat.getColor(context, colorRes),
+            android.graphics.PorterDuff.Mode.MULTIPLY)
 }
