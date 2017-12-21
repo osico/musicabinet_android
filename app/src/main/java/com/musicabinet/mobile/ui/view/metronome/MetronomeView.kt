@@ -22,6 +22,7 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
     private lateinit var mediaPlayer: MediaPlayer
     private var tickRunnable: Runnable? = null
     private lateinit var tickHandler: Handler
+    private var listener: OnMetronomeStatusChange? = null
 
     constructor(context: Context) : super(context) {
         init()
@@ -73,12 +74,25 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
         }
 
         tickHandler.postDelayed(tickRunnable, 60000 / period)
+
+        listener?.metronomeStatusChange(true)
     }
 
     override fun stopTick() {
         tickHandler.removeCallbacks(tickRunnable)
         mediaPlayer.stop()
+
+        listener?.metronomeStatusChange(false)
     }
 
 
+    fun setOnMetronomeStatusChange(callback: OnMetronomeStatusChange) {
+        listener = callback
+    }
+
+
+    interface OnMetronomeStatusChange {
+
+        fun metronomeStatusChange(enable: Boolean)
+    }
 }

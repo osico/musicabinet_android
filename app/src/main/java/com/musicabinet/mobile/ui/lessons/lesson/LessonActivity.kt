@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.ViewGroup
@@ -23,7 +24,7 @@ import java.io.Serializable
 /**
  * @author Kirchhoff-
  */
-class LessonActivity : AppCompatActivity(), LessonContract.View {
+class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.OnMetronomeStatusChange {
 
     companion object {
         const val LESSON_ID_ARG = "LESSON_ID_ARG"
@@ -57,6 +58,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
         }
 
         metronomeView = MetronomeView(this)
+        metronomeView.setOnMetronomeStatusChange(this)
     }
 
     override fun showSuccess() {
@@ -104,6 +106,16 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
     override fun onPause() {
         super.onPause()
         metronomeView.stopTick()
+    }
+
+    override fun metronomeStatusChange(enable: Boolean) {
+        if (enable) {
+            ivMetronome.setColorFilter(ContextCompat.getColor(this, R.color.red),
+                    android.graphics.PorterDuff.Mode.MULTIPLY)
+        } else {
+            ivMetronome.setColorFilter(ContextCompat.getColor(this, R.color.white),
+                    android.graphics.PorterDuff.Mode.MULTIPLY)
+        }
     }
 
     private fun showMetronomePopup() {
