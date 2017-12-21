@@ -12,6 +12,10 @@ interface MetronomeContract {
         fun showStartActionButton()
 
         fun showStopActionButton()
+
+        fun startTick(period: Long)
+
+        fun stopTick()
     }
 
     interface Presenter {

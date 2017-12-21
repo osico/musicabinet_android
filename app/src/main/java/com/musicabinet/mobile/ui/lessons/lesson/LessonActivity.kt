@@ -32,6 +32,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
     private lateinit var presenter: LessonContract.Presenter
     private val adapter = LessonAdapter(this)
     private var metronomePopup: PopupWindow? = null
+    private lateinit var metronomeView: MetronomeView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +55,8 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
             if (metronomePopup != null && metronomePopup!!.isShowing)
                 metronomePopup!!.dismiss()
         }
+
+        metronomeView = MetronomeView(this)
     }
 
     override fun showSuccess() {
@@ -98,9 +101,13 @@ class LessonActivity : AppCompatActivity(), LessonContract.View {
         tvLesson.text = title
     }
 
+    override fun onPause() {
+        super.onPause()
+        metronomeView.stopTick()
+    }
+
     private fun showMetronomePopup() {
-        val popupView = MetronomeView(this)
-        metronomePopup = PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT,
+        metronomePopup = PopupWindow(metronomeView, ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true)
         metronomePopup!!.animationStyle = android.R.style.Animation_Dialog
         metronomePopup!!.isOutsideTouchable

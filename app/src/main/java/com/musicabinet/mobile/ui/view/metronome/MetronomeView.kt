@@ -2,6 +2,9 @@ package com.musicabinet.mobile.ui.view.metronome
 
 import android.content.Context
 import android.graphics.PorterDuff
+import android.media.MediaPlayer
+import android.os.Handler
+import android.os.Looper
 import android.support.constraint.ConstraintLayout
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
@@ -15,6 +18,10 @@ import kotlinx.android.synthetic.main.view_metronome.view.*
 class MetronomeView : ConstraintLayout, MetronomeContract.View {
 
     private val presenter = MetronomePresenter(this)
+
+    private lateinit var mediaPlayer: MediaPlayer
+    private var tickRunnable: Runnable? = null
+    private lateinit var tickHandler: Handler
 
     constructor(context: Context) : super(context) {
         init()
@@ -35,6 +42,9 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
         ivMinus.setOnClickListener { presenter.subPeriod() }
         bAction.setOnClickListener { presenter.actionClick() }
 
+        mediaPlayer = MediaPlayer.create(context, R.raw.wood)
+        tickHandler = Handler(Looper.getMainLooper())
+
         presenter.subscribe()
     }
 
@@ -51,4 +61,24 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
         bAction.setText(R.string.stop)
         bAction.background.setColorFilter(ContextCompat.getColor(context, R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
     }
+
+    override fun startTick(period: Long) {
+
+        if (tickRunnable != null)
+            tickHandler.removeCallbacks(tickRunnable)
+
+        tickRunnable = Runnable {
+            mediaPlayer.start()
+            tickHandler.postDelayed(tickRunnable, 60000 / period)
+        }
+
+        tickHandler.postDelayed(tickRunnable, 60000 / period)
+    }
+
+    override fun stopTick() {
+        tickHandler.removeCallbacks(tickRunnable)
+        mediaPlayer.stop()
+    }
+
+
 }

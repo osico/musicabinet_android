@@ -5,7 +5,7 @@ package com.musicabinet.mobile.ui.view.metronome
  */
 class MetronomePresenter(private val view: MetronomeContract.View) : MetronomeContract.Presenter {
 
-    private var period = 0
+    private var period = 0L
     private var playing = false
 
     override fun subscribe() {
@@ -18,6 +18,9 @@ class MetronomePresenter(private val view: MetronomeContract.View) : MetronomeCo
             period += 15
 
         view.showPeriod(period.toString())
+
+        if (playing)
+            view.startTick(period)
     }
 
     override fun subPeriod() {
@@ -25,14 +28,20 @@ class MetronomePresenter(private val view: MetronomeContract.View) : MetronomeCo
             period -= 15
 
         view.showPeriod(period.toString())
+
+        if (playing)
+            view.startTick(period)
     }
 
     override fun actionClick() {
         playing = !playing
 
-        if (playing)
+        if (playing) {
             view.showStopActionButton()
-        else
+            view.startTick(period)
+        } else {
             view.showStartActionButton()
+            view.stopTick()
+        }
     }
 }
