@@ -20,7 +20,7 @@ interface LessonListContract {
 
         fun showBuyLoading(show: Boolean)
 
-        fun moveToPaymentScreen(id: String, requestCode: Int)
+        fun showPaymentDialog()
 
         fun moveToLesson(id: String)
 

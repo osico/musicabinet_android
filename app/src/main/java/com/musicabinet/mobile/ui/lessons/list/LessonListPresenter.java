@@ -25,14 +25,10 @@ import io.reactivex.functions.Function;
 
 public class LessonListPresenter implements LessonListContract.Presenter {
 
-    private final static int REQUEST_PAYMENT_CODE = 1003;
-
     private final LessonListContract.View view;
     private final MusicabinetRepository repository;
     private final InstrumentCourse instrumentCourse;
     private CompositeDisposable disposable;
-
-    private String orderId;
 
     LessonListPresenter(LessonListContract.View view,
                         MusicabinetRepository repository,
@@ -100,7 +96,7 @@ public class LessonListPresenter implements LessonListContract.Presenter {
 
     @Override
     public void buyLesson(@NotNull String lessonId) {
-
+        view.showPaymentDialog();
     }
 
     @Override
