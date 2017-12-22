@@ -84,6 +84,7 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
         tickHandler.removeCallbacks(tickRunnable)
         mediaPlayer.stop()
 
+        mediaPlayer = MediaPlayer.create(context, R.raw.wood)
         listener?.metronomeStatusChange(false)
     }
 
