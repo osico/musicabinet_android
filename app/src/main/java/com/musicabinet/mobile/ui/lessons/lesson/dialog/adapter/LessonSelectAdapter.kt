@@ -35,9 +35,10 @@ class LessonSelectAdapter
         if (!selectedList[position]) {
             selectedList = MutableList(getDataSet().size, { false })
             selectedList[position] = true
+            selectedPosition = position
             notifyDataSetChanged()
         }
     }
 
-    public fun getSelectedItem() = getItem(selectedPosition)
+    fun getSelectedItem() = getItem(selectedPosition)
 }
