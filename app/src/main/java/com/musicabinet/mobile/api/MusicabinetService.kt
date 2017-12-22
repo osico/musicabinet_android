@@ -7,11 +7,6 @@ import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterRes
 import com.musicabinet.mobile.model.lesson.lesson.LessonGroup
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.login.LoginRequestBody
-import com.musicabinet.mobile.model.order.OrderIdResponse
-import com.musicabinet.mobile.model.order.execute.OrderExecuteBody
-import com.musicabinet.mobile.model.order.execute.OrderExecuteResponse
-import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteBody
-import com.musicabinet.mobile.model.order.finish.OrderFinishExecuteResponse
 import com.musicabinet.mobile.model.profile.UserProfile
 import com.musicabinet.mobile.model.register.RegisterRequestBody
 import io.reactivex.Completable
@@ -44,15 +39,6 @@ interface MusicabinetService {
                                   @Query("active") active: Boolean,
                                   @Query("start") start: Int,
                                   @Query("count") count: Int): Observable<InstrumentFilterResponse>
-
-    @POST("/api/cabinet/{productId}/order")
-    fun createOrder(@Path("productId") productId: String): Observable<OrderIdResponse>
-
-    @POST("/platform/api/order/execute")
-    fun executeOrder(@Body body: OrderExecuteBody): Observable<OrderExecuteResponse>
-
-    @POST("/platform/api/order/execute")
-    fun finishExecuteOrder(@Body body: OrderFinishExecuteBody): Observable<OrderFinishExecuteResponse>
 
     @POST("/platform/api/user/register")
     fun registerUser(@Body registerBody: RegisterRequestBody): Completable

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import com.braintreepayments.api.dropin.DropInRequest
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
@@ -97,19 +96,13 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
     }
 
     override fun moveToPaymentScreen(id: String, requestCode: Int) {
-        val dropInRequest = DropInRequest().clientToken(getString(R.string.test_payments_token))
-        startActivityForResult(dropInRequest.getIntent(this), requestCode)
+        //Here will be displaying dialog about payment
     }
 
     override fun moveToLesson(id: String) {
         val intent = Intent(this, LessonActivity::class.java)
         intent.putExtra(LessonActivity.LESSON_ID_ARG, id)
         startActivity(intent)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        presenter.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun showSuccessPayment() {
