@@ -84,6 +84,7 @@
 
     <!-- Resources for LessonListActivity-->
     <string name="price_buy">buy $%.2f</string>
+    <string name="authorize_error">Buy lesson for learning</string>
 
 
     <!-- Resources for DialogLessonSelect -->

@@ -57,7 +57,8 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
 
         lessonLayout.setVisible(false)
 
-        presenter = LessonListPresenter(this, Injection.provideRepository(), instrumentCourse)
+        presenter = LessonListPresenter(this, Injection.provideRepository(),
+                Injection.provideStorage(), instrumentCourse)
         presenter.getFilters(intent.getStringExtra(INSTRUMENT_ID_ARG))
     }
 
@@ -132,6 +133,10 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
         alertDialog.show()
         alertDialog.getButton(BUTTON_NEGATIVE).textColor(R.color.colorPrimary)
         alertDialog.getButton(BUTTON_POSITIVE).textColor(R.color.colorPrimary)
+    }
+
+    override fun showAuthorizedError() {
+        toast(R.string.authorize_error)
     }
 
     override fun moveToLesson(id: String) {

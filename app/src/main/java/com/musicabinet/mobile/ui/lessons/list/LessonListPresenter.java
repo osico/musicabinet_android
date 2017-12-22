@@ -6,6 +6,7 @@ import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse;
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentGroup;
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList;
 import com.musicabinet.mobile.repository.MusicabinetRepository;
+import com.musicabinet.mobile.repository.keyvalue.MusicabinetKeyValueStorage;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -27,14 +28,17 @@ public class LessonListPresenter implements LessonListContract.Presenter {
 
     private final LessonListContract.View view;
     private final MusicabinetRepository repository;
+    private final MusicabinetKeyValueStorage storage;
     private final InstrumentCourse instrumentCourse;
     private CompositeDisposable disposable;
 
     LessonListPresenter(LessonListContract.View view,
                         MusicabinetRepository repository,
+                        MusicabinetKeyValueStorage storage,
                         InstrumentCourse instrumentCourse) {
         this.view = view;
         this.repository = repository;
+        this.storage = storage;
         this.instrumentCourse = instrumentCourse;
         disposable = new CompositeDisposable();
     }
@@ -101,6 +105,9 @@ public class LessonListPresenter implements LessonListContract.Presenter {
 
     @Override
     public void onLessonClick(@NotNull LessonItem item) {
-        view.moveToLesson(item.getId());
+        if (storage.isUserExist())
+            view.moveToLesson(item.getId());
+        else
+            view.showAuthorizedError();
     }
 }

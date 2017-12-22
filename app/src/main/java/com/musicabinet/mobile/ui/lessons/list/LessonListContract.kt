@@ -18,6 +18,8 @@ interface LessonListContract {
 
         fun showSuccess()
 
+        fun showAuthorizedError()
+
         fun showBuyLoading(show: Boolean)
 
         fun showPaymentDialog()
