@@ -69,10 +69,11 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
         toast("Error")
     }
 
-    override fun showSelectLesson(lessonList: List<Lesson>, requestCode: Int,
+    override fun showSelectLesson(lessonList: List<Lesson>, lessonId: String, requestCode: Int,
                                   resultId: String, resultName: String) {
         val intent = Intent(this, LessonSelectActivity::class.java)
         intent.putExtra(LessonSelectActivity.LESSON_LIST_ARG, lessonList as Serializable)
+        intent.putExtra(LessonSelectActivity.LESSON_ID_ARG, lessonId)
         intent.putExtra(LessonSelectActivity.LESSON_ID_RESULT_ARG, resultId)
         intent.putExtra(LessonSelectActivity.LESSON_NAME_RESULT_ARG, resultName)
         startActivityForResult(intent, requestCode)

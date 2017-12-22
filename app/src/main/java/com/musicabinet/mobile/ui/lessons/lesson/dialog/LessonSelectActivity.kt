@@ -18,6 +18,7 @@ class LessonSelectActivity : AppCompatActivity(), LessonSelectContract.View {
 
     companion object {
         const val LESSON_LIST_ARG = "LESSON_LIST_ARG"
+        const val LESSON_ID_ARG = "LESSON_ID_ARG"
         const val LESSON_NAME_RESULT_ARG = "LESSON_NAME_RESULT_ARG"
         const val LESSON_ID_RESULT_ARG = "LESSON_ID_RESULT_ARG"
     }
@@ -30,7 +31,8 @@ class LessonSelectActivity : AppCompatActivity(), LessonSelectContract.View {
         setContentView(R.layout.activity_lesson_select)
 
         val lessonList: List<Lesson> = intent.getSerializableExtra(LESSON_LIST_ARG) as List<Lesson>
-        val adapter = LessonSelectAdapter(lessonList)
+        val id = intent.getStringExtra(LESSON_ID_ARG)
+        val adapter = LessonSelectAdapter(lessonList, id)
         recyclerView.layoutManager = LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter

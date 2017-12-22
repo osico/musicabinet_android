@@ -27,6 +27,7 @@ class LessonPresenter(private val view: LessonContract.View,
 
     private val subscriptions = CompositeDisposable()
     private var lessonList: List<Lesson>? = null
+    private lateinit var currentLessonId: String
 
     override fun getLessonGroup(id: String) {
         subscriptions.add(repository.getLessonGroup(id)
@@ -63,6 +64,7 @@ class LessonPresenter(private val view: LessonContract.View,
                         lessonImageList.add(LessonData(lessonResponse.lessonParts[i].name, images))
                     }
 
+                    currentLessonId = lessonResponse.id
                     LessonScreenData(lessonResponse.name, methodList, lessonImageList)
                 })
                 .subscribe({ screenData: LessonScreenData ->
@@ -95,6 +97,7 @@ class LessonPresenter(private val view: LessonContract.View,
                         lessonImageList.add(LessonData(lessonResponse.lessonParts[i].name, images))
                     }
 
+                    currentLessonId = lessonResponse.id
                     LessonScreenData(lessonResponse.name, methodList, lessonImageList)
                 })
                 .subscribe({ screenData: LessonScreenData ->
@@ -108,7 +111,7 @@ class LessonPresenter(private val view: LessonContract.View,
 
     override fun selectLessonClick() {
         if (lessonList != null)
-            view.showSelectLesson(lessonList!!, REQUEST_LESSON_CODE,
+            view.showSelectLesson(lessonList!!, currentLessonId, REQUEST_LESSON_CODE,
                     REQUEST_LESSON_ID_RESULT, REQUEST_LESSON_NAME_RESULT)
     }
 

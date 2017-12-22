@@ -20,7 +20,7 @@ interface LessonContract {
 
         fun showLessonTitle(title: String)
 
-        fun showSelectLesson(lessonList: List<Lesson>, requestCode: Int,
+        fun showSelectLesson(lessonList: List<Lesson>, lessonId: String, requestCode: Int,
                              resultId: String, resultName: String)
 
         fun showMethod(methodList: List<MethodItem>)

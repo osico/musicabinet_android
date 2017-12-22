@@ -13,12 +13,17 @@ class LessonSelectAdapter
     : BaseRecyclerAdapter<LessonSelectViewHolder, Lesson>, BaseRecyclerAdapter.OnItemClickWithPositionListener<Lesson> {
 
     private var selectedList: MutableList<Boolean>
-    private var selectedPosition: Int
+    private var selectedPosition: Int = 0
 
-    constructor(items: List<Lesson>) : super(items) {
+    constructor(items: List<Lesson>, selectedLessonId: String) : super(items) {
         selectedList = MutableList(items.size, { false })
-        selectedPosition = 0
-        selectedList[selectedPosition] = true
+        for (i in items.indices) {
+            if (items[i].id == selectedLessonId) {
+                selectedPosition = i
+                selectedList[selectedPosition] = true
+                break
+            }
+        }
         setOnItemClickWithPosition(this)
     }
 
