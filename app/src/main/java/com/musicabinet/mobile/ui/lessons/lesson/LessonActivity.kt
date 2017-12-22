@@ -88,8 +88,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
     }
 
     override fun onLessonSelected(id: String) {
-        presenter.getLessonGroup(id)
-        presenter.getLessonInformation(id)
+        presenter.getPreparedLesson(id)
     }
 
     override fun showMethod(methodList: List<MethodItem>) {

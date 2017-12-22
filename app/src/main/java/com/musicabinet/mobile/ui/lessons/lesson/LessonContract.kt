@@ -36,6 +36,8 @@ interface LessonContract {
 
         fun getLessonInformation(id: String)
 
+        fun getPreparedLesson(id: String)
+
         fun selectLessonClick()
 
         fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)

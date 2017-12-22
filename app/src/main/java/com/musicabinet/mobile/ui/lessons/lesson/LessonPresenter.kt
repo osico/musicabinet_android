@@ -73,6 +73,38 @@ class LessonPresenter(private val view: LessonContract.View,
                 }, { view.showError() }))
     }
 
+    override fun getPreparedLesson(id: String) {
+        subscriptions.add(repository.getPreparedLesson(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { view.showLoading(true) }
+                .doOnTerminate { view.showLoading(false) }
+                .map({ lessonResponse: LessonResponse ->
+                    val methodList = ArrayList<MethodItem>()
+                    val lessonImageList = ArrayList<LessonData>()
+                    for (lessonPart in lessonResponse.lessonParts) {
+                        if (lessonPart.video != null && lessonPart.video!!.video != null)
+                            methodList.add(MethodItem(lessonPart.video!!.description,
+                                    lessonPart.description, lessonPart.video!!.video!!))
+                    }
+
+                    for (i in lessonResponse.lessonParts.indices) {
+                        val images = ArrayList<String>()
+                        for (exercise in lessonResponse.lessonParts[i].exercisesList)
+                            images.add(exercise.stave.file.id)
+
+                        lessonImageList.add(LessonData(lessonResponse.lessonParts[i].name, images))
+                    }
+
+                    LessonScreenData(lessonResponse.name, methodList, lessonImageList)
+                })
+                .subscribe({ screenData: LessonScreenData ->
+                    view.showSuccess()
+                    view.showMethod(screenData.methodList)
+                    view.showLessonTitle(screenData.title)
+                    view.showLessonImages(screenData.lessonImages)
+                }, { view.showError() }))
+    }
+
 
     override fun selectLessonClick() {
         if (lessonList != null)
