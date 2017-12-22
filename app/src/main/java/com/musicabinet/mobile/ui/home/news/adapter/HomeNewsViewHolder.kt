@@ -3,6 +3,7 @@ package com.musicabinet.mobile.ui.home.news.adapter
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.musicabinet.mobile.model.home.HomeDataElement
+import com.musicabinet.mobile.utils.DateUtils
 import kotlinx.android.synthetic.main.item_home_news.view.*
 
 /**
@@ -14,7 +15,7 @@ class HomeNewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         with(element) {
             itemView.tvTitle.text = name
             itemView.tvText.text = dataField.text
-            itemView.tvDate.text = date
+            itemView.tvDate.text = DateUtils.parseIso8601DateTime(date)
         }
     }
 }
