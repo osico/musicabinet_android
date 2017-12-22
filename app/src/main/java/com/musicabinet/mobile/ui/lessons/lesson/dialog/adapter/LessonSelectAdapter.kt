@@ -46,4 +46,6 @@ class LessonSelectAdapter
     }
 
     fun getSelectedItem() = getItem(selectedPosition)
+
+    fun getSelectedPosition() = selectedPosition
 }

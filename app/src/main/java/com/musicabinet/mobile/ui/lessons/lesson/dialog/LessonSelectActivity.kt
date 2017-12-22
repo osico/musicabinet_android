@@ -39,6 +39,8 @@ class LessonSelectActivity : AppCompatActivity(), LessonSelectContract.View {
 
         tvCancel.setOnClickListener { finish() }
         tvSelect.setOnClickListener { presenter.selectLesson(adapter.getSelectedItem()) }
+
+        recyclerView.layoutManager.scrollToPosition(adapter.getSelectedPosition())
     }
 
     override fun onLessonSelect(id: String, name: String) {
