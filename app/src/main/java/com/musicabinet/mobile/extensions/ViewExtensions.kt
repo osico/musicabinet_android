@@ -8,6 +8,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -50,4 +51,8 @@ fun TextView.displayHtmlText(text: String) {
 fun ImageView.setTint(@ColorRes colorRes: Int) {
     setColorFilter(ContextCompat.getColor(context, colorRes),
             android.graphics.PorterDuff.Mode.MULTIPLY)
+}
+
+fun Button.textColor(@ColorRes color: Int) {
+    setTextColor(ContextCompat.getColor(context, color))
 }

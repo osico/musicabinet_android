@@ -7,7 +7,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.SpannableStringBuilder
@@ -17,6 +16,7 @@ import android.view.MenuItem
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.extensions.textColor
 import com.musicabinet.mobile.model.instrument.matrix.LessonItem
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
@@ -130,10 +130,8 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
                 .create()
 
         alertDialog.show()
-        alertDialog.getButton(BUTTON_NEGATIVE)
-                .setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
-        alertDialog.getButton(BUTTON_POSITIVE)
-                .setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+        alertDialog.getButton(BUTTON_NEGATIVE).textColor(R.color.colorPrimary)
+        alertDialog.getButton(BUTTON_POSITIVE).textColor(R.color.colorPrimary)
     }
 
     override fun moveToLesson(id: String) {
