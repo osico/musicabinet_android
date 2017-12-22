@@ -42,6 +42,8 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
         ivPlus.setOnClickListener { presenter.addPeriod() }
         ivMinus.setOnClickListener { presenter.subPeriod() }
         bAction.setOnClickListener { presenter.actionClick() }
+        metronomeBackground.setOnClickListener { listener?.onMetronomeBackgroundClick() }
+        actionLayout.setOnClickListener { }
 
         mediaPlayer = MediaPlayer.create(context, R.raw.wood)
         tickHandler = Handler(Looper.getMainLooper())
@@ -94,5 +96,7 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
     interface OnMetronomeStatusChange {
 
         fun metronomeStatusChange(enable: Boolean)
+
+        fun onMetronomeBackgroundClick()
     }
 }

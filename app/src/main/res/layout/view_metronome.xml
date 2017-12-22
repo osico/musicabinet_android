@@ -1,80 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="225dp"
-    android:layout_height="160dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginStart="16dp"
-    android:background="@color/grey_f2f2ea"
-    android:padding="8dp"
-    tools:layout_editor_absoluteX="80dp"
-    tools:layout_editor_absoluteY="257dp"
-    tools:layout_gravity="center">
+    android:id="@+id/metronomeBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_transparent_99">
 
-    <Button
-        android:id="@+id/bAction"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/actionLayout"
+        android:layout_width="225dp"
+        android:layout_height="160dp"
+        android:layout_gravity="end|top"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:background="@color/grey_f2f2ea"
+        android:padding="8dp"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="257dp"
+        tools:layout_gravity="center">
 
-    <ImageView
-        android:id="@+id/ivMinus"
-        style="@style/MetronomeImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/bAction"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_metronome_minus" />
+        <Button
+            android:id="@+id/bAction"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/ivPlus"
-        style="@style/MetronomeImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/bAction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_metronome_plus" />
+        <ImageView
+            android:id="@+id/ivMinus"
+            style="@style/MetronomeImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="28dp"
+            app:layout_constraintBottom_toTopOf="@+id/bAction"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_metronome_minus" />
 
-    <TextView
-        android:id="@+id/tvPeriod"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="120"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/bAction"
-        app:layout_constraintEnd_toStartOf="@+id/ivPlus"
-        app:layout_constraintStart_toEndOf="@+id/ivMinus" />
+        <ImageView
+            android:id="@+id/ivPlus"
+            style="@style/MetronomeImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="28dp"
+            app:layout_constraintBottom_toTopOf="@+id/bAction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_metronome_plus" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/metronome"
-        android:textAllCaps="true"
-        android:textColor="@color/grey_969692"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvPeriod"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tvPeriod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="120"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toTopOf="@+id/bAction"
+            app:layout_constraintEnd_toStartOf="@+id/ivPlus"
+            app:layout_constraintStart_toEndOf="@+id/ivMinus" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/metronome"
+            android:textAllCaps="true"
+            android:textColor="@color/grey_969692"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvPeriod"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>
+

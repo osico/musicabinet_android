@@ -119,9 +119,13 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
         }
     }
 
+    override fun onMetronomeBackgroundClick() {
+        metronomePopup!!.dismiss()
+    }
+
     private fun showMetronomePopup() {
-        metronomePopup = PopupWindow(metronomeView, ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT, true)
+        metronomePopup = PopupWindow(metronomeView, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT, true)
         metronomePopup!!.animationStyle = android.R.style.Animation_Dialog
         metronomePopup!!.isOutsideTouchable
         metronomePopup!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
