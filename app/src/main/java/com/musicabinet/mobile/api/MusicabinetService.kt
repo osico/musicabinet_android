@@ -64,4 +64,7 @@ interface MusicabinetService {
     @GET("/api/lesson/next")
     fun getNextLesson(@Query("lessonGroupId") id: String,
                       @Query("prepared") prepared: Boolean): Observable<LessonResponse>
+
+    @GET("/api/lesson/{lessonId}/prepared")
+    fun getPreparedLesson(@Path("lessonId") lessonId: String): Observable<LessonResponse>
 }

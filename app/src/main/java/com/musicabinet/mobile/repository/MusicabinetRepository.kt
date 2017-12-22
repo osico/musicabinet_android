@@ -45,4 +45,6 @@ interface MusicabinetRepository {
     fun getLessonGroup(id: String): Observable<LessonGroup>
 
     fun getNextLesson(id: String): Observable<LessonResponse>
+
+    fun getPreparedLesson(id: String): Observable<LessonResponse>
 }

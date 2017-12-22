@@ -78,4 +78,7 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     override fun getNextLesson(id: String) =
             ApiFactory.service.getNextLesson(id, PREPARED_LESSON_STATUS)
+
+    override fun getPreparedLesson(id: String) =
+            ApiFactory.service.getPreparedLesson(id)
 }
