@@ -94,6 +94,7 @@ public class CoursePresenter implements CoursesContract.Presenter {
                                    view.showCourseError(false);
                                    view.showCourseList(true);
                                    view.showCourses(instrumentCourses);
+                                   view.showBuyButton(true);
                                }
                            },
                         new Consumer<Throwable>() {
@@ -103,5 +104,10 @@ public class CoursePresenter implements CoursesContract.Presenter {
                                 view.showCourseList(false);
                             }
                         }));
+    }
+
+    @Override
+    public void onBuyClick() {
+        view.showPaymentDialog();
     }
 }

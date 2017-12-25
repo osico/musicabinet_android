@@ -18,11 +18,15 @@ interface CoursesContract {
         fun showBuyButton(visible: Boolean)
 
         fun showCourses(list: List<InstrumentCourse>)
+
+        fun showPaymentDialog()
     }
 
     interface Presenter {
 
         fun loadInstrumentMatrix(instrumentId: String)
+
+        fun onBuyClick()
 
     }
 }

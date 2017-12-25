@@ -79,7 +79,7 @@
     <!-- Resources for CoursesActivity -->
     <string name="courses">Courses</string>
     <string name="courses_error">Error during loading courses</string>
-    <string name="courses_buy">Buy all just for $%s</string>
+    <string name="courses_buy">Buy all</string>
 
 
     <!-- Resources for LessonListActivity-->
