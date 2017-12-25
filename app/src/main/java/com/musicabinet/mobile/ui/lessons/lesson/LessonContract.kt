@@ -23,7 +23,7 @@ interface LessonContract {
         fun showSelectLesson(lessonList: List<Lesson>, lessonId: String, requestCode: Int,
                              resultId: String, resultName: String)
 
-        fun setLessonTime(time: Long)
+        fun setLessonTime(time: Long, lessonId: String)
 
         fun showMethod(methodList: List<MethodItem>)
 

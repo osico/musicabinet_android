@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.displayTimeValue
 import kotlinx.android.synthetic.main.view_timer.view.*
@@ -13,7 +14,7 @@ import kotlinx.android.synthetic.main.view_timer.view.*
  */
 class TimerView : LinearLayout, TimerContract.View {
 
-    private val presenter = TimerPresenter(this)
+    private val presenter = TimerPresenter(this, Injection.provideRepository())
 
     constructor(context: Context) : super(context) {
         init()
@@ -31,8 +32,8 @@ class TimerView : LinearLayout, TimerContract.View {
         LayoutInflater.from(context).inflate(R.layout.view_timer, this, true)
     }
 
-    fun setStartTime(time: Long) {
-        presenter.subscribe(time)
+    fun setStartTime(time: Long, lessonId: String) {
+        presenter.subscribe(time, lessonId)
     }
 
     override fun displaySecond(seconds: Long) {

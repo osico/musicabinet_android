@@ -17,7 +17,7 @@ interface TimerContract {
 
     interface Presenter {
 
-        fun subscribe(currentTime: Long)
+        fun subscribe(currentTime: Long, lessonId: String)
 
     }
 }

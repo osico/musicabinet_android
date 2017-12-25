@@ -65,15 +65,15 @@ class LessonPresenter(private val view: LessonContract.View,
                     }
 
                     currentLessonId = lessonResponse.id
-                    LessonScreenData(lessonResponse.name, methodList, lessonImageList,
-                            lessonResponse.progress.timeSpent)
+                    LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
+                            lessonImageList, lessonResponse.progress.timeSpent)
                 })
                 .subscribe({ screenData: LessonScreenData ->
                     view.showSuccess()
                     view.showMethod(screenData.methodList)
                     view.showLessonTitle(screenData.title)
                     view.showLessonImages(screenData.lessonImages)
-                    view.setLessonTime(screenData.spendTime)
+                    view.setLessonTime(screenData.spendTime, screenData.id)
                 }, { view.showError() }))
     }
 
@@ -100,15 +100,15 @@ class LessonPresenter(private val view: LessonContract.View,
                     }
 
                     currentLessonId = lessonResponse.id
-                    LessonScreenData(lessonResponse.name, methodList, lessonImageList,
-                            lessonResponse.progress.timeSpent)
+                    LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
+                            lessonImageList, lessonResponse.progress.timeSpent)
                 })
                 .subscribe({ screenData: LessonScreenData ->
                     view.showSuccess()
                     view.showMethod(screenData.methodList)
                     view.showLessonTitle(screenData.title)
                     view.showLessonImages(screenData.lessonImages)
-                    view.setLessonTime(screenData.spendTime)
+                    view.setLessonTime(screenData.spendTime, screenData.id)
                 }, { view.showError() }))
     }
 
