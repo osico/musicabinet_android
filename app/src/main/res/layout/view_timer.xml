@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -8,8 +9,8 @@
         android:id="@+id/tvHours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="10"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:text="10" />
 
     <TextView
         android:id="@+id/vFirstDivider"
@@ -26,8 +27,8 @@
         android:id="@+id/tvMinutes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="39"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:text="39" />
 
     <TextView
         android:id="@+id/vSecondDivider"
@@ -44,8 +45,8 @@
         android:id="@+id/tvSeconds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="43"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:text="43" />
 
 
 </LinearLayout>

@@ -71,8 +71,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="16dp"
-                        android:layout_toStartOf="@+id/ivMetronome"
-                        android:visibility="gone" />
+                        android:layout_toStartOf="@+id/ivMetronome" />
 
                     <ImageView
                         android:id="@+id/ivMetronome"

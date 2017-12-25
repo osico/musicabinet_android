@@ -106,6 +106,10 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
         tvLesson.text = title
     }
 
+    override fun setLessonTime(time: Long) {
+        timerView.setStartTime(time)
+    }
+
     override fun onPause() {
         super.onPause()
         metronomeView.stopTick()

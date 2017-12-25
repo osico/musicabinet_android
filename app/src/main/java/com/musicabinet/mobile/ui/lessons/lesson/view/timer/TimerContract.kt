@@ -7,9 +7,17 @@ interface TimerContract {
 
     interface View {
 
+        fun displaySecond(seconds: Long)
+
+        fun displayMinute(minute: Long)
+
+        fun displayHour(hour: Long)
+
     }
 
     interface Presenter {
+
+        fun subscribe(currentTime: Long)
 
     }
 }

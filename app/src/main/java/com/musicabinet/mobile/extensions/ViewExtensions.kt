@@ -48,6 +48,14 @@ fun TextView.displayHtmlText(text: String) {
     }
 }
 
+fun TextView.displayTimeValue(value: Long) {
+    text = when (value) {
+        0L -> "00"
+        in 1..9 -> "0" + value
+        else -> value.toString()
+    }
+}
+
 fun ImageView.setTint(@ColorRes colorRes: Int) {
     setColorFilter(ContextCompat.getColor(context, colorRes),
             android.graphics.PorterDuff.Mode.MULTIPLY)
