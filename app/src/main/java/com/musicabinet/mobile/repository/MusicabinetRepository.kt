@@ -38,4 +38,6 @@ interface MusicabinetRepository {
     fun getNextLesson(id: String): Observable<LessonResponse>
 
     fun getPreparedLesson(id: String): Observable<LessonResponse>
+
+    fun updateLessonProgress(id: String): Completable
 }

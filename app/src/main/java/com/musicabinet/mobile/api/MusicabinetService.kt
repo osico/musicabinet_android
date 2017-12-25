@@ -5,6 +5,7 @@ import com.musicabinet.mobile.model.instrument.InstrumentData
 import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
 import com.musicabinet.mobile.model.lesson.lesson.LessonGroup
+import com.musicabinet.mobile.model.lesson.progress.LessonProgress
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.login.LoginRequestBody
 import com.musicabinet.mobile.model.profile.UserProfile
@@ -53,4 +54,8 @@ interface MusicabinetService {
 
     @GET("/api/lesson/{lessonId}/prepared")
     fun getPreparedLesson(@Path("lessonId") lessonId: String): Observable<LessonResponse>
+
+    @POST("/api/history/{lessonId}/update-progress")
+    fun updateLessonProgress(@Path("lessonId") lessonId: String,
+                             @Body lessonProgress: LessonProgress): Completable
 }

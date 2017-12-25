@@ -1,6 +1,7 @@
 package com.musicabinet.mobile.repository
 
 import com.musicabinet.mobile.api.ApiFactory
+import com.musicabinet.mobile.model.lesson.progress.LessonProgress
 import com.musicabinet.mobile.model.login.LoginRequestBody
 import com.musicabinet.mobile.model.register.RegisterRequestBody
 import com.musicabinet.mobile.model.register.UserInfo
@@ -20,6 +21,8 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
     private const val LESSON_REQUEST_COUNT = 100
 
     private const val PREPARED_LESSON_STATUS = true
+
+    private val LESSON_UPDATE_PROGRESS = LessonProgress(30000, false)
 
     override fun getHomeNews(start: Int) =
             ApiFactory.service.getHomeItems(HOME_NEWS_ID, true, start, REQUEST_ITEM_COUNT)
@@ -57,4 +60,7 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     override fun getPreparedLesson(id: String) =
             ApiFactory.service.getPreparedLesson(id)
+
+    override fun updateLessonProgress(id: String) =
+            ApiFactory.service.updateLessonProgress(id, LESSON_UPDATE_PROGRESS)
 }
