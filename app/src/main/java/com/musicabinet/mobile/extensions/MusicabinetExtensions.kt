@@ -1,5 +1,14 @@
 package com.musicabinet.mobile.extensions
 
+import android.app.Activity
+import android.content.DialogInterface
+import android.content.Intent
+import android.graphics.Color
+import android.net.Uri
+import android.support.v7.app.AlertDialog
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.widget.ImageView
 import android.widget.TextView
 import com.musicabinet.mobile.Injection
@@ -51,4 +60,31 @@ fun TextView.setCompletedPercent(percent: Float) {
 fun ImageView.loadLessonImage(url: String?) {
     if (!url.isNullOrEmpty())
         Picasso.with(context).load(LESSON_IMAGE_URL + url + DOWNLOAD).into(this)
+}
+
+
+fun Activity.createPaymentDialog() {
+    val title = getString(R.string.buy_dialog_title)
+    val foregroundColorSpan = ForegroundColorSpan(Color.BLACK)
+    val ssBuilder = SpannableStringBuilder(title)
+    ssBuilder.setSpan(
+            foregroundColorSpan,
+            0,
+            title.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+    );
+    val alertDialog = AlertDialog.Builder(this)
+            .setTitle(ssBuilder)
+            .setMessage(R.string.buy_dialog_text)
+            .setPositiveButton(R.string.go_to_site) { _, _ ->
+                val browserIntent = Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://app.musicabinet.com"))
+                startActivity(browserIntent)
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .create()
+
+    alertDialog.show()
+    alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).textColor(R.color.colorPrimary)
+    alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).textColor(R.color.colorPrimary)
 }

@@ -1,22 +1,13 @@
 package com.musicabinet.mobile.ui.lessons.list
 
-import android.content.DialogInterface
-import android.content.DialogInterface.BUTTON_NEGATIVE
-import android.content.DialogInterface.BUTTON_POSITIVE
 import android.content.Intent
-import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.style.ForegroundColorSpan
 import android.view.MenuItem
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.createPaymentDialog
 import com.musicabinet.mobile.extensions.setVisible
-import com.musicabinet.mobile.extensions.textColor
 import com.musicabinet.mobile.model.instrument.matrix.LessonItem
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
@@ -108,31 +99,7 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
     }
 
     override fun showPaymentDialog() {
-        val title = getString(R.string.buy_dialog_title)
-        val foregroundColorSpan = ForegroundColorSpan(Color.BLACK)
-        val ssBuilder = SpannableStringBuilder(title)
-        ssBuilder.setSpan(
-                foregroundColorSpan,
-                0,
-                title.length,
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        );
-        val alertDialog = AlertDialog.Builder(this)
-                .setTitle(ssBuilder)
-                .setMessage(R.string.buy_dialog_text)
-                .setPositiveButton(R.string.go_to_site, object : DialogInterface.OnClickListener {
-                    override fun onClick(p0: DialogInterface?, p1: Int) {
-                        val browserIntent = Intent(Intent.ACTION_VIEW,
-                                Uri.parse("https://app.musicabinet.com"))
-                        startActivity(browserIntent)
-                    }
-                })
-                .setNegativeButton(R.string.cancel, null)
-                .create()
-
-        alertDialog.show()
-        alertDialog.getButton(BUTTON_NEGATIVE).textColor(R.color.colorPrimary)
-        alertDialog.getButton(BUTTON_POSITIVE).textColor(R.color.colorPrimary)
+        createPaymentDialog()
     }
 
     override fun showAuthorizedError() {
