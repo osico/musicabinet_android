@@ -55,7 +55,8 @@
         <activity
             android:name=".ui.cabinet.password.CabinetPasswordActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".ui.cabinet.change.ChangePasswordActivity"
