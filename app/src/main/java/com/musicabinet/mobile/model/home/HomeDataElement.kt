@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 /**
  * @author Kirchhoff-
  */
-data class HomeDataElement(@SerializedName("name") val name: String,
+data class HomeDataElement(@SerializedName("nameLocalized") val name: String,
                            @SerializedName("fields") var dataField: Field,
                            @SerializedName("elementDt") val date: String)

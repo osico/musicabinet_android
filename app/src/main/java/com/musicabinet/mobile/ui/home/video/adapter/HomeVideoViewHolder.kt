@@ -14,6 +14,7 @@ class HomeVideoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(element: HomeDataElement) {
         with(element) {
             itemView.ivTutorial.loadImage(dataField.imageUrl)
+            itemView.tvVideoName.text = name
         }
     }
 }
