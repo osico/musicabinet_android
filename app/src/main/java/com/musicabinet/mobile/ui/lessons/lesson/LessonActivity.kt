@@ -113,6 +113,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
     override fun onPause() {
         super.onPause()
         metronomeView.stopTick()
+        timerView.onPause()
     }
 
     override fun metronomeStatusChange(enable: Boolean) {

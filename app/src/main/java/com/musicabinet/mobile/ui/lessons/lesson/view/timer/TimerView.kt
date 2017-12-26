@@ -52,4 +52,8 @@ class TimerView : LinearLayout, TimerContract.View {
     override fun showTime(show: Boolean) {
         timerLayout.setVisible(show)
     }
+
+    fun onPause() {
+        presenter.unsubscribe()
+    }
 }

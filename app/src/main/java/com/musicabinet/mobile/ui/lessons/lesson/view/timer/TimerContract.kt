@@ -20,5 +20,7 @@ interface TimerContract {
 
         fun subscribe(currentTime: Long, lessonId: String)
 
+        fun unsubscribe()
+
     }
 }

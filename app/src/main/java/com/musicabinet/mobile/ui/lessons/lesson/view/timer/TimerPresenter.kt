@@ -58,4 +58,8 @@ class TimerPresenter(private val view: TimerContract.View,
         view.displaySecond(bufTime / SECOND)
     }
 
+    override fun unsubscribe() {
+        subscriptions.clear()
+    }
+
 }
