@@ -15,6 +15,7 @@ import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.lesson.Lesson
 import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
+import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.ui.lessons.lesson.dialog.LessonSelectActivity
 import com.musicabinet.mobile.ui.view.metronome.MetronomeView
 import kotlinx.android.synthetic.main.activity_lesson.*
@@ -108,6 +109,10 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
 
     override fun setLessonTime(time: Long, lessonId: String) {
         timerView.setStartTime(time, lessonId)
+    }
+
+    override fun showAccompaniments(accompaniments: Set<Accompaniment>) {
+        adapter.setAccompaniments(accompaniments)
     }
 
     override fun onPause() {

@@ -8,6 +8,7 @@ import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.loadLessonImage
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.local.LessonData
+import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.ui.lessons.lesson.view.lesson.page.LessonPagePresenter
 import kotlinx.android.synthetic.main.view_lesson.view.*
 
@@ -79,5 +80,9 @@ class LessonView : FrameLayout, LessonPagePresenter.OnPageClickListener {
             ivLesson4.setVisible(false)
         }
 
+    }
+
+    fun setAccompaniments(accompaniments: Set<Accompaniment>) {
+        soundView.setAccompaniments(accompaniments)
     }
 }

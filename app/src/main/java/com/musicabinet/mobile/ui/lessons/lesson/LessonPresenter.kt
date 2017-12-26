@@ -6,12 +6,14 @@ import com.musicabinet.mobile.model.lesson.lesson.Lesson
 import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.LessonScreenData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
+import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashSet
 
 /**
  * @author Kirchhoff-
@@ -50,6 +52,7 @@ class LessonPresenter(private val view: LessonContract.View,
                 .map({ lessonResponse: LessonResponse ->
                     val methodList = ArrayList<MethodItem>()
                     val lessonImageList = ArrayList<LessonData>()
+                    val accompaniments = HashSet<Accompaniment>()
                     for (lessonPart in lessonResponse.lessonParts) {
                         if (lessonPart.video != null && lessonPart.video!!.video != null)
                             methodList.add(MethodItem(lessonPart.video!!.description,
@@ -58,15 +61,17 @@ class LessonPresenter(private val view: LessonContract.View,
 
                     for (i in lessonResponse.lessonParts.indices) {
                         val images = ArrayList<String>()
-                        for (exercise in lessonResponse.lessonParts[i].exercisesList)
+                        for (exercise in lessonResponse.lessonParts[i].exercisesList) {
                             images.add(exercise.stave.file.id)
+                            accompaniments.add(exercise.accompaniment)
+                        }
 
                         lessonImageList.add(LessonData(lessonResponse.lessonParts[i].name, images))
                     }
 
                     currentLessonId = lessonResponse.id
                     LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
-                            lessonImageList, lessonResponse.duration - lessonResponse.progress.timeSpent)
+                            lessonImageList, accompaniments, lessonResponse.duration - lessonResponse.progress.timeSpent)
                 })
                 .subscribe({ screenData: LessonScreenData ->
                     view.showSuccess()
@@ -74,6 +79,7 @@ class LessonPresenter(private val view: LessonContract.View,
                     view.showLessonTitle(screenData.title)
                     view.showLessonImages(screenData.lessonImages)
                     view.setLessonTime(screenData.spendTime, screenData.id)
+                    view.showAccompaniments(screenData.accompaniments)
                 }, { view.showError() }))
     }
 
@@ -85,6 +91,7 @@ class LessonPresenter(private val view: LessonContract.View,
                 .map({ lessonResponse: LessonResponse ->
                     val methodList = ArrayList<MethodItem>()
                     val lessonImageList = ArrayList<LessonData>()
+                    val accompaniments = HashSet<Accompaniment>()
                     for (lessonPart in lessonResponse.lessonParts) {
                         if (lessonPart.video != null && lessonPart.video!!.video != null)
                             methodList.add(MethodItem(lessonPart.video!!.description,
@@ -93,15 +100,17 @@ class LessonPresenter(private val view: LessonContract.View,
 
                     for (i in lessonResponse.lessonParts.indices) {
                         val images = ArrayList<String>()
-                        for (exercise in lessonResponse.lessonParts[i].exercisesList)
+                        for (exercise in lessonResponse.lessonParts[i].exercisesList) {
                             images.add(exercise.stave.file.id)
+                            accompaniments.add(exercise.accompaniment)
+                        }
 
                         lessonImageList.add(LessonData(lessonResponse.lessonParts[i].name, images))
                     }
 
                     currentLessonId = lessonResponse.id
                     LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
-                            lessonImageList, lessonResponse.duration - lessonResponse.progress.timeSpent)
+                            lessonImageList, accompaniments, lessonResponse.duration - lessonResponse.progress.timeSpent)
                 })
                 .subscribe({ screenData: LessonScreenData ->
                     view.showSuccess()
@@ -109,6 +118,7 @@ class LessonPresenter(private val view: LessonContract.View,
                     view.showLessonTitle(screenData.title)
                     view.showLessonImages(screenData.lessonImages)
                     view.setLessonTime(screenData.spendTime, screenData.id)
+                    view.showAccompaniments(screenData.accompaniments)
                 }, { view.showError() }))
     }
 

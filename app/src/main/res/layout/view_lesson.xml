@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <com.musicabinet.mobile.ui.lessons.lesson.view.SoundView
+        android:id="@+id/soundView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

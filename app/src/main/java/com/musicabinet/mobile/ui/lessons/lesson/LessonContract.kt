@@ -4,6 +4,7 @@ import android.content.Intent
 import com.musicabinet.mobile.model.lesson.lesson.Lesson
 import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
+import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 
 /**
  * @author Kirchhoff-
@@ -28,6 +29,8 @@ interface LessonContract {
         fun showMethod(methodList: List<MethodItem>)
 
         fun showLessonImages(lessonImagesList: List<LessonData>)
+
+        fun showAccompaniments(accompaniments: Set<Accompaniment>)
 
         fun onLessonSelected(id: String)
     }
