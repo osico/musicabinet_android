@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.slidemenu
 
+import com.musicabinet.mobile.api.ApiFactory
 import com.musicabinet.mobile.repository.keyvalue.KeyValueStorage
 
 /**
@@ -18,6 +19,7 @@ class SlideMenuPresenter(private val view: SlideMenuContract.View,
 
     override fun onLogOutClick() {
         storage.clear()
+        ApiFactory.clearCookie()
         view.logout()
     }
 

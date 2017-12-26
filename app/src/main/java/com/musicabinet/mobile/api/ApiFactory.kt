@@ -48,7 +48,7 @@ object ApiFactory {
         service = retrofit.create(MusicabinetService::class.java)
     }
 
-    public fun clearCookie() {
+    fun clearCookie() {
         cookieJar.clear()
     }
 }
