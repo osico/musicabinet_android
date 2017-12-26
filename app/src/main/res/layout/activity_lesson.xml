@@ -59,11 +59,20 @@
                         android:layout_marginEnd="16dp"
                         android:layout_marginStart="16dp"
                         android:layout_toEndOf="@+id/ivBack"
-                        android:layout_toStartOf="@+id/timerView"
+                        android:layout_toStartOf="@+id/viewProgress"
                         android:ellipsize="end"
                         android:singleLine="true"
                         android:textSize="18sp"
                         tools:text="Lesson1" />
+
+                    <com.musicabinet.mobile.ui.lessons.lesson.view.count.ProgressView
+                        android:id="@+id/viewProgress"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_toStartOf="@+id/timerView" />
 
                     <com.musicabinet.mobile.ui.lessons.lesson.view.timer.TimerView
                         android:id="@+id/timerView"
