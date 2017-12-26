@@ -24,7 +24,7 @@ class TimerPresenter(private val view: TimerContract.View,
         var sum = 0
         Observable.just(currentTime)
                 .map {
-                    sum += 1000
+                    sum -= 1000
                     currentTime + sum
                 }
                 .repeatWhen { it.delay(1, TimeUnit.SECONDS) }
