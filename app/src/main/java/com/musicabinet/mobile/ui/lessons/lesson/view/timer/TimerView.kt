@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.displayTimeValue
+import com.musicabinet.mobile.extensions.setVisible
 import kotlinx.android.synthetic.main.view_timer.view.*
 
 /**
@@ -46,5 +47,9 @@ class TimerView : LinearLayout, TimerContract.View {
 
     override fun displayHour(hour: Long) {
         tvHours.displayTimeValue(hour)
+    }
+
+    override fun showTime(show: Boolean) {
+        timerLayout.setVisible(show)
     }
 }

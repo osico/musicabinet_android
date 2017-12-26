@@ -13,6 +13,7 @@ interface TimerContract {
 
         fun displayHour(hour: Long)
 
+        fun showTime(show: Boolean)
     }
 
     interface Presenter {

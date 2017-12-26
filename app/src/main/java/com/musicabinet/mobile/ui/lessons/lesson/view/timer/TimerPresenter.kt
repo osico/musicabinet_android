@@ -45,6 +45,9 @@ class TimerPresenter(private val view: TimerContract.View,
     }
 
     private fun displayTime(currentTime: Long) {
+
+        view.showTime(currentTime > 0)
+
         var bufTime = currentTime - (currentTime / HOUR) * HOUR
 
         view.displayHour(currentTime / HOUR)
