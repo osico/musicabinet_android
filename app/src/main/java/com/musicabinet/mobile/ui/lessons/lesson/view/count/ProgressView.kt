@@ -3,13 +3,16 @@ package com.musicabinet.mobile.ui.lessons.lesson.view.count
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.util.AttributeSet
 import android.view.View
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.textColor
 
 class ProgressView : View {
 
@@ -24,6 +27,7 @@ class ProgressView : View {
     private var animationDuration: Int = 600000
 
     private var animation: ValueAnimator? = null
+    private var shouldShowDialog = true
 
     constructor(context: Context?) : super(context, null) {
         init()
@@ -52,7 +56,6 @@ class ProgressView : View {
         progressPaint.isAntiAlias = true
 
         startAnimating()
-        setOnClickListener { startAnimating() }
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -85,6 +88,7 @@ class ProgressView : View {
             }
 
             override fun onAnimationEnd(animation: Animator?) {
+                showProgressDialog()
             }
 
             override fun onAnimationCancel(animation: Animator?) {
@@ -97,8 +101,17 @@ class ProgressView : View {
 
     }
 
-    fun stopAnimation() {
-        animation?.cancel()
+    private fun showProgressDialog() {
+        if (shouldShowDialog) {
+            val alertDialog = AlertDialog.Builder(context, R.style.ProgressDialogTheme)
+                    .setMessage(R.string.progress_dialog_text)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .create()
+
+            alertDialog.show()
+            shouldShowDialog = false
+            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).textColor(R.color.colorPrimary)
+        }
     }
 
 }

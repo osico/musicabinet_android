@@ -115,4 +115,8 @@
     <string name="buy_dialog_title">Buy lesson</string>
     <string name="buy_dialog_text">At this moment you can purchase education content only via site</string>
     <string name="go_to_site">Go to site</string>
+
+
+    <!-- Resources for ProgressDialog-->
+    <string name="progress_dialog_text">To improve the perception, we recommend moving on to the next module</string>
 </resources>

@@ -71,4 +71,7 @@
         <item name="colorControlHighlight">@color/grey_969692</item>
     </style>
 
+    <style name="ProgressDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/white</item>
+    </style>
 </resources>
