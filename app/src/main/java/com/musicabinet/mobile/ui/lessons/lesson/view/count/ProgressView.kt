@@ -24,7 +24,7 @@ class ProgressView : View {
     private val progressPaint: Paint = Paint()
     private val tempRect = RectF()
 
-    private var animationDuration: Int = 600000
+    private var animationDuration: Int = 1000 * 60 * 60
 
     private var animation: ValueAnimator? = null
     private var shouldShowDialog = true
