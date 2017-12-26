@@ -43,10 +43,10 @@ fun ImageView.bindInstrumentImage(instrument: String) {
 }
 
 
-fun TextView.setCompletedPercent(percent: Float) {
-    if (Injection.provideStorage().isUserExist()) {
+fun TextView.setCompletedPercent(percent: Float?) {
+    if (Injection.provideStorage().isUserExist() && percent != null) {
         setVisible(true)
-        text = percent.toString() + "%"
+        text = (percent * 100).toInt().toString() + "%"
 
         alpha = if (percent == 0f)
             0.5f
