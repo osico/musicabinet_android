@@ -41,7 +41,7 @@ class LessonPresenter(private val view: LessonContract.View,
                 .subscribe({ list: List<Lesson> ->
                     lessonList = ArrayList<Lesson>(list)
                     view.showSuccess()
-                }, { view.showError() }))
+                }, { t: Throwable -> view.showError() }))
     }
 
     override fun getLessonInformation(id: String) {
@@ -62,7 +62,8 @@ class LessonPresenter(private val view: LessonContract.View,
                     for (i in lessonResponse.lessonParts.indices) {
                         val images = ArrayList<String>()
                         for (exercise in lessonResponse.lessonParts[i].exercisesList) {
-                            images.add(exercise.stave.file.id)
+                            if (exercise.stave != null)
+                                images.add(exercise.stave.file.id)
                             accompaniments.add(exercise.accompaniment)
                         }
 
@@ -80,7 +81,7 @@ class LessonPresenter(private val view: LessonContract.View,
                     view.showLessonImages(screenData.lessonImages)
                     view.setLessonTime(screenData.spendTime, screenData.id)
                     view.showAccompaniments(screenData.accompaniments)
-                }, { view.showError() }))
+                }, { t: Throwable -> view.showError() }))
     }
 
     override fun getPreparedLesson(id: String) {
@@ -101,7 +102,8 @@ class LessonPresenter(private val view: LessonContract.View,
                     for (i in lessonResponse.lessonParts.indices) {
                         val images = ArrayList<String>()
                         for (exercise in lessonResponse.lessonParts[i].exercisesList) {
-                            images.add(exercise.stave.file.id)
+                            if (exercise.stave != null)
+                                images.add(exercise.stave.file.id)
                             accompaniments.add(exercise.accompaniment)
                         }
 
