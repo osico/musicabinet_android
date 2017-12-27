@@ -61,13 +61,15 @@ class LessonPresenter(private val view: LessonContract.View,
 
                     for (i in lessonResponse.lessonParts.indices) {
                         val images = ArrayList<String>()
+                        val bufI = i
                         for (exercise in lessonResponse.lessonParts[i].exercisesList) {
                             if (exercise.stave != null)
                                 images.add(exercise.stave.file.id)
                             accompaniments.add(exercise.accompaniment)
                         }
 
-                        lessonImageList.add(LessonData(lessonResponse.lessonParts[i].name, images))
+                        if (lessonResponse.lessonParts[bufI].isLessonPartsExist())
+                            lessonImageList.add(LessonData(lessonResponse.lessonParts[i].name, images))
                     }
 
                     currentLessonId = lessonResponse.id
@@ -101,13 +103,15 @@ class LessonPresenter(private val view: LessonContract.View,
 
                     for (i in lessonResponse.lessonParts.indices) {
                         val images = ArrayList<String>()
+                        val bufI = i
                         for (exercise in lessonResponse.lessonParts[i].exercisesList) {
                             if (exercise.stave != null)
                                 images.add(exercise.stave.file.id)
                             accompaniments.add(exercise.accompaniment)
                         }
 
-                        lessonImageList.add(LessonData(lessonResponse.lessonParts[i].name, images))
+                        if (lessonResponse.lessonParts[bufI].isLessonPartsExist())
+                            lessonImageList.add(LessonData(lessonResponse.lessonParts[i].name, images))
                     }
 
                     currentLessonId = lessonResponse.id
