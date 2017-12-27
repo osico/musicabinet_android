@@ -65,7 +65,9 @@ class LessonPresenter(private val view: LessonContract.View,
                         for (exercise in lessonResponse.lessonParts[i].exercisesList) {
                             if (exercise.stave != null)
                                 images.add(exercise.stave.file.id)
-                            accompaniments.add(exercise.accompaniment)
+
+                            if (exercise.accompaniment != null)
+                                accompaniments.add(exercise.accompaniment)
                         }
 
                         if (lessonResponse.lessonParts[bufI].isLessonPartsExist())
@@ -107,7 +109,9 @@ class LessonPresenter(private val view: LessonContract.View,
                         for (exercise in lessonResponse.lessonParts[i].exercisesList) {
                             if (exercise.stave != null)
                                 images.add(exercise.stave.file.id)
-                            accompaniments.add(exercise.accompaniment)
+
+                            if (exercise.accompaniment != null)
+                                accompaniments.add(exercise.accompaniment)
                         }
 
                         if (lessonResponse.lessonParts[bufI].isLessonPartsExist())
