@@ -7,6 +7,6 @@ import com.google.gson.annotations.SerializedName
  */
 data class Accompaniment(@SerializedName("id") val id: String,
                          @SerializedName("nameLocalized") val name: String,
-                         @SerializedName("trackOne") val drums: StoredFile,
-                         @SerializedName("trackTwo") val bass: StoredFile,
-                         @SerializedName("trackThree") val keys: StoredFile)
+                         @SerializedName("trackOne") val drums: StoredFile?,
+                         @SerializedName("trackTwo") val bass: StoredFile?,
+                         @SerializedName("trackThree") val keys: StoredFile?)

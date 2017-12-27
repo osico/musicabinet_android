@@ -42,5 +42,17 @@ class SoundView : ConstraintLayout {
         val list = ArrayList<Accompaniment>(accompaniments)
         val adapter = SoundViewAdapter(context, R.layout.item_sound_spinner, list)
         sRoad.adapter = adapter
+
+        for (accompaniment in list) {
+
+            if (accompaniment.drums != null && accompaniment.drums.dataAvailable)
+                cDrums.isChecked = true
+
+            if (accompaniment.bass != null && accompaniment.bass.dataAvailable)
+                cBass.isChecked = true
+
+            if (accompaniment.keys != null && accompaniment.keys.dataAvailable)
+                cKeys.isChecked = true
+        }
     }
 }
