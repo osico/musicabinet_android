@@ -28,7 +28,6 @@ ext.versions = [
         retrofitVersion    : '2.3.0',
         rxandroidVersion   : '2.0.1',
         rxjavaVersion      : '2.1.5',
-        persistentCookie   : 'v1.0.1',
 
         //Test
         junitVersion       : '4.12',
@@ -66,7 +65,6 @@ ext.libraries = [
         gsonConverter      : "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion",
         rxJavaAdapter      : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofitVersion",
         okHttpInterceptor  : "com.squareup.okhttp3:logging-interceptor:$versions.okhttpVersion",
-        persistentCookie   : "com.github.franmontiel:PersistentCookieJar:$versions.persistentCookie",
 
         //Rx
         rxJava             : "io.reactivex.rxjava2:rxjava:$versions.rxjavaVersion",
