@@ -74,4 +74,13 @@
     <style name="ProgressDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:background">@color/white</item>
     </style>
+
+    <style name="FacebookButton" parent="Base.Widget.AppCompat.Button">
+        <item name="backgroundTint">@color/facebook_button_color</item>
+    </style>
+
+    <style name="GoogleButton" parent="Base.Widget.AppCompat.Button">
+        <item name="backgroundTint">@color/google_button_color</item>
+    </style>
+
 </resources>
