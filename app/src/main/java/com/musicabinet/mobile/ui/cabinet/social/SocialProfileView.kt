@@ -1,10 +1,12 @@
 package com.musicabinet.mobile.ui.cabinet.social
 
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.ui.cabinet.CabinetActivity
 import com.musicabinet.mobile.ui.cabinet.social.web.WebAuthorizationActivity
 import kotlinx.android.synthetic.main.view_social_profile.view.*
 
@@ -35,11 +37,11 @@ class SocialProfileView : LinearLayout {
         LayoutInflater.from(context).inflate(R.layout.view_social_profile, this, true)
 
         bFacebook.setOnClickListener {
-            WebAuthorizationActivity.startWebAuthorization(context, FACEBOOK_URL)
+            WebAuthorizationActivity.startWebAuthorization(context as Activity, CabinetActivity.REQUEST_USER_LOGIN, FACEBOOK_URL)
         }
 
         bGoogle.setOnClickListener {
-            WebAuthorizationActivity.startWebAuthorization(context, GOOGLE_URL)
+            WebAuthorizationActivity.startWebAuthorization(context as Activity, CabinetActivity.REQUEST_USER_LOGIN, GOOGLE_URL)
         }
     }
 }

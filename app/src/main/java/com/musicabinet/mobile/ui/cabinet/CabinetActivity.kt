@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.cabinet
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +18,10 @@ import org.jetbrains.anko.toast
  * @author Kirchhoff-
  */
 class CabinetActivity : SlideMenuActivity() {
+
+    companion object {
+        const val REQUEST_USER_LOGIN = 4567
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +52,13 @@ class CabinetActivity : SlideMenuActivity() {
                 finish()
             } else if (resultCode == CabinetPasswordActivity.RESULT_ERROR)
                 toast("Error")
+        } else if (requestCode == REQUEST_USER_LOGIN) {
+
+            if (resultCode == Activity.RESULT_OK) {
+                intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 }

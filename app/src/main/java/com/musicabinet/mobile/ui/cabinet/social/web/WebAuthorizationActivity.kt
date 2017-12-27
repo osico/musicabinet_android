@@ -1,6 +1,6 @@
 package com.musicabinet.mobile.ui.cabinet.social.web
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.ui.view.LoadingDialog
 import kotlinx.android.synthetic.main.activity_web_authorization.*
+import org.jetbrains.anko.toast
 
 /**
  * @author Kirchhoff-
@@ -19,14 +22,17 @@ class WebAuthorizationActivity : AppCompatActivity(), WebAuthorizationContract.V
     companion object {
         const val URL_ARG = "URL_ARG"
 
-        fun startWebAuthorization(context: Context, url: String) {
-            val intent = Intent(context, WebAuthorizationActivity::class.java)
+        fun startWebAuthorization(activity: Activity, requestCode: Int, url: String) {
+            val intent = Intent(activity, WebAuthorizationActivity::class.java)
             intent.putExtra(URL_ARG, url)
-            context.startActivity(intent)
+            activity.startActivityForResult(intent, requestCode)
         }
     }
 
-    val presenter = WebAuthorizationPresenter(this)
+    val presenter = WebAuthorizationPresenter(this, Injection.provideRepository(),
+            Injection.provideStorage())
+
+    private var loadingDialog: LoadingDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +54,24 @@ class WebAuthorizationActivity : AppCompatActivity(), WebAuthorizationContract.V
         return super.onOptionsItemSelected(item)
     }
 
+
+    override fun showLoading(show: Boolean) {
+        loadingDialog?.dismiss()
+
+        if (show) {
+            loadingDialog = LoadingDialog()
+            loadingDialog?.show(supportFragmentManager, "TAG")
+        }
+    }
+
+    override fun showError() {
+        toast("Error")
+    }
+
+    override fun moveToHomeScreen() {
+        setResult(Activity.RESULT_OK)
+        finish()
+    }
 
     class MusicabinetWebClient(val presenter: WebAuthorizationPresenter) : WebViewClient() {
 

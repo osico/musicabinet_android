@@ -7,6 +7,12 @@ interface WebAuthorizationContract {
 
     interface View {
 
+        fun showLoading(show: Boolean)
+
+        fun showError()
+
+        fun moveToHomeScreen()
+
     }
 
     interface Presenter {
