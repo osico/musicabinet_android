@@ -92,6 +92,12 @@
             android:label="@string/lesson_information_title"
             android:screenOrientation="landscape" />
 
+
+        <activity
+            android:name=".ui.cabinet.social.web.WebAuthorizationActivity"
+            android:label="@string/authorization"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="55b4ddc0b0d079482c57d654d6e008482ea5b58d" />

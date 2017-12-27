@@ -42,6 +42,8 @@
     <string name="connect_facebook">Connect with Facebook</string>
     <string name="connect_google">Connect with Google</string>
 
+    <!-- Resources for WebAuthorizationActivity-->
+    <string name="authorization">Authorization</string>
 
     <!-- Resources for SignUpUserScreen -->
     <string name="user_name">Name</string>
