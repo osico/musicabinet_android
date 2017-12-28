@@ -56,7 +56,7 @@ class LessonPresenter(private val view: LessonContract.View,
                     for (lessonPart in lessonResponse.lessonParts) {
                         if (lessonPart.video != null && lessonPart.video!!.video != null)
                             methodList.add(MethodItem(lessonPart.video!!.description,
-                                    lessonPart.description, lessonPart.video!!.video!!))
+                                    lessonPart.description, lessonPart.video!!.name, lessonPart.video!!.video!!))
                     }
 
                     for (i in lessonResponse.lessonParts.indices) {
@@ -100,7 +100,7 @@ class LessonPresenter(private val view: LessonContract.View,
                     for (lessonPart in lessonResponse.lessonParts) {
                         if (lessonPart.video != null && lessonPart.video!!.video != null)
                             methodList.add(MethodItem(lessonPart.video!!.description,
-                                    lessonPart.description, lessonPart.video!!.video!!))
+                                    lessonPart.description, lessonPart.video!!.name, lessonPart.video!!.video!!))
                     }
 
                     for (i in lessonResponse.lessonParts.indices) {

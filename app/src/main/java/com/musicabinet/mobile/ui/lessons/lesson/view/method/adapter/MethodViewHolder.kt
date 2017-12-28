@@ -15,6 +15,7 @@ class MethodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         with(element) {
             itemView.tvDescription.text = description
             itemView.fabInfo.setVisible(element.information != null)
+            itemView.tvMethodName.text = name
             itemView.fabInfo.setOnClickListener {
                 if (element.information != null)
                     listener.onInfoClick(element.information)
