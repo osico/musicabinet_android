@@ -8,10 +8,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.squareup.picasso.Picasso
 
 /**
@@ -63,4 +60,14 @@ fun ImageView.setTint(@ColorRes colorRes: Int) {
 
 fun Button.textColor(@ColorRes color: Int) {
     setTextColor(ContextCompat.getColor(context, color))
+}
+
+fun CheckedTextView.configVisibility() {
+    if (isChecked) {
+        isEnabled = true
+        alpha = 1.0f
+    } else {
+        isEnabled = false
+        alpha = 0.5f
+    }
 }

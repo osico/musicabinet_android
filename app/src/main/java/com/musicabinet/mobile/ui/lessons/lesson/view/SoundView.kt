@@ -4,7 +4,10 @@ import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.AdapterView
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.configVisibility
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import kotlinx.android.synthetic.main.view_sound.view.*
@@ -12,7 +15,9 @@ import kotlinx.android.synthetic.main.view_sound.view.*
 /**
  * @author Kirchhoff-
  */
-class SoundView : ConstraintLayout {
+class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener {
+
+    private lateinit var accompanimentsList: ArrayList<Accompaniment>
 
     constructor(context: Context) : super(context) {
         init()
@@ -39,24 +44,38 @@ class SoundView : ConstraintLayout {
 
         setVisible(!accompaniments.isEmpty())
 
-        val list = ArrayList<Accompaniment>(accompaniments)
-        val adapter = SoundViewAdapter(context, R.layout.item_sound_spinner, list)
+        accompanimentsList = ArrayList<Accompaniment>(accompaniments)
+        setupAdapter(accompanimentsList)
+        showAccompaniment(accompanimentsList[0])
+    }
+
+    private fun setupAdapter(accompaniments: List<Accompaniment>) {
+        val adapter = SoundViewAdapter(context, R.layout.item_sound_spinner, accompaniments)
         sRoad.adapter = adapter
 
-        for (accompaniment in list) {
+        sRoad.onItemSelectedListener = this
+    }
 
-            if (accompaniment.drums != null && accompaniment.drums.dataAvailable)
-                cDrums.isChecked = true
+    private fun showAccompaniment(accompaniment: Accompaniment) {
+        if (accompaniment.drums != null && accompaniment.drums.dataAvailable)
+            cDrums.isChecked = true
 
-            if (accompaniment.bass != null && accompaniment.bass.dataAvailable)
-                cBass.isChecked = true
+        if (accompaniment.bass != null && accompaniment.bass.dataAvailable)
+            cBass.isChecked = true
 
-            if (accompaniment.keys != null && accompaniment.keys.dataAvailable)
-                cKeys.isChecked = true
-        }
+        if (accompaniment.keys != null && accompaniment.keys.dataAvailable)
+            cKeys.isChecked = true
 
-        cDrums.isEnabled = cDrums.isChecked
-        cBass.isEnabled = cBass.isChecked
-        cKeys.isEnabled = cKeys.isChecked
+
+        cDrums.configVisibility()
+        cBass.configVisibility()
+        cKeys.configVisibility()
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+        showAccompaniment(accompanimentsList[position])
     }
 }
