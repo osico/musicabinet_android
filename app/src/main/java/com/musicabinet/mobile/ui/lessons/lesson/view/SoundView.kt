@@ -42,11 +42,29 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener {
 
     fun setAccompaniments(accompaniments: Set<Accompaniment>) {
 
-        setVisible(!accompaniments.isEmpty())
-
-        accompanimentsList = ArrayList<Accompaniment>(accompaniments)
+        accompanimentsList = ArrayList(accompaniments)
         setupAdapter(accompanimentsList)
         showAccompaniment(accompanimentsList[0])
+
+        var shouldShowElement = false
+        for (accompaniment in accompanimentsList) {
+            if (accompaniment.keys != null && accompaniment.keys.dataAvailable) {
+                shouldShowElement = true
+                break
+            }
+
+            if (accompaniment.drums != null && accompaniment.drums.dataAvailable) {
+                shouldShowElement = true
+                break
+            }
+
+            if (accompaniment.bass != null && accompaniment.bass.dataAvailable) {
+                shouldShowElement = true
+                break
+            }
+        }
+
+        setVisible(shouldShowElement)
     }
 
     private fun setupAdapter(accompaniments: List<Accompaniment>) {
