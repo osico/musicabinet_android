@@ -54,5 +54,9 @@ class SoundView : ConstraintLayout {
             if (accompaniment.keys != null && accompaniment.keys.dataAvailable)
                 cKeys.isChecked = true
         }
+
+        cDrums.isEnabled = cDrums.isChecked
+        cBass.isEnabled = cBass.isChecked
+        cKeys.isEnabled = cKeys.isChecked
     }
 }
