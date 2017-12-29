@@ -13,6 +13,7 @@
     <string name="virtual_institute">virtual institute</string>
     <string name="my_account">My account</string>
     <string name="log_out">Log out</string>
+    <string name="log_out_success">Log out success</string>
 
     <!-- Resources for HomeScreen -->
     <string name="how_to_use">How to use</string>

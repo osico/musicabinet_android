@@ -18,6 +18,7 @@ import com.musicabinet.mobile.ui.instrument.InstrumentActivity
 import kotlinx.android.synthetic.main.activity_slide_menu.*
 import kotlinx.android.synthetic.main.view_slide_header.*
 import kotlinx.android.synthetic.main.view_slide_menu.*
+import org.jetbrains.anko.toast
 
 /**
  * @author Kirchhoff-
@@ -103,6 +104,8 @@ abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
             startActivity(intent)
             finish()
         }, OPEN_SCREEN_DELAY)
+
+        toast(R.string.log_out_success)
     }
 
     override fun moveToMyAccount() {
