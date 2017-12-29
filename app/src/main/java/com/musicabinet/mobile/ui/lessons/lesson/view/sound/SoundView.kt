@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
+import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.configVisibility
 import com.musicabinet.mobile.extensions.setVisible
@@ -40,7 +41,8 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
         cBass.setOnClickListener { cBass.isChecked = !cBass.isChecked }
         cKeys.setOnClickListener { cKeys.isChecked = !cKeys.isChecked }
 
-        presenter = SoundViewPresenter(this)
+        presenter = SoundViewPresenter(this, Injection.provideRepository(),
+                context.filesDir)
     }
 
 
