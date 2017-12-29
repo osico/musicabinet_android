@@ -105,9 +105,13 @@ public class LessonListPresenter implements LessonListContract.Presenter {
 
     @Override
     public void onLessonClick(@NotNull LessonItem item) {
-        if (storage.isUserExist())
-            view.moveToLesson(item.getId());
-        else
+        if (storage.isUserExist()) {
+            if (item.getProductAvailable()) {
+                view.moveToLesson(item.getId());
+            } else {
+                view.showNotAvailableError();
+            }
+        } else
             view.showAuthorizedError();
     }
 }

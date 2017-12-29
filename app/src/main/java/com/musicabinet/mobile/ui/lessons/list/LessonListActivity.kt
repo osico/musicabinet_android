@@ -81,6 +81,10 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
         toast("Success")
     }
 
+    override fun showNotAvailableError() {
+        toast("Product not available")
+    }
+
     override fun onBuyButtonClick() {
         presenter.buyLesson(instrumentCourse.id)
     }

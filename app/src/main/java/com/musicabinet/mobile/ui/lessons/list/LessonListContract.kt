@@ -27,6 +27,8 @@ interface LessonListContract {
         fun moveToLesson(id: String)
 
         fun showSuccessPayment()
+
+        fun showNotAvailableError()
     }
 
     interface Presenter {

@@ -9,4 +9,5 @@ import java.io.Serializable
 data class LessonItem(@SerializedName("id") val id: String,
                       @SerializedName("nameLocalized") val nameLocalized: String,
                       @SerializedName("progress") val progress: Float,
+                      @SerializedName("productAvailable") val productAvailable: Boolean,
                       @SerializedName("programs") val programs: List<String>) : Serializable
