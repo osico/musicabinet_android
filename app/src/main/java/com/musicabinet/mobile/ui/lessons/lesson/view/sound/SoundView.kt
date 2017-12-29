@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.lessons.lesson.view
+package com.musicabinet.mobile.ui.lessons.lesson.view.sound
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
@@ -15,9 +15,10 @@ import kotlinx.android.synthetic.main.view_sound.view.*
 /**
  * @author Kirchhoff-
  */
-class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener {
+class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundViewContract.View {
 
     private lateinit var accompanimentsList: ArrayList<Accompaniment>
+    private lateinit var presenter: SoundViewContract.Presenter
 
     constructor(context: Context) : super(context) {
         init()
@@ -37,6 +38,8 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener {
         cDrums.setOnClickListener { cDrums.isChecked = !cDrums.isChecked }
         cBass.setOnClickListener { cBass.isChecked = !cBass.isChecked }
         cKeys.setOnClickListener { cKeys.isChecked = !cKeys.isChecked }
+
+        presenter = SoundViewPresenter(this)
     }
 
 

@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.lessons.lesson.view;
+package com.musicabinet.mobile.ui.lessons.lesson.view.sound;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
