@@ -70,17 +70,15 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_toStartOf="@+id/timerView" />
+                        android:layout_toStartOf="@+id/ivMetronome" />
 
                     <com.musicabinet.mobile.ui.lessons.lesson.view.timer.TimerView
                         android:id="@+id/timerView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginEnd="16dp"
-                        android:layout_toStartOf="@+id/ivMetronome" />
+                        android:layout_margin="8dp"
+                        android:layout_toStartOf="@+id/viewProgress" />
 
                     <ImageView
                         android:id="@+id/ivMetronome"
