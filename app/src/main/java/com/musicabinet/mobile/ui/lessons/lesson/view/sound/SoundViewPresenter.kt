@@ -56,12 +56,15 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
     }
 
     override fun showAccompaniment(position: Int) {
-        currentSelectedPosition = position
-        view.showAccompaniment(accompanimentsList[currentSelectedPosition])
+        // currentSelectedPosition = position
+        //    view.showAccompaniment(accompanimentsList[currentSelectedPosition])
 
-        checkFileAvailable()
+        //    checkFileAvailable()
     }
 
+    override fun play() {
+        view.setAudioFiles(musicListId)
+    }
 
     private fun checkFileAvailable() {
         val accompaniment = accompanimentsList[currentSelectedPosition]

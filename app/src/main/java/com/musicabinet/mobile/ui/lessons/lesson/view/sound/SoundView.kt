@@ -1,6 +1,9 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.sound
 
 import android.content.Context
+import android.media.AudioAttributes
+import android.media.SoundPool
+import android.os.Build
 import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -12,6 +15,8 @@ import com.musicabinet.mobile.extensions.configVisibility
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import kotlinx.android.synthetic.main.view_sound.view.*
+import java.io.File
+
 
 /**
  * @author Kirchhoff-
@@ -42,6 +47,8 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
 
         presenter = SoundViewPresenter(this, Injection.provideRepository(),
                 context.filesDir)
+
+        ivPlay.setOnClickListener { presenter.play() }
     }
 
 
@@ -82,5 +89,24 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
         presenter.showAccompaniment(position)
+    }
+
+    override fun setAudioFiles(list: List<String>) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            val attributes = AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build()
+            val soundPool = SoundPool.Builder().setAudioAttributes(attributes).setMaxStreams(list.size).build()
+
+            val soundIdList = ArrayList<Int>()
+            for (item in list) {
+                soundIdList.add(soundPool.load(File(context.filesDir, item).absolutePath, 1))
+            }
+
+            for (id in soundIdList) {
+                soundPool.play(id, 0f, 1f, 1, -1, 1.0f)
+            }
+        }
     }
 }

@@ -16,6 +16,8 @@ interface SoundViewContract {
         fun showAccompaniment(accompaniment: Accompaniment)
 
         fun showLoading(show: Boolean)
+
+        fun setAudioFiles(list: List<String>)
     }
 
     interface Presenter {
@@ -23,5 +25,7 @@ interface SoundViewContract {
         fun setAccompanimentsData(accompaniments: Set<Accompaniment>)
 
         fun showAccompaniment(position: Int)
+
+        fun play()
     }
 }
