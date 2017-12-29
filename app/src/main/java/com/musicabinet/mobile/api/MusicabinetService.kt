@@ -12,6 +12,8 @@ import com.musicabinet.mobile.model.profile.UserProfile
 import com.musicabinet.mobile.model.register.RegisterRequestBody
 import io.reactivex.Completable
 import io.reactivex.Observable
+import okhttp3.ResponseBody
+import retrofit2.Response
 import retrofit2.http.*
 
 /**
@@ -58,4 +60,8 @@ interface MusicabinetService {
     @POST("/api/history/{lessonId}/update-progress")
     fun updateLessonProgress(@Path("lessonId") lessonId: String,
                              @Body lessonProgress: LessonProgress): Completable
+
+    @Streaming
+    @GET("/platform/api/file-storage/{fileId}/download")
+    fun downloadFile(@Path("fileId") fileId: String): Observable<Response<ResponseBody>>
 }

@@ -63,4 +63,6 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     override fun updateLessonProgress(id: String) =
             ApiFactory.service.updateLessonProgress(id, LESSON_UPDATE_PROGRESS)
+
+    override fun downloadFile(fileId: String) = ApiFactory.service.downloadFile(fileId)
 }

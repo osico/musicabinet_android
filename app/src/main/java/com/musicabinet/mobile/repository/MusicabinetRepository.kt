@@ -9,6 +9,8 @@ import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.profile.UserProfile
 import io.reactivex.Completable
 import io.reactivex.Observable
+import okhttp3.ResponseBody
+import retrofit2.Response
 
 /**
  * @author Kirchhoff-
@@ -40,4 +42,6 @@ interface MusicabinetRepository {
     fun getPreparedLesson(id: String): Observable<LessonResponse>
 
     fun updateLessonProgress(id: String): Completable
+
+    fun downloadFile(fileId: String): Observable<Response<ResponseBody>>
 }
