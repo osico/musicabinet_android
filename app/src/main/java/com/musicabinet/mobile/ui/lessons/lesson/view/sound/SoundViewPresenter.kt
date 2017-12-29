@@ -4,6 +4,7 @@ import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import io.reactivex.Observable
 import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import okio.Okio
 import java.io.File
@@ -99,35 +100,44 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
         fileCounter = AtomicInteger(list.size)
 
         for (item in list) {
-            subscriptions.add(repository.downloadFile(item).flatMap { responseBodyResponse ->
-                object : Observable<File>() {
-                    override fun subscribeActual(observer: Observer<in File>) {
-                        try {
-                            val fileName = item
-                            // will create file in global Music directory, can be any other directory, just don't forget to handle permissions
-                            val file = File(internalDirectory, fileName)
+            subscriptions.add(repository.downloadFile(item)
+                    .flatMap { responseBodyResponse ->
+                        object : Observable<File>() {
+                            override fun subscribeActual(observer: Observer<in File>) {
+                                try {
+                                    val fileName = item
+                                    // will create file in global Music directory, can be any other directory, just don't forget to handle permissions
+                                    val file = File(internalDirectory, fileName)
 
-                            val sink = Okio.buffer(Okio.sink(file))
-                            // you can access body of response
-                            sink.writeAll(responseBodyResponse.body()!!.source())
-                            sink.close()
-                            observer.onNext(file)
-                            observer.onComplete()
-                        } catch (e: IOException) {
-                            e.printStackTrace()
-                            observer.onError(e)
+                                    val sink = Okio.buffer(Okio.sink(file))
+                                    // you can access body of response
+                                    sink.writeAll(responseBodyResponse.body()!!.source())
+                                    sink.close()
+                                    observer.onNext(file)
+                                    observer.onComplete()
+                                } catch (e: IOException) {
+                                    e.printStackTrace()
+                                    observer.onError(e)
+                                }
+
+                            }
                         }
-
-                    }
-                }
-            }.subscribe({
-                fileCounter.decrementAndGet()
-            }, {
-                fileCounter.decrementAndGet()
-            }))
+                    }.observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        val result = fileCounter.decrementAndGet()
+                        if (result == 0)
+                            view.showLoading(false)
+                        else
+                            view.showLoading(true)
+                    }, {
+                        val result = fileCounter.decrementAndGet()
+                        if (result == 0)
+                            view.showLoading(false)
+                        else
+                            view.showLoading(true)
+                    }))
         }
     }
-
 
     private fun isFileExist(id: String): Boolean {
         val file = File(internalDirectory, id)

@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.view_sound.view.*
  */
 class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundViewContract.View {
 
-
     private lateinit var accompanimentsList: ArrayList<Accompaniment>
     private lateinit var presenter: SoundViewContract.Presenter
 
@@ -71,6 +70,11 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
         sRoad.adapter = adapter
 
         sRoad.onItemSelectedListener = this
+    }
+
+    override fun showLoading(show: Boolean) {
+        progressBar.setVisible(show)
+        ivPlay.setVisible(!show)
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
