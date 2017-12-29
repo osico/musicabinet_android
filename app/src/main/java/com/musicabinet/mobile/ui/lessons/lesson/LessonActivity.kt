@@ -53,11 +53,6 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
                 metronomePopup!!.dismiss()
         }
 
-        appBar.addOnOffsetChangedListener { _, _ ->
-            if (metronomePopup != null && metronomePopup!!.isShowing)
-                metronomePopup!!.dismiss()
-        }
-
         metronomeView = MetronomeView(this)
         metronomeView.setOnMetronomeStatusChange(this)
     }
