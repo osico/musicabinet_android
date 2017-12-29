@@ -21,15 +21,16 @@ class TimerPresenter(private val view: TimerContract.View,
     override fun subscribe(currentTime: Long, lessonId: String) {
         displayTime(currentTime)
 
+        subscriptions.clear()
         var sum = 0
-        Observable.just(currentTime)
+        subscriptions.add(Observable.just(currentTime)
                 .map {
                     sum -= 1000
                     currentTime + sum
                 }
                 .repeatWhen { it.delay(1, TimeUnit.SECONDS) }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ displayTime(it) })
+                .subscribe({ displayTime(it) }))
 
 
         subscriptions.add(Observable.just(true)
