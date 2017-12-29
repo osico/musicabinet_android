@@ -8,6 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import okio.Okio
 import java.io.File
 import java.io.IOException
+import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * @author Kirchhoff-
@@ -18,6 +19,8 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
 
     private lateinit var accompanimentsList: ArrayList<Accompaniment>
     private var currentSelectedPosition = 0
+    private lateinit var fileCounter: AtomicInteger
+    private lateinit var musicListId: ArrayList<String>
 
     private val subscriptions = CompositeDisposable()
 
@@ -48,38 +51,86 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
 
         view.setElementVisibility(shouldShowElement)
 
-        downloadAccompaniment()
+        checkFileAvailable()
     }
 
     override fun showAccompaniment(position: Int) {
         currentSelectedPosition = position
         view.showAccompaniment(accompanimentsList[currentSelectedPosition])
+
+        checkFileAvailable()
     }
 
 
-    private fun downloadAccompaniment() {
-        val fileId = accompanimentsList[currentSelectedPosition].bass?.id
-        subscriptions.add(repository.downloadFile(fileId!!).flatMap { responseBodyResponse ->
-            object : Observable<File>() {
-                override fun subscribeActual(observer: Observer<in File>) {
-                    try {
-                        val fileName = fileId
-                        // will create file in global Music directory, can be any other directory, just don't forget to handle permissions
-                        val file = File(internalDirectory, fileName)
+    private fun checkFileAvailable() {
+        val accompaniment = accompanimentsList[currentSelectedPosition]
+        musicListId = ArrayList()
 
-                        val sink = Okio.buffer(Okio.sink(file))
-                        // you can access body of response
-                        sink.writeAll(responseBodyResponse.body()!!.source())
-                        sink.close()
-                        observer.onNext(file)
-                        observer.onComplete()
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                        observer.onError(e)
-                    }
+        //Check is data is available
+        if (accompaniment.bass != null && accompaniment.bass.dataAvailable)
+            musicListId.add(accompaniment.bass.id)
 
-                }
+        if (accompaniment.drums != null && accompaniment.drums.dataAvailable)
+            musicListId.add(accompaniment.drums.id)
+
+        if (accompaniment.keys != null && accompaniment.keys.dataAvailable)
+            musicListId.add(accompaniment.keys.id)
+
+
+        //Check data on disk
+        if (!musicListId.isEmpty()) {
+            val downloadedFileId = ArrayList<String>()
+
+            for (id in musicListId)
+                if (!isFileExist(id))
+                    downloadedFileId.add(id)
+
+            if (!downloadedFileId.isEmpty())
+                downloadAccompaniment(downloadedFileId)
+            else {
+                //Here will be setting file to MusicPlayer.
             }
-        }.subscribe({}, {}))
+
+        }
+    }
+
+    private fun downloadAccompaniment(list: List<String>) {
+
+        fileCounter = AtomicInteger(list.size)
+
+        for (item in list) {
+            subscriptions.add(repository.downloadFile(item).flatMap { responseBodyResponse ->
+                object : Observable<File>() {
+                    override fun subscribeActual(observer: Observer<in File>) {
+                        try {
+                            val fileName = item
+                            // will create file in global Music directory, can be any other directory, just don't forget to handle permissions
+                            val file = File(internalDirectory, fileName)
+
+                            val sink = Okio.buffer(Okio.sink(file))
+                            // you can access body of response
+                            sink.writeAll(responseBodyResponse.body()!!.source())
+                            sink.close()
+                            observer.onNext(file)
+                            observer.onComplete()
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                            observer.onError(e)
+                        }
+
+                    }
+                }
+            }.subscribe({
+                fileCounter.decrementAndGet()
+            }, {
+                fileCounter.decrementAndGet()
+            }))
+        }
+    }
+
+
+    private fun isFileExist(id: String): Boolean {
+        val file = File(internalDirectory, id)
+        return file.exists()
     }
 }
