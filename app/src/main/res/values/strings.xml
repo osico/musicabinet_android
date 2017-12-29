@@ -36,6 +36,7 @@
     <string name="create_new_account"><a href="">Create a New Account</a></string>
     <string name="email_tab">Email</string>
     <string name="social_profile_tab">Social profile</string>
+    <string name="success_login">Successful sign in</string>
 
 
     <!-- Resources for SocialProfileView -->
