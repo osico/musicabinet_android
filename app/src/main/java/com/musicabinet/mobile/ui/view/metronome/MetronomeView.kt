@@ -1,15 +1,14 @@
 package com.musicabinet.mobile.ui.view.metronome
 
 import android.content.Context
-import android.graphics.PorterDuff
 import android.media.MediaPlayer
 import android.os.Handler
 import android.os.Looper
 import android.support.constraint.ConstraintLayout
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.setBackgroundTint
 import kotlinx.android.synthetic.main.view_metronome.view.*
 
 /**
@@ -57,12 +56,12 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
 
     override fun showStartActionButton() {
         bAction.setText(R.string.start)
-        bAction.background.setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY)
+        bAction.setBackgroundTint(R.color.colorPrimary)
     }
 
     override fun showStopActionButton() {
         bAction.setText(R.string.stop)
-        bAction.background.setColorFilter(ContextCompat.getColor(context, R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
+        bAction.setBackgroundTint(R.color.colorAccent)
     }
 
     override fun startTick(period: Long) {

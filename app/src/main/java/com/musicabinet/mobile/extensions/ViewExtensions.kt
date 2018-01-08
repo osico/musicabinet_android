@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.extensions
 
+import android.graphics.PorterDuff
 import android.os.Build
 import android.support.annotation.ColorRes
 import android.support.annotation.StringRes
@@ -60,6 +61,10 @@ fun ImageView.setTint(@ColorRes colorRes: Int) {
 
 fun Button.textColor(@ColorRes color: Int) {
     setTextColor(ContextCompat.getColor(context, color))
+}
+
+fun Button.setBackgroundTint(@ColorRes color: Int) {
+    background.setColorFilter(ContextCompat.getColor(context, color), PorterDuff.Mode.MULTIPLY)
 }
 
 fun CheckedTextView.configVisibility() {
