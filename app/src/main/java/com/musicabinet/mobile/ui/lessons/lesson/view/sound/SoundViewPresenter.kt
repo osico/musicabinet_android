@@ -52,14 +52,14 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
 
         view.setElementVisibility(shouldShowElement)
 
-        //checkFileAvailable()
+        checkFileAvailable()
     }
 
     override fun showAccompaniment(position: Int) {
         currentSelectedPosition = position
         view.showAccompaniment(accompanimentsList[currentSelectedPosition])
 
-        //    checkFileAvailable()
+        checkFileAvailable()
     }
 
     override fun play() {
@@ -132,7 +132,7 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
                             view.showLoading(false)
                         else
                             view.showLoading(true)
-                    }, {
+                    }, { t: Throwable ->
                         val result = fileCounter.decrementAndGet()
                         if (result == 0)
                             view.showLoading(false)

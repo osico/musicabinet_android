@@ -48,7 +48,7 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
         presenter = SoundViewPresenter(this, Injection.provideRepository(),
                 context.filesDir)
 
-        ///ivPlay.setOnClickListener { presenter.play() }
+        ivPlay.setOnClickListener { presenter.play() }
     }
 
 
