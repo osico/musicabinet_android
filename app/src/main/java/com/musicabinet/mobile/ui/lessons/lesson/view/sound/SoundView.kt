@@ -97,16 +97,17 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
                     .setUsage(AudioAttributes.USAGE_GAME)
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                     .build()
-            val soundPool = SoundPool.Builder().setAudioAttributes(attributes).setMaxStreams(list.size).build()
+            val soundPool = SoundPool.Builder().setAudioAttributes(attributes).setMaxStreams(20).build()
 
-            val soundIdList = ArrayList<Int>()
-            for (item in list) {
-                soundIdList.add(soundPool.load(File(context.filesDir, item).absolutePath, 1))
+            for (i in list.indices) {
+                soundPool.load(File(context.filesDir, list[i]).absolutePath, i + 1)
             }
 
-            for (id in soundIdList) {
-                soundPool.play(id, 0f, 1f, 1, -1, 1.0f)
-            }
+            soundPool.setOnLoadCompleteListener(object : SoundPool.OnLoadCompleteListener {
+                override fun onLoadComplete(p0: SoundPool?, sampleId: Int, status: Int) {
+                    soundPool.play(sampleId, 0f, 1f, 1, -1, 1.0f)
+                }
+            })
         }
     }
 }
