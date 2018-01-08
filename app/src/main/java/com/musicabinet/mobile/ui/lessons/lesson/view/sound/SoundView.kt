@@ -24,7 +24,7 @@ import java.io.File
 class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundViewContract.View {
 
     private lateinit var presenter: SoundViewContract.Presenter
-    private lateinit var musicPlayerList: MutableList<MediaPlayer>
+    private var musicPlayerList: MutableList<MediaPlayer> = java.util.ArrayList()
 
     constructor(context: Context) : super(context) {
         init()
@@ -121,7 +121,11 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
         for (i in list.indices) {
             musicPlayerList.add(MediaPlayer.create(context,
                     Uri.parse(File(context.filesDir, list[i]).absolutePath)))
-            musicPlayerList[i].play()
+
+            if ((i == 0 && cDrums.isChecked) ||
+                    (i == 1 && cBass.isChecked) ||
+                    (i == 2 && cKeys.isChecked))
+                musicPlayerList[i].play()
         }
 
         ivPlay.setImageResource(R.drawable.ic_button_stop)

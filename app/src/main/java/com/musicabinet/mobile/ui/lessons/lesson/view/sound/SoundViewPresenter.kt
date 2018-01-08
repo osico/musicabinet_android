@@ -57,6 +57,8 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
     }
 
     override fun showAccompaniment(position: Int) {
+        view.stopPlay()
+        isPlaying = false
         currentSelectedPosition = position
         view.showAccompaniment(accompanimentsList[currentSelectedPosition])
 
@@ -94,6 +96,7 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
             for (id in musicListId)
                 if (!isFileExist(id))
                     downloadedFileId.add(id)
+
 
             if (!downloadedFileId.isEmpty())
                 downloadAccompaniment(downloadedFileId)
