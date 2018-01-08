@@ -1,9 +1,8 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.sound
 
 import android.content.Context
-import android.media.AudioAttributes
-import android.media.SoundPool
-import android.os.Build
+import android.media.MediaPlayer
+import android.net.Uri
 import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import android.widget.AdapterView
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.configVisibility
+import com.musicabinet.mobile.extensions.play
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import kotlinx.android.synthetic.main.view_sound.view.*
@@ -92,22 +92,11 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     }
 
     override fun setAudioFiles(list: List<String>) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            val attributes = AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_GAME)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build()
-            val soundPool = SoundPool.Builder().setAudioAttributes(attributes).setMaxStreams(20).build()
 
-            for (i in list.indices) {
-                soundPool.load(File(context.filesDir, list[i]).absolutePath, i + 1)
-            }
-
-            soundPool.setOnLoadCompleteListener(object : SoundPool.OnLoadCompleteListener {
-                override fun onLoadComplete(p0: SoundPool?, sampleId: Int, status: Int) {
-                    soundPool.play(sampleId, 0f, 1f, 1, -1, 1.0f)
-                }
-            })
+        for (item in list) {
+            val mediaPlayer = MediaPlayer.create(context,
+                    Uri.parse(File(context.filesDir, item).absolutePath))
+            mediaPlayer.play()
         }
     }
 }

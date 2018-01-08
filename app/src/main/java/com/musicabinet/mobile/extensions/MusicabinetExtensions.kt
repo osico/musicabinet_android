@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.net.Uri
 import android.support.v7.app.AlertDialog
 import android.text.SpannableStringBuilder
@@ -87,4 +88,15 @@ fun Activity.createPaymentDialog() {
     alertDialog.show()
     alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).textColor(R.color.colorPrimary)
     alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).textColor(R.color.colorPrimary)
+}
+
+fun MediaPlayer.play() {
+
+    setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
+        override fun onCompletion(p0: MediaPlayer?) {
+            start()
+        }
+    })
+
+    start()
 }
