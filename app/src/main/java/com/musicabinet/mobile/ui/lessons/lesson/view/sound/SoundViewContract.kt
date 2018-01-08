@@ -20,6 +20,8 @@ interface SoundViewContract {
         fun setAudioFiles(list: List<String>)
 
         fun stopPlay()
+
+        fun startPlay()
     }
 
     interface Presenter {
@@ -29,5 +31,7 @@ interface SoundViewContract {
         fun showAccompaniment(position: Int)
 
         fun play()
+
+        fun getSoundsId(): List<String>
     }
 }

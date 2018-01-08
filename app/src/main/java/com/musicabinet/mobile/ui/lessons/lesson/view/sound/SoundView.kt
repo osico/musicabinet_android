@@ -121,14 +121,7 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
         for (i in list.indices) {
             musicPlayerList.add(MediaPlayer.create(context,
                     Uri.parse(File(context.filesDir, list[i]).absolutePath)))
-
-            if ((i == 0 && cDrums.isChecked) ||
-                    (i == 1 && cBass.isChecked) ||
-                    (i == 2 && cKeys.isChecked))
-                musicPlayerList[i].play()
         }
-
-        ivPlay.setImageResource(R.drawable.ic_button_stop)
     }
 
     override fun stopPlay() {
@@ -136,6 +129,29 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
             item.stop()
 
         ivPlay.setImageResource(R.drawable.ic_button_play)
+    }
+
+    override fun startPlay() {
+        musicPlayerList.clear()
+        for (i in presenter.getSoundsId().indices) {
+            musicPlayerList.add(MediaPlayer.create(context,
+                    Uri.parse(File(context.filesDir, presenter.getSoundsId()[i]).absolutePath)))
+
+            //If accompaniment - don't check set sound to 0
+            if (i == 0 && !cDrums.isChecked)
+                musicPlayerList[0].setVolume(0f, 0f)
+            if (i == 1 && !cBass.isChecked)
+                musicPlayerList[1].setVolume(0f, 0f)
+            if (i == 2 && !cKeys.isChecked)
+                musicPlayerList[2].setVolume(0f, 0f)
+
+            //Start play all accompaniments
+            musicPlayerList[i].play()
+        }
+
+
+
+        ivPlay.setImageResource(R.drawable.ic_button_stop)
     }
 
 }

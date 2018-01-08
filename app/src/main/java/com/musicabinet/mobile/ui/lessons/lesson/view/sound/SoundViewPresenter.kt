@@ -67,12 +67,14 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
 
     override fun play() {
         if (!isPlaying)
-            view.setAudioFiles(musicListId)
+            view.startPlay()
         else
             view.stopPlay()
 
         isPlaying = isPlaying.not()
     }
+
+    override fun getSoundsId() = musicListId
 
     private fun checkFileAvailable() {
         val accompaniment = accompanimentsList[currentSelectedPosition]
@@ -97,11 +99,10 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
                 if (!isFileExist(id))
                     downloadedFileId.add(id)
 
-
             if (!downloadedFileId.isEmpty())
                 downloadAccompaniment(downloadedFileId)
             else {
-                //Here will be setting file to MusicPlayer.
+                view.setAudioFiles(musicListId)
             }
 
         }
@@ -137,9 +138,10 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
                     }.observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         val result = fileCounter.decrementAndGet()
-                        if (result == 0)
+                        if (result == 0) {
                             view.showLoading(false)
-                        else
+                            view.setAudioFiles(musicListId)
+                        } else
                             view.showLoading(true)
                     }, { t: Throwable ->
                         val result = fileCounter.decrementAndGet()
