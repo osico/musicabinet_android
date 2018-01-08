@@ -18,3 +18,13 @@ Before added new layout to project should append prefix to it.
 - item (item_transaction)
 - toolbar (toolbar_card)
 - view (view_counter)
+
+
+## Libraries Used
+* Picasso - https://github.com/square/picasso
+* MkLoader - https://github.com/nntuyen/mkloader
+* PageIndicatorView - https://github.com/romandanylyk/PageIndicatorView
+* Retrofit - http://square.github.io/retrofit/
+* RxJava - https://github.com/ReactiveX/RxJava
+* RxAndroid - https://github.com/ReactiveX/RxAndroid
+* Android Support Library - http://developer.android.com/tools/support-library/index.html
