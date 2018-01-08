@@ -25,6 +25,7 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
 
     private lateinit var accompanimentsList: ArrayList<Accompaniment>
     private lateinit var presenter: SoundViewContract.Presenter
+    private lateinit var musicPlayerList: MutableList<MediaPlayer>
 
     constructor(context: Context) : super(context) {
         init()
@@ -41,9 +42,28 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     private fun init() {
         LayoutInflater.from(context).inflate(R.layout.view_sound, this, true)
 
-        cDrums.setOnClickListener { cDrums.isChecked = !cDrums.isChecked }
-        cBass.setOnClickListener { cBass.isChecked = !cBass.isChecked }
-        cKeys.setOnClickListener { cKeys.isChecked = !cKeys.isChecked }
+        cDrums.setOnClickListener {
+            cDrums.isChecked = !cDrums.isChecked
+            if (cDrums.isChecked)
+                musicPlayerList[0].setVolume(1f, 1f)
+            else
+                musicPlayerList[0].setVolume(0f, 0f)
+
+        }
+        cBass.setOnClickListener {
+            cBass.isChecked = !cBass.isChecked
+            if (cBass.isChecked)
+                musicPlayerList[1].setVolume(1f, 1f)
+            else
+                musicPlayerList[1].setVolume(0f, 0f)
+        }
+        cKeys.setOnClickListener {
+            cKeys.isChecked = !cKeys.isChecked
+            if (cKeys.isChecked)
+                musicPlayerList[2].setVolume(1f, 1f)
+            else
+                musicPlayerList[2].setVolume(0f, 0f)
+        }
 
         presenter = SoundViewPresenter(this, Injection.provideRepository(),
                 context.filesDir)
@@ -55,6 +75,11 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     fun setAccompaniments(accompaniments: Set<Accompaniment>) {
 
         presenter.setAccompanimentsData(accompaniments)
+    }
+
+    fun onPause() {
+        for (item in musicPlayerList)
+            item.stop()
     }
 
 
@@ -93,10 +118,12 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
 
     override fun setAudioFiles(list: List<String>) {
 
-        for (item in list) {
-            val mediaPlayer = MediaPlayer.create(context,
-                    Uri.parse(File(context.filesDir, item).absolutePath))
-            mediaPlayer.play()
+        musicPlayerList = ArrayList()
+        for (i in list.indices) {
+            musicPlayerList.add(MediaPlayer.create(context,
+                    Uri.parse(File(context.filesDir, list[i]).absolutePath)))
+            musicPlayerList[i].play()
         }
     }
+
 }

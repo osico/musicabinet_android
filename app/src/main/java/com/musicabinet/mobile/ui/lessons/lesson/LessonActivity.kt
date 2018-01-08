@@ -19,6 +19,7 @@ import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.ui.lessons.lesson.dialog.LessonSelectActivity
 import com.musicabinet.mobile.ui.view.metronome.MetronomeView
 import kotlinx.android.synthetic.main.activity_lesson.*
+import kotlinx.android.synthetic.main.view_lesson.*
 import org.jetbrains.anko.toast
 import java.io.Serializable
 
@@ -114,6 +115,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
         super.onPause()
         metronomeView.stopTick()
         timerView.onPause()
+        soundView.onPause()
     }
 
     override fun metronomeStatusChange(enable: Boolean) {

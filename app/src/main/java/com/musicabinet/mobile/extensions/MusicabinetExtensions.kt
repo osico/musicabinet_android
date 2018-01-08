@@ -92,11 +92,6 @@ fun Activity.createPaymentDialog() {
 
 fun MediaPlayer.play() {
 
-    setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
-        override fun onCompletion(p0: MediaPlayer?) {
-            start()
-        }
-    })
-
+    setOnCompletionListener { start() }
     start()
 }
