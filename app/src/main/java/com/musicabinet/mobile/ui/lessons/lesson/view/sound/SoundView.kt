@@ -23,7 +23,6 @@ import java.io.File
  */
 class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundViewContract.View {
 
-    private lateinit var accompanimentsList: ArrayList<Accompaniment>
     private lateinit var presenter: SoundViewContract.Presenter
     private lateinit var musicPlayerList: MutableList<MediaPlayer>
 
@@ -124,6 +123,15 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
                     Uri.parse(File(context.filesDir, list[i]).absolutePath)))
             musicPlayerList[i].play()
         }
+
+        ivPlay.setImageResource(R.drawable.ic_button_stop)
+    }
+
+    override fun stopPlay() {
+        for (item in musicPlayerList)
+            item.stop()
+
+        ivPlay.setImageResource(R.drawable.ic_button_play)
     }
 
 }

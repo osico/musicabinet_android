@@ -22,6 +22,7 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
     private var currentSelectedPosition = 0
     private lateinit var fileCounter: AtomicInteger
     private lateinit var musicListId: ArrayList<String>
+    private var isPlaying = false
 
     private val subscriptions = CompositeDisposable()
 
@@ -63,7 +64,12 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
     }
 
     override fun play() {
-        view.setAudioFiles(musicListId)
+        if (!isPlaying)
+            view.setAudioFiles(musicListId)
+        else
+            view.stopPlay()
+
+        isPlaying = isPlaying.not()
     }
 
     private fun checkFileAvailable() {

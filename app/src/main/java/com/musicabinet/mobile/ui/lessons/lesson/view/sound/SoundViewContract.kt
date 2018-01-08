@@ -18,6 +18,8 @@ interface SoundViewContract {
         fun showLoading(show: Boolean)
 
         fun setAudioFiles(list: List<String>)
+
+        fun stopPlay()
     }
 
     interface Presenter {
