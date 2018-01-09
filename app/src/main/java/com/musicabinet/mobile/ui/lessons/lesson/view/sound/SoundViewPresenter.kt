@@ -146,14 +146,14 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
                     }.observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         val result = fileCounter.decrementAndGet()
-                        if (result == 0) {
+                        if (result <= 0) {
                             view.showLoading(false)
                             view.setAudioFiles(musicListId)
                         } else
                             view.showLoading(true)
                     }, { t: Throwable ->
                         val result = fileCounter.decrementAndGet()
-                        if (result == 0)
+                        if (result <= 0)
                             view.showLoading(false)
                         else
                             view.showLoading(true)
