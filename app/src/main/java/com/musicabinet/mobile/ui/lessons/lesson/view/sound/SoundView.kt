@@ -25,6 +25,7 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
 
     private lateinit var presenter: SoundViewContract.Presenter
     private var musicPlayerList: MutableList<MediaPlayer> = java.util.ArrayList()
+    private var check: Int = 0
 
     constructor(context: Context) : super(context) {
         init()
@@ -118,7 +119,9 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-        presenter.showAccompaniment(position)
+        if (++check > 1) {
+            presenter.showAccompaniment(position)
+        }
     }
 
     override fun setAudioFiles(list: List<String>) {
