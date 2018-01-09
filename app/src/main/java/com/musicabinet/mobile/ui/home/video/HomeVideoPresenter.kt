@@ -48,7 +48,7 @@ class HomeVideoPresenter(private val repository: MusicabinetRepository,
 
     override fun onVideoClick(videoItem: HomeDataElement) {
         if (videoItem.dataField.url != null)
-            view.openVideo(videoItem.dataField.url!!)
+            view.openVideo(videoItem.dataField.url!!, videoItem.name)
     }
 
 }

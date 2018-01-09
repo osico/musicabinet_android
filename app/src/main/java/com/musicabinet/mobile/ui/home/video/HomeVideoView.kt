@@ -9,10 +9,10 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
-import com.musicabinet.mobile.extensions.openVideoIntent
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.home.HomeDataElement
 import com.musicabinet.mobile.ui.home.video.adapter.HomeVideoAdapter
+import com.musicabinet.mobile.ui.web.WebVideoActivity
 import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 import kotlinx.android.synthetic.main.view_home_video.view.*
 
@@ -100,7 +100,7 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View, BaseRecyclerAdapter.O
         presenter.onVideoClick(item)
     }
 
-    override fun openVideo(url: String) {
-        context.openVideoIntent(url)
+    override fun openVideo(url: String, title: String) {
+        WebVideoActivity.startWebVideo(context, url, title)
     }
 }

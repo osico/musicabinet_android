@@ -19,7 +19,7 @@ interface HomeVideoContract {
 
         fun setHomeVideoItem(videoList: List<HomeDataElement>, enablePagination: Boolean)
 
-        fun openVideo(url: String)
+        fun openVideo(url: String, title: String)
     }
 
     interface Presenter {

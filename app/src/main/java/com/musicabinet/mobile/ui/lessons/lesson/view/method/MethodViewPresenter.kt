@@ -8,7 +8,10 @@ import com.musicabinet.mobile.model.lesson.local.MethodItem
 class MethodViewPresenter(private val view: MethodViewContract.View) : MethodViewContract.Presenter {
 
     override fun onVideoClick(methodItem: MethodItem) {
-        view.openVideo(methodItem.video.meta)
+        var title = ""
+        if (methodItem.name != null)
+            title = methodItem.name!!
+        view.openVideo(methodItem.video.meta, title)
     }
 
     override fun onInfoClick(information: String) {

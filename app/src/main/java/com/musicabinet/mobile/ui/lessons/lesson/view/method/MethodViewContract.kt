@@ -9,7 +9,7 @@ interface MethodViewContract {
 
     interface View {
 
-        fun openVideo(url: String)
+        fun openVideo(url: String, title: String)
 
         fun openInformation(information: String)
     }

@@ -11,7 +11,7 @@ import android.webkit.WebViewClient
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.ui.view.LoadingDialog
-import kotlinx.android.synthetic.main.activity_web_authorization.*
+import kotlinx.android.synthetic.main.activity_web.*
 import org.jetbrains.anko.toast
 
 /**
@@ -36,7 +36,7 @@ class WebAuthorizationActivity : AppCompatActivity(), WebAuthorizationContract.V
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_web_authorization)
+        setContentView(R.layout.activity_web)
 
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

@@ -7,11 +7,11 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.musicabinet.mobile.R
-import com.musicabinet.mobile.extensions.openVideoIntent
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.ui.lessons.lesson.info.LessonInformationActivity
 import com.musicabinet.mobile.ui.lessons.lesson.view.adapter.MethodViewAdapter
 import com.musicabinet.mobile.ui.lessons.lesson.view.adapter.MethodViewHolder
+import com.musicabinet.mobile.ui.web.WebVideoActivity
 import kotlinx.android.synthetic.main.view_method.view.*
 
 /**
@@ -59,7 +59,7 @@ class MethodView : FrameLayout, MethodViewContract.View, MethodViewHolder.OnMeth
         presenter.onVideoClick(methodItem)
     }
 
-    override fun openVideo(url: String) {
-        context.openVideoIntent(url)
+    override fun openVideo(url: String, title: String) {
+        WebVideoActivity.startWebVideo(context, url, title)
     }
 }
