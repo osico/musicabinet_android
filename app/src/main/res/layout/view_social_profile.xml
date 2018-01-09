@@ -4,33 +4,15 @@
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <Button
+        android:id="@+id/bFacebook"
+        style="@style/FacebookButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/bFacebook"
-            style="@style/FacebookButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:drawableStart="@drawable/ic_facebook"
-            android:text="@string/connect_facebook"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/bGoogle"
-            style="@style/GoogleButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:drawableStart="@drawable/ic_google"
-            android:text="@string/connect_google"
-            android:textAllCaps="false" />
-
-    </LinearLayout>
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:drawableStart="@drawable/ic_facebook"
+        android:text="@string/connect_facebook"
+        android:textAllCaps="false" />
 
 </ScrollView>
