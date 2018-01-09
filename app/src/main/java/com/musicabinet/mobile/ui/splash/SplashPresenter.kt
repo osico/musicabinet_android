@@ -28,6 +28,7 @@ class SplashPresenter(private val repository: MusicabinetRepository,
                     }, {
                         storage.clear()
                         ApiFactory.clearCookie()
+                        view.moveToHome()
                     }))
         } else {
             view.moveToHome()
