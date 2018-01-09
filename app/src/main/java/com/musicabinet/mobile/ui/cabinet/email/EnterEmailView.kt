@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.disableErrorOnType
 import com.musicabinet.mobile.extensions.getString
 import com.musicabinet.mobile.ui.cabinet.password.CabinetPasswordActivity
 import com.musicabinet.mobile.utils.TextWatcherAdapter
@@ -37,13 +38,19 @@ class EnterEmailView : LinearLayout, EnterEmailContract.View {
         presenter = EnterEmailPresenter(this)
         bNext.isEnabled = false
 
-        bNext.setOnClickListener { presenter.onNextClick() }
+        bNext.setOnClickListener { presenter.onNextClick(edEmail.getString()) }
 
         edEmail.addTextChangedListener(emailTextWatcher)
+        edEmail.disableErrorOnType(ilEmail)
     }
 
     override fun enableNextButton(enable: Boolean) {
         bNext.isEnabled = enable
+    }
+
+    override fun showMailError() {
+        ilEmail.isErrorEnabled = true
+        ilEmail.error = context.getString(R.string.email_error)
     }
 
     private val emailTextWatcher = object : TextWatcherAdapter() {
