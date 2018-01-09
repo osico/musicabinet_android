@@ -109,6 +109,9 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     override fun showLoading(show: Boolean) {
         progressBar.setVisible(show)
         ivPlay.setVisible(!show)
+        cDrums.isClickable = !show
+        cBass.isClickable = !show
+        cKeys.isClickable = !show
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
