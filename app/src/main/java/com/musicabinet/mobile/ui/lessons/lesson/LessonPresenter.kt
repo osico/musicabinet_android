@@ -129,7 +129,7 @@ class LessonPresenter(private val view: LessonContract.View,
                     view.showLessonImages(screenData.lessonImages)
                     view.setLessonTime(screenData.spendTime, screenData.id)
                     view.showAccompaniments(screenData.accompaniments)
-                }, { view.showError() }))
+                }, { t: Throwable -> view.showError() }))
     }
 
 

@@ -30,30 +30,34 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
         accompanimentsList = ArrayList(accompaniments)
 
         currentSelectedPosition = 0
-        view.setAccompanimentList(accompanimentsList)
-        view.showAccompaniment(accompanimentsList[currentSelectedPosition])
+        if (!accompaniments.isEmpty()) {
+            view.setAccompanimentList(accompanimentsList)
+            view.showAccompaniment(accompanimentsList[currentSelectedPosition])
 
-        var shouldShowElement = false
-        for (accompaniment in accompanimentsList) {
-            if (accompaniment.keys != null && accompaniment.keys.dataAvailable) {
-                shouldShowElement = true
-                break
+            var shouldShowElement = false
+            for (accompaniment in accompanimentsList) {
+                if (accompaniment.keys != null && accompaniment.keys.dataAvailable) {
+                    shouldShowElement = true
+                    break
+                }
+
+                if (accompaniment.drums != null && accompaniment.drums.dataAvailable) {
+                    shouldShowElement = true
+                    break
+                }
+
+                if (accompaniment.bass != null && accompaniment.bass.dataAvailable) {
+                    shouldShowElement = true
+                    break
+                }
             }
 
-            if (accompaniment.drums != null && accompaniment.drums.dataAvailable) {
-                shouldShowElement = true
-                break
-            }
+            view.setElementVisibility(shouldShowElement)
 
-            if (accompaniment.bass != null && accompaniment.bass.dataAvailable) {
-                shouldShowElement = true
-                break
-            }
+            checkFileAvailable()
+        } else {
+            view.setElementVisibility(false)
         }
-
-        view.setElementVisibility(shouldShowElement)
-
-        checkFileAvailable()
     }
 
     override fun showAccompaniment(position: Int) {
