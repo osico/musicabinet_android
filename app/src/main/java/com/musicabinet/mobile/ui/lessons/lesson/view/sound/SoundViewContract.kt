@@ -32,6 +32,8 @@ interface SoundViewContract {
 
         fun play()
 
+        fun stop()
+
         fun getSoundsId(): List<String>
     }
 }

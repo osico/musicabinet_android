@@ -74,6 +74,10 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
         isPlaying = isPlaying.not()
     }
 
+    override fun stop() {
+        isPlaying = false
+    }
+
     override fun getSoundsId() = musicListId
 
     private fun checkFileAvailable() {

@@ -79,6 +79,9 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     fun onPause() {
         for (item in musicPlayerList)
             item.stop()
+
+        ivPlay.setImageResource(R.drawable.ic_button_play)
+        presenter.stop()
     }
 
 
