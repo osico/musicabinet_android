@@ -26,5 +26,7 @@ interface InstrumentContract {
 
         fun loadInstrumentList()
 
+        fun unsubscribe()
+
     }
 }

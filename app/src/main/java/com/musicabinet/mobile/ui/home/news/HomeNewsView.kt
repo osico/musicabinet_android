@@ -64,6 +64,10 @@ class HomeNewsView : FrameLayout, HomeNewsContract.View {
         })
     }
 
+    fun onPause() {
+        presenter.unsubscribe()
+    }
+
     override fun showLoading(visible: Boolean) {
         cvLoading.setVisible(visible)
     }

@@ -13,10 +13,12 @@ import kotlinx.android.synthetic.main.activity_home.*
  */
 class HomeActivity : SlideMenuActivity() {
 
+    private val adapter = HomeAdapter(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewPager.adapter = HomeAdapter(this)
+        viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
     }
 
@@ -24,6 +26,12 @@ class HomeActivity : SlideMenuActivity() {
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         return inflater.inflate(R.layout.activity_home, null, false)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        homeVideoView.onPause()
+        adapter.onPause()
     }
 
 }

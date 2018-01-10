@@ -51,4 +51,8 @@ class HomeVideoPresenter(private val repository: MusicabinetRepository,
             view.openVideo(videoItem.dataField.url!!, videoItem.name)
     }
 
+    override fun unsubscribe() {
+        subscriptions.clear()
+    }
+
 }

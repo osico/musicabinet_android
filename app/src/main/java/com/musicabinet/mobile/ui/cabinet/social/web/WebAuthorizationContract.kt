@@ -18,5 +18,7 @@ interface WebAuthorizationContract {
     interface Presenter {
 
         fun shouldLoadUrl(url: String?): Boolean
+
+        fun unsubscribe()
     }
 }

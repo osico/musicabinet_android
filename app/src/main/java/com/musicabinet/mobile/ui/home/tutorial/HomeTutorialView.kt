@@ -68,6 +68,10 @@ class HomeTutorialView : FrameLayout, HomeTutorialContract.View {
         })
     }
 
+    fun onPause() {
+        presenter.unsubscribe()
+    }
+
     override fun showLoading(visible: Boolean) {
         cvLoading.setVisible(visible)
     }

@@ -83,6 +83,7 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
 
         ivPlay.setImageResource(R.drawable.ic_button_play)
         presenter.stop()
+        presenter.unsubscribe()
     }
 
 

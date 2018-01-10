@@ -27,5 +27,7 @@ interface HomeVideoContract {
         fun loadItems()
 
         fun onVideoClick(videoItem: HomeDataElement)
+
+        fun unsubscribe()
     }
 }

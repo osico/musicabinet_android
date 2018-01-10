@@ -146,4 +146,8 @@ class LessonPresenter(private val view: LessonContract.View,
         }
     }
 
+    override fun unsubscribe() {
+        subscriptions.clear()
+    }
+
 }

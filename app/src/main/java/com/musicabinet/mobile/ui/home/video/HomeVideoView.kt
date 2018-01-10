@@ -66,6 +66,10 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View, BaseRecyclerAdapter.O
         })
     }
 
+    fun onPause() {
+        presenter.unsubscribe()
+    }
+
     override fun showLoading(visible: Boolean) {
         cvLoading.setVisible(visible)
     }

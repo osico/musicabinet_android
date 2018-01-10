@@ -36,6 +36,11 @@ class InstrumentActivity : SlideMenuActivity(), InstrumentContract.View, Instrum
         return inflater.inflate(R.layout.activity_instrument, null, false)
     }
 
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
     override fun showLoading(visible: Boolean) {
         progressBar.setVisible(visible)
     }

@@ -46,5 +46,7 @@ interface LessonContract {
         fun selectLessonClick()
 
         fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+
+        fun unsubscribe()
     }
 }

@@ -49,4 +49,8 @@ class HomeTutorialPresenter(private val repository: MusicabinetRepository,
         }
     }
 
+    override fun unsubscribe() {
+        subscriptions.clear()
+    }
+
 }

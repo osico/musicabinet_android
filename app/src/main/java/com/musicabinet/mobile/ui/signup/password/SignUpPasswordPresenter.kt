@@ -31,4 +31,8 @@ class SignUpPasswordPresenter(private val view: SignUpPasswordContract.View,
                 .subscribe({ view.moveToFinishRegistration() }, { view.showError() }))
     }
 
+
+    override fun unsubscribe() {
+        subscriptions.clear()
+    }
 }

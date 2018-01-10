@@ -42,4 +42,7 @@ class WebAuthorizationPresenter(private val view: WebAuthorizationContract.View,
                 }))
     }
 
+    override fun unsubscribe() {
+        subscriptions.clear()
+    }
 }

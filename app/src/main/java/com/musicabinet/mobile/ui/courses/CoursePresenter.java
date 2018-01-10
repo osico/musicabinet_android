@@ -110,4 +110,9 @@ public class CoursePresenter implements CoursesContract.Presenter {
     public void onBuyClick() {
         view.showPaymentDialog();
     }
+
+    @Override
+    public void unsubscribe() {
+        disposable.clear();
+    }
 }

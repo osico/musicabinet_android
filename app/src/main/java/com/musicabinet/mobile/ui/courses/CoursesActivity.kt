@@ -48,6 +48,11 @@ class CoursesActivity : AppCompatActivity(), CoursesContract.View, BaseRecyclerA
         presenter.loadInstrumentMatrix(intent.getStringExtra(INSTRUMENT_ID_ARG))
     }
 
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home)
             onBackPressed()

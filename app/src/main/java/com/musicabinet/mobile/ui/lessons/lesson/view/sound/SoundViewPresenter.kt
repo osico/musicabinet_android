@@ -165,4 +165,8 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
         val file = File(internalDirectory, id)
         return file.exists()
     }
+
+    override fun unsubscribe() {
+        subscriptions.clear()
+    }
 }

@@ -47,6 +47,11 @@ class WebAuthorizationActivity : AppCompatActivity(), WebAuthorizationContract.V
         webView.loadUrl(intent.getStringExtra(URL_ARG))
     }
 
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home)
             onBackPressed()

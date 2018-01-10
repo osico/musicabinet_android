@@ -24,5 +24,7 @@ interface SignUpPasswordContract {
 
         fun registerUser(email: String, name: String, surname: String, password: String,
                          confirmPassword: String)
+
+        fun unsubscribe()
     }
 }

@@ -51,4 +51,8 @@ class CabinetPasswordPresenter(private val repository: MusicabinetRepository,
                 }))
     }
 
+    override fun unsubscribe() {
+        subscriptions.clear()
+    }
+
 }

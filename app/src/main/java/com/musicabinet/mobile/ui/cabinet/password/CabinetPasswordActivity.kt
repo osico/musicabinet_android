@@ -56,6 +56,11 @@ class CabinetPasswordActivity : ActivityWithBackButton(), CabinetPasswordContrac
         return inflater.inflate(R.layout.activity_cabinet_password, null, false)
     }
 
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
     override fun showCompanyIcon() = true
 
     override fun enableNextButton(enable: Boolean) {

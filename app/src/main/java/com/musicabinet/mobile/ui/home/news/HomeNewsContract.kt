@@ -24,5 +24,7 @@ interface HomeNewsContract {
 
         fun loadItems()
 
+        fun unsubscribe()
+
     }
 }

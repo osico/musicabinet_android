@@ -28,5 +28,7 @@ interface CoursesContract {
 
         fun onBuyClick()
 
+        fun unsubscribe()
+
     }
 }

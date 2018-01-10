@@ -50,6 +50,11 @@ class SignUpPasswordActivity : ActivityWithBackButton(), SignUpPasswordContract.
         edConfirmPassword.disableErrorOnType(ilConfirmPassword)
     }
 
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
     override fun inflateLayout(): View {
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 

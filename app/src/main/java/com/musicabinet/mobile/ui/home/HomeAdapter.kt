@@ -15,13 +15,16 @@ import com.musicabinet.mobile.ui.home.tutorial.HomeTutorialView
 
 class HomeAdapter(private val context: Context) : PagerAdapter() {
 
+    private lateinit var homeNewsView: HomeNewsView
+    private lateinit var homeTutorialView: HomeTutorialView
+
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         if (position == 0) {
-            val homeNewsView = HomeNewsView(context)
+            homeNewsView = HomeNewsView(context)
             container.addView(homeNewsView)
             return homeNewsView
         } else {
-            val homeTutorialView = HomeTutorialView(context)
+            homeTutorialView = HomeTutorialView(context)
             container.addView(homeTutorialView)
             return homeTutorialView
         }
@@ -34,11 +37,16 @@ class HomeAdapter(private val context: Context) : PagerAdapter() {
     override fun getCount() = 2
 
     override fun isViewFromObject(view: View, `object`: Any) = view === `object`
-    
+
     override fun getPageTitle(position: Int): CharSequence? {
         return if (position == 0)
             context.getString(R.string.news_tab)
         else
             context.getString(R.string.tutorial_tab)
+    }
+
+    fun onPause() {
+        homeNewsView.onPause()
+        homeTutorialView.onPause()
     }
 }

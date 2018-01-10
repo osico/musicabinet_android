@@ -24,5 +24,7 @@ interface HomeTutorialContract {
 
         fun loadItems()
 
+        fun unsubscribe()
+
     }
 }

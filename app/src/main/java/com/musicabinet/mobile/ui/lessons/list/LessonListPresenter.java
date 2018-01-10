@@ -116,4 +116,9 @@ public class LessonListPresenter implements LessonListContract.Presenter {
         } else
             view.showAuthorizedError();
     }
+
+    @Override
+    public void unsubscribe() {
+        disposable.clear();
+    }
 }

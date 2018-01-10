@@ -28,5 +28,7 @@ interface CabinetPasswordContract {
         fun forgotPassword()
 
         fun loginUser(email: String, password: String)
+
+        fun unsubscribe()
     }
 }

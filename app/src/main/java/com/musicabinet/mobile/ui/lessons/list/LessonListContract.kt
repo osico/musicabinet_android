@@ -38,5 +38,7 @@ interface LessonListContract {
         fun buyLesson(lessonId: String)
 
         fun onLessonClick(item: LessonItem)
+
+        fun unsubscribe()
     }
 }

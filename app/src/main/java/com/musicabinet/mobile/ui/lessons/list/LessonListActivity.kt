@@ -54,6 +54,11 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
         presenter.getFilters(intent.getStringExtra(INSTRUMENT_ID_ARG))
     }
 
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home)
             onBackPressed()
