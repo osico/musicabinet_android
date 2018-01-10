@@ -20,7 +20,7 @@ abstract class BaseRecyclerAdapter<VH : RecyclerView.ViewHolder, T>(items: List<
 
     private val clickListener = View.OnClickListener { view ->
         val position: Int = view.tag as Int
-        val item = items.get(position)
+        val item = this.items.get(position)
         onItemClickListener?.onItemClick(item)
         onItemClickWithPositionListener?.onItemClick(item, position)
     }
