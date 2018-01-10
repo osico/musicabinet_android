@@ -4,12 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.ui.ActionBarActivity
 import com.musicabinet.mobile.ui.view.LoadingDialog
 import kotlinx.android.synthetic.main.activity_web.*
 import org.jetbrains.anko.toast
@@ -17,7 +16,7 @@ import org.jetbrains.anko.toast
 /**
  * @author Kirchhoff-
  */
-class WebAuthorizationActivity : AppCompatActivity(), WebAuthorizationContract.View {
+class WebAuthorizationActivity : ActionBarActivity(), WebAuthorizationContract.View {
 
     companion object {
         const val URL_ARG = "URL_ARG"
@@ -38,9 +37,6 @@ class WebAuthorizationActivity : AppCompatActivity(), WebAuthorizationContract.V
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
 
-        supportActionBar?.setHomeButtonEnabled(true)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         webView.settings.javaScriptEnabled = true
         webView.clearCache(true)
         webView.webViewClient = MusicabinetWebClient(presenter)
@@ -51,14 +47,6 @@ class WebAuthorizationActivity : AppCompatActivity(), WebAuthorizationContract.V
         super.onPause()
         presenter.unsubscribe()
     }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == android.R.id.home)
-            onBackPressed()
-
-        return super.onOptionsItemSelected(item)
-    }
-
 
     override fun showLoading(show: Boolean) {
         loadingDialog?.dismiss()

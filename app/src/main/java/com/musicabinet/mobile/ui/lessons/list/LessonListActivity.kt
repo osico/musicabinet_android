@@ -2,8 +2,6 @@ package com.musicabinet.mobile.ui.lessons.list
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.createPaymentDialog
@@ -11,6 +9,7 @@ import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.matrix.LessonItem
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
+import com.musicabinet.mobile.ui.ActionBarActivity
 import com.musicabinet.mobile.ui.lessons.lesson.LessonActivity
 import com.musicabinet.mobile.ui.lessons.list.pager.LessonListPagerAdapter
 import com.musicabinet.mobile.ui.lessons.list.pager.LessonListView
@@ -22,7 +21,7 @@ import org.jetbrains.anko.toast
 /**
  * @author Kirchhoff-
  */
-class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonListView.LessonBuyButtonListener {
+class LessonListActivity : ActionBarActivity(), LessonListContract.View, LessonListView.LessonBuyButtonListener {
 
     companion object {
         const val INSTRUMENT_COURSE_ARG = "INSTRUMENT_COURSE_ARG"
@@ -43,8 +42,6 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
         instrumentCourse = intent
                 .getSerializableExtra(LessonListActivity.INSTRUMENT_COURSE_ARG) as InstrumentCourse
 
-        supportActionBar?.setHomeButtonEnabled(true)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = intent.getStringExtra(INSTRUMENT_NAME_ARG)
 
         lessonLayout.setVisible(false)
@@ -57,13 +54,6 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
     override fun onPause() {
         super.onPause()
         presenter.unsubscribe()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == android.R.id.home)
-            onBackPressed()
-
-        return super.onOptionsItemSelected(item)
     }
 
     override fun showLoading(visible: Boolean) {
