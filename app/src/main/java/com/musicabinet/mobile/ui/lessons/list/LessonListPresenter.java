@@ -11,6 +11,7 @@ import com.musicabinet.mobile.repository.keyvalue.MusicabinetKeyValueStorage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -62,6 +63,7 @@ public class LessonListPresenter implements LessonListContract.Presenter {
                     public List<InstrumentLessonList> apply(InstrumentFilterResponse response) throws Exception {
                         if (!response.getFilterList().isEmpty()) {
                             List<InstrumentLessonList> resultList = new ArrayList<>();
+                            Collections.sort(response.getFilterList());
 
                             for (int i = 0; i < response.getFilterList().size(); i++) {
 
@@ -70,7 +72,7 @@ public class LessonListPresenter implements LessonListContract.Presenter {
                                 for (int j = 0; j < instrumentCourse.getLessonGroups().size(); j++) {
                                     InstrumentGroup instrumentGroup = instrumentCourse.getLessonGroups().get(j);
                                     if (instrumentGroup.isContainsFilter(response.getFilterList().get(i).getId()))
-                                        filteredInstrumentGroup.add(instrumentGroup);
+                                        filteredInstrumentGroup.add(instrumentGroup.filteredInstrumentGroup(response.getFilterList().get(i).getId()));
                                 }
 
                                 resultList.add(new InstrumentLessonList(response.getFilterList().get(i).getName(),

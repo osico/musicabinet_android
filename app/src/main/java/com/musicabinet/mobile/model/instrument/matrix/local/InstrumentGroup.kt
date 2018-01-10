@@ -28,4 +28,21 @@ data class InstrumentGroup(val lessonList: List<LessonItem>, val module: Modules
         return false
     }
 
+
+    fun filteredInstrumentGroup(filterId: String): InstrumentGroup {
+        val bufLessonList = ArrayList<LessonItem>()
+
+        for (lesson in lessonList) {
+
+            for (program in lesson.programs) {
+                if (program == filterId)
+                    bufLessonList.add(lesson)
+            }
+
+        }
+
+
+        return InstrumentGroup(bufLessonList, module)
+    }
+
 }
