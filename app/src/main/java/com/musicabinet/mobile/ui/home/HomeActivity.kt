@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ class HomeActivity : SlideMenuActivity() {
         tabLayout.setupWithViewPager(viewPager)
     }
 
+    @SuppressLint("InflateParams")
     override fun inflateLayout(): View {
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 

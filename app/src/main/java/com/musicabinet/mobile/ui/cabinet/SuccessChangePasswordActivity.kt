@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.cabinet
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.musicabinet.mobile.ui.ActivityWithBackButton
  */
 class SuccessChangePasswordActivity : ActivityWithBackButton() {
 
+    @SuppressLint("InflateParams")
     override fun inflateLayout(): View {
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 

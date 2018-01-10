@@ -43,9 +43,7 @@ class HomeTutorialPresenter(private val repository: MusicabinetRepository,
                 } else {
                     view.showHomeTutorialError()
                 }
-            }, { t: Throwable? ->
-                view.showHomeTutorialError()
-            }))
+            }, { view.showHomeTutorialError() }))
         }
     }
 

@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.cabinet.password
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -50,6 +51,7 @@ class CabinetPasswordActivity : ActivityWithBackButton(), CabinetPasswordContrac
         }
     }
 
+    @SuppressLint("InflateParams")
     override fun inflateLayout(): View {
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 

@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.instrument
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -30,6 +31,7 @@ class InstrumentActivity : SlideMenuActivity(), InstrumentContract.View, Instrum
         presenter.loadInstrumentList()
     }
 
+    @SuppressLint("InflateParams")
     override fun inflateLayout(): View {
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 

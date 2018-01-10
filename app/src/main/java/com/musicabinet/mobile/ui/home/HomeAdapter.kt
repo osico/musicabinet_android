@@ -19,14 +19,14 @@ class HomeAdapter(private val context: Context) : PagerAdapter() {
     private lateinit var homeTutorialView: HomeTutorialView
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        if (position == 0) {
+        return if (position == 0) {
             homeNewsView = HomeNewsView(context)
             container.addView(homeNewsView)
-            return homeNewsView
+            homeNewsView
         } else {
             homeTutorialView = HomeTutorialView(context)
             container.addView(homeTutorialView)
-            return homeTutorialView
+            homeTutorialView
         }
     }
 

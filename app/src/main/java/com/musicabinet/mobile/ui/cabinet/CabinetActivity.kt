@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.cabinet
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -35,12 +36,12 @@ class CabinetActivity : SlideMenuActivity() {
         }
     }
 
+    @SuppressLint("InflateParams")
     override fun inflateLayout(): View {
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         return inflater.inflate(R.layout.activity_cabinet, null, false)
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

@@ -18,7 +18,6 @@ class HomeNewsPresenter(private val repository: MusicabinetRepository,
     private var homeNewsLoaded = 0
     private var homeNewsMaxSize = 1
 
-
     override fun loadItems() {
 
         if (homeNewsLoaded < homeNewsMaxSize) {
@@ -42,9 +41,7 @@ class HomeNewsPresenter(private val repository: MusicabinetRepository,
                 } else {
                     view.showHomeNewsError()
                 }
-            }, { t: Throwable? ->
-                view.showHomeNewsError()
-            }))
+            }, { view.showHomeNewsError() }))
         }
     }
 

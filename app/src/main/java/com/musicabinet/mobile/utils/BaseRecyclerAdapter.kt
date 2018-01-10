@@ -20,7 +20,7 @@ abstract class BaseRecyclerAdapter<VH : RecyclerView.ViewHolder, T>(items: List<
 
     private val clickListener = View.OnClickListener { view ->
         val position: Int = view.tag as Int
-        val item = this.items.get(position)
+        val item = this.items[position]
         onItemClickListener?.onItemClick(item)
         onItemClickWithPositionListener?.onItemClick(item, position)
     }
@@ -31,12 +31,6 @@ abstract class BaseRecyclerAdapter<VH : RecyclerView.ViewHolder, T>(items: List<
 
     fun add(value: T) {
         items.add(value)
-        notifyDataSetChanged()
-    }
-
-    fun changeDataSet(values: List<T>) {
-        items.clear()
-        items.addAll(values)
         notifyDataSetChanged()
     }
 
@@ -74,11 +68,11 @@ abstract class BaseRecyclerAdapter<VH : RecyclerView.ViewHolder, T>(items: List<
 
     fun getDataSet() = items
 
-    interface OnItemClickListener<T> {
+    interface OnItemClickListener<in T> {
         fun onItemClick(item: T)
     }
 
-    interface OnItemClickWithPositionListener<T> {
+    interface OnItemClickWithPositionListener<in T> {
         fun onItemClick(item: T, position: Int)
     }
 }

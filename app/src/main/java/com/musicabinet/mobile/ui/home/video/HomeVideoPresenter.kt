@@ -40,9 +40,7 @@ class HomeVideoPresenter(private val repository: MusicabinetRepository,
                 } else {
                     view.showHomeVideoError()
                 }
-            }, { t: Throwable? ->
-                view.showHomeVideoError()
-            }))
+            }, { view.showHomeVideoError() }))
         }
     }
 

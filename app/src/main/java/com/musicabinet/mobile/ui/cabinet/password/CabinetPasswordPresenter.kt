@@ -32,9 +32,7 @@ class CabinetPasswordPresenter(private val repository: MusicabinetRepository,
                 .doOnTerminate { view.showLoading(false) }
                 .subscribe({
                     getUserProfile()
-                }, { t: Throwable? ->
-                    view.showEmailError()
-                }))
+                }, { view.showEmailError() }))
 
     }
 
@@ -46,9 +44,7 @@ class CabinetPasswordPresenter(private val repository: MusicabinetRepository,
                 .subscribe({ profile: UserProfile ->
                     storage.saveUserInformation(profile)
                     view.moveToHomeScreen()
-                }, { t: Throwable? ->
-                    view.showEmailError()
-                }))
+                }, { view.showEmailError() }))
     }
 
     override fun unsubscribe() {

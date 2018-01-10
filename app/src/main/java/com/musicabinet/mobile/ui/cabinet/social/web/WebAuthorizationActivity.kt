@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.cabinet.social.web
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -33,6 +34,7 @@ class WebAuthorizationActivity : ActionBarActivity(), WebAuthorizationContract.V
 
     private var loadingDialog: LoadingDialog? = null
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)

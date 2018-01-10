@@ -39,10 +39,7 @@ class InstrumentPresenter(private val repository: MusicabinetRepository,
                         view.showInstrumentList(true)
                         view.showPageIndicator(true)
                     }
-                },
-                        { t: Throwable? ->
-                            view.showError(true)
-                        }))
+                }, { view.showError(true) }))
     }
 
     override fun unsubscribe() {

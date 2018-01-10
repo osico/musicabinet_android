@@ -39,7 +39,7 @@ fun TextView.setTextFromResource(@StringRes stringId: Int, formatArgs: Any) =
 fun EditText.getString() = text.toString()
 
 fun TextView.displayHtmlText(text: String) {
-    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         setText(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY))
     } else {
         setText(Html.fromHtml(text))

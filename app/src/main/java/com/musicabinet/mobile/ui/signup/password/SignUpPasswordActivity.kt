@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.signup.password
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -55,6 +56,7 @@ class SignUpPasswordActivity : ActivityWithBackButton(), SignUpPasswordContract.
         presenter.unsubscribe()
     }
 
+    @SuppressLint("InflateParams")
     override fun inflateLayout(): View {
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 

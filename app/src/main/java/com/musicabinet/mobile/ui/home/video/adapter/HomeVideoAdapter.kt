@@ -14,7 +14,9 @@ import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 class HomeVideoAdapter(items: List<HomeDataElement>, private var shouldShowPaginationProgress: Boolean = true)
     : BaseRecyclerAdapter<RecyclerView.ViewHolder, HomeDataElement>(items) {
 
-    private val ITEM_FOOTER = 1
+    companion object {
+        const val ITEM_FOOTER = 1
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -31,8 +33,7 @@ class HomeVideoAdapter(items: List<HomeDataElement>, private var shouldShowPagin
 
         if (holder is HomeVideoViewHolder)
             holder.bind(getItem(position))
-        else if (holder is PaginationProgressViewHolder)
-            holder.bind(shouldShowPaginationProgress)
+        else (holder as? PaginationProgressViewHolder)?.bind(shouldShowPaginationProgress)
 
     }
 

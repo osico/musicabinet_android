@@ -25,7 +25,9 @@ import org.jetbrains.anko.toast
  */
 abstract class SlideMenuActivity : AppCompatActivity(), SlideMenuContract.View {
 
-    private val OPEN_SCREEN_DELAY = 200L
+    companion object {
+        const val OPEN_SCREEN_DELAY = 200L
+    }
 
     private lateinit var presenter: SlideMenuContract.Presenter
     private val handler = Handler()

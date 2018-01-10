@@ -61,7 +61,7 @@ public class CoursePresenter implements CoursesContract.Presenter {
                     @Override
                     public List<InstrumentCourse> apply(InstrumentMatrixResponse response) throws Exception {
 
-                        List<InstrumentCourse> instrumentCourseList = new ArrayList();
+                        List<InstrumentCourse> instrumentCourseList = new ArrayList<>();
 
                         List<LessonCourse> lessonCourseList = response.getCourses();
                         for (int i = 0; i < lessonCourseList.size(); i++) {

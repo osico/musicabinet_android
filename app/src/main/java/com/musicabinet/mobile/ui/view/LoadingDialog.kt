@@ -21,6 +21,6 @@ class LoadingDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(context!!, R.style.LoadingDialog)
                 .setView(View.inflate(activity, R.layout.dialog_loading, null))
-                .create();
+                .create()
     }
 }

@@ -73,7 +73,7 @@ fun Activity.createPaymentDialog() {
             0,
             title.length,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-    );
+    )
     val alertDialog = AlertDialog.Builder(this)
             .setTitle(ssBuilder)
             .setMessage(R.string.buy_dialog_text)

@@ -14,7 +14,9 @@ import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 class HomeTutorialAdapter(items: List<HomeDataElement>, private var shouldShowPaginationProgress: Boolean = true)
     : BaseRecyclerAdapter<RecyclerView.ViewHolder, HomeDataElement>(items) {
 
-    private val ITEM_FOOTER = 1
+    companion object {
+        const val ITEM_FOOTER = 1
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == ITEM_FOOTER) {
@@ -31,8 +33,7 @@ class HomeTutorialAdapter(items: List<HomeDataElement>, private var shouldShowPa
 
         if (holder is HomeTutorialViewHolder)
             holder.bind(getItem(position))
-        else if (holder is PaginationProgressViewHolder)
-            holder.bind(shouldShowPaginationProgress)
+        else (holder as? PaginationProgressViewHolder)?.bind(shouldShowPaginationProgress)
     }
 
     override fun getItemCount(): Int {

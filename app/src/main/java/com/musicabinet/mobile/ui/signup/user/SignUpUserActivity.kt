@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.signup.user
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -38,6 +39,7 @@ class SignUpUserActivity : ActivityWithBackButton(), SignUpUserContract.View {
         }
     }
 
+    @SuppressLint("InflateParams")
     override fun inflateLayout(): View {
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
