@@ -26,6 +26,7 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
 
     companion object {
         const val INSTRUMENT_COURSE_ARG = "INSTRUMENT_COURSE_ARG"
+        const val INSTRUMENT_NAME_ARG = "INSTRUMENT_NAME_ARG"
         const val INSTRUMENT_ID_ARG = "INSTRUMENT_ID_ARG"
     }
 
@@ -44,7 +45,7 @@ class LessonListActivity : AppCompatActivity(), LessonListContract.View, LessonL
 
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        title = instrumentCourse.name
+        title = intent.getStringExtra(INSTRUMENT_NAME_ARG)
 
         lessonLayout.setVisible(false)
 

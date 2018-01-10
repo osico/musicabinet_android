@@ -93,6 +93,7 @@ class CoursesActivity : AppCompatActivity(), CoursesContract.View, BaseRecyclerA
         val intent = Intent(this, LessonListActivity::class.java)
         intent.putExtra(LessonListActivity.INSTRUMENT_COURSE_ARG, item)
         intent.putExtra(LessonListActivity.INSTRUMENT_ID_ARG, this.intent.getStringExtra(INSTRUMENT_ID_ARG))
+        intent.putExtra(LessonListActivity.INSTRUMENT_NAME_ARG, this.intent.getStringExtra(INSTRUMENT_NAME_ARG))
         startActivity(intent)
     }
 
