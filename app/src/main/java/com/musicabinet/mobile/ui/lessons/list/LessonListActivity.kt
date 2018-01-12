@@ -39,8 +39,7 @@ class LessonListActivity : ActionBarActivity(), LessonListContract.View, LessonL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lesson_list)
 
-        instrumentCourse = intent
-                .getSerializableExtra(LessonListActivity.INSTRUMENT_COURSE_ARG) as InstrumentCourse
+        instrumentCourse = intent.getParcelableExtra(INSTRUMENT_COURSE_ARG)
 
         title = intent.getStringExtra(INSTRUMENT_NAME_ARG)
 

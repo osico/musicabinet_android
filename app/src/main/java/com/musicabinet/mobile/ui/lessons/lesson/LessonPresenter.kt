@@ -28,7 +28,7 @@ class LessonPresenter(private val view: LessonContract.View,
     }
 
     private val subscriptions = CompositeDisposable()
-    private var lessonList: List<Lesson>? = null
+    private var lessonList: ArrayList<Lesson>? = null
     private lateinit var currentLessonId: String
 
     override fun getLessonGroup(id: String) {

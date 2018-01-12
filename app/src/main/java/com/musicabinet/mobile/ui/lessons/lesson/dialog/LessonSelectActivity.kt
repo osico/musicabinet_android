@@ -30,7 +30,7 @@ class LessonSelectActivity : AppCompatActivity(), LessonSelectContract.View {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_lesson_select)
 
-        val lessonList: List<Lesson> = intent.getSerializableExtra(LESSON_LIST_ARG) as List<Lesson>
+        val lessonList: List<Lesson> = intent.getParcelableArrayListExtra(LESSON_LIST_ARG)
         val id = intent.getStringExtra(LESSON_ID_ARG)
         val adapter = LessonSelectAdapter(lessonList, id)
         recyclerView.layoutManager = LinearLayoutManager(this,

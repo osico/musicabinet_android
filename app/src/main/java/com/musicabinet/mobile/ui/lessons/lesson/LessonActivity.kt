@@ -21,7 +21,6 @@ import com.musicabinet.mobile.ui.view.metronome.MetronomeView
 import kotlinx.android.synthetic.main.activity_lesson.*
 import kotlinx.android.synthetic.main.view_lesson.*
 import org.jetbrains.anko.toast
-import java.io.Serializable
 
 /**
  * @author Kirchhoff-
@@ -66,10 +65,10 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
         toast("Error")
     }
 
-    override fun showSelectLesson(lessonList: List<Lesson>, lessonId: String, requestCode: Int,
+    override fun showSelectLesson(lessonList: ArrayList<Lesson>, lessonId: String, requestCode: Int,
                                   resultId: String, resultName: String) {
         val intent = Intent(this, LessonSelectActivity::class.java)
-        intent.putExtra(LessonSelectActivity.LESSON_LIST_ARG, lessonList as Serializable)
+        intent.putParcelableArrayListExtra(LessonSelectActivity.LESSON_LIST_ARG, lessonList)
         intent.putExtra(LessonSelectActivity.LESSON_ID_ARG, lessonId)
         intent.putExtra(LessonSelectActivity.LESSON_ID_RESULT_ARG, resultId)
         intent.putExtra(LessonSelectActivity.LESSON_NAME_RESULT_ARG, resultName)
@@ -136,7 +135,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
                 ViewGroup.LayoutParams.MATCH_PARENT, true)
         metronomePopup!!.animationStyle = android.R.style.Animation_Dialog
         metronomePopup!!.isOutsideTouchable
-        metronomePopup!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        metronomePopup!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         metronomePopup!!.showAtLocation(ivMetronome, Gravity.END,
                 resources.getDimensionPixelSize(R.dimen.metronome_popup_x_margin),
                 -resources.getDimensionPixelSize(R.dimen.metronome_popup_y_margin))

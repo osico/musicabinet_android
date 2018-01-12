@@ -1,13 +1,17 @@
 package com.musicabinet.mobile.model.instrument.matrix.local
 
+import android.annotation.SuppressLint
+import android.os.Parcelable
 import com.musicabinet.mobile.model.instrument.matrix.LessonItem
 import com.musicabinet.mobile.model.instrument.matrix.Modules
-import java.io.Serializable
+import kotlinx.android.parcel.Parcelize
 
 /**
  * @author Kirchhoff-
  */
-data class InstrumentGroup(val lessonList: List<LessonItem>, val module: Modules) : Serializable {
+@SuppressLint("ParcelCreator")
+@Parcelize
+data class InstrumentGroup(val lessonList: List<LessonItem>, val module: Modules) : Parcelable {
 
     fun isContainsFilter(filterId: String): Boolean {
         if (lessonList.isEmpty())

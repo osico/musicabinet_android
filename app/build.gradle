@@ -22,6 +22,10 @@ android {
         buildConfigField "String", "API_ENDPOINT", '"https://api.musicabinet.com"'
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
     buildTypes {
 
         debug {
