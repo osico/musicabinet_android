@@ -1,17 +1,19 @@
 package com.musicabinet.mobile.ui.splash
 
+import com.musicabinet.archmvp.base.BaseContract
+
 /**
  * @author Kirchhoff-
  */
 interface SplashContract {
 
-    interface View {
+    interface View : BaseContract.View {
 
         fun moveToHome()
 
     }
 
-    interface Presenter {
+    interface Presenter : BaseContract.Presenter<SplashContract.View> {
 
         fun subscribe()
 

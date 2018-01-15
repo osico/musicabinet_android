@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.splash
 
+import com.musicabinet.archmvp.base.BasePresenter
 import com.musicabinet.mobile.api.ApiFactory
 import com.musicabinet.mobile.model.profile.UserProfile
 import com.musicabinet.mobile.repository.MusicabinetRepository
@@ -11,8 +12,8 @@ import io.reactivex.disposables.CompositeDisposable
  * @author Kirchhoff-
  */
 class SplashPresenter(private val repository: MusicabinetRepository,
-                      private val view: SplashContract.View,
-                      private val storage: KeyValueStorage) : SplashContract.Presenter {
+                      private val storage: KeyValueStorage) : BasePresenter<SplashContract.View>(),
+        SplashContract.Presenter {
 
     private val subscriptions = CompositeDisposable()
 

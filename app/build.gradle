@@ -49,6 +49,8 @@ android {
 }
 
 dependencies {
+    //Module
+    compile project(path: ':archmvp')
     //UI
     implementation libraries.supportAppCompat
     implementation libraries.supportRecyclerView
