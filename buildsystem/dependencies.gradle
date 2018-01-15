@@ -15,7 +15,7 @@ ext.versions = [
         ankoVersion        : '0.10.1',
 
         //UI
-        supportVersion     : '27.0.0',
+        supportVersion     : '27.0.2',
         constraintLayout   : '1.0.2',
         pageIndicatorView  : '0.2.0',
         mkLoader           : '1.4.0',
