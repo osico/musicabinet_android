@@ -2,6 +2,7 @@ package com.musicabinet.mobile.ui.lessons.lesson.view.count
 
 import android.animation.Animator
 import android.animation.ValueAnimator
+import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Canvas
@@ -102,7 +103,7 @@ class ProgressView : View {
     }
 
     private fun showProgressDialog() {
-        if (shouldShowDialog) {
+        if (shouldShowDialog && (context is Activity && !(context as Activity).isFinishing)) {
             val alertDialog = AlertDialog.Builder(context, R.style.ProgressDialogTheme)
                     .setMessage(R.string.progress_dialog_text)
                     .setPositiveButton(android.R.string.ok, null)
