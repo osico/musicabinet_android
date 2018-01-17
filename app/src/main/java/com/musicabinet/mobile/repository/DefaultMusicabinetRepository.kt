@@ -14,6 +14,8 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
     private const val HOME_VIDEO_ID = "1eb9efe2-1428-476a-a69c-46c1cebb9dad"
     private const val HOME_NEWS_ID = "1eb9efe2-1428-476a-a69c-46c1cebb9dab"
     private const val HOME_TUTORIALS_ID = "1eb9efe2-1428-476a-a69c-46c1cebb9daa"
+    private const val HOME_SORT_FIELD = "el.sortOrder"
+    private const val HOME_SORT_DIR = "ASC"
     private const val REQUEST_ITEM_COUNT = 5
 
     private const val LOGIN_TYPE_EMAIL = "email"
@@ -25,13 +27,16 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
     private val LESSON_UPDATE_PROGRESS = LessonProgress(30000, false)
 
     override fun getHomeNews(start: Int) =
-            ApiFactory.service.getHomeItems(HOME_NEWS_ID, true, start, REQUEST_ITEM_COUNT)
+            ApiFactory.service.getHomeItems(HOME_NEWS_ID, true, start, REQUEST_ITEM_COUNT,
+                    HOME_SORT_FIELD, HOME_SORT_DIR)
 
     override fun getHomeTutorial(start: Int) =
-            ApiFactory.service.getHomeItems(HOME_TUTORIALS_ID, true, start, REQUEST_ITEM_COUNT)
+            ApiFactory.service.getHomeItems(HOME_TUTORIALS_ID, true, start, REQUEST_ITEM_COUNT,
+                    HOME_SORT_FIELD, HOME_SORT_DIR)
 
     override fun getHomeVideo(start: Int) =
-            ApiFactory.service.getHomeItems(HOME_VIDEO_ID, true, start, REQUEST_ITEM_COUNT)
+            ApiFactory.service.getHomeItems(HOME_VIDEO_ID, true, start, REQUEST_ITEM_COUNT,
+                    HOME_SORT_FIELD, HOME_SORT_DIR)
 
     override fun getInstrumentList() =
             ApiFactory.service.getInstrumentList()

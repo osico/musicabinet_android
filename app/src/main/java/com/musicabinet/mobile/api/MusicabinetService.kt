@@ -22,8 +22,12 @@ import retrofit2.http.*
 interface MusicabinetService {
 
     @GET("/platform/api/content/element")
-    fun getHomeItems(@Query("sectionIds") id: String, @Query("active") active: Boolean,
-                     @Query("start") start: Int, @Query("count") count: Int): Observable<HomeData>
+    fun getHomeItems(@Query("sectionIds") id: String,
+                     @Query("active") active: Boolean,
+                     @Query("start") start: Int,
+                     @Query("count") count: Int,
+                     @Query("sortField") sortField: String,
+                     @Query("sortDir") sortDir: String): Observable<HomeData>
 
     @GET("/api/instrument")
     fun getInstrumentList(): Observable<InstrumentData>
