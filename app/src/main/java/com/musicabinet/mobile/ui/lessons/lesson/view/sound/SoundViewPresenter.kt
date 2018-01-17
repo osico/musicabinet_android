@@ -89,11 +89,11 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
         musicListId = ArrayList()
 
         //Check is data is available
-        if (accompaniment.bass != null && accompaniment.bass.dataAvailable)
-            musicListId.add(accompaniment.bass.id)
-
         if (accompaniment.drums != null && accompaniment.drums.dataAvailable)
             musicListId.add(accompaniment.drums.id)
+
+        if (accompaniment.bass != null && accompaniment.bass.dataAvailable)
+            musicListId.add(accompaniment.bass.id)
 
         if (accompaniment.keys != null && accompaniment.keys.dataAvailable)
             musicListId.add(accompaniment.keys.id)
