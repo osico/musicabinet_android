@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_weight="4"
+    android:orientation="horizontal">
 
-</android.support.constraint.ConstraintLayout>
+    <com.musicabinet.mobile.ui.lessons.lesson.view.guide.element.GuideElementView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <com.musicabinet.mobile.ui.lessons.lesson.view.guide.element.GuideElementView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <com.musicabinet.mobile.ui.lessons.lesson.view.guide.element.GuideElementView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <com.musicabinet.mobile.ui.lessons.lesson.view.guide.element.GuideElementView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+</LinearLayout>

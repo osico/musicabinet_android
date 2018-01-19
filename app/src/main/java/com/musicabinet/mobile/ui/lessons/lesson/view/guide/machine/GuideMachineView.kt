@@ -1,7 +1,7 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.guide.machine
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
+import android.support.v4.widget.NestedScrollView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.musicabinet.mobile.R
@@ -9,7 +9,7 @@ import com.musicabinet.mobile.R
 /**
  * @author Kirchhoff-
  */
-class GuideMachineView : ConstraintLayout, GuideMachineContract.View {
+class GuideMachineView : NestedScrollView, GuideMachineContract.View {
 
     private val presenter = GuideMachinePresenter(this)
 
