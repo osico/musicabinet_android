@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.ui.lessons.lesson.view.guide
+package com.musicabinet.mobile.ui.lessons.lesson.view.guide.element
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
@@ -9,7 +9,9 @@ import com.musicabinet.mobile.R
 /**
  * @author Kirchhoff-
  */
-class GuideElementView : ConstraintLayout {
+class GuideElementView : ConstraintLayout, GuideElementContract.View {
+
+    private val presenter = GuideElementPresenter(this)
 
     constructor(context: Context) : super(context) {
         init()
