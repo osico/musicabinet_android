@@ -8,19 +8,25 @@ import com.musicabinet.mobile.R
 import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
+import com.musicabinet.mobile.ui.lessons.lesson.view.guide.machine.GuideMachineView
 import com.musicabinet.mobile.ui.lessons.lesson.view.lesson.LessonView
 import com.musicabinet.mobile.ui.lessons.lesson.view.method.MethodView
 
 /**
  * @author Kirchhoff-
  */
-class LessonAdapter(private val context: Context) : PagerAdapter() {
+class LessonAdapter(private val context: Context, private val hasGuideMachine: Boolean) : PagerAdapter() {
 
     private var lessonView: LessonView? = null
     private var methodView: MethodView? = null
+    private var guideMachineView: GuideMachineView? = null
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        if (position == 0) {
+        if (position == 0 && hasGuideMachine) {
+            guideMachineView = GuideMachineView(context)
+            container.addView(guideMachineView)
+            return guideMachineView!!
+        } else if (position == 0 && !hasGuideMachine) {
             lessonView = LessonView(context)
             container.addView(lessonView)
             return lessonView!!

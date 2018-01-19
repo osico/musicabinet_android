@@ -82,15 +82,17 @@ class LessonPresenter(private val view: LessonContract.View,
                 })
                 .subscribe({ screenData: LessonScreenData ->
                     view.showSuccess()
-                    view.showMethod(screenData.methodList)
                     view.showLessonTitle(screenData.title)
                     view.setLessonTime(screenData.spendTime, screenData.id)
-                    view.showAccompaniments(screenData.accompaniments)
 
                     if (screenData.hasGuideMachine)
                         view.showGuideMachine()
                     else
                         view.showLessonImages(screenData.lessonImages)
+
+                    //Should be always after .showGuideMachine or .showLessonImages
+                    view.showMethod(screenData.methodList)
+                    view.showAccompaniments(screenData.accompaniments)
 
                 }, { t: Throwable -> view.showError() }))
     }
@@ -133,15 +135,17 @@ class LessonPresenter(private val view: LessonContract.View,
                 })
                 .subscribe({ screenData: LessonScreenData ->
                     view.showSuccess()
-                    view.showMethod(screenData.methodList)
                     view.showLessonTitle(screenData.title)
                     view.setLessonTime(screenData.spendTime, screenData.id)
-                    view.showAccompaniments(screenData.accompaniments)
 
                     if (screenData.hasGuideMachine)
                         view.showGuideMachine()
                     else
                         view.showLessonImages(screenData.lessonImages)
+
+                    //Should be always after .showGuideMachine or .showLessonImages
+                    view.showMethod(screenData.methodList)
+                    view.showAccompaniments(screenData.accompaniments)
 
                 }, { t: Throwable -> view.showError() }))
     }

@@ -32,8 +32,8 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
     }
 
     private lateinit var presenter: LessonContract.Presenter
-    private val adapter = LessonAdapter(this)
     private var metronomePopup: PopupWindow? = null
+    private lateinit var adapter: LessonAdapter
     private lateinit var metronomeView: MetronomeView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +55,8 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
 
         metronomeView = MetronomeView(this)
         metronomeView.setOnMetronomeStatusChange(this)
+
+        tabLayout.setupWithViewPager(viewPager)
     }
 
     override fun showSuccess() {
@@ -89,12 +91,12 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
     }
 
     override fun showMethod(methodList: List<MethodItem>) {
-        viewPager.adapter = adapter
-        tabLayout.setupWithViewPager(viewPager)
         adapter.setMethodList(methodList)
     }
 
     override fun showLessonImages(lessonImagesList: List<LessonData>) {
+        adapter = LessonAdapter(this, false)
+        viewPager.adapter = adapter
         adapter.showLessonImagesList(lessonImagesList)
     }
 
@@ -111,7 +113,8 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
     }
 
     override fun showGuideMachine() {
-        toast("show Guide Machine")
+        adapter = LessonAdapter(this, true)
+        viewPager.adapter = adapter
     }
 
     override fun onPause() {
