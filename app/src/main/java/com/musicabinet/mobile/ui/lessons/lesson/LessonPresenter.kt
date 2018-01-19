@@ -76,7 +76,7 @@ class LessonPresenter(private val view: LessonContract.View,
 
                     currentLessonId = lessonResponse.id
                     LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
-                            lessonImageList, accompaniments, lessonResponse.duration - lessonResponse.progress.timeSpent)
+                            lessonImageList, accompaniments, lessonResponse.duration - lessonResponse.getProgress())
                 })
                 .subscribe({ screenData: LessonScreenData ->
                     view.showSuccess()
@@ -120,7 +120,7 @@ class LessonPresenter(private val view: LessonContract.View,
 
                     currentLessonId = lessonResponse.id
                     LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
-                            lessonImageList, accompaniments, lessonResponse.duration - lessonResponse.progress.timeSpent)
+                            lessonImageList, accompaniments, lessonResponse.duration - lessonResponse.getProgress())
                 })
                 .subscribe({ screenData: LessonScreenData ->
                     view.showSuccess()
