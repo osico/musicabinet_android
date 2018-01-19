@@ -32,6 +32,8 @@ interface LessonContract {
 
         fun showAccompaniments(accompaniments: Set<Accompaniment>)
 
+        fun showGuideMachine()
+
         fun onLessonSelected(id: String)
     }
 

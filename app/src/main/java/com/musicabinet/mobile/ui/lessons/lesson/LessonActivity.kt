@@ -110,6 +110,10 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
         adapter.setAccompaniments(accompaniments)
     }
 
+    override fun showGuideMachine() {
+        toast("show Guide Machine")
+    }
+
     override fun onPause() {
         super.onPause()
         metronomeView.stopTick()

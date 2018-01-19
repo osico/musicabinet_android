@@ -76,15 +76,22 @@ class LessonPresenter(private val view: LessonContract.View,
 
                     currentLessonId = lessonResponse.id
                     LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
-                            lessonImageList, accompaniments, lessonResponse.duration - lessonResponse.getProgress())
+                            lessonImageList, accompaniments,
+                            lessonResponse.duration - lessonResponse.getProgress(),
+                            lessonResponse.hasGuideMachine())
                 })
                 .subscribe({ screenData: LessonScreenData ->
                     view.showSuccess()
                     view.showMethod(screenData.methodList)
                     view.showLessonTitle(screenData.title)
-                    view.showLessonImages(screenData.lessonImages)
                     view.setLessonTime(screenData.spendTime, screenData.id)
                     view.showAccompaniments(screenData.accompaniments)
+
+                    if (screenData.hasGuideMachine)
+                        view.showGuideMachine()
+                    else
+                        view.showLessonImages(screenData.lessonImages)
+
                 }, { t: Throwable -> view.showError() }))
     }
 
@@ -120,15 +127,22 @@ class LessonPresenter(private val view: LessonContract.View,
 
                     currentLessonId = lessonResponse.id
                     LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
-                            lessonImageList, accompaniments, lessonResponse.duration - lessonResponse.getProgress())
+                            lessonImageList, accompaniments,
+                            lessonResponse.duration - lessonResponse.getProgress(),
+                            lessonResponse.hasGuideMachine())
                 })
                 .subscribe({ screenData: LessonScreenData ->
                     view.showSuccess()
                     view.showMethod(screenData.methodList)
                     view.showLessonTitle(screenData.title)
-                    view.showLessonImages(screenData.lessonImages)
                     view.setLessonTime(screenData.spendTime, screenData.id)
                     view.showAccompaniments(screenData.accompaniments)
+
+                    if (screenData.hasGuideMachine)
+                        view.showGuideMachine()
+                    else
+                        view.showLessonImages(screenData.lessonImages)
+
                 }, { t: Throwable -> view.showError() }))
     }
 
