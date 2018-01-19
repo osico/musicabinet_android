@@ -80,21 +80,8 @@ class LessonPresenter(private val view: LessonContract.View,
                             lessonResponse.duration - lessonResponse.getProgress(),
                             lessonResponse.hasGuideMachine())
                 })
-                .subscribe({ screenData: LessonScreenData ->
-                    view.showSuccess()
-                    view.showLessonTitle(screenData.title)
-                    view.setLessonTime(screenData.spendTime, screenData.id)
-
-                    if (screenData.hasGuideMachine)
-                        view.showGuideMachine()
-                    else
-                        view.showLessonImages(screenData.lessonImages)
-
-                    //Should be always after .showGuideMachine or .showLessonImages
-                    view.showMethod(screenData.methodList)
-                    view.showAccompaniments(screenData.accompaniments)
-
-                }, { t: Throwable -> view.showError() }))
+                .subscribe({ screenData: LessonScreenData -> showLesson(screenData) },
+                        { t: Throwable -> view.showError() }))
     }
 
     override fun getPreparedLesson(id: String) {
@@ -133,23 +120,25 @@ class LessonPresenter(private val view: LessonContract.View,
                             lessonResponse.duration - lessonResponse.getProgress(),
                             lessonResponse.hasGuideMachine())
                 })
-                .subscribe({ screenData: LessonScreenData ->
-                    view.showSuccess()
-                    view.showLessonTitle(screenData.title)
-                    view.setLessonTime(screenData.spendTime, screenData.id)
-
-                    if (screenData.hasGuideMachine)
-                        view.showGuideMachine()
-                    else
-                        view.showLessonImages(screenData.lessonImages)
-
-                    //Should be always after .showGuideMachine or .showLessonImages
-                    view.showMethod(screenData.methodList)
-                    view.showAccompaniments(screenData.accompaniments)
-
-                }, { t: Throwable -> view.showError() }))
+                .subscribe({ screenData: LessonScreenData -> showLesson(screenData) },
+                        { t: Throwable -> view.showError() }))
     }
 
+
+    private fun showLesson(screenData: LessonScreenData) {
+        view.showSuccess()
+        view.showLessonTitle(screenData.title)
+        view.setLessonTime(screenData.spendTime, screenData.id)
+
+        if (screenData.hasGuideMachine)
+            view.showGuideMachine()
+        else
+            view.showLessonImages(screenData.lessonImages)
+
+        //Should be always after .showGuideMachine or .showLessonImages
+        view.showMethod(screenData.methodList)
+        view.showAccompaniments(screenData.accompaniments)
+    }
 
     override fun selectLessonClick() {
         if (lessonList != null)
