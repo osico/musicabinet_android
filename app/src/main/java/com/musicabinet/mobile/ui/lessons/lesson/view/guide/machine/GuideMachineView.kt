@@ -1,15 +1,17 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.guide.machine
 
 import android.content.Context
-import android.support.v4.widget.NestedScrollView
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.LinearLayout
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.model.lesson.remote.Accompaniment
+import kotlinx.android.synthetic.main.view_guide_machine.view.*
 
 /**
  * @author Kirchhoff-
  */
-class GuideMachineView : NestedScrollView, GuideMachineContract.View {
+class GuideMachineView : LinearLayout, GuideMachineContract.View {
 
     private val presenter = GuideMachinePresenter(this)
 
@@ -27,5 +29,9 @@ class GuideMachineView : NestedScrollView, GuideMachineContract.View {
 
     fun init() {
         LayoutInflater.from(context).inflate(R.layout.view_guide_machine, this, true)
+    }
+
+    fun setAccompaniments(accompaniments: Set<Accompaniment>) {
+        soundView.setAccompaniments(accompaniments)
     }
 }

@@ -62,5 +62,6 @@ class LessonAdapter(private val context: Context, private val hasGuideMachine: B
 
     fun setAccompaniments(accompaniments: Set<Accompaniment>) {
         lessonView?.setAccompaniments(accompaniments)
+        guideMachineView?.setAccompaniments(accompaniments)
     }
 }

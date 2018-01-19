@@ -1,15 +1,15 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.guide.element
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.RelativeLayout
 import com.musicabinet.mobile.R
 
 /**
  * @author Kirchhoff-
  */
-class GuideElementView : ConstraintLayout, GuideElementContract.View {
+class GuideElementView : RelativeLayout, GuideElementContract.View {
 
     private val presenter = GuideElementPresenter(this)
 
