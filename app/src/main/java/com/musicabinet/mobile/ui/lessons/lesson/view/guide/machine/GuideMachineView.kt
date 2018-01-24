@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
+import com.musicabinet.mobile.ui.lessons.lesson.view.guide.row.GuideRowView
 import kotlinx.android.synthetic.main.view_guide_machine.view.*
 
 /**
@@ -29,6 +30,16 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
 
     fun init() {
         LayoutInflater.from(context).inflate(R.layout.view_guide_machine, this, true)
+
+        presenter.subscribe()
+    }
+
+    override fun addRow(row: Int) {
+
+        val row = GuideRowView(context)
+        row.setRowTag(row.toString())
+
+        machineLayout.addView(row)
     }
 
     fun setAccompaniments(accompaniments: Set<Accompaniment>) {

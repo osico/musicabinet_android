@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.musicabinet.mobile.R
+import kotlinx.android.synthetic.main.view_guide_row.view.*
 
 /**
  * @author Kirchhoff-
@@ -27,5 +28,14 @@ class GuideRowView : LinearLayout, GuideRowContract.View {
 
     fun init() {
         LayoutInflater.from(context).inflate(R.layout.view_guide_row, this, true)
+    }
+
+    fun setRowTag(position: String) {
+        tag = position
+
+        firstElement.tag = position + "1"
+        secondElement.tag = position + "2"
+        thirdElement.tag = position + "3"
+        fourthElement.tag = position + "4"
     }
 }

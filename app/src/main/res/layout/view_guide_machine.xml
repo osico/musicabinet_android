@@ -16,13 +16,10 @@
         android:background="@color/grey_f2f2ea">
 
         <LinearLayout
+            android:id="@+id/machineLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <com.musicabinet.mobile.ui.lessons.lesson.view.guide.row.GuideRowView
-                android:layout_width="match_parent"
-                android:layout_height="180dp" />
 
         </LinearLayout>
 

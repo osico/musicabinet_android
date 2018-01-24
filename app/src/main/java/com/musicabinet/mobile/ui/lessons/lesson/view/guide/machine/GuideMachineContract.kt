@@ -7,9 +7,13 @@ interface GuideMachineContract {
 
     interface View {
 
+        fun addRow(row: Int)
+
     }
 
     interface Presenter {
+
+        fun subscribe()
 
     }
 }
