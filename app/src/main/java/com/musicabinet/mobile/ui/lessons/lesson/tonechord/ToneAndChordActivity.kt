@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
+import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.ui.lessons.lesson.tonechord.adapter.ToneAndChordAdapter
 import kotlinx.android.synthetic.main.activity_tone_and_chord.*
 import org.jetbrains.anko.toast
@@ -20,11 +22,15 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
 
     private val presenter = ToneAndChordPresenter(this, Injection.provideRepository())
 
+    //Just for test , remove in feature
+    private lateinit var firstToneOrChord: ToneOrChord
+    private lateinit var secondToneOrChord: ToneOrChord
+
     companion object {
 
-        fun requestToneAndChord(activity: Activity, requestCode: Int, tagArg: String,
-                                toneResultArg: String, chordResultArg: String) {
+        fun requestToneAndChord(activity: Activity, requestCode: Int, tagArg: String) {
             val intent = Intent(activity, ToneAndChordActivity::class.java)
+            intent.putExtra(Constants.GUIDE_MACHINE_TAG_RESULT_ARG, tagArg)
             activity.startActivityForResult(intent, requestCode)
         }
     }
@@ -33,6 +39,21 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tone_and_chord)
         presenter.subscribe()
+
+
+        tvCancel.setOnClickListener {
+            finish()
+        }
+
+        tvOk.setOnClickListener {
+            val resultIntent = Intent()
+            resultIntent.putExtra(Constants.GUIDE_MACHINE_TAG_RESULT_ARG,
+                    intent.getStringExtra(Constants.GUIDE_MACHINE_TAG_RESULT_ARG))
+            resultIntent.putExtra(Constants.GUIDE_MACHINE_ELEMENT_RESULT_ARG,
+                    ToneOrChordResult(firstToneOrChord, secondToneOrChord))
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        }
     }
 
     override fun showLoading(show: Boolean) {
@@ -54,6 +75,7 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
         rvTone.layoutManager = LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false)
         rvTone.adapter = adapter
+        firstToneOrChord = list[0]
     }
 
     override fun showChord(list: List<ToneOrChord>) {
@@ -61,6 +83,7 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
         rvChord.layoutManager = LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false)
         rvChord.adapter = adapter
+        secondToneOrChord = list[0]
     }
 
 }

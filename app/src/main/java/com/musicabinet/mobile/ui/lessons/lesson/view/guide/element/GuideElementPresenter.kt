@@ -1,9 +1,7 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.guide.element
 
-import com.musicabinet.mobile.Constants.CHORD_RESULT_ARG
-import com.musicabinet.mobile.Constants.TAG_RESULT_ARG
-import com.musicabinet.mobile.Constants.TONE_AND_CHORD_REQUEST_CODE
-import com.musicabinet.mobile.Constants.TONE_RESULT_ARG
+import com.musicabinet.mobile.Constants
+
 
 /**
  * @author Kirchhoff-
@@ -16,8 +14,8 @@ class GuideElementPresenter(private val view: GuideElementContract.View) : Guide
     }
 
     override fun requestToneAndChord() {
-        view.requestToneAndChord(TONE_AND_CHORD_REQUEST_CODE, TAG_RESULT_ARG,
-                TONE_RESULT_ARG, CHORD_RESULT_ARG)
+        view.requestToneAndChord(Constants.GUIDE_MACHINE_REQUEST_CODE,
+                Constants.GUIDE_MACHINE_TAG_RESULT_ARG)
     }
 
 }

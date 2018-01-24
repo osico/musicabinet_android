@@ -80,6 +80,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         presenter.onActivityResult(requestCode, resultCode, data)
+        adapter?.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun showLoading(show: Boolean) {

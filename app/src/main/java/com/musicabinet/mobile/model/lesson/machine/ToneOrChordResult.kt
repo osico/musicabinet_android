@@ -9,4 +9,4 @@ import kotlinx.android.parcel.Parcelize
  */
 @SuppressLint("ParcelCreator")
 @Parcelize
-data class ToneOrChord(val id: String, val name: String, val sortOrder: Int) : Parcelable
+data class ToneOrChordResult(val tone: ToneOrChord, val chord: ToneOrChord) : Parcelable

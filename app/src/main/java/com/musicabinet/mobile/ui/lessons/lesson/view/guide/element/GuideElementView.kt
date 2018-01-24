@@ -4,8 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.RelativeLayout
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.ui.lessons.lesson.tonechord.ToneAndChordActivity
 import kotlinx.android.synthetic.main.view_guide_element.view.*
 
@@ -45,9 +48,14 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
         ivNotes.isEnabled = enable
     }
 
-    override fun requestToneAndChord(requestCode: Int, tagArg: String, toneArg: String, chordArg: String) {
-        ToneAndChordActivity.requestToneAndChord(context as Activity, requestCode, tagArg,
-                toneArg, chordArg)
+    override fun requestToneAndChord(requestCode: Int, tagArg: String) {
+        ToneAndChordActivity.requestToneAndChord(context as Activity, requestCode, tag.toString())
+    }
+
+    fun showToneAndChord(toneAndChordResult: ToneOrChordResult) {
+        fabAddElement.visibility = View.INVISIBLE
+        tvElementText.setText(toneAndChordResult.tone.name + " " + toneAndChordResult.chord.name)
+        tvElementText.setVisible(true)
     }
 
 }

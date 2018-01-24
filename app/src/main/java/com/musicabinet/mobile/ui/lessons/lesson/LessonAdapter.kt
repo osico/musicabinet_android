@@ -1,6 +1,7 @@
 package com.musicabinet.mobile.ui.lessons.lesson
 
 import android.content.Context
+import android.content.Intent
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
@@ -68,5 +69,9 @@ class LessonAdapter(private val context: Context, private val hasGuideMachine: B
     fun onPause() {
         lessonView?.onPause()
         guideMachineView?.onPause()
+    }
+
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        guideMachineView?.onActivityResult(requestCode, resultCode, data)
     }
 }
