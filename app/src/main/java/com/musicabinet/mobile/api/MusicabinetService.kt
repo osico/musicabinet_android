@@ -5,8 +5,7 @@ import com.musicabinet.mobile.model.instrument.InstrumentData
 import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
 import com.musicabinet.mobile.model.lesson.lesson.LessonGroup
-import com.musicabinet.mobile.model.lesson.machine.Chord
-import com.musicabinet.mobile.model.lesson.machine.Tone
+import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
 import com.musicabinet.mobile.model.lesson.progress.LessonProgress
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.login.LoginRequestBody
@@ -72,8 +71,8 @@ interface MusicabinetService {
     fun downloadFile(@Path("fileId") fileId: String): Observable<Response<ResponseBody>>
 
     @GET("/api/tone")
-    fun getTone(): Observable<List<Tone>>
+    fun getTone(): Observable<List<ToneOrChord>>
 
     @GET("/api/chord-type")
-    fun getChordType(): Observable<List<Chord>>
+    fun getChordType(): Observable<List<ToneOrChord>>
 }

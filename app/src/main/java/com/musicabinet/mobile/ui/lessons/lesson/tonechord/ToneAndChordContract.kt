@@ -1,7 +1,6 @@
 package com.musicabinet.mobile.ui.lessons.lesson.tonechord
 
-import com.musicabinet.mobile.model.lesson.machine.Chord
-import com.musicabinet.mobile.model.lesson.machine.Tone
+import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
 
 /**
  * @author Kirchhoff-
@@ -14,9 +13,9 @@ interface ToneAndChordContract {
 
         fun showError()
 
-        fun showTone(list: List<Tone>)
+        fun showTone(list: List<ToneOrChord>)
 
-        fun showChord(list: List<Chord>)
+        fun showChord(list: List<ToneOrChord>)
     }
 
     interface Presenter {

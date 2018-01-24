@@ -5,8 +5,7 @@ import com.musicabinet.mobile.model.instrument.InstrumentData
 import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
 import com.musicabinet.mobile.model.lesson.lesson.LessonGroup
-import com.musicabinet.mobile.model.lesson.machine.Chord
-import com.musicabinet.mobile.model.lesson.machine.Tone
+import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.profile.UserProfile
 import io.reactivex.Completable
@@ -47,7 +46,7 @@ interface MusicabinetRepository {
 
     fun downloadFile(fileId: String): Observable<Response<ResponseBody>>
 
-    fun getTone(): Observable<List<Tone>>
+    fun getTone(): Observable<List<ToneOrChord>>
 
-    fun getChordType(): Observable<List<Chord>>
+    fun getChordType(): Observable<List<ToneOrChord>>
 }

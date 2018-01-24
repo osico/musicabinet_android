@@ -4,11 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
-import com.musicabinet.mobile.model.lesson.machine.Chord
-import com.musicabinet.mobile.model.lesson.machine.Tone
+import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
+import com.musicabinet.mobile.ui.lessons.lesson.tonechord.adapter.ToneAndChordAdapter
 import kotlinx.android.synthetic.main.activity_tone_and_chord.*
 import org.jetbrains.anko.toast
 
@@ -37,8 +38,8 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
     override fun showLoading(show: Boolean) {
         progressBar.setVisible(show)
 
-        npChord.setVisible(!show)
-        npTone.setVisible(!show)
+        rvChord.setVisible(!show)
+        rvTone.setVisible(!show)
         tvCancel.setVisible(!show)
         tvOk.setVisible(!show)
     }
@@ -48,18 +49,18 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
         finish()
     }
 
-    override fun showTone(list: List<Tone>) {
-        val toneStringList = ArrayList<String>()
-        for (item in list)
-            toneStringList.add(item.name)
-        npTone.displayedValues = toneStringList.toTypedArray()
+    override fun showTone(list: List<ToneOrChord>) {
+        val adapter = ToneAndChordAdapter(list)
+        rvTone.layoutManager = LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false)
+        rvTone.adapter = adapter
     }
 
-    override fun showChord(list: List<Chord>) {
-        val chordStringList = ArrayList<String>()
-        for (item in list)
-            chordStringList.add(item.name)
-        npChord.displayedValues = chordStringList.toTypedArray()
+    override fun showChord(list: List<ToneOrChord>) {
+        val adapter = ToneAndChordAdapter(list)
+        rvChord.layoutManager = LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false)
+        rvChord.adapter = adapter
     }
 
 }
