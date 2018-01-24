@@ -11,7 +11,6 @@ import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.profile.UserProfile
 import io.reactivex.Completable
 import io.reactivex.Observable
-import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.Response
 
@@ -48,7 +47,7 @@ interface MusicabinetRepository {
 
     fun downloadFile(fileId: String): Observable<Response<ResponseBody>>
 
-    fun getTone(): Single<List<Tone>>
+    fun getTone(): Observable<List<Tone>>
 
-    fun getChordType(): Single<List<Chord>>
+    fun getChordType(): Observable<List<Chord>>
 }

@@ -14,7 +14,6 @@ import com.musicabinet.mobile.model.profile.UserProfile
 import com.musicabinet.mobile.model.register.RegisterRequestBody
 import io.reactivex.Completable
 import io.reactivex.Observable
-import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -73,8 +72,8 @@ interface MusicabinetService {
     fun downloadFile(@Path("fileId") fileId: String): Observable<Response<ResponseBody>>
 
     @GET("/api/tone")
-    fun getTone(): Single<List<Tone>>
+    fun getTone(): Observable<List<Tone>>
 
     @GET("/api/chord-type")
-    fun getChordType(): Single<List<Chord>>
+    fun getChordType(): Observable<List<Chord>>
 }
