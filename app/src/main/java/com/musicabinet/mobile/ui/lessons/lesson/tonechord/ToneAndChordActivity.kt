@@ -22,8 +22,8 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
 
     companion object {
 
-        fun requestToneAndChord(activity: Activity, requestCode: Int, toneResultArg: String,
-                                chordResultArg: String) {
+        fun requestToneAndChord(activity: Activity, requestCode: Int, tagArg: String,
+                                toneResultArg: String, chordResultArg: String) {
             val intent = Intent(activity, ToneAndChordActivity::class.java)
             activity.startActivityForResult(intent, requestCode)
         }
