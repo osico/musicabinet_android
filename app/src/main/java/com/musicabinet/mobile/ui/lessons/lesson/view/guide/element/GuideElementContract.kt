@@ -7,9 +7,19 @@ interface GuideElementContract {
 
     interface View {
 
+        fun enableFabClick(enable: Boolean)
+
+        fun enableNoteClick(enable: Boolean)
+
+        fun requestToneAndChord()
+
     }
 
     interface Presenter {
+
+        fun subscribe()
+
+        fun onFabClick()
 
     }
 }

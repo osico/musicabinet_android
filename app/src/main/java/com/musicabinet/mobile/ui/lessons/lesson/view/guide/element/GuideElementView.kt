@@ -31,5 +31,18 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
 
         fabAddElement.setOnClickListener { }
         ivNotes.setOnClickListener { }
+
+        presenter.subscribe()
+    }
+
+    override fun enableFabClick(enable: Boolean) {
+        fabAddElement.isEnabled = enable
+    }
+
+    override fun enableNoteClick(enable: Boolean) {
+        ivNotes.isEnabled = enable
+    }
+
+    override fun requestToneAndChord() {
     }
 }
