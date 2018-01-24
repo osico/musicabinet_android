@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.musicabinet.mobile.R
+import kotlinx.android.synthetic.main.view_guide_element.view.*
 
 /**
  * @author Kirchhoff-
@@ -27,5 +28,8 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
 
     fun init() {
         LayoutInflater.from(context).inflate(R.layout.view_guide_element, this, true)
+
+        ivAddElement.setOnClickListener { }
+        ivNotes.setOnClickListener { }
     }
 }

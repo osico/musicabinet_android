@@ -29,8 +29,9 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/ivAddElement"
         android:layout_marginTop="8dp"
-        android:background="@color/grey_f2f2ea"
+        android:background="?selectableItemBackground"
         android:scaleType="fitXY"
+        android:theme="@style/GreyRippleTheme"
         app:srcCompat="@drawable/note_image" />
 
 </RelativeLayout>

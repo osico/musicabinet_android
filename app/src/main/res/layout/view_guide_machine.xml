@@ -12,21 +12,13 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/grey_f2f2ea">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/grey_f2f2ea"
             android:orientation="vertical">
-
-            <com.musicabinet.mobile.ui.lessons.lesson.view.guide.row.GuideRowView
-                android:layout_width="match_parent"
-                android:layout_height="180dp" />
-
-            <com.musicabinet.mobile.ui.lessons.lesson.view.guide.row.GuideRowView
-                android:layout_width="match_parent"
-                android:layout_height="180dp" />
 
             <com.musicabinet.mobile.ui.lessons.lesson.view.guide.row.GuideRowView
                 android:layout_width="match_parent"
