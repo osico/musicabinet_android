@@ -70,4 +70,8 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
             ApiFactory.service.updateLessonProgress(id, LESSON_UPDATE_PROGRESS)
 
     override fun downloadFile(fileId: String) = ApiFactory.service.downloadFile(fileId)
+
+    override fun getTone() = ApiFactory.service.getTone()
+
+    override fun getChordType() = ApiFactory.service.getChordType()
 }

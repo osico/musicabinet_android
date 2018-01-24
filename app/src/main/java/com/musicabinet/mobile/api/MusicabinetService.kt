@@ -5,6 +5,8 @@ import com.musicabinet.mobile.model.instrument.InstrumentData
 import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
 import com.musicabinet.mobile.model.lesson.lesson.LessonGroup
+import com.musicabinet.mobile.model.lesson.machine.Chord
+import com.musicabinet.mobile.model.lesson.machine.Tone
 import com.musicabinet.mobile.model.lesson.progress.LessonProgress
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.login.LoginRequestBody
@@ -12,6 +14,7 @@ import com.musicabinet.mobile.model.profile.UserProfile
 import com.musicabinet.mobile.model.register.RegisterRequestBody
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -68,4 +71,10 @@ interface MusicabinetService {
     @Streaming
     @GET("/platform/api/file-storage/{fileId}/download")
     fun downloadFile(@Path("fileId") fileId: String): Observable<Response<ResponseBody>>
+
+    @GET("/api/tone")
+    fun getTone(): Single<List<Tone>>
+
+    @GET("/api/chord-type")
+    fun getChordType(): Single<List<Chord>>
 }

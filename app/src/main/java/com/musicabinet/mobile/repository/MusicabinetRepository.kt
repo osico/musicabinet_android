@@ -5,10 +5,13 @@ import com.musicabinet.mobile.model.instrument.InstrumentData
 import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
 import com.musicabinet.mobile.model.lesson.lesson.LessonGroup
+import com.musicabinet.mobile.model.lesson.machine.Chord
+import com.musicabinet.mobile.model.lesson.machine.Tone
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.profile.UserProfile
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.Response
 
@@ -44,4 +47,8 @@ interface MusicabinetRepository {
     fun updateLessonProgress(id: String): Completable
 
     fun downloadFile(fileId: String): Observable<Response<ResponseBody>>
+
+    fun getTone(): Single<List<Tone>>
+
+    fun getChordType(): Single<List<Chord>>
 }
