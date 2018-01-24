@@ -29,7 +29,7 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
     fun init() {
         LayoutInflater.from(context).inflate(R.layout.view_guide_element, this, true)
 
-        ivAddElement.setOnClickListener { }
+        fabAddElement.setOnClickListener { }
         ivNotes.setOnClickListener { }
     }
 }
