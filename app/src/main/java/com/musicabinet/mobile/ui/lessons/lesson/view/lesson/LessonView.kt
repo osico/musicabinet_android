@@ -85,4 +85,8 @@ class LessonView : FrameLayout, LessonPagePresenter.OnPageClickListener {
     fun setAccompaniments(accompaniments: Set<Accompaniment>) {
         soundView.setAccompaniments(accompaniments)
     }
+
+    fun onPause() {
+        soundView.onPause()
+    }
 }

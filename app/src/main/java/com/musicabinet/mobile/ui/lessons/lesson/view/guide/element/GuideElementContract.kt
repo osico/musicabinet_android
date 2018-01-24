@@ -11,7 +11,7 @@ interface GuideElementContract {
 
         fun enableNoteClick(enable: Boolean)
 
-        fun requestToneAndChord()
+        fun requestToneAndChord(requestCode: Int, toneArg: String, chordArg: String)
 
     }
 
@@ -19,7 +19,7 @@ interface GuideElementContract {
 
         fun subscribe()
 
-        fun onFabClick()
+        fun requestToneAndChord()
 
     }
 }

@@ -91,7 +91,6 @@
             android:label="@string/lesson_information_title"
             android:screenOrientation="landscape" />
 
-
         <activity
             android:name=".ui.cabinet.social.web.WebAuthorizationActivity"
             android:label="@string/authorization"
@@ -101,6 +100,11 @@
             android:name=".ui.web.WebVideoActivity"
             android:label="@string/video_for_lesson"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.lessons.lesson.tonechord.ToneAndChordActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar.Translucent" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

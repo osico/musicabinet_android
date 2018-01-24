@@ -34,4 +34,8 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
     fun setAccompaniments(accompaniments: Set<Accompaniment>) {
         soundView.setAccompaniments(accompaniments)
     }
+
+    fun onPause() {
+        soundView.onPause()
+    }
 }

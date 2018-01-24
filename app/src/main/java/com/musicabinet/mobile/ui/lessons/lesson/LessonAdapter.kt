@@ -64,4 +64,9 @@ class LessonAdapter(private val context: Context, private val hasGuideMachine: B
         lessonView?.setAccompaniments(accompaniments)
         guideMachineView?.setAccompaniments(accompaniments)
     }
+
+    fun onPause() {
+        lessonView?.onPause()
+        guideMachineView?.onPause()
+    }
 }

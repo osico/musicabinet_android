@@ -19,7 +19,6 @@ import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.ui.lessons.lesson.dialog.LessonSelectActivity
 import com.musicabinet.mobile.ui.view.metronome.MetronomeView
 import kotlinx.android.synthetic.main.activity_lesson.*
-import kotlinx.android.synthetic.main.view_lesson.*
 import org.jetbrains.anko.toast
 
 /**
@@ -33,7 +32,8 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
 
     private lateinit var presenter: LessonContract.Presenter
     private var metronomePopup: PopupWindow? = null
-    private lateinit var adapter: LessonAdapter
+    //Can be lateinit, but looks like bug in build tools
+    private var adapter: LessonAdapter? = null
     private lateinit var metronomeView: MetronomeView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,13 +91,13 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
     }
 
     override fun showMethod(methodList: List<MethodItem>) {
-        adapter.setMethodList(methodList)
+        adapter?.setMethodList(methodList)
     }
 
     override fun showLessonImages(lessonImagesList: List<LessonData>) {
         adapter = LessonAdapter(this, false)
         viewPager.adapter = adapter
-        adapter.showLessonImagesList(lessonImagesList)
+        adapter?.showLessonImagesList(lessonImagesList)
     }
 
     override fun showLessonTitle(title: String) {
@@ -109,7 +109,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
     }
 
     override fun showAccompaniments(accompaniments: Set<Accompaniment>) {
-        adapter.setAccompaniments(accompaniments)
+        adapter?.setAccompaniments(accompaniments)
     }
 
     override fun showGuideMachine() {
@@ -118,11 +118,11 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
     }
 
     override fun onPause() {
-        super.onPause()
         metronomeView.stopTick()
+        adapter?.onPause()
         timerView.onPause()
-        soundView.onPause()
         presenter.unsubscribe()
+        super.onPause()
     }
 
     override fun metronomeStatusChange(enable: Boolean) {
