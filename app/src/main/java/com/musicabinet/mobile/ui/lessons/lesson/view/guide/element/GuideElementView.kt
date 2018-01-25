@@ -52,10 +52,27 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
         ToneAndChordActivity.requestToneAndChord(context as Activity, requestCode, tag.toString())
     }
 
-    fun showToneAndChord(toneAndChordResult: ToneOrChordResult) {
-        fabAddElement.visibility = View.INVISIBLE
-        tvElementText.setText(toneAndChordResult.tone.name + " " + toneAndChordResult.chord.name)
-        tvElementText.setVisible(true)
+    fun setToneAndChord(toneAndChordResult: ToneOrChordResult) {
+        presenter.showToneAndChord(toneAndChordResult)
+    }
+
+    override fun showAddButton(show: Boolean) {
+        if (show)
+            fabAddElement.visibility = View.VISIBLE
+        else
+            fabAddElement.visibility = View.INVISIBLE
+    }
+
+    override fun showToneAndChord(show: Boolean) {
+        toneAndChordLayout.setVisible(show)
+    }
+
+    override fun setTone(tone: String) {
+        tvTone.text = tone
+    }
+
+    override fun setChord(chord: String) {
+        tvChord.text = chord
     }
 
 }
