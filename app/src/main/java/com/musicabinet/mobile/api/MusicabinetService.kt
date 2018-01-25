@@ -78,8 +78,8 @@ interface MusicabinetService {
     fun getChordType(): Observable<List<ToneOrChord>>
 
     @GET("/api/module")
-    fun getNoteModule(@Path("instrumentId") instrumentId: String): Observable<NoteItemResponse>
+    fun getNoteModule(@Query("instrumentId") instrumentId: String): Observable<NoteItemResponse>
 
     @GET("/api/course")
-    fun getCourseModule(@Path("instrumentId") instrumentId: String): Observable<NoteItemResponse>
+    fun getNoteCourse(@Query("instrumentId") instrumentId: String): Observable<NoteItemResponse>
 }

@@ -6,8 +6,13 @@ import android.os.Bundle
 import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
+import com.musicabinet.mobile.model.lesson.machine.note.NoteItem
 import com.musicabinet.mobile.ui.ActionBarActivity
+import com.musicabinet.mobile.ui.lessons.lesson.note.adapter.spinner.NoteSpinnerAdapter
+import kotlinx.android.synthetic.main.activity_note.*
+import org.jetbrains.anko.toast
 
 /**
  * @author Kirchhoff-
@@ -35,5 +40,34 @@ class NoteActivity : ActionBarActivity(), NoteContract.View {
         toneOrChordArg = intent.getParcelableExtra(Constants.NOTE_ELEMENT_ARG)
 
         title = toneOrChordArg.tone.name + " " + toneOrChordArg.chord.name
+
+        presenter.subscribe()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
+    override fun showLoading(show: Boolean) {
+        progressBar.setVisible(show)
+
+        spinnerInstrument.setVisible(!show)
+        spinnerModule.setVisible(!show)
+    }
+
+    override fun showError() {
+        toast(R.string.internal_error)
+        finish()
+    }
+
+    override fun showInstrument(list: List<NoteItem>) {
+        val adapter = NoteSpinnerAdapter(this, list)
+        spinnerInstrument.adapter = adapter
+    }
+
+    override fun showModule(list: List<NoteItem>) {
+        val adapter = NoteSpinnerAdapter(this, list)
+        spinnerModule.adapter = adapter
     }
 }

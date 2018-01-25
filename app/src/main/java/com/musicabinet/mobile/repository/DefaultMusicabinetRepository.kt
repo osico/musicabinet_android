@@ -75,7 +75,7 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     override fun getChordType() = ApiFactory.service.getChordType()
 
-    override fun getNoteCourse(id: String) = ApiFactory.service.getNoteModule(id)
+    override fun getNoteCourse(id: String) = ApiFactory.service.getNoteCourse(id)
 
     override fun getNoteModule(id: String) = ApiFactory.service.getNoteModule(id)
 

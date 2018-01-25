@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.lessons.lesson.note.adapter.spinner;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,10 @@ import java.util.List;
 public class NoteSpinnerAdapter extends BaseAdapter {
 
     private List<NoteItem> list;
+    private Context context;
 
-    NoteSpinnerAdapter(List<NoteItem> list) {
+    public NoteSpinnerAdapter(Context context, List<NoteItem> list) {
+        this.context = context;
         this.list = new ArrayList<>(list);
     }
 
@@ -41,7 +44,7 @@ public class NoteSpinnerAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        View itemView = LayoutInflater.from(view.getContext()).inflate(R.layout.item_note_spinner, null);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.item_note_spinner, null);
         TextView tvTitle = itemView.findViewById(R.id.tvTitle);
         tvTitle.setText(getItem(position).getName());
         return itemView;
