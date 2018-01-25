@@ -106,6 +106,10 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
 
+        <activity
+            android:name=".model.lesson.note.NoteActivity"
+            android:screenOrientation="landscape" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="55b4ddc0b0d079482c57d654d6e008482ea5b58d" />
