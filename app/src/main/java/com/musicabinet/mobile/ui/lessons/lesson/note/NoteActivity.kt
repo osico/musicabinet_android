@@ -62,12 +62,12 @@ class NoteActivity : ActionBarActivity(), NoteContract.View {
     }
 
     override fun showInstrument(list: List<NoteItem>) {
-        val adapter = NoteSpinnerAdapter(this, list)
+        val adapter = NoteSpinnerAdapter(this, R.layout.item_note_spinner, list)
         spinnerInstrument.adapter = adapter
     }
 
     override fun showModule(list: List<NoteItem>) {
-        val adapter = NoteSpinnerAdapter(this, list)
+        val adapter = NoteSpinnerAdapter(this, R.layout.item_note_spinner, list)
         spinnerModule.adapter = adapter
     }
 }

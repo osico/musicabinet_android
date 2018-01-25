@@ -1,10 +1,12 @@
 package com.musicabinet.mobile.ui.lessons.lesson.note.adapter.spinner;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.musicabinet.mobile.R;
@@ -17,36 +19,46 @@ import java.util.List;
  * @author Kirchhoff-
  */
 
-public class NoteSpinnerAdapter extends BaseAdapter {
+public class NoteSpinnerAdapter extends ArrayAdapter<NoteItem> {
 
-    private List<NoteItem> list;
-    private Context context;
+    // declaring our ArrayList of items
+    private ArrayList<NoteItem> noteList;
 
-    public NoteSpinnerAdapter(Context context, List<NoteItem> list) {
-        this.context = context;
-        this.list = new ArrayList<>(list);
+    public NoteSpinnerAdapter(@NonNull Context context, int resource, @NonNull List<NoteItem> objects) {
+        super(context, resource, objects);
+        this.noteList = new ArrayList<>(objects);
     }
 
-    @Override
-    public int getCount() {
-        return list.size();
-    }
 
+    @NonNull
     @Override
-    public NoteItem getItem(int i) {
-        return list.get(i);
-    }
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        View view = convertView;
 
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.item_note_spinner, null);
+        }
 
-    @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.item_note_spinner, null);
-        TextView tvTitle = itemView.findViewById(R.id.tvTitle);
+        TextView tvTitle = view.findViewById(R.id.tvTitle);
         tvTitle.setText(getItem(position).getName());
-        return itemView;
+
+        return view;
+    }
+
+    @Override
+    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        View view = convertView;
+
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.item_note_spinner, null);
+        }
+
+        TextView tvTitle = view.findViewById(R.id.tvTitle);
+        tvTitle.setText(getItem(position).getName());
+
+        return view;
     }
 }
+
