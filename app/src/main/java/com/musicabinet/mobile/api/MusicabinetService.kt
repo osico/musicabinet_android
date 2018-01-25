@@ -6,6 +6,7 @@ import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
 import com.musicabinet.mobile.model.lesson.lesson.LessonGroup
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
+import com.musicabinet.mobile.model.lesson.machine.note.NoteItemResponse
 import com.musicabinet.mobile.model.lesson.progress.LessonProgress
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.login.LoginRequestBody
@@ -75,4 +76,10 @@ interface MusicabinetService {
 
     @GET("/api/chord-type")
     fun getChordType(): Observable<List<ToneOrChord>>
+
+    @GET("/api/module")
+    fun getNoteModule(@Path("instrumentId") instrumentId: String): Observable<NoteItemResponse>
+
+    @GET("/api/course")
+    fun getCourseModule(@Path("instrumentId") instrumentId: String): Observable<NoteItemResponse>
 }
