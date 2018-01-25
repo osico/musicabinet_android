@@ -15,5 +15,7 @@ interface GuideMachineContract {
 
         fun subscribe()
 
+        fun onElementSelected(rowString: String)
+
     }
 }

@@ -40,10 +40,10 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
 
     override fun addRow(row: Int) {
 
-        val row = GuideRowView(context)
-        row.setRowTag(row.toString())
+        val rowView = GuideRowView(context)
+        rowView.setRowTag(row.toString())
 
-        machineLayout.addView(row)
+        machineLayout.addView(rowView)
     }
 
     fun setAccompaniments(accompaniments: Set<Accompaniment>) {
@@ -58,8 +58,11 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
         if (requestCode == Constants.GUIDE_MACHINE_REQUEST_CODE && resultCode == Activity.RESULT_OK &&
                 data != null) {
 
+            val resultTag: String = data.getStringExtra(Constants.GUIDE_MACHINE_TAG_RESULT_ARG)
+            val row = resultTag.substring(resultTag.lastIndexOf("}") + 1, resultTag.length - 1)
+            presenter.onElementSelected(row)
             val guideElementView: GuideElementView = machineLayout
-                    .findViewWithTag(data.getStringExtra(Constants.GUIDE_MACHINE_TAG_RESULT_ARG))
+                    .findViewWithTag(resultTag)
 
             guideElementView.setToneAndChord(data.getParcelableExtra(Constants.GUIDE_MACHINE_ELEMENT_RESULT_ARG))
         }
