@@ -1,4 +1,4 @@
-package com.musicabinet.mobile.model.lesson.note
+package com.musicabinet.mobile.ui.lessons.lesson.note
 
 import android.app.Activity
 import android.content.Intent

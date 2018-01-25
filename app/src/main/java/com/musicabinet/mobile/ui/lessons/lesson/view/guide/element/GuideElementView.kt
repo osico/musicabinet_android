@@ -9,7 +9,7 @@ import android.widget.RelativeLayout
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
-import com.musicabinet.mobile.model.lesson.note.NoteActivity
+import com.musicabinet.mobile.ui.lessons.lesson.note.NoteActivity
 import com.musicabinet.mobile.ui.lessons.lesson.tonechord.ToneAndChordActivity
 import kotlinx.android.synthetic.main.view_guide_element.view.*
 

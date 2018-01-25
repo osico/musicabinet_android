@@ -107,7 +107,7 @@
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
 
         <activity
-            android:name=".model.lesson.note.NoteActivity"
+            android:name="com.musicabinet.mobile.ui.lessons.lesson.note.NoteActivity"
             android:screenOrientation="landscape" />
 
         <meta-data
