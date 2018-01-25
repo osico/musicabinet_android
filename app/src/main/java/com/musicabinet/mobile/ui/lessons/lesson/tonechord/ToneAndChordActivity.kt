@@ -86,4 +86,9 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
         secondToneOrChord = list[0]
     }
 
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
 }

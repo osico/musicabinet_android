@@ -23,10 +23,10 @@ class ToneAndChordPresenter(private val view: ToneAndChordContract.View,
                 { toneList, chordList -> Pair(toneList, chordList) })
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading(true) }
-                .doFinally { view.showLoading(false) }
                 .subscribe({ pair: Pair<List<ToneOrChord>, List<ToneOrChord>> ->
                     view.showTone(pair.first)
                     view.showChord(pair.second)
+                    view.showLoading(false)
                 }, { t: Throwable -> view.showError() }))
     }
 
