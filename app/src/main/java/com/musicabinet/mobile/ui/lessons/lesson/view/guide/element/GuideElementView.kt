@@ -9,6 +9,7 @@ import android.widget.RelativeLayout
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
+import com.musicabinet.mobile.model.lesson.note.NoteActivity
 import com.musicabinet.mobile.ui.lessons.lesson.tonechord.ToneAndChordActivity
 import kotlinx.android.synthetic.main.view_guide_element.view.*
 
@@ -35,7 +36,7 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
         LayoutInflater.from(context).inflate(R.layout.view_guide_element, this, true)
 
         fabAddElement.setOnClickListener { presenter.requestToneAndChord() }
-        ivNotes.setOnClickListener { }
+        ivNotes.setOnClickListener { presenter.requestNote() }
 
         presenter.subscribe()
     }
@@ -73,6 +74,10 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
 
     override fun setChord(chord: String) {
         tvChord.text = chord
+    }
+
+    override fun requestNote(toneAndChordResult: ToneOrChordResult) {
+        NoteActivity.requestNote(context as Activity, toneAndChordResult, tag.toString())
     }
 
 }

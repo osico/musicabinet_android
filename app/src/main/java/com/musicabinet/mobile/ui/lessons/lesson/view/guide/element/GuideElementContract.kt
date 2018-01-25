@@ -23,6 +23,8 @@ interface GuideElementContract {
 
         fun setChord(chord: String)
 
+        fun requestNote(toneAndChordResult: ToneOrChordResult)
+
     }
 
     interface Presenter {
@@ -31,7 +33,8 @@ interface GuideElementContract {
 
         fun requestToneAndChord()
 
-        fun showToneAndChord(toneAndChordResult: ToneOrChordResult)
+        fun showToneAndChord(result: ToneOrChordResult)
 
+        fun requestNote()
     }
 }
