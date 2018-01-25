@@ -2,6 +2,7 @@ package com.musicabinet.mobile.ui.instrument
 
 import com.musicabinet.mobile.model.instrument.InstrumentDataElement
 import com.musicabinet.mobile.repository.MusicabinetRepository
+import com.musicabinet.mobile.repository.keyvalue.KeyValueStorage
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import java.util.*
@@ -10,6 +11,7 @@ import java.util.*
  * @author Kirchhoff-
  */
 class InstrumentPresenter(private val repository: MusicabinetRepository,
+                          private val storage: KeyValueStorage,
                           private val view: InstrumentContract.View) : InstrumentContract.Presenter {
 
     private val subscriptions = CompositeDisposable()
@@ -40,6 +42,11 @@ class InstrumentPresenter(private val repository: MusicabinetRepository,
                         view.showPageIndicator(true)
                     }
                 }, { view.showError(true) }))
+    }
+
+    override fun onInstrumentSelected(instrument: InstrumentDataElement) {
+        storage.saveSelectedInstrumentId(instrument.id)
+        view.moveToCourseActivity(instrument.nameLocalized, instrument.id)
     }
 
     override fun unsubscribe() {

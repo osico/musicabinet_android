@@ -19,12 +19,16 @@ interface InstrumentContract {
 
         fun setInstrumentList(instrumentList: List<InstrumentDataElement>)
 
+        fun moveToCourseActivity(name: String, id: String)
+
     }
 
 
     interface Presenter {
 
         fun loadInstrumentList()
+
+        fun onInstrumentSelected(instrument: InstrumentDataElement)
 
         fun unsubscribe()
 

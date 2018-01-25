@@ -24,6 +24,14 @@ object MusicabinetKeyValueStorage : KeyValueStorage {
 
     override fun isUserExist() = preferences.contains(KeyValueStorage.USER_NAME_KEY)
 
+    override fun saveSelectedInstrumentId(id: String) {
+        val editor = preferences.edit()
+        editor.putString(KeyValueStorage.SELECT_INSTRUMENT_ID, id)
+        editor.apply()
+    }
+
+    override fun getSelectedInstrumentId() = preferences.getString(KeyValueStorage.SELECT_INSTRUMENT_ID, "")
+
     override fun clear() {
         preferences.edit().clear().apply()
     }

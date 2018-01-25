@@ -10,6 +10,7 @@ interface KeyValueStorage {
     companion object {
         const val USER_NAME_KEY = "USER_NAME_KEY"
         const val USER_EMAIL_KEY = "USER_EMAIL_KEY"
+        const val SELECT_INSTRUMENT_ID = "SELECT_INSTRUMENT_ID"
     }
 
     fun saveUserInformation(userProfile: UserProfile)
@@ -19,6 +20,10 @@ interface KeyValueStorage {
     fun getUserEmail(): String
 
     fun isUserExist(): Boolean
+
+    fun saveSelectedInstrumentId(id: String)
+
+    fun getSelectedInstrumentId(): String
 
     fun clear()
 }

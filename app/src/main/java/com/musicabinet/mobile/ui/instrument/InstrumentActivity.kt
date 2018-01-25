@@ -20,13 +20,12 @@ import kotlinx.android.synthetic.main.activity_instrument.*
  */
 class InstrumentActivity : SlideMenuActivity(), InstrumentContract.View, InstrumentAdapter.OnInstrumentClickListener {
 
+    private val presenter = InstrumentPresenter(Injection.provideRepository(), Injection.provideStorage(), this)
+
     private lateinit var instrumentAdapter: InstrumentAdapter
-    private lateinit var presenter: InstrumentContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        presenter = InstrumentPresenter(Injection.provideRepository(), this)
 
         presenter.loadInstrumentList()
     }
@@ -69,10 +68,14 @@ class InstrumentActivity : SlideMenuActivity(), InstrumentContract.View, Instrum
         instrumentAdapter.setOnInstrumentClickListener(this)
     }
 
-    override fun onInstrumentSelected(instrument: InstrumentDataElement) {
+    override fun moveToCourseActivity(name: String, id: String) {
         val intent = Intent(this, CoursesActivity::class.java)
-        intent.putExtra(CoursesActivity.INSTRUMENT_NAME_ARG, instrument.nameLocalized)
-        intent.putExtra(CoursesActivity.INSTRUMENT_ID_ARG, instrument.id)
+        intent.putExtra(CoursesActivity.INSTRUMENT_NAME_ARG, name)
+        intent.putExtra(CoursesActivity.INSTRUMENT_ID_ARG, id)
         startActivity(intent)
+    }
+
+    override fun onInstrumentSelected(instrument: InstrumentDataElement) {
+        presenter.onInstrumentSelected(instrument)
     }
 }
