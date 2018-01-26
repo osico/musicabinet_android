@@ -99,6 +99,9 @@
     <!-- Resources for DialogLessonSelect -->
     <string name="choose_lesson">Choose lesson</string>
 
+    <!-- Resources for NoteActivity-->
+    <string name="save_and_exit">Save and exit</string>
+
 
     <!-- Resources for LessonActivity -->
     <string name="lesson_tab">Lesson</string>
