@@ -7,6 +7,7 @@ import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterRes
 import com.musicabinet.mobile.model.lesson.lesson.LessonGroup
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItemResponse
+import com.musicabinet.mobile.model.lesson.machine.note.image.NoteImageResponse
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.profile.UserProfile
 import io.reactivex.Completable
@@ -54,4 +55,7 @@ interface MusicabinetRepository {
     fun getNoteModule(id: String): Observable<NoteItemResponse>
 
     fun getNoteCourse(id: String): Observable<NoteItemResponse>
+
+    fun getNoteDiagram(moduleId: String, courseId: String, toneId: String,
+                       chordTypeId: String): Observable<NoteImageResponse>
 }

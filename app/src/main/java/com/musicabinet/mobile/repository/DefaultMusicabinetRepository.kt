@@ -14,13 +14,13 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
     private const val HOME_VIDEO_ID = "1eb9efe2-1428-476a-a69c-46c1cebb9dad"
     private const val HOME_NEWS_ID = "1eb9efe2-1428-476a-a69c-46c1cebb9dab"
     private const val HOME_TUTORIALS_ID = "1eb9efe2-1428-476a-a69c-46c1cebb9daa"
-    private const val HOME_SORT_FIELD = "el.sortOrder"
-    private const val HOME_SORT_DIR = "ASC"
+    private const val DEFAULT_SORT_FIELD = "el.sortOrder"
+    private const val DEFAULT_SORT_DIR = "ASC"
     private const val REQUEST_ITEM_COUNT = 5
 
     private const val LOGIN_TYPE_EMAIL = "email"
 
-    private const val LESSON_REQUEST_COUNT = 100
+    private const val DEFAULT_REQUEST_COUNT = 100
 
     private const val PREPARED_LESSON_STATUS = true
 
@@ -28,15 +28,15 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     override fun getHomeNews(start: Int) =
             ApiFactory.service.getHomeItems(HOME_NEWS_ID, true, start, REQUEST_ITEM_COUNT,
-                    HOME_SORT_FIELD, HOME_SORT_DIR)
+                    DEFAULT_SORT_FIELD, DEFAULT_SORT_DIR)
 
     override fun getHomeTutorial(start: Int) =
             ApiFactory.service.getHomeItems(HOME_TUTORIALS_ID, true, start, REQUEST_ITEM_COUNT,
-                    HOME_SORT_FIELD, HOME_SORT_DIR)
+                    DEFAULT_SORT_FIELD, DEFAULT_SORT_DIR)
 
     override fun getHomeVideo(start: Int) =
             ApiFactory.service.getHomeItems(HOME_VIDEO_ID, true, start, REQUEST_ITEM_COUNT,
-                    HOME_SORT_FIELD, HOME_SORT_DIR)
+                    DEFAULT_SORT_FIELD, DEFAULT_SORT_DIR)
 
     override fun getInstrumentList() =
             ApiFactory.service.getInstrumentList()
@@ -58,7 +58,7 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
             ApiFactory.service.registerUser(RegisterRequestBody(email, password, UserInfo(name, surname)))
 
     override fun getLessonGroup(id: String) =
-            ApiFactory.service.getLessonGroup(id, LESSON_REQUEST_COUNT)
+            ApiFactory.service.getLessonGroup(id, DEFAULT_REQUEST_COUNT)
 
     override fun getNextLesson(id: String) =
             ApiFactory.service.getNextLesson(id, PREPARED_LESSON_STATUS)
@@ -78,5 +78,11 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
     override fun getNoteCourse(id: String) = ApiFactory.service.getNoteCourse(id)
 
     override fun getNoteModule(id: String) = ApiFactory.service.getNoteModule(id)
+
+    override fun getNoteDiagram(moduleId: String, courseId: String, toneId: String,
+                                chordTypeId: String)
+            = ApiFactory.service.getNoteDiagram(moduleId, courseId, toneId, chordTypeId,
+            true, true, 1, DEFAULT_REQUEST_COUNT,
+            DEFAULT_SORT_FIELD, DEFAULT_SORT_DIR, true)
 
 }

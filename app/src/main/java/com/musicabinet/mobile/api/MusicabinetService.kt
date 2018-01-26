@@ -7,6 +7,7 @@ import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterRes
 import com.musicabinet.mobile.model.lesson.lesson.LessonGroup
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItemResponse
+import com.musicabinet.mobile.model.lesson.machine.note.image.NoteImageResponse
 import com.musicabinet.mobile.model.lesson.progress.LessonProgress
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.login.LoginRequestBody
@@ -82,4 +83,17 @@ interface MusicabinetService {
 
     @GET("/api/course")
     fun getNoteCourse(@Query("instrumentId") instrumentId: String): Observable<NoteItemResponse>
+
+    @GET("api/diagram")
+    fun getNoteDiagram(@Query("moduleId") moduleId: String,
+                       @Query("courseId") courseId: String,
+                       @Query("toneId") toneId: String,
+                       @Query("chordTypeId") chordTypeId: String,
+                       @Query("withElements") withElements: Boolean,
+                       @Query("withUserStatistics") withUserStatistics: Boolean,
+                       @Query("page") page: Int,
+                       @Query("count") count: Int,
+                       @Query("sortField") sortField: String,
+                       @Query("sortDir") sortDir: String,
+                       @Query("enrich") enrich: Boolean): Observable<NoteImageResponse>
 }
