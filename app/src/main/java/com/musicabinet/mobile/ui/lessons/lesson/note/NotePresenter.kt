@@ -36,8 +36,10 @@ class NotePresenter(private val repository: MusicabinetRepository,
                 .subscribe({ pair: Pair<List<NoteItem>, List<NoteItem>> ->
                     view.showInstrument(pair.first)
                     view.showModule(pair.second)
-                    //TODO Here should be check about empty array
-                    getNoteDiagram(toneOrChordResult, pair.first[0].id, pair.second[0].id)
+                    if (!pair.first.isEmpty() && !pair.second.isEmpty())
+                        getNoteDiagram(toneOrChordResult, pair.first[0].id, pair.second[0].id)
+                    else
+                        view.showLoading(false)
                 }, { t: Throwable -> view.showError() }))
     }
 
