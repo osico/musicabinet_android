@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.lessons.lesson.note
 
+import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItem
 
 /**
@@ -21,7 +22,7 @@ interface NoteContract {
 
     interface Presenter {
 
-        fun subscribe()
+        fun subscribe(toneOrChordResult: ToneOrChordResult)
 
         fun unsubscribe()
 

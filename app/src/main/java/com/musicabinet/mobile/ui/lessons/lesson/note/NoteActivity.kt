@@ -41,7 +41,7 @@ class NoteActivity : ActionBarActivity(), NoteContract.View {
 
         title = toneOrChordArg.tone.name + " " + toneOrChordArg.chord.name
 
-        presenter.subscribe()
+        presenter.subscribe(toneOrChordArg)
     }
 
     override fun onPause() {
