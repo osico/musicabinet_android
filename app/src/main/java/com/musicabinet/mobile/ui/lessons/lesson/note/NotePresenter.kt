@@ -10,6 +10,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.BiFunction
+import java.util.*
 
 /**
  * @author Kirchhoff-
@@ -24,7 +25,11 @@ class NotePresenter(private val repository: MusicabinetRepository,
         subscriptions.add(Observable.zip(repository.getNoteModule(storage.getSelectedInstrumentId()),
                 repository.getNoteCourse(storage.getSelectedInstrumentId()),
                 BiFunction<NoteItemResponse, NoteItemResponse, Pair<List<NoteItem>, List<NoteItem>>>
-                { noteModule, noteCourse -> Pair(noteModule.noteList, noteCourse.noteList) })
+                { noteModule, noteCourse ->
+                    Collections.sort(noteModule.noteList)
+                    Collections.sort(noteCourse.noteList)
+                    Pair(noteModule.noteList, noteCourse.noteList)
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading(true) }
                 .subscribe({ pair: Pair<List<NoteItem>, List<NoteItem>> ->
