@@ -3,13 +3,16 @@ package com.musicabinet.mobile.ui.lessons.lesson.note
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.GridLayoutManager
 import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItem
+import com.musicabinet.mobile.model.lesson.machine.note.image.NoteElement
 import com.musicabinet.mobile.ui.ActionBarActivity
+import com.musicabinet.mobile.ui.lessons.lesson.note.adapter.image.NoteImageAdapter
 import com.musicabinet.mobile.ui.lessons.lesson.note.adapter.spinner.NoteSpinnerAdapter
 import kotlinx.android.synthetic.main.activity_note.*
 import org.jetbrains.anko.toast
@@ -69,5 +72,13 @@ class NoteActivity : ActionBarActivity(), NoteContract.View {
     override fun showModule(list: List<NoteItem>) {
         val adapter = NoteSpinnerAdapter(this, R.layout.item_note_spinner, list)
         spinnerModule.adapter = adapter
+    }
+
+    override fun showNoteImage(list: List<NoteElement>) {
+        val adapter = NoteImageAdapter(list)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = GridLayoutManager(this,
+                4)
+        recyclerView.setHasFixedSize(true)
     }
 }

@@ -3,6 +3,7 @@ package com.musicabinet.mobile.ui.lessons.lesson.note
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItem
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItemResponse
+import com.musicabinet.mobile.model.lesson.machine.note.image.NoteElement
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteImageResponse
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import com.musicabinet.mobile.repository.keyvalue.KeyValueStorage
@@ -51,6 +52,11 @@ class NotePresenter(private val repository: MusicabinetRepository,
                 toneOrChordResult.chord.id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ imageResponse: NoteImageResponse ->
+                    val noteImageList = ArrayList<NoteElement>()
+                    for (item in imageResponse.list) {
+                        noteImageList.addAll(item.list)
+                    }
+                    view.showNoteImage(noteImageList)
                     view.showLoading(false)
                 }, { t: Throwable ->
                     view.showError()
