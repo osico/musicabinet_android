@@ -20,7 +20,7 @@ import org.jetbrains.anko.toast
 /**
  * @author Kirchhoff-
  */
-class NoteActivity : ActionBarActivity(), NoteContract.View {
+class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.NoteItemSelected {
 
     companion object {
         fun requestNote(activity: Activity, toneOrChordArg: ToneOrChordResult, tagArg: String) {
@@ -56,6 +56,8 @@ class NoteActivity : ActionBarActivity(), NoteContract.View {
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
+
+        bSave.isEnabled = false
     }
 
     override fun onPause() {
@@ -86,10 +88,14 @@ class NoteActivity : ActionBarActivity(), NoteContract.View {
     }
 
     override fun showNoteImage(list: List<NoteElement>) {
-        adapter = NoteImageAdapter(list)
+        adapter = NoteImageAdapter(list, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(this,
                 4)
         recyclerView.setHasFixedSize(true)
+    }
+
+    override fun onItemSelected(isSelected: Boolean) {
+        bSave.isEnabled = isSelected
     }
 }
