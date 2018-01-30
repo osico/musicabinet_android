@@ -33,4 +33,15 @@ class NoteImageAdapter : BaseRecyclerAdapter<NoteImageViewHolder, NoteElement>,
         selectedList[position] = result
         notifyDataSetChanged()
     }
+
+
+    fun getSelectedElement(): NoteElement {
+        var position = 0
+        for (i in selectedList.indices) {
+            if (selectedList[i])
+                position = i
+        }
+
+        return getItem(position)
+    }
 }

@@ -35,6 +35,7 @@ class NoteActivity : ActionBarActivity(), NoteContract.View {
             this)
 
     private lateinit var toneOrChordArg: ToneOrChordResult
+    private lateinit var adapter: NoteImageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +46,16 @@ class NoteActivity : ActionBarActivity(), NoteContract.View {
         title = toneOrChordArg.tone.name + " " + toneOrChordArg.chord.name
 
         presenter.subscribe(toneOrChordArg)
+
+        bSave.setOnClickListener {
+            val resultIntent = Intent()
+            resultIntent.putExtra(Constants.NOTE_TAG_ARG,
+                    intent.getStringExtra(Constants.NOTE_TAG_ARG))
+            resultIntent.putExtra(Constants.NOTE_RESULT_ARG,
+                    adapter.getSelectedElement())
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        }
     }
 
     override fun onPause() {
@@ -75,7 +86,7 @@ class NoteActivity : ActionBarActivity(), NoteContract.View {
     }
 
     override fun showNoteImage(list: List<NoteElement>) {
-        val adapter = NoteImageAdapter(list)
+        adapter = NoteImageAdapter(list)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(this,
                 4)

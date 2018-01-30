@@ -65,6 +65,13 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
                     .findViewWithTag(resultTag)
 
             guideElementView.setToneAndChord(data.getParcelableExtra(Constants.GUIDE_MACHINE_ELEMENT_RESULT_ARG))
+        } else if (requestCode == Constants.NOTE_REQUEST_CODE && resultCode == Activity.RESULT_OK &&
+                data != null) {
+            val resultTag: String = data.getStringExtra(Constants.NOTE_TAG_ARG)
+            val guideElementView: GuideElementView = machineLayout
+                    .findViewWithTag(resultTag)
+
+            guideElementView.setNoteImage(data.getParcelableExtra(Constants.NOTE_RESULT_ARG))
         }
     }
 }
