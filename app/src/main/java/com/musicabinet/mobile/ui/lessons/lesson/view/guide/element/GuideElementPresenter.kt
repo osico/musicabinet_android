@@ -35,7 +35,7 @@ class GuideElementPresenter(private val view: GuideElementContract.View) : Guide
 
     override fun requestNote() {
         if (toneOrChordResult != null)
-            view.requestNote(toneOrChordResult!!)
+            view.requestNote(toneOrChordResult!!, noteElement)
     }
 
     override fun showNote(element: NoteElement) {

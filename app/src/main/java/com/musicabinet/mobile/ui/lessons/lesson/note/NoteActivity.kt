@@ -23,9 +23,11 @@ import org.jetbrains.anko.toast
 class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.NoteItemSelected {
 
     companion object {
-        fun requestNote(activity: Activity, toneOrChordArg: ToneOrChordResult, tagArg: String) {
+        fun requestNote(activity: Activity, toneOrChordArg: ToneOrChordResult,
+                        noteElement: NoteElement?, tagArg: String) {
             val intent = Intent(activity, NoteActivity::class.java)
             intent.putExtra(Constants.NOTE_ELEMENT_ARG, toneOrChordArg)
+            intent.putExtra(Constants.NOTE_SELECTED_ELEMENT_ARG, noteElement)
             intent.putExtra(Constants.NOTE_TAG_ARG, tagArg)
             activity.startActivityForResult(intent, Constants.NOTE_REQUEST_CODE)
         }
@@ -88,11 +90,16 @@ class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.No
     }
 
     override fun showNoteImage(list: List<NoteElement>) {
-        adapter = NoteImageAdapter(list, this)
+        val noteItem: NoteElement? = intent.getParcelableExtra(Constants.NOTE_SELECTED_ELEMENT_ARG)
+        adapter = NoteImageAdapter(list, noteItem, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(this,
                 4)
         recyclerView.setHasFixedSize(true)
+
+        val selectedPosition = adapter.getSelectedElementPosition()
+        if (selectedPosition != 0)
+            recyclerView.scrollToPosition(selectedPosition)
     }
 
     override fun onItemSelected(isSelected: Boolean) {

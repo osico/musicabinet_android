@@ -87,8 +87,8 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
         tvChord.text = chord
     }
 
-    override fun requestNote(toneAndChordResult: ToneOrChordResult) {
-        NoteActivity.requestNote(context as Activity, toneAndChordResult, tag.toString())
+    override fun requestNote(toneAndChordResult: ToneOrChordResult, noteElement: NoteElement?) {
+        NoteActivity.requestNote(context as Activity, toneAndChordResult, noteElement, tag.toString())
     }
 
 }

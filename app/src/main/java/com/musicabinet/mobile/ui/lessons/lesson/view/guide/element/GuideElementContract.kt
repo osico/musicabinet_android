@@ -26,7 +26,7 @@ interface GuideElementContract {
 
         fun setChord(chord: String)
 
-        fun requestNote(toneAndChordResult: ToneOrChordResult)
+        fun requestNote(toneAndChordResult: ToneOrChordResult, noteElement: NoteElement?)
 
     }
 

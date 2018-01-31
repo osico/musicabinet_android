@@ -15,10 +15,19 @@ class NoteImageAdapter : BaseRecyclerAdapter<NoteImageViewHolder, NoteElement>,
     private var selectedList: MutableList<Boolean>
     private var listener: NoteItemSelected
 
-    constructor(items: List<NoteElement>, listener: NoteItemSelected) : super(items) {
+    constructor(items: List<NoteElement>, selectedItem: NoteElement?, listener: NoteItemSelected) : super(items) {
         selectedList = MutableList(items.size, { false })
         setOnItemClickWithPosition(this)
         this.listener = listener
+
+        if (selectedItem != null) {
+            for (i in items.indices) {
+                if (items[i].id == selectedItem.id) {
+                    selectedList[i] = true
+                    listener.onItemSelected(true)
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -37,7 +46,6 @@ class NoteImageAdapter : BaseRecyclerAdapter<NoteImageViewHolder, NoteElement>,
         notifyDataSetChanged()
     }
 
-
     fun getSelectedElement(): NoteElement {
         var position = 0
         for (i in selectedList.indices) {
@@ -48,6 +56,15 @@ class NoteImageAdapter : BaseRecyclerAdapter<NoteImageViewHolder, NoteElement>,
         return getItem(position)
     }
 
+    fun getSelectedElementPosition(): Int {
+        var position = 0
+        for (i in selectedList.indices) {
+            if (selectedList[i])
+                position = i
+        }
+
+        return position
+    }
 
     interface NoteItemSelected {
 
