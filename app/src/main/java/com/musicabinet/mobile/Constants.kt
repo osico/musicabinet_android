@@ -13,5 +13,6 @@ object Constants {
     const val NOTE_REQUEST_CODE = 13000
     const val NOTE_TAG_ARG = "NOTE_TAG_ARG"
     const val NOTE_ELEMENT_ARG = "NOTE_ELEMENT_ARG"
+    const val NOTE_SELECTED_ELEMENT_ARG = "NOTE_SELECTED_ELEMENT_ARG"
     const val NOTE_RESULT_ARG = "NOTE_RESULT_ARG"
 }

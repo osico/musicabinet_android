@@ -60,7 +60,12 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
     }
 
     fun setNoteImage(element: NoteElement) {
+        presenter.showNote(element)
         ivNotes.loadLessonImage(element.image.id)
+    }
+
+    override fun showNoteImage(url: String) {
+        ivNotes.loadLessonImage(url)
     }
 
     override fun showAddButton(show: Boolean) {

@@ -1,6 +1,7 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.guide.element
 
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
+import com.musicabinet.mobile.model.lesson.machine.note.image.NoteElement
 
 /**
  * @author Kirchhoff-
@@ -19,6 +20,8 @@ interface GuideElementContract {
 
         fun showToneAndChord(show: Boolean)
 
+        fun showNoteImage(url: String)
+
         fun setTone(tone: String)
 
         fun setChord(chord: String)
@@ -34,6 +37,8 @@ interface GuideElementContract {
         fun requestToneAndChord()
 
         fun showToneAndChord(result: ToneOrChordResult)
+
+        fun showNote(element: NoteElement)
 
         fun requestNote()
     }

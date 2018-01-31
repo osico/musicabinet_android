@@ -2,6 +2,7 @@ package com.musicabinet.mobile.ui.lessons.lesson.view.guide.element
 
 import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
+import com.musicabinet.mobile.model.lesson.machine.note.image.NoteElement
 
 
 /**
@@ -10,6 +11,7 @@ import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 class GuideElementPresenter(private val view: GuideElementContract.View) : GuideElementContract.Presenter {
 
     private var toneOrChordResult: ToneOrChordResult? = null
+    private var noteElement: NoteElement? = null
 
     override fun subscribe() {
         view.enableFabClick(true)
@@ -34,5 +36,10 @@ class GuideElementPresenter(private val view: GuideElementContract.View) : Guide
     override fun requestNote() {
         if (toneOrChordResult != null)
             view.requestNote(toneOrChordResult!!)
+    }
+
+    override fun showNote(element: NoteElement) {
+        noteElement = element
+        view.showNoteImage(element.image.id)
     }
 }
