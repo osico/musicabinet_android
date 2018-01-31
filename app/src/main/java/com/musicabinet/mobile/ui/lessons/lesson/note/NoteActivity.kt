@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.view.View
+import android.widget.AdapterView
 import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
@@ -20,7 +22,7 @@ import org.jetbrains.anko.toast
 /**
  * @author Kirchhoff-
  */
-class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.NoteItemSelected {
+class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.NoteItemSelected, AdapterView.OnItemSelectedListener {
 
     companion object {
         fun requestNote(activity: Activity, toneOrChordArg: ToneOrChordResult,
@@ -38,6 +40,11 @@ class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.No
 
     private lateinit var toneOrChordArg: ToneOrChordResult
     private lateinit var adapter: NoteImageAdapter
+    //For fixing android bug
+    private var selectedItemCount = 0
+    private lateinit var instrumentAdapter: NoteSpinnerAdapter
+    private lateinit var moduleAdapter: NoteSpinnerAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +79,13 @@ class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.No
 
         spinnerInstrument.setVisible(!show)
         spinnerModule.setVisible(!show)
+        recyclerView.setVisible(!show)
+    }
+
+    override fun showNoteLoading(show: Boolean) {
+        progressBar.setVisible(show)
+
+        recyclerView.setVisible(!show)
     }
 
     override fun showError() {
@@ -80,13 +94,15 @@ class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.No
     }
 
     override fun showInstrument(list: List<NoteItem>) {
-        val adapter = NoteSpinnerAdapter(this, R.layout.item_note_spinner, list)
-        spinnerInstrument.adapter = adapter
+        instrumentAdapter = NoteSpinnerAdapter(this, R.layout.item_note_spinner, list)
+        spinnerInstrument.adapter = instrumentAdapter
+        spinnerInstrument.onItemSelectedListener = this
     }
 
     override fun showModule(list: List<NoteItem>) {
-        val adapter = NoteSpinnerAdapter(this, R.layout.item_note_spinner, list)
-        spinnerModule.adapter = adapter
+        moduleAdapter = NoteSpinnerAdapter(this, R.layout.item_note_spinner, list)
+        spinnerModule.adapter = moduleAdapter
+        spinnerModule.onItemSelectedListener = this
     }
 
     override fun showNoteImage(list: List<NoteElement>) {
@@ -104,5 +120,18 @@ class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.No
 
     override fun onItemSelected(isSelected: Boolean) {
         bSave.isEnabled = isSelected
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        if (selectedItemCount > 1) {
+            presenter.getNoteDiagram(toneOrChordArg, moduleAdapter.getItem(spinnerModule.selectedItemPosition).id,
+                    instrumentAdapter.getItem(spinnerInstrument.selectedItemPosition).id)
+        } else {
+            selectedItemCount++
+        }
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        //Not needed
     }
 }

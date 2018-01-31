@@ -13,6 +13,8 @@ interface NoteContract {
 
         fun showLoading(show: Boolean)
 
+        fun showNoteLoading(show: Boolean)
+
         fun showError()
 
         fun showModule(list: List<NoteItem>)

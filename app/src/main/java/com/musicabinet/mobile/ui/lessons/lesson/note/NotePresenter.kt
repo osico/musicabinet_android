@@ -48,18 +48,22 @@ class NotePresenter(private val repository: MusicabinetRepository,
     }
 
 
-    private fun getNoteDiagram(toneOrChordResult: ToneOrChordResult, moduleId: String,
-                               courseId: String) {
+    public fun getNoteDiagram(toneOrChordResult: ToneOrChordResult, moduleId: String,
+                              courseId: String) {
         subscriptions.add(repository.getNoteDiagram(moduleId, courseId, toneOrChordResult.tone.id,
                 toneOrChordResult.chord.id)
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    view.showLoading(false)
+                    view.showNoteLoading(true)
+                }
                 .subscribe({ imageResponse: NoteImageResponse ->
                     val noteImageList = ArrayList<NoteElement>()
                     for (item in imageResponse.list) {
                         noteImageList.addAll(item.list)
                     }
                     view.showNoteImage(noteImageList)
-                    view.showLoading(false)
+                    view.showNoteLoading(false)
                 }, { t: Throwable ->
                     view.showError()
                 }))
