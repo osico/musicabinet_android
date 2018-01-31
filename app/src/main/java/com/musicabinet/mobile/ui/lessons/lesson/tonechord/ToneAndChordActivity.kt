@@ -20,10 +20,6 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
 
     private val presenter = ToneAndChordPresenter(this, Injection.provideRepository())
 
-    //Just for test , remove in feature
-    private lateinit var firstToneOrChord: ToneOrChord
-    private lateinit var secondToneOrChord: ToneOrChord
-
     companion object {
 
         fun requestToneAndChord(activity: Activity, requestCode: Int, tagArg: String) {
@@ -32,6 +28,9 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
             activity.startActivityForResult(intent, requestCode)
         }
     }
+
+    private lateinit var toneList: List<ToneOrChord>
+    private lateinit var chordList: List<ToneOrChord>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +46,7 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
             resultIntent.putExtra(Constants.GUIDE_MACHINE_TAG_RESULT_ARG,
                     intent.getStringExtra(Constants.GUIDE_MACHINE_TAG_RESULT_ARG))
             resultIntent.putExtra(Constants.GUIDE_MACHINE_ELEMENT_RESULT_ARG,
-                    ToneOrChordResult(firstToneOrChord, secondToneOrChord))
+                    ToneOrChordResult(toneList[npTone.value], chordList[npChord.value]))
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
@@ -68,6 +67,7 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
     }
 
     override fun showTone(list: List<ToneOrChord>) {
+        toneList = list
         val toneStringList = ArrayList<String>()
         for (item in list)
             toneStringList.add(item.name)
@@ -77,6 +77,7 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
     }
 
     override fun showChord(list: List<ToneOrChord>) {
+        chordList = list
         val chordStringList = ArrayList<String>()
         for (item in list)
             chordStringList.add(item.name)
