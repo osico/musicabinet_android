@@ -80,6 +80,12 @@ class LessonPresenter(private val view: LessonContract.View,
                             lessonImageList.add(LessonData(lessonResponse.lessonParts[i].name, images))
                     }
 
+                    //determine stave item for guideMachine(it stave item is exist)
+                    if (!lessonResponse.improvisations.isEmpty()) {
+                        guideMachineStave = lessonResponse
+                                .improvisations[lessonResponse.improvisations.size - 1].stave
+                    }
+
                     currentLessonId = lessonResponse.id
                     LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
                             lessonImageList, accompaniments,
@@ -123,6 +129,13 @@ class LessonPresenter(private val view: LessonContract.View,
 
                         if (lessonResponse.lessonParts[bufI].isLessonPartsExist())
                             lessonImageList.add(LessonData(lessonResponse.lessonParts[i].name, images))
+                    }
+
+
+                    //determine stave item for guideMachine(it stave item is exist)
+                    if (!lessonResponse.improvisations.isEmpty()) {
+                        guideMachineStave = lessonResponse
+                                .improvisations[lessonResponse.improvisations.size - 1].stave
                     }
 
                     currentLessonId = lessonResponse.id
