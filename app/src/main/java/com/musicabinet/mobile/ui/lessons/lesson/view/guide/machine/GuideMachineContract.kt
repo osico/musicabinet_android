@@ -11,6 +11,8 @@ interface GuideMachineContract {
 
         fun addRow(row: Int)
 
+        fun showLoading(show: Boolean)
+
     }
 
     interface Presenter {

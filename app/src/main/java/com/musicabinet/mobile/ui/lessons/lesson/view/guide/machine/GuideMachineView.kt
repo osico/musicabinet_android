@@ -7,7 +7,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.musicabinet.mobile.Constants
+import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.model.lesson.remote.Stave
 import com.musicabinet.mobile.ui.lessons.lesson.view.guide.element.GuideElementView
@@ -19,7 +21,7 @@ import kotlinx.android.synthetic.main.view_guide_machine.view.*
  */
 class GuideMachineView : LinearLayout, GuideMachineContract.View {
 
-    private val presenter = GuideMachinePresenter(this)
+    private val presenter = GuideMachinePresenter(this, Injection.provideRepository())
 
     constructor(context: Context) : super(context) {
         init()
@@ -57,6 +59,11 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
 
     fun onPause() {
         soundView.onPause()
+    }
+
+    override fun showLoading(show: Boolean) {
+        progressBar.setVisible(show)
+        machineLayout.setVisible(!show)
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
