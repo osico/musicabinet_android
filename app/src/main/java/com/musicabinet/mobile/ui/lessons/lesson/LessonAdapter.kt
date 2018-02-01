@@ -9,6 +9,7 @@ import com.musicabinet.mobile.R
 import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
+import com.musicabinet.mobile.model.lesson.remote.Stave
 import com.musicabinet.mobile.ui.lessons.lesson.view.guide.machine.GuideMachineView
 import com.musicabinet.mobile.ui.lessons.lesson.view.lesson.LessonView
 import com.musicabinet.mobile.ui.lessons.lesson.view.method.MethodView
@@ -64,6 +65,10 @@ class LessonAdapter(private val context: Context, private val hasGuideMachine: B
     fun setAccompaniments(accompaniments: Set<Accompaniment>) {
         lessonView?.setAccompaniments(accompaniments)
         guideMachineView?.setAccompaniments(accompaniments)
+    }
+
+    fun setStave(stave: Stave?) {
+        guideMachineView?.setStave(stave)
     }
 
     fun onPause() {

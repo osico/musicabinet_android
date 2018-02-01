@@ -117,6 +117,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
     override fun showGuideMachine(stave: Stave?) {
         adapter = LessonAdapter(this, true)
         viewPager.adapter = adapter
+        adapter?.setStave(stave)
     }
 
     override fun onPause() {

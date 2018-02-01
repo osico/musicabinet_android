@@ -1,5 +1,8 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.guide.machine
 
+import android.util.Log
+import com.musicabinet.mobile.model.lesson.remote.Stave
+
 /**
  * @author Kirchhoff-
  */
@@ -8,8 +11,11 @@ class GuideMachinePresenter(private val view: GuideMachineContract.View) : Guide
     private var row = 0
     private var firstSelect = true
 
-    override fun subscribe() {
-        view.addRow(row)
+    override fun subscribe(stave: Stave?) {
+        if (stave == null)
+            view.addRow(row)
+        else
+            Log.d("TAG", "Should request and parse file")
     }
 
     override fun onElementSelected(rowString: String) {
