@@ -2,6 +2,7 @@ package com.musicabinet.mobile.ui.lessons.lesson.view.guide.machine
 
 import com.musicabinet.mobile.model.lesson.remote.Stave
 import com.musicabinet.mobile.repository.MusicabinetRepository
+import com.musicabinet.mobile.utils.FileUtils
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -74,6 +75,7 @@ class GuideMachinePresenter(private val view: GuideMachineContract.View,
                 }.observeOn(AndroidSchedulers.mainThread())
                 .doOnTerminate { view.showLoading(false) }
                 .subscribe({ file: File ->
+                    val list = FileUtils.getDataFromFile(file.path)
                     view.showImprovisationNote()
                 }, { t: Throwable ->
                     view.showError()
