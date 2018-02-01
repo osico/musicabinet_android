@@ -16,6 +16,7 @@ import com.musicabinet.mobile.model.lesson.lesson.Lesson
 import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
+import com.musicabinet.mobile.model.lesson.remote.Stave
 import com.musicabinet.mobile.ui.lessons.lesson.dialog.LessonSelectActivity
 import com.musicabinet.mobile.ui.view.metronome.MetronomeView
 import kotlinx.android.synthetic.main.activity_lesson.*
@@ -113,7 +114,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
         adapter?.setAccompaniments(accompaniments)
     }
 
-    override fun showGuideMachine() {
+    override fun showGuideMachine(stave: Stave?) {
         adapter = LessonAdapter(this, true)
         viewPager.adapter = adapter
     }

@@ -5,6 +5,7 @@ import com.musicabinet.mobile.model.lesson.lesson.Lesson
 import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
+import com.musicabinet.mobile.model.lesson.remote.Stave
 
 /**
  * @author Kirchhoff-
@@ -32,7 +33,7 @@ interface LessonContract {
 
         fun showAccompaniments(accompaniments: Set<Accompaniment>)
 
-        fun showGuideMachine()
+        fun showGuideMachine(stave: Stave?)
 
         fun onLessonSelected(id: String)
     }

@@ -8,6 +8,7 @@ import com.musicabinet.mobile.model.lesson.local.LessonScreenData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
+import com.musicabinet.mobile.model.lesson.remote.Stave
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -53,6 +54,7 @@ class LessonPresenter(private val view: LessonContract.View,
                     val methodList = ArrayList<MethodItem>()
                     val lessonImageList = ArrayList<LessonData>()
                     val accompaniments = HashSet<Accompaniment>()
+                    var guideMachineStave: Stave? = null
                     for (lessonPart in lessonResponse.lessonParts) {
                         if (lessonPart.video != null && lessonPart.video!!.video != null)
                             methodList.add(MethodItem(lessonPart.video!!.description,
@@ -63,8 +65,12 @@ class LessonPresenter(private val view: LessonContract.View,
                         val images = ArrayList<String>()
                         val bufI = i
                         for (exercise in lessonResponse.lessonParts[i].exercisesList) {
-                            if (exercise.stave != null)
+                            if (exercise.stave != null) {
                                 images.add(exercise.stave.file.id)
+
+                                if (exercise.stave.isGuideMachineStave())
+                                    guideMachineStave = exercise.stave
+                            }
 
                             if (exercise.accompaniment != null)
                                 accompaniments.add(exercise.accompaniment)
@@ -78,7 +84,7 @@ class LessonPresenter(private val view: LessonContract.View,
                     LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
                             lessonImageList, accompaniments,
                             lessonResponse.duration - lessonResponse.getProgress(),
-                            lessonResponse.hasGuideMachine())
+                            lessonResponse.hasGuideMachine(), guideMachineStave)
                 })
                 .subscribe({ screenData: LessonScreenData -> showLesson(screenData) },
                         { t: Throwable -> view.showError() }))
@@ -93,6 +99,7 @@ class LessonPresenter(private val view: LessonContract.View,
                     val methodList = ArrayList<MethodItem>()
                     val lessonImageList = ArrayList<LessonData>()
                     val accompaniments = HashSet<Accompaniment>()
+                    var guideMachineStave: Stave? = null
                     for (lessonPart in lessonResponse.lessonParts) {
                         if (lessonPart.video != null && lessonPart.video!!.video != null)
                             methodList.add(MethodItem(lessonPart.video!!.description,
@@ -103,8 +110,12 @@ class LessonPresenter(private val view: LessonContract.View,
                         val images = ArrayList<String>()
                         val bufI = i
                         for (exercise in lessonResponse.lessonParts[i].exercisesList) {
-                            if (exercise.stave != null)
+                            if (exercise.stave != null) {
                                 images.add(exercise.stave.file.id)
+
+                                if (exercise.stave.isGuideMachineStave())
+                                    guideMachineStave = exercise.stave
+                            }
 
                             if (exercise.accompaniment != null)
                                 accompaniments.add(exercise.accompaniment)
@@ -118,7 +129,7 @@ class LessonPresenter(private val view: LessonContract.View,
                     LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
                             lessonImageList, accompaniments,
                             lessonResponse.duration - lessonResponse.getProgress(),
-                            lessonResponse.hasGuideMachine())
+                            lessonResponse.hasGuideMachine(), guideMachineStave)
                 })
                 .subscribe({ screenData: LessonScreenData -> showLesson(screenData) },
                         { t: Throwable -> view.showError() }))
@@ -131,7 +142,7 @@ class LessonPresenter(private val view: LessonContract.View,
         view.setLessonTime(screenData.spendTime, screenData.id)
 
         if (screenData.hasGuideMachine)
-            view.showGuideMachine()
+            view.showGuideMachine(screenData.guideMachineStave)
         else
             view.showLessonImages(screenData.lessonImages)
 
