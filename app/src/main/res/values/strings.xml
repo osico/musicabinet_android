@@ -131,4 +131,7 @@
 
     <!-- Resources for ProgressDialog-->
     <string name="progress_dialog_text">To improve the perception, we recommend moving on to the next module</string>
+
+    <!-- Resources for GuideMachine -->
+    <string name="guide_machine_download_file_error">Error download improvisation file</string>
 </resources>

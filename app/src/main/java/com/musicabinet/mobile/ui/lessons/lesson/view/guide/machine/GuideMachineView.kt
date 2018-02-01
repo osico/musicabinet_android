@@ -6,6 +6,7 @@ import android.content.Intent
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.view_guide_machine.view.*
  */
 class GuideMachineView : LinearLayout, GuideMachineContract.View {
 
-    private val presenter = GuideMachinePresenter(this, Injection.provideRepository())
+    private val presenter = GuideMachinePresenter(this, Injection.provideRepository(), context.filesDir)
 
     constructor(context: Context) : super(context) {
         init()
@@ -64,6 +65,14 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
     override fun showLoading(show: Boolean) {
         progressBar.setVisible(show)
         machineLayout.setVisible(!show)
+    }
+
+    override fun showError() {
+        Toast.makeText(context, R.string.guide_machine_download_file_error, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showImprovisationNote() {
+        Toast.makeText(context, "ShowImprovisationNote", Toast.LENGTH_SHORT).show()
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -11,7 +11,11 @@ interface GuideMachineContract {
 
         fun addRow(row: Int)
 
+        fun showError()
+
         fun showLoading(show: Boolean)
+
+        fun showImprovisationNote()
 
     }
 
