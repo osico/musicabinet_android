@@ -1,6 +1,7 @@
 package com.musicabinet.mobile.model.lesson.remote
 
 import com.google.gson.annotations.SerializedName
+import com.musicabinet.mobile.model.lesson.machine.ImprovisationsItem
 
 /**
  * @author Kirchhoff-
@@ -10,6 +11,7 @@ data class LessonResponse(@SerializedName("id") val id: String,
                           @SerializedName("progress") private val progress: Progress?,
                           @SerializedName("lessonTypeId") private val lessonTypeId: String?,
                           @SerializedName("lessonParts") val lessonParts: List<LessonPartsItem>,
+                          @SerializedName("improvisations") val improvisations: List<ImprovisationsItem>,
                           @SerializedName("duration") val duration: Long) {
 
 
