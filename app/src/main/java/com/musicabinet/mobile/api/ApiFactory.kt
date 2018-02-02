@@ -3,6 +3,7 @@ package com.musicabinet.mobile.api
 import com.musicabinet.mobile.BuildConfig
 import com.musicabinet.mobile.MusicabinetApp
 import com.musicabinet.mobile.api.cookie.WebviewCookieHandler
+import com.musicabinet.mobile.api.interceptor.LanguageInterceptor
 import com.musicabinet.mobile.api.interceptor.LogginingInterceptor
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
@@ -24,6 +25,7 @@ object ApiFactory {
             OkHttpClient.Builder()
                     .cookieJar(cookieManager)
                     .cache(cache)
+                    .addInterceptor(LanguageInterceptor())
                     .addInterceptor(LogginingInterceptor())
                     .build()
 
