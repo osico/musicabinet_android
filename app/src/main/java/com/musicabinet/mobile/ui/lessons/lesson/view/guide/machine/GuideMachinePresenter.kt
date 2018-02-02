@@ -52,7 +52,8 @@ class GuideMachinePresenter(private val view: GuideMachineContract.View,
     override fun addedRows(rowValue: Int) {
         firstSelect = false
 
-        while (rowValue >= row) {
+        //Added rows , +1 for empty row in the end
+        while (rowValue + 1 >= row) {
             view.addRow(row)
             row += 1
         }
