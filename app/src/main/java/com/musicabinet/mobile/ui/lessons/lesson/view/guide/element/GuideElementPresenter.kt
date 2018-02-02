@@ -17,6 +17,7 @@ class GuideElementPresenter(private val view: GuideElementContract.View) : Guide
     override fun subscribe() {
         view.enableFabClick(true)
         view.enableNoteClick(false)
+        view.showLoading(false)
     }
 
     override fun requestToneAndChord() {
@@ -42,6 +43,8 @@ class GuideElementPresenter(private val view: GuideElementContract.View) : Guide
             view.showToneAndChord(true)
             view.setTone(item.tone!!)
             view.setChord(item.chord!!)
+        } else if (item.noteInformation != null) {
+            view.showLoading(true)
         }
     }
 

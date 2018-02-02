@@ -73,6 +73,14 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
         ivNotes.loadLessonImage(url)
     }
 
+    override fun showLoading(show: Boolean) {
+        guideElementProgressBar.setVisible(show)
+
+        ivNotes.setVisible(!show)
+        toneAndChordLayout.setVisible(!show)
+        fabLayout.setVisible(!show)
+    }
+
     override fun showAddButton(show: Boolean) {
         if (show)
             fabAddElement.visibility = View.VISIBLE

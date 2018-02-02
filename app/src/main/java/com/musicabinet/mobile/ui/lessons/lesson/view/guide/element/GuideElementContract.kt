@@ -11,6 +11,8 @@ interface GuideElementContract {
 
     interface View {
 
+        fun showLoading(show: Boolean)
+
         fun enableFabClick(enable: Boolean)
 
         fun enableNoteClick(enable: Boolean)
