@@ -22,7 +22,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/machineLayout"
+                android:id="@+id/guideMachineLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -30,7 +30,7 @@
             </LinearLayout>
 
             <com.tuyenmonkey.mkloader.MKLoader
-                android:id="@+id/progressBar"
+                android:id="@+id/guideProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

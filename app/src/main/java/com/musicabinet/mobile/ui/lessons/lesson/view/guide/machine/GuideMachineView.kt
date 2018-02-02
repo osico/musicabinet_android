@@ -47,7 +47,7 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
         val rowView = GuideRowView(context)
         rowView.setRowTag(row.toString())
 
-        machineLayout.addView(rowView)
+        guideMachineLayout.addView(rowView)
     }
 
     fun setAccompaniments(accompaniments: Set<Accompaniment>) {
@@ -63,8 +63,8 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
     }
 
     override fun showLoading(show: Boolean) {
-        progressBar.setVisible(show)
-        machineLayout.setVisible(!show)
+        guideProgressBar.setVisible(show)
+        guideMachineLayout.setVisible(!show)
     }
 
     override fun showError() {
@@ -82,14 +82,14 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
             val resultTag: String = data.getStringExtra(Constants.GUIDE_MACHINE_TAG_RESULT_ARG)
             val row = resultTag.substring(resultTag.lastIndexOf("}") + 1, resultTag.length - 1)
             presenter.onElementSelected(row)
-            val guideElementView: GuideElementView = machineLayout
+            val guideElementView: GuideElementView = guideMachineLayout
                     .findViewWithTag(resultTag)
 
             guideElementView.setToneAndChord(data.getParcelableExtra(Constants.GUIDE_MACHINE_ELEMENT_RESULT_ARG))
         } else if (requestCode == Constants.NOTE_REQUEST_CODE && resultCode == Activity.RESULT_OK &&
                 data != null) {
             val resultTag: String = data.getStringExtra(Constants.NOTE_TAG_ARG)
-            val guideElementView: GuideElementView = machineLayout
+            val guideElementView: GuideElementView = guideMachineLayout
                     .findViewWithTag(resultTag)
 
             guideElementView.setNoteImage(data.getParcelableExtra(Constants.NOTE_RESULT_ARG))
