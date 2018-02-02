@@ -85,4 +85,8 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
                     view.showLoading(false)
                 }))
     }
+
+    override fun unsubscribe() {
+        subscriptions.clear()
+    }
 }

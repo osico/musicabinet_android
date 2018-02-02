@@ -38,4 +38,11 @@ class GuideRowView : LinearLayout, GuideRowContract.View {
         thirdElement.tag = position + "3"
         fourthElement.tag = position + "4"
     }
+
+    fun onPause() {
+        firstElement.onPause()
+        secondElement.onPause()
+        thirdElement.onPause()
+        fourthElement.onPause()
+    }
 }

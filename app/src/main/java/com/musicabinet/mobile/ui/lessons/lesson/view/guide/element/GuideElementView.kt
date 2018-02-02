@@ -45,6 +45,10 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
         presenter.subscribe()
     }
 
+    fun onPause() {
+        presenter.unsubscribe()
+    }
+
     override fun enableFabClick(enable: Boolean) {
         fabAddElement.isEnabled = enable
     }

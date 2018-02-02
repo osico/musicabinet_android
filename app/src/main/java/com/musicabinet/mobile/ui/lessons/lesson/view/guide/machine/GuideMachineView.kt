@@ -61,6 +61,11 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
 
     fun onPause() {
         soundView.onPause()
+        val childCount = guideMachineLayout.childCount
+        for (i in 0..childCount step 1) {
+            if (guideMachineLayout.getChildAt(i) is GuideRowView)
+                (guideMachineLayout.getChildAt(i) as GuideRowView).onPause()
+        }
     }
 
     override fun showLoading(show: Boolean) {
@@ -104,4 +109,6 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
             guideElementView.setNoteImage(data.getParcelableExtra(Constants.NOTE_RESULT_ARG))
         }
     }
+
+
 }

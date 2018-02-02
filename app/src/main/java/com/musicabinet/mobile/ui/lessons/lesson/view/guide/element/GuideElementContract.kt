@@ -37,6 +37,8 @@ interface GuideElementContract {
 
         fun subscribe()
 
+        fun unsubscribe()
+
         fun requestToneAndChord()
 
         fun showToneAndChord(result: ToneOrChordResult)
