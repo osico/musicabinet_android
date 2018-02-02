@@ -125,8 +125,8 @@ class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.No
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (selectedItemCount > 1) {
             presenter.getNoteDiagram(toneOrChordArg,
-                    instrumentAdapter.getItem(spinnerInstrument.selectedItemPosition).id,
-                    moduleAdapter.getItem(spinnerModule.selectedItemPosition).id)
+                    moduleAdapter.getItem(spinnerModule.selectedItemPosition).id,
+                    instrumentAdapter.getItem(spinnerInstrument.selectedItemPosition).id)
         } else {
             selectedItemCount++
         }

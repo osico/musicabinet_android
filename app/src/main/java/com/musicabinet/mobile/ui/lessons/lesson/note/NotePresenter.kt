@@ -34,8 +34,8 @@ class NotePresenter(private val repository: MusicabinetRepository,
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading(true) }
                 .subscribe({ pair: Pair<List<NoteItem>, List<NoteItem>> ->
-                    view.showInstrument(pair.first)
-                    view.showModule(pair.second)
+                    view.showModule(pair.first)
+                    view.showInstrument(pair.second)
                     if (!pair.first.isEmpty() && !pair.second.isEmpty())
                         getNoteDiagram(toneOrChordResult, pair.first[0].id, pair.second[0].id)
                     else
