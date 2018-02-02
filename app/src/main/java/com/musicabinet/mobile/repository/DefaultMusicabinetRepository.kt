@@ -1,10 +1,13 @@
 package com.musicabinet.mobile.repository
 
 import com.musicabinet.mobile.api.ApiFactory
+import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageRequestBody
+import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageResponse
 import com.musicabinet.mobile.model.lesson.progress.LessonProgress
 import com.musicabinet.mobile.model.login.LoginRequestBody
 import com.musicabinet.mobile.model.register.RegisterRequestBody
 import com.musicabinet.mobile.model.register.UserInfo
+import io.reactivex.Single
 
 /**
  * @author Kirchhoff-
@@ -84,5 +87,12 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
             = ApiFactory.service.getNoteDiagram(moduleId, courseId, toneId, chordTypeId,
             true, true, 1, DEFAULT_REQUEST_COUNT,
             DEFAULT_SORT_FIELD, DEFAULT_SORT_DIR, true)
+
+    override fun getDiagramImage(diagramString: String): Single<DiagramImageResponse> {
+        val list: MutableList<String> = ArrayList()
+        list.add(diagramString)
+        return ApiFactory.service.getDiagramImage(true,
+                DiagramImageRequestBody(list))
+    }
 
 }

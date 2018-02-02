@@ -6,12 +6,14 @@ import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
 import com.musicabinet.mobile.model.lesson.lesson.LessonGroup
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
+import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageResponse
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItemResponse
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteImageResponse
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.profile.UserProfile
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.Response
 
@@ -58,4 +60,6 @@ interface MusicabinetRepository {
 
     fun getNoteDiagram(moduleId: String, courseId: String, toneId: String,
                        chordTypeId: String): Observable<NoteImageResponse>
+
+    fun getDiagramImage(diagramString: String): Single<DiagramImageResponse>
 }

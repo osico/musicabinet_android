@@ -6,6 +6,8 @@ import com.musicabinet.mobile.model.instrument.matrix.InstrumentMatrixResponse
 import com.musicabinet.mobile.model.instrument.matrix.filter.InstrumentFilterResponse
 import com.musicabinet.mobile.model.lesson.lesson.LessonGroup
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
+import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageRequestBody
+import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageResponse
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItemResponse
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteImageResponse
 import com.musicabinet.mobile.model.lesson.progress.LessonProgress
@@ -15,6 +17,7 @@ import com.musicabinet.mobile.model.profile.UserProfile
 import com.musicabinet.mobile.model.register.RegisterRequestBody
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -84,7 +87,7 @@ interface MusicabinetService {
     @GET("/api/course")
     fun getNoteCourse(@Query("instrumentId") instrumentId: String): Observable<NoteItemResponse>
 
-    @GET("api/diagram")
+    @GET("/api/diagram")
     fun getNoteDiagram(@Query("moduleId") moduleId: String,
                        @Query("courseId") courseId: String,
                        @Query("toneId") toneId: String,
@@ -96,4 +99,9 @@ interface MusicabinetService {
                        @Query("sortField") sortField: String,
                        @Query("sortDir") sortDir: String,
                        @Query("enrich") enrich: Boolean): Observable<NoteImageResponse>
+
+
+    @POST("/api/diagram/find-elements")
+    fun getDiagramImage(@Query("findInChords") findInChords: Boolean,
+                        @Body diagramBody: DiagramImageRequestBody): Single<DiagramImageResponse>
 }
