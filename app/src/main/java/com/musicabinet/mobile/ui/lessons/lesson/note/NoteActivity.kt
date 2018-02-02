@@ -26,10 +26,13 @@ class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.No
 
     companion object {
         fun requestNote(activity: Activity, toneOrChordArg: ToneOrChordResult,
-                        noteElement: NoteElement?, tagArg: String) {
+                        noteElement: NoteElement?, moduleId: String?,
+                        courseId: String?, tagArg: String) {
             val intent = Intent(activity, NoteActivity::class.java)
             intent.putExtra(Constants.NOTE_ELEMENT_ARG, toneOrChordArg)
             intent.putExtra(Constants.NOTE_SELECTED_ELEMENT_ARG, noteElement)
+            intent.putExtra(Constants.NOTE_SELECTED_MODULE_ID_ARG, moduleId)
+            intent.putExtra(Constants.NOTE_SELECTED_COURSE_ID_ARG, courseId)
             intent.putExtra(Constants.NOTE_TAG_ARG, tagArg)
             activity.startActivityForResult(intent, Constants.NOTE_REQUEST_CODE)
         }
@@ -54,14 +57,16 @@ class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.No
 
         title = toneOrChordArg.tone.name + " " + toneOrChordArg.chord.name
 
-        presenter.subscribe(toneOrChordArg)
+        presenter.subscribe(toneOrChordArg,
+                intent.getStringExtra(Constants.NOTE_SELECTED_MODULE_ID_ARG),
+                intent.getStringExtra(Constants.NOTE_SELECTED_COURSE_ID_ARG))
 
         bSave.setOnClickListener {
             val resultIntent = Intent()
-            resultIntent.putExtra(Constants.NOTE_TAG_ARG,
-                    intent.getStringExtra(Constants.NOTE_TAG_ARG))
-            resultIntent.putExtra(Constants.NOTE_RESULT_ARG,
-                    adapter.getSelectedElement())
+            resultIntent.putExtra(Constants.NOTE_TAG_ARG, intent.getStringExtra(Constants.NOTE_TAG_ARG))
+            resultIntent.putExtra(Constants.NOTE_RESULT_ARG, adapter.getSelectedElement())
+            resultIntent.putExtra(Constants.NOTE_MODULE_RESULT_ARG, presenter.getModuleId())
+            resultIntent.putExtra(Constants.NOTE_COURSE_RESULT_ARG, presenter.getCourseId())
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
@@ -93,16 +98,22 @@ class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.No
         finish()
     }
 
-    override fun showInstrument(list: List<NoteItem>) {
+    override fun showInstrument(list: List<NoteItem>, courseId: String?) {
         instrumentAdapter = NoteSpinnerAdapter(this, R.layout.item_note_spinner, list)
         spinnerInstrument.adapter = instrumentAdapter
         spinnerInstrument.onItemSelectedListener = this
+
+        if (courseId != null)
+            spinnerInstrument.setSelection(getItemPosition(list, courseId))
     }
 
-    override fun showModule(list: List<NoteItem>) {
+    override fun showModule(list: List<NoteItem>, moduleId: String?) {
         moduleAdapter = NoteSpinnerAdapter(this, R.layout.item_note_spinner, list)
         spinnerModule.adapter = moduleAdapter
         spinnerModule.onItemSelectedListener = this
+
+        if (moduleId != null)
+            spinnerModule.setSelection(getItemPosition(list, moduleId))
     }
 
     override fun showNoteImage(list: List<NoteElement>) {
@@ -134,5 +145,14 @@ class NoteActivity : ActionBarActivity(), NoteContract.View, NoteImageAdapter.No
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
         //Not needed
+    }
+
+    private fun getItemPosition(list: List<NoteItem>, id: String): Int {
+        for (i in list.indices) {
+            if (id.equals(list[i].id))
+                return i
+        }
+
+        return 0
     }
 }

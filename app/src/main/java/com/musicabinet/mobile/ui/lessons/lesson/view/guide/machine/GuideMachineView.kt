@@ -106,7 +106,9 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
             val guideElementView: GuideElementView = guideMachineLayout
                     .findViewWithTag(resultTag)
 
-            guideElementView.setNoteImage(data.getParcelableExtra(Constants.NOTE_RESULT_ARG))
+            guideElementView.setNoteImage(data.getParcelableExtra(Constants.NOTE_RESULT_ARG),
+                    data.getStringExtra(Constants.NOTE_MODULE_RESULT_ARG),
+                    data.getStringExtra(Constants.NOTE_COURSE_RESULT_ARG))
         }
     }
 

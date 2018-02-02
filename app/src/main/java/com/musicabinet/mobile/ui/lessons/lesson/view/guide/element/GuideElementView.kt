@@ -69,8 +69,8 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
         presenter.showToneAndChord(toneAndChordResult)
     }
 
-    fun setNoteImage(element: NoteElement) {
-        presenter.showNote(element)
+    fun setNoteImage(element: NoteElement, moduleId: String?, courseId: String?) {
+        presenter.showNote(element, moduleId, courseId)
         ivNotes.loadLessonImage(element.image.id)
     }
 
@@ -113,8 +113,10 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
         tvChord.text = chord
     }
 
-    override fun requestNote(toneAndChordResult: ToneOrChordResult, noteElement: NoteElement?) {
-        NoteActivity.requestNote(context as Activity, toneAndChordResult, noteElement, tag.toString())
+    override fun requestNote(toneAndChordResult: ToneOrChordResult, noteElement: NoteElement?,
+                             moduleId: String?, courseId: String?) {
+        NoteActivity.requestNote(context as Activity, toneAndChordResult, noteElement,
+                moduleId, courseId, tag.toString())
     }
 
 }

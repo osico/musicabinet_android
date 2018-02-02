@@ -17,9 +17,9 @@ interface NoteContract {
 
         fun showError()
 
-        fun showModule(list: List<NoteItem>)
+        fun showModule(list: List<NoteItem>, moduleId: String?)
 
-        fun showInstrument(list: List<NoteItem>)
+        fun showInstrument(list: List<NoteItem>, courseId: String?)
 
         fun showNoteImage(list: List<NoteElement>)
 
@@ -27,7 +27,12 @@ interface NoteContract {
 
     interface Presenter {
 
-        fun subscribe(toneOrChordResult: ToneOrChordResult)
+        fun subscribe(toneOrChordResult: ToneOrChordResult, moduleId: String?,
+                      courseId: String?)
+
+        fun getModuleId(): String?
+
+        fun getCourseId(): String?
 
         fun unsubscribe()
 

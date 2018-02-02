@@ -22,6 +22,8 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
     private var noteElement: NoteElement? = null
     private var toneCode: String? = null
     private var chordCode: String? = null
+    private var moduleId: String? = null
+    private var courseId: String? = null
 
     override fun subscribe() {
         view.enableFabClick(true)
@@ -64,11 +66,13 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
 
     override fun requestNote() {
         if (toneOrChordResult != null)
-            view.requestNote(toneOrChordResult!!, noteElement)
+            view.requestNote(toneOrChordResult!!, noteElement, moduleId, courseId)
     }
 
-    override fun showNote(element: NoteElement) {
+    override fun showNote(element: NoteElement, moduleId: String?, courseId: String?) {
         noteElement = element
+        this.moduleId = moduleId
+        this.courseId = courseId
         view.showNoteImage(element.image.id)
     }
 

@@ -21,8 +21,13 @@ class NotePresenter(private val repository: MusicabinetRepository,
                     private val view: NoteContract.View) : NoteContract.Presenter {
 
     private val subscriptions = CompositeDisposable()
+    private var moduleId: String? = null
+    private var courseId: String? = null
 
-    override fun subscribe(toneOrChordResult: ToneOrChordResult) {
+    override fun subscribe(toneOrChordResult: ToneOrChordResult, moduleId: String?,
+                           courseId: String?) {
+        this.moduleId = moduleId
+        this.courseId = courseId
         subscriptions.add(Observable.zip(repository.getNoteModule(storage.getSelectedInstrumentId()),
                 repository.getNoteCourse(storage.getSelectedInstrumentId()),
                 BiFunction<NoteItemResponse, NoteItemResponse, Pair<List<NoteItem>, List<NoteItem>>>
@@ -34,9 +39,11 @@ class NotePresenter(private val repository: MusicabinetRepository,
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading(true) }
                 .subscribe({ pair: Pair<List<NoteItem>, List<NoteItem>> ->
-                    view.showModule(pair.first)
-                    view.showInstrument(pair.second)
-                    if (!pair.first.isEmpty() && !pair.second.isEmpty())
+                    view.showModule(pair.first, moduleId)
+                    view.showInstrument(pair.second, courseId)
+                    if (moduleId != null && courseId != null)
+                        getNoteDiagram(toneOrChordResult, moduleId, courseId)
+                    else if (!pair.first.isEmpty() && !pair.second.isEmpty())
                         getNoteDiagram(toneOrChordResult, pair.first[0].id, pair.second[0].id)
                     else
                         view.showLoading(false)
@@ -47,9 +54,10 @@ class NotePresenter(private val repository: MusicabinetRepository,
         subscriptions.clear()
     }
 
-
     fun getNoteDiagram(toneOrChordResult: ToneOrChordResult, moduleId: String,
                        courseId: String) {
+        this.moduleId = moduleId
+        this.courseId = courseId
         subscriptions.add(repository.getNoteDiagram(moduleId, courseId, toneOrChordResult.tone.id,
                 toneOrChordResult.chord.id)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -68,5 +76,9 @@ class NotePresenter(private val repository: MusicabinetRepository,
                     view.showError()
                 }))
     }
+
+    override fun getModuleId() = moduleId
+
+    override fun getCourseId() = courseId
 
 }

@@ -32,7 +32,8 @@ interface GuideElementContract {
 
         fun setChord(chord: String)
 
-        fun requestNote(toneAndChordResult: ToneOrChordResult, noteElement: NoteElement?)
+        fun requestNote(toneAndChordResult: ToneOrChordResult, noteElement: NoteElement?,
+                        moduleId: String?, courseId: String?)
 
     }
 
@@ -46,7 +47,7 @@ interface GuideElementContract {
 
         fun showToneAndChord(result: ToneOrChordResult)
 
-        fun showNote(element: NoteElement)
+        fun showNote(element: NoteElement, moduleId: String?, courseId: String?)
 
         fun setFileDataItem(item: FileDataItem)
 
