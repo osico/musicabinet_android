@@ -11,6 +11,7 @@ import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.model.lesson.machine.FileDataItem
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.model.lesson.remote.Stave
 import com.musicabinet.mobile.ui.lessons.lesson.view.guide.element.GuideElementView
@@ -71,8 +72,10 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
         Toast.makeText(context, R.string.guide_machine_download_file_error, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showImprovisationNote() {
-        Toast.makeText(context, "ShowImprovisationNote", Toast.LENGTH_SHORT).show()
+    override fun showImprovisationNote(list: List<FileDataItem>) {
+        val item = list.last()
+        val rowInt = item.tag.substring(0, item.tag.length - 1).toInt()
+        presenter.addedRows(rowInt)
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

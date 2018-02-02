@@ -10,6 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import okio.Okio
 import java.io.File
 import java.io.IOException
+import java.util.*
 
 /**
  * @author Kirchhoff-
@@ -48,6 +49,15 @@ class GuideMachinePresenter(private val view: GuideMachineContract.View,
         }
     }
 
+    override fun addedRows(rowValue: Int) {
+        firstSelect = false
+
+        while (rowValue >= row) {
+            view.addRow(row)
+            row += 1
+        }
+    }
+
 
     private fun downloadImprovisationFile(stave: Stave) {
         subscriptions.add(repository.downloadFile(stave.file.id)
@@ -76,7 +86,8 @@ class GuideMachinePresenter(private val view: GuideMachineContract.View,
                 .doOnTerminate { view.showLoading(false) }
                 .subscribe({ file: File ->
                     val list = FileUtils.getDataFromFile(file.path)
-                    view.showImprovisationNote()
+                    Collections.sort(list)
+                    view.showImprovisationNote(list)
                 }, { t: Throwable ->
                     view.showError()
                 }))
