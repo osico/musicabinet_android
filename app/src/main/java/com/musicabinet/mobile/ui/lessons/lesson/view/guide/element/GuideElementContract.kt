@@ -17,7 +17,8 @@ interface GuideElementContract {
 
         fun enableNoteClick(enable: Boolean)
 
-        fun requestToneAndChord(requestCode: Int, toneAndChordResult: ToneOrChordResult?, tagArg: String)
+        fun requestToneAndChord(requestCode: Int, toneAndChordResult: ToneOrChordResult?,
+                                toneCodeArg: String?, chordCodeArg: String?, tagArg: String)
 
         fun showAddButton(show: Boolean)
 

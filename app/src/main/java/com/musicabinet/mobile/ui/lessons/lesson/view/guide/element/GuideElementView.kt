@@ -59,9 +59,10 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
         ivNotes.isEnabled = enable
     }
 
-    override fun requestToneAndChord(requestCode: Int, toneAndChordResult: ToneOrChordResult?, tagArg: String) {
+    override fun requestToneAndChord(requestCode: Int, toneAndChordResult: ToneOrChordResult?,
+                                     toneCodeArg: String?, chordCodeArg: String?, tagArg: String) {
         ToneAndChordActivity.requestToneAndChord(context as Activity, requestCode,
-                toneAndChordResult, tag.toString())
+                toneAndChordResult, toneCodeArg, chordCodeArg, tag.toString())
     }
 
     fun setToneAndChord(toneAndChordResult: ToneOrChordResult) {

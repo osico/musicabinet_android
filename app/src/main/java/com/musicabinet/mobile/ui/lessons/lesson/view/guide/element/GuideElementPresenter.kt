@@ -20,6 +20,8 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
 
     private var toneOrChordResult: ToneOrChordResult? = null
     private var noteElement: NoteElement? = null
+    private var toneCode: String? = null
+    private var chordCode: String? = null
 
     override fun subscribe() {
         view.enableFabClick(true)
@@ -29,7 +31,7 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
 
     override fun requestToneAndChord() {
         view.requestToneAndChord(Constants.GUIDE_MACHINE_REQUEST_CODE,
-                toneOrChordResult, Constants.GUIDE_MACHINE_TAG_RESULT_ARG)
+                toneOrChordResult, toneCode, chordCode, Constants.GUIDE_MACHINE_TAG_RESULT_ARG)
     }
 
     override fun showToneAndChord(result: ToneOrChordResult) {
@@ -52,6 +54,8 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
             view.showToneAndChord(true)
             view.setTone(item.tone!!)
             view.setChord(item.chord!!)
+            toneCode = item.tone
+            chordCode = item.chord
         } else if (item.noteInformation != null) {
             view.showLoading(true)
             getDiagramImage(item.noteInformation!!)

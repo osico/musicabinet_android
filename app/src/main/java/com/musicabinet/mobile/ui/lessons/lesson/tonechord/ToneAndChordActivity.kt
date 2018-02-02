@@ -20,12 +20,18 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
 
     private val presenter = ToneAndChordPresenter(this, Injection.provideRepository())
     private var toneOrChordResultArg: ToneOrChordResult? = null
+    private var toneCodeArg: String? = null
+    private var chordCodeArg: String? = null
 
     companion object {
 
-        fun requestToneAndChord(activity: Activity, requestCode: Int, toneOrChordResult: ToneOrChordResult?, tagArg: String) {
+        fun requestToneAndChord(activity: Activity, requestCode: Int,
+                                toneOrChordResult: ToneOrChordResult?,
+                                toneCode: String?, chordCode: String?, tagArg: String) {
             val intent = Intent(activity, ToneAndChordActivity::class.java)
             intent.putExtra(Constants.GUIDE_MACHINE_TAG_RESULT_ARG, tagArg)
+            intent.putExtra(Constants.GUIDE_MACHINE_TONE_CODE_ARG, toneCode)
+            intent.putExtra(Constants.GUIDE_MACHINE_CHORD_CODE_ARG, chordCode)
             intent.putExtra(Constants.GUIDE_MACHINE_ELEMENT_ARG, toneOrChordResult)
             activity.startActivityForResult(intent, requestCode)
         }
@@ -54,6 +60,8 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
         }
 
         toneOrChordResultArg = intent.getParcelableExtra(Constants.GUIDE_MACHINE_ELEMENT_ARG)
+        toneCodeArg = intent.getStringExtra(Constants.GUIDE_MACHINE_TONE_CODE_ARG)
+        chordCodeArg = intent.getStringExtra(Constants.GUIDE_MACHINE_CHORD_CODE_ARG)
     }
 
     override fun showLoading(show: Boolean) {
@@ -79,13 +87,10 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
         npTone.maxValue = list.size - 1
         npTone.displayedValues = toneStringList.toTypedArray()
 
-        if (toneOrChordResultArg != null) {
-            for (i in list.indices)
-                if (list[i].id == toneOrChordResultArg!!.tone.id) {
-                    npTone.value = i
-                    break
-                }
-        }
+        if (toneOrChordResultArg != null)
+            npTone.value = getItemPosition(list, toneOrChordResultArg!!.tone.id)
+        else if (toneCodeArg != null)
+            npTone.value = getItemPosition(list, toneCodeArg!!)
     }
 
     override fun showChord(list: List<ToneOrChord>) {
@@ -97,13 +102,20 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
         npChord.maxValue = list.size - 1
         npChord.displayedValues = chordStringList.toTypedArray()
 
-        if (toneOrChordResultArg != null) {
-            for (i in list.indices)
-                if (list[i].id == toneOrChordResultArg!!.chord.id) {
-                    npChord.value = i
-                    break
-                }
-        }
+        if (toneOrChordResultArg != null)
+            npChord.value = getItemPosition(list, toneOrChordResultArg!!.chord.id)
+        else if (chordCodeArg != null)
+            npChord.value = getItemPosition(list, chordCodeArg!!)
+
+    }
+
+    private fun getItemPosition(list: List<ToneOrChord>, codeOrId: String): Int {
+        for (i in list.indices)
+            if (list[i].id == codeOrId) {
+                return i
+            }
+
+        return 0
     }
 
     override fun onPause() {
