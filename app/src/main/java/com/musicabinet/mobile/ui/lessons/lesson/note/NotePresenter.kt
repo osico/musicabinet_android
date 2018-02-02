@@ -48,8 +48,8 @@ class NotePresenter(private val repository: MusicabinetRepository,
     }
 
 
-    public fun getNoteDiagram(toneOrChordResult: ToneOrChordResult, moduleId: String,
-                              courseId: String) {
+    fun getNoteDiagram(toneOrChordResult: ToneOrChordResult, moduleId: String,
+                       courseId: String) {
         subscriptions.add(repository.getNoteDiagram(moduleId, courseId, toneOrChordResult.tone.id,
                 toneOrChordResult.chord.id)
                 .observeOn(AndroidSchedulers.mainThread())
