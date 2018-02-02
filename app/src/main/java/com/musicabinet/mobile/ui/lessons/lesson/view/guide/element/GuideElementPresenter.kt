@@ -1,6 +1,7 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.guide.element
 
 import com.musicabinet.mobile.Constants
+import com.musicabinet.mobile.model.lesson.machine.FileDataItem
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteElement
 
@@ -31,6 +32,17 @@ class GuideElementPresenter(private val view: GuideElementContract.View) : Guide
         view.showToneAndChord(true)
         view.setTone(result.tone.name)
         view.setChord(result.chord.name)
+    }
+
+    override fun setFileDataItem(item: FileDataItem) {
+        if (item.chord != null && item.tone != null) {
+            view.enableNoteClick(true)
+            view.enableFabClick(false)
+            view.showAddButton(false)
+            view.showToneAndChord(true)
+            view.setTone(item.tone!!)
+            view.setChord(item.chord!!)
+        }
     }
 
     override fun requestNote() {

@@ -9,6 +9,7 @@ import android.widget.RelativeLayout
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.loadLessonImage
 import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.model.lesson.machine.FileDataItem
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteElement
 import com.musicabinet.mobile.ui.lessons.lesson.note.NoteActivity
@@ -62,6 +63,10 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
     fun setNoteImage(element: NoteElement) {
         presenter.showNote(element)
         ivNotes.loadLessonImage(element.image.id)
+    }
+
+    fun setFileDataItem(item: FileDataItem) {
+        presenter.setFileDataItem(item)
     }
 
     override fun showNoteImage(url: String) {

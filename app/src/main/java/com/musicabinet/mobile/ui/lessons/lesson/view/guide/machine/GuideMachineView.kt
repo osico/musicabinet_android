@@ -76,6 +76,12 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
         val item = list.last()
         val rowInt = item.tag.substring(0, item.tag.length - 1).toInt()
         presenter.addedRows(rowInt)
+
+        for (fileData in list) {
+            val guideElementView: GuideElementView = guideMachineLayout
+                    .findViewWithTag(fileData.tag)
+            guideElementView.setFileDataItem(fileData)
+        }
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

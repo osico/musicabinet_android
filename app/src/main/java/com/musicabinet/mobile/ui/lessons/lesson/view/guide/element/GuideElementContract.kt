@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.guide.element
 
+import com.musicabinet.mobile.model.lesson.machine.FileDataItem
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteElement
 
@@ -39,6 +40,8 @@ interface GuideElementContract {
         fun showToneAndChord(result: ToneOrChordResult)
 
         fun showNote(element: NoteElement)
+
+        fun setFileDataItem(item: FileDataItem)
 
         fun requestNote()
     }

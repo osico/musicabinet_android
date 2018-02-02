@@ -52,10 +52,10 @@ public class FileUtils {
                     int splitIndex = stringArray[i].indexOf("|");
                     fileDataItems.add(new FileDataItem(stringArray[i].substring(1, splitIndex),
                             stringArray[i].substring(splitIndex + 1), null,
-                            String.valueOf(line) + String.valueOf(i)));
+                            String.valueOf(line) + String.valueOf(i + 1)));
                 } else {
                     fileDataItems.add(new FileDataItem(null, null, stringArray[i],
-                            String.valueOf(line) + String.valueOf(i)));
+                            String.valueOf(line) + String.valueOf(i + 1)));
                 }
 
             }
