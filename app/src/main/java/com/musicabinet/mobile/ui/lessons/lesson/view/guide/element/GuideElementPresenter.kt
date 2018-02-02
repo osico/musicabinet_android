@@ -3,13 +3,20 @@ package com.musicabinet.mobile.ui.lessons.lesson.view.guide.element
 import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.model.lesson.machine.FileDataItem
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
+import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageResponse
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteElement
+import com.musicabinet.mobile.repository.MusicabinetRepository
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 
 
 /**
  * @author Kirchhoff-
  */
-class GuideElementPresenter(private val view: GuideElementContract.View) : GuideElementContract.Presenter {
+class GuideElementPresenter(private val view: GuideElementContract.View,
+                            private val repository: MusicabinetRepository) : GuideElementContract.Presenter {
+
+    private val subscriptions = CompositeDisposable()
 
     private var toneOrChordResult: ToneOrChordResult? = null
     private var noteElement: NoteElement? = null
@@ -45,6 +52,7 @@ class GuideElementPresenter(private val view: GuideElementContract.View) : Guide
             view.setChord(item.chord!!)
         } else if (item.noteInformation != null) {
             view.showLoading(true)
+            getDiagramImage(item.noteInformation!!)
         }
     }
 
@@ -56,5 +64,25 @@ class GuideElementPresenter(private val view: GuideElementContract.View) : Guide
     override fun showNote(element: NoteElement) {
         noteElement = element
         view.showNoteImage(element.image.id)
+    }
+
+    private fun getDiagramImage(noteInformation: String) {
+        subscriptions.add(repository.getDiagramImage(noteInformation)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ diagramResponse: DiagramImageResponse ->
+                    val diagramElement = diagramResponse.elements.get(noteInformation)
+                    view.showLoading(false)
+                    if (diagramElement != null) {
+                        view.enableNoteClick(true)
+                        view.enableFabClick(false)
+                        view.showAddButton(false)
+                        view.showToneAndChord(true)
+                        view.setTone(diagramElement.diagramToneName)
+                        view.setChord(diagramElement.diagramChordTypeName)
+                        view.showNoteImage(diagramElement.image.id)
+                    }
+                }, { t: Throwable? ->
+                    view.showLoading(false)
+                }))
     }
 }

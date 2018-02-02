@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
+import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.loadLessonImage
 import com.musicabinet.mobile.extensions.setVisible
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.view_guide_element.view.*
  */
 class GuideElementView : RelativeLayout, GuideElementContract.View {
 
-    private val presenter = GuideElementPresenter(this)
+    private val presenter = GuideElementPresenter(this, Injection.provideRepository())
 
     constructor(context: Context) : super(context) {
         init()
