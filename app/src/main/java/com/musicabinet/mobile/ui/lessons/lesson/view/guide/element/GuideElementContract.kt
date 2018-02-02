@@ -17,13 +17,15 @@ interface GuideElementContract {
 
         fun enableNoteClick(enable: Boolean)
 
-        fun requestToneAndChord(requestCode: Int, tagArg: String)
+        fun requestToneAndChord(requestCode: Int, toneAndChordResult: ToneOrChordResult?, tagArg: String)
 
         fun showAddButton(show: Boolean)
 
         fun showToneAndChord(show: Boolean)
 
         fun showNoteImage(url: String)
+
+        fun showDefaultNoteImage()
 
         fun setTone(tone: String)
 

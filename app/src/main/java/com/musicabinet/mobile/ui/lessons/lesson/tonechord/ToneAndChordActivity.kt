@@ -19,12 +19,14 @@ import org.jetbrains.anko.toast
 class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
 
     private val presenter = ToneAndChordPresenter(this, Injection.provideRepository())
+    private var toneOrChordResultArg: ToneOrChordResult? = null
 
     companion object {
 
-        fun requestToneAndChord(activity: Activity, requestCode: Int, tagArg: String) {
+        fun requestToneAndChord(activity: Activity, requestCode: Int, toneOrChordResult: ToneOrChordResult?, tagArg: String) {
             val intent = Intent(activity, ToneAndChordActivity::class.java)
             intent.putExtra(Constants.GUIDE_MACHINE_TAG_RESULT_ARG, tagArg)
+            intent.putExtra(Constants.GUIDE_MACHINE_ELEMENT_ARG, toneOrChordResult)
             activity.startActivityForResult(intent, requestCode)
         }
     }
@@ -50,6 +52,8 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
+
+        toneOrChordResultArg = intent.getParcelableExtra(Constants.GUIDE_MACHINE_ELEMENT_ARG)
     }
 
     override fun showLoading(show: Boolean) {
@@ -74,6 +78,14 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
         npTone.minValue = 0
         npTone.maxValue = list.size - 1
         npTone.displayedValues = toneStringList.toTypedArray()
+
+        if (toneOrChordResultArg != null) {
+            for (i in list.indices)
+                if (list[i].id == toneOrChordResultArg!!.tone.id) {
+                    npTone.value = i
+                    break
+                }
+        }
     }
 
     override fun showChord(list: List<ToneOrChord>) {
@@ -84,6 +96,14 @@ class ToneAndChordActivity : AppCompatActivity(), ToneAndChordContract.View {
         npChord.minValue = 0
         npChord.maxValue = list.size - 1
         npChord.displayedValues = chordStringList.toTypedArray()
+
+        if (toneOrChordResultArg != null) {
+            for (i in list.indices)
+                if (list[i].id == toneOrChordResultArg!!.chord.id) {
+                    npChord.value = i
+                    break
+                }
+        }
     }
 
     override fun onPause() {

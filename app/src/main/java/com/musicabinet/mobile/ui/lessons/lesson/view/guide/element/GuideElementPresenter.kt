@@ -29,7 +29,7 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
 
     override fun requestToneAndChord() {
         view.requestToneAndChord(Constants.GUIDE_MACHINE_REQUEST_CODE,
-                Constants.GUIDE_MACHINE_TAG_RESULT_ARG)
+                toneOrChordResult, Constants.GUIDE_MACHINE_TAG_RESULT_ARG)
     }
 
     override fun showToneAndChord(result: ToneOrChordResult) {
@@ -40,6 +40,8 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
         view.showToneAndChord(true)
         view.setTone(result.tone.name)
         view.setChord(result.chord.name)
+        noteElement = null
+        view.showDefaultNoteImage()
     }
 
     override fun setFileDataItem(item: FileDataItem) {

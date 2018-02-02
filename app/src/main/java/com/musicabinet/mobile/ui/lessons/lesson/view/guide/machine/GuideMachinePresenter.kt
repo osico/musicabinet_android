@@ -25,9 +25,10 @@ class GuideMachinePresenter(private val view: GuideMachineContract.View,
     private var firstSelect = true
 
     override fun subscribe(stave: Stave?) {
-        if (stave == null)
+        if (stave == null) {
             view.addRow(row)
-        else {
+            view.showLoading(false)
+        } else {
             view.showLoading(true)
             downloadImprovisationFile(stave)
         }

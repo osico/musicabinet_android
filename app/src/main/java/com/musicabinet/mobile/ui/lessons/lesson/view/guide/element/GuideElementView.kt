@@ -41,6 +41,8 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
 
         fabAddElement.setOnClickListener { presenter.requestToneAndChord() }
         ivNotes.setOnClickListener { presenter.requestNote() }
+        toneAndChordLayout.setOnClickListener { presenter.requestToneAndChord() }
+
 
         presenter.subscribe()
     }
@@ -57,8 +59,9 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
         ivNotes.isEnabled = enable
     }
 
-    override fun requestToneAndChord(requestCode: Int, tagArg: String) {
-        ToneAndChordActivity.requestToneAndChord(context as Activity, requestCode, tag.toString())
+    override fun requestToneAndChord(requestCode: Int, toneAndChordResult: ToneOrChordResult?, tagArg: String) {
+        ToneAndChordActivity.requestToneAndChord(context as Activity, requestCode,
+                toneAndChordResult, tag.toString())
     }
 
     fun setToneAndChord(toneAndChordResult: ToneOrChordResult) {
@@ -68,6 +71,10 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
     fun setNoteImage(element: NoteElement) {
         presenter.showNote(element)
         ivNotes.loadLessonImage(element.image.id)
+    }
+
+    override fun showDefaultNoteImage() {
+        ivNotes.setImageResource(R.drawable.note_image)
     }
 
     fun setFileDataItem(item: FileDataItem) {
