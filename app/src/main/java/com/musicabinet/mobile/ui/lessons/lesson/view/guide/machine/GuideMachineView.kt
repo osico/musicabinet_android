@@ -64,10 +64,9 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
     fun onPause() {
         soundView.onPause()
         val childCount = guideMachineLayout.childCount
-        for (i in 0..childCount step 1) {
-            if (guideMachineLayout.getChildAt(i) is GuideRowView)
-                (guideMachineLayout.getChildAt(i) as GuideRowView).onPause()
-        }
+        (0..childCount step 1)
+                .filter { guideMachineLayout.getChildAt(it) is GuideRowView }
+                .forEach { (guideMachineLayout.getChildAt(it) as GuideRowView).onPause() }
     }
 
     override fun showLoading(show: Boolean) {
@@ -123,12 +122,12 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
     private fun getImprovisationFileElements(): ArrayList<ImprovisationResult> {
         val resultImprovisation = ArrayList<ImprovisationResult>()
         val childCount = guideMachineLayout.childCount
-        for (i in 0..childCount step 1) {
-            if (guideMachineLayout.getChildAt(i) is GuideRowView) {
-                resultImprovisation.add(ImprovisationResult(guideMachineLayout.getChildAt(i).tag.toString(),
-                        (guideMachineLayout.getChildAt(i) as GuideRowView).getImprovisationRowInformation()))
-            }
-        }
+        (0..childCount step 1)
+                .filter { guideMachineLayout.getChildAt(it) is GuideRowView }
+                .mapTo(resultImprovisation) {
+                    ImprovisationResult(guideMachineLayout.getChildAt(it).tag.toString(),
+                            (guideMachineLayout.getChildAt(it) as GuideRowView).getImprovisationRowInformation())
+                }
 
         return resultImprovisation
     }
