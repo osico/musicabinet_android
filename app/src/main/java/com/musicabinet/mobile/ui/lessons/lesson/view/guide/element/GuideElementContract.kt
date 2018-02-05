@@ -1,6 +1,7 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.guide.element
 
 import com.musicabinet.mobile.model.lesson.machine.FileDataItem
+import com.musicabinet.mobile.model.lesson.machine.ImprovisationResultItem
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteElement
 
@@ -52,5 +53,7 @@ interface GuideElementContract {
         fun setFileDataItem(item: FileDataItem)
 
         fun requestNote()
+
+        fun getImprovisationInformation(): ImprovisationResultItem
     }
 }

@@ -2,6 +2,7 @@ package com.musicabinet.mobile.ui.lessons.lesson.view.guide.element
 
 import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.model.lesson.machine.FileDataItem
+import com.musicabinet.mobile.model.lesson.machine.ImprovisationResultItem
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageResponse
@@ -78,6 +79,9 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
         this.courseId = courseId
         view.showNoteImage(element.image.id)
     }
+
+    override fun getImprovisationInformation() = ImprovisationResultItem(toneOrChordResult,
+            noteElement, fileDataItem)
 
     private fun getDiagramImage(noteInformation: String) {
         subscriptions.add(repository.getDiagramImage(noteInformation)

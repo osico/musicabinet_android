@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.model.lesson.machine.ImprovisationResultItem
 import kotlinx.android.synthetic.main.view_guide_row.view.*
 
 /**
@@ -37,6 +38,15 @@ class GuideRowView : LinearLayout, GuideRowContract.View {
         secondElement.tag = position + "2"
         thirdElement.tag = position + "3"
         fourthElement.tag = position + "4"
+    }
+
+    fun getImprovisationRowInformation(): List<ImprovisationResultItem> {
+        val resultList = ArrayList<ImprovisationResultItem>()
+        resultList.add(firstElement.getImprovisationInformation())
+        resultList.add(secondElement.getImprovisationInformation())
+        resultList.add(thirdElement.getImprovisationInformation())
+        resultList.add(fourthElement.getImprovisationInformation())
+        return resultList
     }
 
     fun onPause() {

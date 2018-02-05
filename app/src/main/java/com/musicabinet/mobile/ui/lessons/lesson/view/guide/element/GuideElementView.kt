@@ -74,6 +74,8 @@ class GuideElementView : RelativeLayout, GuideElementContract.View {
         ivNotes.loadLessonImage(element.image.id)
     }
 
+    fun getImprovisationInformation() = presenter.getImprovisationInformation()
+
     override fun showDefaultNoteImage() {
         ivNotes.setImageResource(R.drawable.note_image)
     }
