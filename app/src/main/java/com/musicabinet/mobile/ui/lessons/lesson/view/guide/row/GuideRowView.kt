@@ -11,9 +11,7 @@ import kotlinx.android.synthetic.main.view_guide_row.view.*
 /**
  * @author Kirchhoff-
  */
-class GuideRowView : LinearLayout, GuideRowContract.View {
-
-    private val presenter = GuideRowPresenter(this)
+class GuideRowView : LinearLayout {
 
     constructor(context: Context) : super(context) {
         init()
