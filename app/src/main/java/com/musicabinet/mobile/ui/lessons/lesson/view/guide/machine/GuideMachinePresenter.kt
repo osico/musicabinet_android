@@ -24,6 +24,8 @@ class GuideMachinePresenter(private val view: GuideMachineContract.View,
     private var row = 0
     private var firstSelect = true
 
+    private var improvisationFileId: String? = null
+
     override fun subscribe(stave: Stave?) {
         if (stave == null) {
             view.addRow(row)
@@ -31,6 +33,7 @@ class GuideMachinePresenter(private val view: GuideMachineContract.View,
         } else {
             view.showLoading(true)
             downloadImprovisationFile(stave)
+            improvisationFileId = stave.file.id
         }
     }
 
@@ -59,6 +62,8 @@ class GuideMachinePresenter(private val view: GuideMachineContract.View,
             row += 1
         }
     }
+
+    override fun getImprovisationFileId() = improvisationFileId
 
 
     private fun downloadImprovisationFile(stave: Stave) {

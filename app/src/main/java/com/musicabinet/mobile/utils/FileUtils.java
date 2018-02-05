@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.musicabinet.mobile.Constants.IMPROVISATION_FILE_NAME;
+
 /**
  * @author Kirchhoff-
  */
@@ -28,7 +30,6 @@ import java.util.List;
 public class FileUtils {
 
     private final static String EMPTY_ITEM = "null";
-    private final static String IMPROVISATION_FILE_NAME = "improvisation.txt";
     private static File improvisationFile;
 
     public static ArrayList<FileDataItem> getDataFromFile(String filePath) throws Exception {

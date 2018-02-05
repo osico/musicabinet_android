@@ -22,4 +22,7 @@ object Constants {
     const val NOTE_RESULT_ARG = "NOTE_RESULT_ARG"
     const val NOTE_MODULE_RESULT_ARG = "NOTE_MODULE_RESULT_ARG"
     const val NOTE_COURSE_RESULT_ARG = "NOTE_COURSE_RESULT_ARG"
+
+
+    const val IMPROVISATION_FILE_NAME = "improvisation.txt"
 }

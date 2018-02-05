@@ -12,8 +12,10 @@ import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.machine.FileDataItem
+import com.musicabinet.mobile.model.lesson.machine.ImprovisationResult
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.model.lesson.remote.Stave
+import com.musicabinet.mobile.repository.ImprovisationService
 import com.musicabinet.mobile.ui.lessons.lesson.view.guide.element.GuideElementView
 import com.musicabinet.mobile.ui.lessons.lesson.view.guide.row.GuideRowView
 import kotlinx.android.synthetic.main.view_guide_machine.view.*
@@ -100,6 +102,9 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
                     .findViewWithTag(resultTag)
 
             guideElementView.setToneAndChord(data.getParcelableExtra(Constants.GUIDE_MACHINE_ELEMENT_RESULT_ARG))
+
+            ImprovisationService.uploadImprovisation(context, presenter.getImprovisationFileId(),
+                    getImprovisationFileElements())
         } else if (requestCode == Constants.NOTE_REQUEST_CODE && resultCode == Activity.RESULT_OK &&
                 data != null) {
             val resultTag: String = data.getStringExtra(Constants.NOTE_TAG_ARG)
@@ -109,8 +114,23 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
             guideElementView.setNoteImage(data.getParcelableExtra(Constants.NOTE_RESULT_ARG),
                     data.getStringExtra(Constants.NOTE_MODULE_RESULT_ARG),
                     data.getStringExtra(Constants.NOTE_COURSE_RESULT_ARG))
+
+            ImprovisationService.uploadImprovisation(context, presenter.getImprovisationFileId(),
+                    getImprovisationFileElements())
         }
     }
 
+    private fun getImprovisationFileElements(): ArrayList<ImprovisationResult> {
+        val resultImprovisation = ArrayList<ImprovisationResult>()
+        val childCount = guideMachineLayout.childCount
+        for (i in 0..childCount step 1) {
+            if (guideMachineLayout.getChildAt(i) is GuideRowView) {
+                resultImprovisation.add(ImprovisationResult(guideMachineLayout.getChildAt(i).tag.toString(),
+                        (guideMachineLayout.getChildAt(i) as GuideRowView).getImprovisationRowInformation()))
+            }
+        }
+
+        return resultImprovisation
+    }
 
 }

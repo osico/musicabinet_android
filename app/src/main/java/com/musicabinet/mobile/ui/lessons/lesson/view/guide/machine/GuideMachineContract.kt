@@ -28,5 +28,7 @@ interface GuideMachineContract {
 
         fun onElementSelected(rowString: String)
 
+        fun getImprovisationFileId(): String?
+
     }
 }
