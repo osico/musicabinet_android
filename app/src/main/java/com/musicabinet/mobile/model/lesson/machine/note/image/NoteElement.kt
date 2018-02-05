@@ -13,4 +13,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class NoteElement(@SerializedName("id") val id: String,
                        @SerializedName("image") val image: StoredFile,
-                       @SerializedName("sortOrder") val sortOrder: Int) : Parcelable
+                       @SerializedName("sortOrder") val sortOrder: Int,
+                       @SerializedName("code") val code: String) : Parcelable

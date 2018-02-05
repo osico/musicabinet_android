@@ -25,6 +25,7 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
     private var chordCode: String? = null
     private var moduleId: String? = null
     private var courseId: String? = null
+    private var fileDataItem: FileDataItem? = null
 
     override fun subscribe() {
         view.enableFabClick(true)
@@ -50,6 +51,7 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
     }
 
     override fun setFileDataItem(item: FileDataItem) {
+        this.fileDataItem = item
         if (item.chord != null && item.tone != null) {
             view.enableNoteClick(true)
             view.enableFabClick(false)
