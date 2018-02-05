@@ -1,13 +1,25 @@
 package com.musicabinet.mobile.utils;
 
+import android.media.MediaScannerConnection;
+import android.os.Environment;
+
+import com.musicabinet.mobile.MusicabinetApp;
 import com.musicabinet.mobile.model.lesson.machine.FileDataItem;
+import com.musicabinet.mobile.model.lesson.machine.ImprovisationResultItem;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Kirchhoff-
@@ -16,6 +28,8 @@ import java.util.ArrayList;
 public class FileUtils {
 
     private final static String EMPTY_ITEM = "null";
+    private final static String IMPROVISATION_FILE_NAME = "improvisation.txt";
+    private static File improvisationFile;
 
     public static ArrayList<FileDataItem> getDataFromFile(String filePath) throws Exception {
         File fl = new File(filePath);
@@ -25,6 +39,42 @@ public class FileUtils {
         fin.close();
         return list;
     }
+
+    public static File createImprovisationFile(HashMap<String,
+            List<ImprovisationResultItem>> improvisationMap) {
+
+        for (List<ImprovisationResultItem> improvisationList : improvisationMap.values()) {
+
+            for (ImprovisationResultItem improvisationItem : improvisationList) {
+
+                if (improvisationItem.getFileDataItem() == null &&
+                        improvisationItem.getNoteElement() == null &&
+                        improvisationItem.getToneOrChordResult() == null) {
+                    writeToFile(EMPTY_ITEM);
+                    continue;
+                }
+
+                if (improvisationItem.getNoteElement() != null) {
+                    writeToFile(improvisationItem.getNoteElement().getCode());
+                    continue;
+                }
+
+                if (improvisationItem.getToneOrChordResult() != null) {
+                    writeToFile(improvisationItem.getToneOrChordResult().getTone().getName(),
+                            improvisationItem.getToneOrChordResult().getChord().getName());
+                    continue;
+                }
+
+                writeToFile(improvisationItem.getFileDataItem());
+
+            }
+
+        }
+
+        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        return new File(path, IMPROVISATION_FILE_NAME);
+    }
+
 
     private static ArrayList<FileDataItem> convertStreamToString(InputStream is) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -63,4 +113,81 @@ public class FileUtils {
 
         return fileDataItems;
     }
+
+    private static void writeToFile(String data) {
+        writeToFile(getImprovisationFile(), data);
+    }
+
+    private static void writeToFile(String tone, String chord) {
+        String builder = ":" + tone + "|" + chord;
+        writeToFile(getImprovisationFile(), builder);
+    }
+
+    private static void writeToFile(FileDataItem fileDataItem) {
+        if (fileDataItem.getNoteInformation() != null)
+            writeToFile(getImprovisationFile(), fileDataItem.getNoteInformation());
+        else
+            writeToFile(fileDataItem.getTone(), fileDataItem.getChord());
+    }
+
+    private static void writeToFile(File file, String data) {
+        if (file != null) {
+            try {
+                BufferedWriter out = new BufferedWriter(new FileWriter(file, true), 1024);
+                try {
+                    out.write(data);
+                    out.write("\n\r");
+                    out.newLine();
+                } catch (IOException e) {
+                } finally {
+                    out.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
+    private static File getImprovisationFile() {
+        if (isFileExist(IMPROVISATION_FILE_NAME)) {
+            if (improvisationFile == null) {
+                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+                File file = new File(path, IMPROVISATION_FILE_NAME);
+                PrintWriter writer;
+                try {
+                    writer = new PrintWriter(file);
+                    writer.print("");
+                    writer.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+
+                improvisationFile = file;
+            }
+        } else {
+            try {
+                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+                File file = new File(path, IMPROVISATION_FILE_NAME);
+                file.createNewFile();
+                path.setExecutable(true);
+                path.setReadable(true);
+                path.setWritable(true);
+                MediaScannerConnection.scanFile(MusicabinetApp.Companion.get(), new String[]{path.toString()}, null, null);
+                improvisationFile = file;
+            } catch (Exception e) {
+                return null;
+            }
+
+        }
+
+        return improvisationFile;
+    }
+
+    private static boolean isFileExist(String fileName) {
+        File downloadedFile = new File(Environment.getExternalStorageDirectory(),
+                fileName);
+        return downloadedFile.exists();
+    }
+
 }
