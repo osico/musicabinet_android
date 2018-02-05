@@ -2,6 +2,7 @@ package com.musicabinet.mobile.ui.lessons.lesson.view.guide.element
 
 import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.model.lesson.machine.FileDataItem
+import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageResponse
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteElement
@@ -90,6 +91,13 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
                         view.setTone(diagramElement.diagramToneName)
                         view.setChord(diagramElement.diagramChordTypeName)
                         view.showNoteImage(diagramElement.image.id)
+
+                        val tone = ToneOrChord(diagramElement.diagramToneId,
+                                diagramElement.diagramToneName, "", 0)
+                        val chord = ToneOrChord(diagramElement.diagramChordTypeId,
+                                diagramElement.diagramChordTypeName, "", 1)
+
+                        toneOrChordResult = ToneOrChordResult(tone, chord)
                     }
                 }, { t: Throwable? ->
                     view.showLoading(false)
