@@ -19,6 +19,7 @@ import com.musicabinet.mobile.model.register.RegisterRequestBody
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -107,6 +108,9 @@ interface MusicabinetService {
                         @Body diagramBody: DiagramImageRequestBody): Single<DiagramImageResponse>
 
 
-    @POST("api/improvisation/save")
+    @POST("/api/improvisation/save")
     fun saveImprovisation(@Body body: ImprovisationStaveResult): Single<ImprovisationStaveResult>
+
+    @POST("/platform/api/file-storage/{fileId}/upload")
+    fun uploadImprovisation(@Path("fileId") fileId: String, @Part file: MultipartBody.Part)
 }
