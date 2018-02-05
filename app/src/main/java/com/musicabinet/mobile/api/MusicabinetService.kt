@@ -10,6 +10,7 @@ import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageRequestBo
 import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageResponse
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItemResponse
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteImageResponse
+import com.musicabinet.mobile.model.lesson.machine.save.ImprovisationStaveResult
 import com.musicabinet.mobile.model.lesson.progress.LessonProgress
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.login.LoginRequestBody
@@ -104,4 +105,8 @@ interface MusicabinetService {
     @POST("/api/diagram/find-elements")
     fun getDiagramImage(@Query("findInChords") findInChords: Boolean,
                         @Body diagramBody: DiagramImageRequestBody): Single<DiagramImageResponse>
+
+
+    @POST("api/improvisation/save")
+    fun saveImprovisation(@Body body: ImprovisationStaveResult): Single<ImprovisationStaveResult>
 }
