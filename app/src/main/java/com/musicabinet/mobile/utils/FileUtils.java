@@ -44,6 +44,7 @@ public class FileUtils {
     public static File createImprovisationFile(TreeMap<Integer,
             List<ImprovisationResultItem>> improvisationMap) {
 
+        clearFile();
 
         for (List<ImprovisationResultItem> improvisationList : improvisationMap.values()) {
 
@@ -61,7 +62,8 @@ public class FileUtils {
                     continue;
                 }
 
-                if (improvisationItem.getToneOrChordResult() != null) {
+                if (improvisationItem.getToneOrChordResult() != null
+                        && improvisationItem.isUserReselecting()) {
                     writeToFile(improvisationItem.getToneOrChordResult().getTone().getName(),
                             improvisationItem.getToneOrChordResult().getChord().getName());
                     continue;
@@ -71,6 +73,7 @@ public class FileUtils {
 
             }
 
+            writeToFile("\n");
         }
 
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
@@ -138,8 +141,7 @@ public class FileUtils {
                 BufferedWriter out = new BufferedWriter(new FileWriter(file, true), 1024);
                 try {
                     out.write(data);
-                    out.write("\n\r");
-                    out.newLine();
+                    out.write(" ");
                 } catch (IOException e) {
                 } finally {
                     out.close();
@@ -148,6 +150,20 @@ public class FileUtils {
 
             }
         }
+    }
+
+    private static void clearFile() {
+        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        File file = new File(path, IMPROVISATION_FILE_NAME);
+        PrintWriter writer;
+        try {
+            writer = new PrintWriter(file);
+            writer.print("");
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private static File getImprovisationFile() {
@@ -187,8 +203,8 @@ public class FileUtils {
     }
 
     private static boolean isFileExist(String fileName) {
-        File downloadedFile = new File(Environment.getExternalStorageDirectory(),
-                fileName);
+        File downloadedFile = new File(Environment
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), fileName);
         return downloadedFile.exists();
     }
 

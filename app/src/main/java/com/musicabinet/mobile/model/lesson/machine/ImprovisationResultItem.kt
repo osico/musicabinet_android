@@ -12,4 +12,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ImprovisationResultItem(val toneOrChordResult: ToneOrChordResult?,
                                    val noteElement: NoteElement?,
-                                   val fileDataItem: FileDataItem?) : Parcelable
+                                   val fileDataItem: FileDataItem?,
+                                   val isUserReselecting: Boolean) : Parcelable

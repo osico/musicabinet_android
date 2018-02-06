@@ -27,6 +27,7 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
     private var moduleId: String? = null
     private var courseId: String? = null
     private var fileDataItem: FileDataItem? = null
+    private var isUserReselecting = false
 
     override fun subscribe() {
         view.enableFabClick(true)
@@ -49,6 +50,7 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
         view.setChord(result.chord.name)
         noteElement = null
         view.showDefaultNoteImage()
+        isUserReselecting = true
     }
 
     override fun setFileDataItem(item: FileDataItem) {
@@ -78,10 +80,11 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
         this.moduleId = moduleId
         this.courseId = courseId
         view.showNoteImage(element.image.id)
+        isUserReselecting = true
     }
 
     override fun getImprovisationInformation() = ImprovisationResultItem(toneOrChordResult,
-            noteElement, fileDataItem)
+            noteElement, fileDataItem, isUserReselecting)
 
     private fun getDiagramImage(noteInformation: String) {
         subscriptions.add(repository.getDiagramImage(noteInformation)
