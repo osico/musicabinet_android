@@ -111,6 +111,8 @@ interface MusicabinetService {
     @POST("/api/improvisation/save")
     fun saveImprovisation(@Body body: ImprovisationStaveResult): Single<ImprovisationStaveResult>
 
+    @Multipart
     @POST("/platform/api/file-storage/{fileId}/upload")
     fun uploadImprovisation(@Path("fileId") fileId: String, @Part file: MultipartBody.Part)
+            : Completable
 }

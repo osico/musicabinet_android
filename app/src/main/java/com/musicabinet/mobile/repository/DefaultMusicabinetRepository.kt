@@ -10,6 +10,7 @@ import com.musicabinet.mobile.model.lesson.progress.LessonProgress
 import com.musicabinet.mobile.model.login.LoginRequestBody
 import com.musicabinet.mobile.model.register.RegisterRequestBody
 import com.musicabinet.mobile.model.register.UserInfo
+import io.reactivex.Completable
 import io.reactivex.Single
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -114,7 +115,7 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
         return ApiFactory.service.saveImprovisation(requestBody)
     }
 
-    override fun uploadImprovisation(id: String, file: File) {
+    override fun uploadImprovisation(id: String, file: File): Completable {
         val multiPartBody = MultipartBody.Part.createFormData("improvisation.txt",
                 file.name, RequestBody.create(MediaType.parse("text/*"), file))
         return ApiFactory.service.uploadImprovisation(id, multiPartBody)

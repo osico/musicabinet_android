@@ -7,8 +7,15 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.musicabinet.mobile.Injection;
 import com.musicabinet.mobile.model.lesson.machine.ImprovisationResultWrapper;
+import com.musicabinet.mobile.utils.FileUtils;
 import com.musicabinet.mobile.utils.GsonHolder;
+
+import java.io.File;
+
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 
 /**
  * @author Kirchhoff-
@@ -41,7 +48,20 @@ public class ImprovisationService extends IntentService {
         if (TextUtils.isEmpty(fileId)) {
             Log.d("TAG", "Should create id and then load file");
         } else {
-            Log.d("TAG", "Load file immediatle");
+            File resultFile = FileUtils.createImprovisationFile(wrapper.getMap());
+            Injection.INSTANCE.provideRepository()
+                    .uploadImprovisation(fileId, resultFile)
+                    .subscribe(new Action() {
+                        @Override
+                        public void run() throws Exception {
+                            Log.d("TAG", "Success");
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            Log.d("TAG", "Error");
+                        }
+                    });
         }
     }
 }

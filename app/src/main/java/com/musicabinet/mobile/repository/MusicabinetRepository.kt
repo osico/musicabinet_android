@@ -67,5 +67,5 @@ interface MusicabinetRepository {
 
     fun saveImprovisation(id: String): Single<ImprovisationStaveResult>
 
-    fun uploadImprovisation(id: String, file: File)
+    fun uploadImprovisation(id: String, file: File): Completable
 }

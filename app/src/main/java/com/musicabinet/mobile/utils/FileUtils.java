@@ -18,8 +18,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import static com.musicabinet.mobile.Constants.IMPROVISATION_FILE_NAME;
 
@@ -41,8 +41,9 @@ public class FileUtils {
         return list;
     }
 
-    public static File createImprovisationFile(HashMap<String,
+    public static File createImprovisationFile(TreeMap<Integer,
             List<ImprovisationResultItem>> improvisationMap) {
+
 
         for (List<ImprovisationResultItem> improvisationList : improvisationMap.values()) {
 

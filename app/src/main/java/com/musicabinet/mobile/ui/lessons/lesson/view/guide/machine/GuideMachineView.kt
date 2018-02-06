@@ -12,7 +12,7 @@ import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.machine.FileDataItem
-import com.musicabinet.mobile.model.lesson.machine.ImprovisationResult
+import com.musicabinet.mobile.model.lesson.machine.ImprovisationResultItem
 import com.musicabinet.mobile.model.lesson.machine.ImprovisationResultWrapper
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.model.lesson.remote.Stave
@@ -20,6 +20,7 @@ import com.musicabinet.mobile.repository.ImprovisationService
 import com.musicabinet.mobile.ui.lessons.lesson.view.guide.element.GuideElementView
 import com.musicabinet.mobile.ui.lessons.lesson.view.guide.row.GuideRowView
 import kotlinx.android.synthetic.main.view_guide_machine.view.*
+import java.util.*
 
 /**
  * @author Kirchhoff-
@@ -120,17 +121,18 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
         }
     }
 
-    private fun getImprovisationFileElements(): ArrayList<ImprovisationResult> {
-        val resultImprovisation = ArrayList<ImprovisationResult>()
+    private fun getImprovisationFileElements(): TreeMap<Int, List<ImprovisationResultItem>> {
+        val resultMap = TreeMap<Int, List<ImprovisationResultItem>>()
         val childCount = guideMachineLayout.childCount
+
         (0..childCount step 1)
                 .filter { guideMachineLayout.getChildAt(it) is GuideRowView }
-                .mapTo(resultImprovisation) {
-                    ImprovisationResult(guideMachineLayout.getChildAt(it).tag.toString(),
+                .forEach {
+                    resultMap.put(guideMachineLayout.getChildAt(it).tag.toString().toInt(),
                             (guideMachineLayout.getChildAt(it) as GuideRowView).getImprovisationRowInformation())
                 }
 
-        return resultImprovisation
+        return resultMap
     }
 
 }
