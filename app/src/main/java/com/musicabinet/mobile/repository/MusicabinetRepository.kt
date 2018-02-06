@@ -9,6 +9,7 @@ import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
 import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageResponse
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItemResponse
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteImageResponse
+import com.musicabinet.mobile.model.lesson.machine.save.ImprovisationStaveResult
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
 import com.musicabinet.mobile.model.profile.UserProfile
 import io.reactivex.Completable
@@ -16,6 +17,7 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.Response
+import java.io.File
 
 /**
  * @author Kirchhoff-
@@ -62,4 +64,8 @@ interface MusicabinetRepository {
                        chordTypeId: String): Observable<NoteImageResponse>
 
     fun getDiagramImage(diagramString: String): Single<DiagramImageResponse>
+
+    fun saveImprovisation(id: String): Single<ImprovisationStaveResult>
+
+    fun uploadImprovisation(id: String, file: File)
 }

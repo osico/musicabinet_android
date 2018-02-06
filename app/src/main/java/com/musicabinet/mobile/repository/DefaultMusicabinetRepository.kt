@@ -3,11 +3,18 @@ package com.musicabinet.mobile.repository
 import com.musicabinet.mobile.api.ApiFactory
 import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageRequestBody
 import com.musicabinet.mobile.model.lesson.machine.diagram.DiagramImageResponse
+import com.musicabinet.mobile.model.lesson.machine.save.ImprovisationStave
+import com.musicabinet.mobile.model.lesson.machine.save.ImprovisationStaveResult
+import com.musicabinet.mobile.model.lesson.machine.save.ImprovisationStoredFile
 import com.musicabinet.mobile.model.lesson.progress.LessonProgress
 import com.musicabinet.mobile.model.login.LoginRequestBody
 import com.musicabinet.mobile.model.register.RegisterRequestBody
 import com.musicabinet.mobile.model.register.UserInfo
 import io.reactivex.Single
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 
 /**
  * @author Kirchhoff-
@@ -93,6 +100,24 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
         list.add(diagramString)
         return ApiFactory.service.getDiagramImage(true,
                 DiagramImageRequestBody(list))
+    }
+
+    override fun saveImprovisation(id: String): Single<ImprovisationStaveResult> {
+        val requestBody = ImprovisationStaveResult(null, "Untitled improvisation",
+                "b0157b02-5464-4762-b090-abdbe6c0ef91",
+                "623f7a16-2d69-4ec0-ba93-88f673a370b9",
+                ImprovisationStave(null, "User stave", null,
+                        "54480ce1-00eb-4179-a2b6-f74daa6b9e73",
+                        "54480ce1-00eb-4179-a2b6-f74daa6b9e72",
+                        ImprovisationStoredFile(null, "54480ce1-00eb-4179-a2b6-f74daa6b9e71")))
+
+        return ApiFactory.service.saveImprovisation(requestBody)
+    }
+
+    override fun uploadImprovisation(id: String, file: File) {
+        val multiPartBody = MultipartBody.Part.createFormData("improvisation.txt",
+                file.name, RequestBody.create(MediaType.parse("text/*"), file))
+        return ApiFactory.service.uploadImprovisation(id, multiPartBody)
     }
 
 }

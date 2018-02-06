@@ -9,4 +9,4 @@ data class ImprovisationStaveResult(@SerializedName("id") val id: String?,
                                     @SerializedName("name") val name: String,
                                     @SerializedName("lessonId") val lessonId: String,
                                     @SerializedName("exerciseId") val exerciseId: String,
-                                    @SerializedName("stave") val stave: ImprovisationStaveResult)
+                                    @SerializedName("stave") val stave: ImprovisationStave)
