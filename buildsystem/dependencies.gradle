@@ -1,5 +1,5 @@
 ext.versions = [
-        code               : 15,
+        code               : 16,
         name               : '1.0.0',
 
         androidGradlePlugin: '3.0.0',
