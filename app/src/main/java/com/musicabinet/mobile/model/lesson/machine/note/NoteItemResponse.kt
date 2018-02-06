@@ -5,4 +5,4 @@ import com.google.gson.annotations.SerializedName
 /**
  * @author Kirchhoff-
  */
-data class NoteItemResponse(@SerializedName("data") val noteList: List<NoteItem>)
+data class NoteItemResponse(@SerializedName("data") val noteList: MutableList<NoteItem>)

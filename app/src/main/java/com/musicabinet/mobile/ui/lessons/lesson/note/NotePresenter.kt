@@ -34,6 +34,13 @@ class NotePresenter(private val repository: MusicabinetRepository,
                 { noteModule, noteCourse ->
                     Collections.sort(noteModule.noteList)
                     Collections.sort(noteCourse.noteList)
+                    noteModule.noteList
+                            .filter { it.activeInLibrary != null && !it.activeInLibrary }
+                            .forEach { noteModule.noteList.remove(it) }
+
+                    noteCourse.noteList
+                            .filter { it.activeInLibrary != null && !it.activeInLibrary }
+                            .forEach { noteCourse.noteList.remove(it) }
                     Pair(noteModule.noteList, noteCourse.noteList)
                 })
                 .observeOn(AndroidSchedulers.mainThread())
