@@ -101,7 +101,7 @@
         <activity
             android:name=".ui.web.WebVideoActivity"
             android:label="@string/video_for_lesson"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
 
         <activity
             android:name=".ui.lessons.lesson.tonechord.ToneAndChordActivity"
