@@ -4,15 +4,44 @@
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true">
 
-    <Button
-        android:id="@+id/bFacebook"
-        style="@style/FacebookButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:drawableStart="@drawable/ic_facebook"
-        android:text="@string/connect_facebook"
-        android:textAllCaps="false" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bFacebook"
+            style="@style/FacebookButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:drawableStart="@drawable/ic_facebook"
+            android:text="@string/connect_facebook"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/bLinkedId"
+            style="@style/LinkedinButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:drawableStart="@drawable/ic_linkedin"
+            android:text="@string/connect_linkedin"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/bInstagram"
+            style="@style/InstagramButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:drawableStart="@drawable/ic_instagram"
+            android:text="@string/connect_instagram"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
 
 </ScrollView>

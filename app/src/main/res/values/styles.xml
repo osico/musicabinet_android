@@ -83,4 +83,13 @@
         <item name="backgroundTint">@color/google_button_color</item>
     </style>
 
+    <style name="LinkedinButton" parent="Base.Widget.AppCompat.Button">
+        <item name="backgroundTint">@color/linked_button_color</item>
+    </style>
+
+    <style name="InstagramButton" parent="Base.Widget.AppCompat.Button">
+        <item name="background">@drawable/ic_rectangle</item>
+    </style>
+
+
 </resources>
