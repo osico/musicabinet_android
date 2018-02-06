@@ -13,6 +13,7 @@ import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.machine.FileDataItem
 import com.musicabinet.mobile.model.lesson.machine.ImprovisationResult
+import com.musicabinet.mobile.model.lesson.machine.ImprovisationResultWrapper
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.model.lesson.remote.Stave
 import com.musicabinet.mobile.repository.ImprovisationService
@@ -103,7 +104,7 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
             guideElementView.setToneAndChord(data.getParcelableExtra(Constants.GUIDE_MACHINE_ELEMENT_RESULT_ARG))
 
             ImprovisationService.uploadImprovisation(context, presenter.getImprovisationFileId(),
-                    getImprovisationFileElements())
+                    ImprovisationResultWrapper(getImprovisationFileElements()))
         } else if (requestCode == Constants.NOTE_REQUEST_CODE && resultCode == Activity.RESULT_OK &&
                 data != null) {
             val resultTag: String = data.getStringExtra(Constants.NOTE_TAG_ARG)
@@ -115,7 +116,7 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
                     data.getStringExtra(Constants.NOTE_COURSE_RESULT_ARG))
 
             ImprovisationService.uploadImprovisation(context, presenter.getImprovisationFileId(),
-                    getImprovisationFileElements())
+                    ImprovisationResultWrapper(getImprovisationFileElements()))
         }
     }
 

@@ -7,9 +7,8 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.musicabinet.mobile.model.lesson.machine.ImprovisationResult;
-
-import java.util.ArrayList;
+import com.musicabinet.mobile.model.lesson.machine.ImprovisationResultWrapper;
+import com.musicabinet.mobile.utils.GsonHolder;
 
 /**
  * @author Kirchhoff-
@@ -26,17 +25,19 @@ public class ImprovisationService extends IntentService {
     }
 
     public static void uploadImprovisation(Context context, String id,
-                                           ArrayList<ImprovisationResult> resultImprovisation) {
+                                           ImprovisationResultWrapper resultImprovisation) {
         Intent intent = new Intent(context, ImprovisationService.class);
         intent.putExtra(FILE_ID_ARG, id);
-        intent.putExtra(IMPROVISATION_MAP_ARG, resultImprovisation.toString());
+        intent.putExtra(IMPROVISATION_MAP_ARG, GsonHolder.getGson().toJson(resultImprovisation));
         context.startService(intent);
     }
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         String fileId = intent.getStringExtra(FILE_ID_ARG);
-        String improvisationMap = intent.getStringExtra(IMPROVISATION_MAP_ARG);
+        String improvisationString = intent.getStringExtra(IMPROVISATION_MAP_ARG);
+        ImprovisationResultWrapper wrapper = GsonHolder.getGson().fromJson(improvisationString,
+                ImprovisationResultWrapper.class);
         if (TextUtils.isEmpty(fileId)) {
             Log.d("TAG", "Should create id and then load file");
         } else {
