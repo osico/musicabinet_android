@@ -87,8 +87,15 @@
         <item name="backgroundTint">@color/linked_button_color</item>
     </style>
 
+    <style name="InstagramButtonTheme">
+        <item name="android:buttonStyle">@style/InstagramButton</item>
+    </style>
+
     <style name="InstagramButton" parent="Base.Widget.AppCompat.Button">
-        <item name="background">@drawable/ic_rectangle</item>
+        <item name="android:background">@drawable/instagram_gradient</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+        <item name="android:padding">8dp</item>
     </style>
 
 
