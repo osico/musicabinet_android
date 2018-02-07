@@ -53,8 +53,7 @@
             android:layout_marginTop="6dp"
             android:drawableStart="@drawable/ic_vk"
             android:text="@string/connect_vk"
-            android:textAllCaps="false"
-            android:visibility="gone" />
+            android:textAllCaps="false" />
 
     </LinearLayout>
 
