@@ -44,6 +44,7 @@
     <string name="connect_facebook">Connect with Facebook</string>
     <string name="connect_linkedin">Connect with LinkedIn</string>
     <string name="connect_instagram">Connect with Instagram</string>
+    <string name="connect_vk">Connect with VK</string>
 
 
     <!-- Resources for WebAuthorizationActivity-->

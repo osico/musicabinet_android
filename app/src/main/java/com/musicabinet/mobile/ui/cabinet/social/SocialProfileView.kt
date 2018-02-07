@@ -20,6 +20,7 @@ class SocialProfileView : LinearLayout {
         const val FACEBOOK_URL = "https://www.facebook.com/dialog/oauth?client_id=1845606962375917&redirect_uri=https%3a%2f%2fapi.musicabinet.com%2fplatform%2foauth%2fFACEBOOK&response_type=code&scope=public_profile,email"
         const val LINKED_IN_URL = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78qkahnfqw17u8&redirect_uri=https%3a%2f%2fapi.musicabinet.com%2fplatform%2foauth%2fLINKEDIN&state=987654321&scope=r_basicprofile%20r_emailaddress"
         const val INSTAGRAM_URL = "https://api.instagram.com/oauth/authorize/?client_id=35f9b7f5fe1541fa84e43430140befec&response_type=code&redirect_uri=https%3a%2f%2fapi.musicabinet.com%2fplatform%2foauth%2fINSTAGRAM"
+        const val VK_URL = "https://oauth.vk.com/authorize?client_id=5755559&response_type=code&scope=email,phone&display=popup&redirect_uri=https%3a%2f%2fapi.musicabinet.com%2fplatform%2foauth%2fVK"
     }
 
     constructor(context: Context) : super(context) {
@@ -47,6 +48,10 @@ class SocialProfileView : LinearLayout {
 
         bInstagram.setOnClickListener {
             WebAuthorizationActivity.startWebAuthorization(context as Activity, CabinetActivity.REQUEST_USER_LOGIN, INSTAGRAM_URL)
+        }
+
+        bVk.setOnClickListener {
+            WebAuthorizationActivity.startWebAuthorization(context as Activity, CabinetActivity.REQUEST_USER_LOGIN, VK_URL)
         }
     }
 }

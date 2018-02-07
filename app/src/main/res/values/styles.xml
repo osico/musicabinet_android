@@ -87,6 +87,10 @@
         <item name="backgroundTint">@color/linked_button_color</item>
     </style>
 
+    <style name="VkButton" parent="Base.Widget.AppCompat.Button">
+        <item name="backgroundTint">@color/vk_button_color</item>
+    </style>
+
     <style name="InstagramButtonTheme">
         <item name="android:buttonStyle">@style/InstagramButton</item>
     </style>

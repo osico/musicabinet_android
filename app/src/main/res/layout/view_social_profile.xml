@@ -43,6 +43,19 @@
             android:textAllCaps="false"
             android:theme="@style/InstagramButtonTheme" />
 
+        <Button
+            android:id="@+id/bVk"
+            style="@style/VkButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:drawableStart="@drawable/ic_vk"
+            android:text="@string/connect_vk"
+            android:textAllCaps="false"
+            android:visibility="gone" />
+
     </LinearLayout>
 
 </ScrollView>
