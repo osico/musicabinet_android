@@ -34,25 +34,7 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
             view.setAccompanimentList(accompanimentsList)
             view.showAccompaniment(accompanimentsList[currentSelectedPosition])
 
-            var shouldShowElement = false
-            for (accompaniment in accompanimentsList) {
-                if (accompaniment.keys != null && accompaniment.keys.dataAvailable) {
-                    shouldShowElement = true
-                    break
-                }
-
-                if (accompaniment.drums != null && accompaniment.drums.dataAvailable) {
-                    shouldShowElement = true
-                    break
-                }
-
-                if (accompaniment.bass != null && accompaniment.bass.dataAvailable) {
-                    shouldShowElement = true
-                    break
-                }
-            }
-
-            view.setElementVisibility(shouldShowElement)
+            view.setElementVisibility(true)
 
             checkFileAvailable()
         } else {
@@ -89,13 +71,13 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
         musicListId = ArrayList()
 
         //Check is data is available
-        if (accompaniment.drums != null && accompaniment.drums.dataAvailable)
+        if (accompaniment.drums != null)
             musicListId.add(accompaniment.drums.id)
 
-        if (accompaniment.bass != null && accompaniment.bass.dataAvailable)
+        if (accompaniment.bass != null)
             musicListId.add(accompaniment.bass.id)
 
-        if (accompaniment.keys != null && accompaniment.keys.dataAvailable)
+        if (accompaniment.keys != null)
             musicListId.add(accompaniment.keys.id)
 
 

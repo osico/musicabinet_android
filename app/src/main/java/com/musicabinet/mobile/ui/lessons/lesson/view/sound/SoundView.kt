@@ -88,9 +88,9 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
 
 
     override fun showAccompaniment(accompaniment: Accompaniment) {
-        cDrums.isChecked = accompaniment.drums != null && accompaniment.drums.dataAvailable
-        cBass.isChecked = accompaniment.bass != null && accompaniment.bass.dataAvailable
-        cKeys.isChecked = accompaniment.keys != null && accompaniment.keys.dataAvailable
+        cDrums.isChecked = accompaniment.drums != null
+        cBass.isChecked = accompaniment.bass != null
+        cKeys.isChecked = accompaniment.keys != null
 
         cDrums.configVisibility()
         cBass.configVisibility()

@@ -11,5 +11,4 @@ import kotlinx.android.parcel.Parcelize
 @SuppressLint("ParcelCreator")
 @Parcelize
 data class StoredFile(@SerializedName("id") val id: String,
-                      @SerializedName("meta") val meta: String,
-                      @SerializedName("dataAvailable") val dataAvailable: Boolean) : Parcelable
+                      @SerializedName("meta") val meta: String) : Parcelable
