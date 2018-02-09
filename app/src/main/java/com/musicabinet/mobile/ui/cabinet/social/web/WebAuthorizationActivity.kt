@@ -9,11 +9,10 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.toast
 import com.musicabinet.mobile.ui.ActionBarActivity
 import com.musicabinet.mobile.ui.view.LoadingDialog
 import kotlinx.android.synthetic.main.activity_web.*
-import org.jetbrains.anko.toast
-
 /**
  * @author Kirchhoff-
  */
@@ -60,7 +59,7 @@ class WebAuthorizationActivity : ActionBarActivity(), WebAuthorizationContract.V
     }
 
     override fun showError() {
-        toast("Error")
+        toast(R.string.internal_error)
     }
 
     override fun moveToHomeScreen() {

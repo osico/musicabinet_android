@@ -10,13 +10,12 @@ import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.disableErrorOnType
 import com.musicabinet.mobile.extensions.getString
+import com.musicabinet.mobile.extensions.toast
 import com.musicabinet.mobile.ui.ActivityWithBackButton
 import com.musicabinet.mobile.ui.signup.SignUpFinishActivity
 import com.musicabinet.mobile.ui.view.LoadingDialog
 import com.musicabinet.mobile.utils.TextWatcherAdapter
 import kotlinx.android.synthetic.main.activity_sign_up_password.*
-import org.jetbrains.anko.toast
-
 /**
  * @author Kirchhoff-
  */

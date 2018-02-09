@@ -61,7 +61,6 @@ dependencies {
     //Kotlin & extensions
     implementation libraries.kotlin
     implementation libraries.kotlinStdLib
-    implementation libraries.anko
 
     //Net
     implementation libraries.retrofit

@@ -12,14 +12,13 @@ import android.view.View
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.extensions.toast
 import com.musicabinet.mobile.ui.cabinet.CabinetActivity
 import com.musicabinet.mobile.ui.home.HomeActivity
 import com.musicabinet.mobile.ui.instrument.InstrumentActivity
 import kotlinx.android.synthetic.main.activity_slide_menu.*
 import kotlinx.android.synthetic.main.view_slide_header.*
 import kotlinx.android.synthetic.main.view_slide_menu.*
-import org.jetbrains.anko.toast
-
 /**
  * @author Kirchhoff-
  */

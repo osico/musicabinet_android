@@ -8,11 +8,10 @@ import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.extensions.toast
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import kotlinx.android.synthetic.main.activity_tone_and_chord.*
-import org.jetbrains.anko.toast
-
 /**
  * @author Kirchhoff-
  */

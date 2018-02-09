@@ -6,6 +6,7 @@ import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.createPaymentDialog
 import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.extensions.toast
 import com.musicabinet.mobile.model.instrument.matrix.LessonItem
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
@@ -15,8 +16,6 @@ import com.musicabinet.mobile.ui.lessons.list.pager.LessonListPagerAdapter
 import com.musicabinet.mobile.ui.lessons.list.pager.LessonListView
 import com.musicabinet.mobile.ui.view.LoadingDialog
 import kotlinx.android.synthetic.main.activity_lesson_list.*
-import org.jetbrains.anko.toast
-
 
 /**
  * @author Kirchhoff-
@@ -69,15 +68,15 @@ class LessonListActivity : ActionBarActivity(), LessonListContract.View, LessonL
     }
 
     override fun showError() {
-        toast("Error")
+        toast(R.string.internal_error)
     }
 
     override fun showSuccess() {
-        toast("Success")
+        toast(R.string.success)
     }
 
     override fun showNotAvailableError() {
-        toast("Product not available")
+        toast(R.string.product_not_available)
     }
 
     override fun onBuyButtonClick() {

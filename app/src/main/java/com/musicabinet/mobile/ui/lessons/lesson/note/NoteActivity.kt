@@ -10,6 +10,7 @@ import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.extensions.toast
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItem
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteElement
@@ -17,8 +18,6 @@ import com.musicabinet.mobile.ui.ActionBarActivity
 import com.musicabinet.mobile.ui.lessons.lesson.note.adapter.image.NoteImageAdapter
 import com.musicabinet.mobile.ui.lessons.lesson.note.adapter.spinner.NoteSpinnerAdapter
 import kotlinx.android.synthetic.main.activity_note.*
-import org.jetbrains.anko.toast
-
 /**
  * @author Kirchhoff-
  */

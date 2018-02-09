@@ -1,9 +1,12 @@
 package com.musicabinet.mobile.extensions
 
+import android.content.Context
+import android.support.annotation.StringRes
 import android.support.design.widget.TextInputEditText
 import android.support.design.widget.TextInputLayout
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
 import java.util.regex.Pattern
 
 /**
@@ -27,4 +30,9 @@ fun TextInputEditText.disableErrorOnType(inputLayout: TextInputLayout) {
 
         }
     })
+}
+
+
+fun Context.toast(@StringRes res: Int) {
+    Toast.makeText(this, getString(res), Toast.LENGTH_LONG).show()
 }

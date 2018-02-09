@@ -12,6 +12,7 @@ import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setTint
 import com.musicabinet.mobile.extensions.setVisible
+import com.musicabinet.mobile.extensions.toast
 import com.musicabinet.mobile.model.lesson.lesson.Lesson
 import com.musicabinet.mobile.model.lesson.local.LessonData
 import com.musicabinet.mobile.model.lesson.local.MethodItem
@@ -20,8 +21,6 @@ import com.musicabinet.mobile.model.lesson.remote.Stave
 import com.musicabinet.mobile.ui.lessons.lesson.dialog.LessonSelectActivity
 import com.musicabinet.mobile.ui.view.metronome.MetronomeView
 import kotlinx.android.synthetic.main.activity_lesson.*
-import org.jetbrains.anko.toast
-
 /**
  * @author Kirchhoff-
  */
@@ -61,11 +60,11 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
     }
 
     override fun showSuccess() {
-        toast("Success")
+        toast(R.string.success)
     }
 
     override fun showError() {
-        toast("Error")
+        toast(R.string.internal_error)
     }
 
     override fun showSelectLesson(lessonList: ArrayList<Lesson>, lessonId: String, requestCode: Int,

@@ -4,6 +4,7 @@
     <!-- General resources -->
     <string name="loading">Loading…</string>
     <string name="internal_error">Internal error, please try later</string>
+    <string name="success">Success</string>
     <string name="cancel">Cancel</string>
 
     <!-- Resources for SlideMenu -->
@@ -97,6 +98,7 @@
     <!-- Resources for LessonListActivity-->
     <string name="price_buy">buy $%.2f</string>
     <string name="authorize_error">Buy lesson for learning</string>
+    <string name="product_not_available">Product not available</string>
 
 
     <!-- Resources for DialogLessonSelect -->

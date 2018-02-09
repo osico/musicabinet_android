@@ -8,12 +8,11 @@ import android.view.View
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.disableErrorOnType
 import com.musicabinet.mobile.extensions.getString
+import com.musicabinet.mobile.extensions.toast
 import com.musicabinet.mobile.ui.ActivityWithBackButton
 import com.musicabinet.mobile.ui.cabinet.SuccessChangePasswordActivity
 import com.musicabinet.mobile.utils.TextWatcherAdapter
 import kotlinx.android.synthetic.main.activity_change_password.*
-import org.jetbrains.anko.toast
-
 /**
  * @author Kirchhoff-
  */
