@@ -13,10 +13,11 @@
     tools:layout_marginBottom="32dp">
 
     <LinearLayout
+        android:id="@+id/homeTutorialRootLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/tvTitle"
