@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -206,6 +207,30 @@ public class FileUtils {
         File downloadedFile = new File(Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), fileName);
         return downloadedFile.exists();
+    }
+
+
+    public static String readStringFromFile(File file) {
+        // File file = new File(Environment
+        //         .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), fileName);
+
+        //Read text from file
+        StringBuilder text = new StringBuilder();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append('\n');
+            }
+            br.close();
+        } catch (IOException e) {
+            //You'll need to add proper error handling here
+        }
+
+        return text.toString();
     }
 
 }

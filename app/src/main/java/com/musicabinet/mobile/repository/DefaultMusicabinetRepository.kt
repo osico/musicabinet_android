@@ -13,9 +13,9 @@ import com.musicabinet.mobile.model.register.UserInfo
 import io.reactivex.Completable
 import io.reactivex.Single
 import okhttp3.MediaType
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+import java.io.FileInputStream
 
 /**
  * @author Kirchhoff-
@@ -116,9 +116,13 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
     }
 
     override fun uploadImprovisation(id: String, file: File): Completable {
-        val multiPartBody = MultipartBody.Part.createFormData("improvisation.txt",
-                file.name, RequestBody.create(MediaType.parse("text/*"), file))
-        return ApiFactory.service.uploadImprovisation(id, multiPartBody)
+        val inputStream = FileInputStream(file)
+        val buf: ByteArray
+        buf = ByteArray(inputStream.available())
+        while (inputStream.read(buf) !== -1);
+        val requestBody = RequestBody
+                .create(MediaType.parse("application/octet-stream"), buf)
+        return ApiFactory.service.uploadImprovisation(id, "test.txt", requestBody)
     }
 
 }
