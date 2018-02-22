@@ -17,12 +17,16 @@ interface HomeTutorialContract {
 
         fun showHomeTutorialError()
 
+        fun openTutorial(url: String, title: String)
+
         fun setHomeTutorialItem(videoList: List<HomeDataElement>, enablePagination: Boolean)
     }
 
     interface Presenter {
 
         fun loadItems()
+
+        fun onTutorialClick(tutorialItem: HomeDataElement)
 
         fun unsubscribe()
 

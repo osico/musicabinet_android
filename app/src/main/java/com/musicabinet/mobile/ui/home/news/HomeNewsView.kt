@@ -12,12 +12,14 @@ import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.home.HomeDataElement
 import com.musicabinet.mobile.ui.home.news.adapter.HomeNewsAdapter
+import com.musicabinet.mobile.ui.web.WebVideoActivity
+import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 import kotlinx.android.synthetic.main.view_home_news.view.*
 
 /**
  * @author Kirchhoff-
  */
-class HomeNewsView : FrameLayout, HomeNewsContract.View {
+class HomeNewsView : FrameLayout, HomeNewsContract.View, BaseRecyclerAdapter.OnItemClickListener<HomeDataElement> {
 
     private var homeNewsAdapter: HomeNewsAdapter? = null
     private lateinit var presenter: HomeNewsContract.Presenter
@@ -94,7 +96,15 @@ class HomeNewsView : FrameLayout, HomeNewsContract.View {
             loading = false
         }
 
+        homeNewsAdapter?.setOnItemClickListener(this)
         recyclerView.setVisible(true)
     }
 
+    override fun onItemClick(item: HomeDataElement) {
+        presenter.onNewsClick(item)
+    }
+
+    override fun openNews(url: String, title: String) {
+        WebVideoActivity.startWebVideo(context, url, title)
+    }
 }

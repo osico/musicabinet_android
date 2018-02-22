@@ -4,6 +4,7 @@ package com.musicabinet.mobile.ui.home.tutorial
  * @author Kirchhoff-
  */
 import com.musicabinet.mobile.model.home.HomeData
+import com.musicabinet.mobile.model.home.HomeDataElement
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -45,6 +46,11 @@ class HomeTutorialPresenter(private val repository: MusicabinetRepository,
                 }
             }, { view.showHomeTutorialError() }))
         }
+    }
+
+    override fun onTutorialClick(tutorialItem: HomeDataElement) {
+        if (tutorialItem.dataField.url != null)
+            view.openTutorial(tutorialItem.dataField.url!!, tutorialItem.name)
     }
 
     override fun unsubscribe() {

@@ -15,12 +15,14 @@ import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.home.HomeDataElement
 import com.musicabinet.mobile.ui.home.tutorial.adapter.HomeTutorialAdapter
+import com.musicabinet.mobile.ui.web.WebVideoActivity
+import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 import kotlinx.android.synthetic.main.view_home_tutorial.view.*
 
 /**
  * @author Kirchhoff-
  */
-class HomeTutorialView : FrameLayout, HomeTutorialContract.View {
+class HomeTutorialView : FrameLayout, HomeTutorialContract.View, BaseRecyclerAdapter.OnItemClickListener<HomeDataElement> {
 
     private var homeTutorialAdapter: HomeTutorialAdapter? = null
     private lateinit var presenter: HomeTutorialContract.Presenter
@@ -98,7 +100,15 @@ class HomeTutorialView : FrameLayout, HomeTutorialContract.View {
             loading = false
         }
 
+        homeTutorialAdapter?.setOnItemClickListener(this)
         recyclerView.setVisible(true)
     }
 
+    override fun onItemClick(item: HomeDataElement) {
+        presenter.onTutorialClick(item)
+    }
+
+    override fun openTutorial(url: String, title: String) {
+        WebVideoActivity.startWebVideo(context, url, title)
+    }
 }

@@ -4,6 +4,7 @@ package com.musicabinet.mobile.ui.home.news
  * @author Kirchhoff-
  */
 import com.musicabinet.mobile.model.home.HomeData
+import com.musicabinet.mobile.model.home.HomeDataElement
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -47,6 +48,11 @@ class HomeNewsPresenter(private val repository: MusicabinetRepository,
 
     override fun unsubscribe() {
         subscriptions.clear()
+    }
+
+    override fun onNewsClick(newsItem: HomeDataElement) {
+        if (newsItem.dataField.url != null)
+            view.openNews(newsItem.dataField.url!!, newsItem.name)
     }
 
 }

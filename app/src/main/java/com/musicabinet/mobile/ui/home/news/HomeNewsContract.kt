@@ -18,11 +18,15 @@ interface HomeNewsContract {
         fun showHomeNewsError()
 
         fun setHomeNewsItem(videoList: List<HomeDataElement>, enablePagination: Boolean)
+
+        fun openNews(url: String, title: String)
     }
 
     interface Presenter {
 
         fun loadItems()
+
+        fun onNewsClick(newsItem: HomeDataElement)
 
         fun unsubscribe()
 
