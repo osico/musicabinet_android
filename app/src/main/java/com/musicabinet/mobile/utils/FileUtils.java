@@ -1,7 +1,6 @@
 package com.musicabinet.mobile.utils;
 
 import android.media.MediaScannerConnection;
-import android.os.Environment;
 import android.text.TextUtils;
 
 import com.musicabinet.mobile.MusicabinetApp;
@@ -91,7 +90,7 @@ public class FileUtils {
             writeToFile("\n");
         }
 
-        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        File path = MusicabinetApp.Companion.getAppContext().getFilesDir();
         return new File(path, IMPROVISATION_FILE_NAME);
     }
 
@@ -171,7 +170,7 @@ public class FileUtils {
     }
 
     private static void clearFile() {
-        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        File path = MusicabinetApp.Companion.getAppContext().getFilesDir();
         File file = new File(path, IMPROVISATION_FILE_NAME);
         PrintWriter writer;
         try {
@@ -187,7 +186,7 @@ public class FileUtils {
     private static File getImprovisationFile() {
         if (isFileExist(IMPROVISATION_FILE_NAME)) {
             if (improvisationFile == null) {
-                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+                File path = MusicabinetApp.Companion.getAppContext().getFilesDir();
                 File file = new File(path, IMPROVISATION_FILE_NAME);
                 PrintWriter writer;
                 try {
@@ -203,7 +202,7 @@ public class FileUtils {
             }
         } else {
             try {
-                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+                File path = MusicabinetApp.Companion.getAppContext().getFilesDir();
                 File file = new File(path, IMPROVISATION_FILE_NAME);
                 file.createNewFile();
                 path.setExecutable(true);
@@ -221,8 +220,7 @@ public class FileUtils {
     }
 
     private static boolean isFileExist(String fileName) {
-        File downloadedFile = new File(Environment
-                .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), fileName);
+        File downloadedFile = new File(MusicabinetApp.Companion.getAppContext().getFilesDir(), fileName);
         return downloadedFile.exists();
     }
 
