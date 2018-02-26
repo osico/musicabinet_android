@@ -113,10 +113,10 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
         adapter?.setAccompaniments(accompaniments)
     }
 
-    override fun showGuideMachine(stave: Stave?) {
+    override fun showGuideMachine(stave: Stave?, userStaveId: Boolean) {
         adapter = LessonAdapter(this, true)
         viewPager.adapter = adapter
-        adapter?.setStave(stave)
+        adapter?.setStave(stave, userStaveId)
     }
 
     override fun onPause() {

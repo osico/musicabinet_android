@@ -31,6 +31,7 @@ class LessonPresenter(private val view: LessonContract.View,
     private val subscriptions = CompositeDisposable()
     private var lessonList: ArrayList<Lesson>? = null
     private lateinit var currentLessonId: String
+    private var shouldUseStaveId = false
 
     override fun getLessonGroup(id: String) {
         subscriptions.add(repository.getLessonGroup(id)
@@ -68,8 +69,10 @@ class LessonPresenter(private val view: LessonContract.View,
                             if (exercise.stave != null) {
                                 images.add(exercise.stave.file.id)
 
-                                if (exercise.stave.isGuideMachineStave())
+                                if (exercise.stave.isGuideMachineStave()) {
                                     guideMachineStave = exercise.stave
+                                    shouldUseStaveId = false
+                                }
                             }
 
                             if (exercise.accompaniment != null)
@@ -84,13 +87,14 @@ class LessonPresenter(private val view: LessonContract.View,
                     if (!lessonResponse.improvisations.isEmpty()) {
                         guideMachineStave = lessonResponse
                                 .improvisations[lessonResponse.improvisations.size - 1].stave
+                        shouldUseStaveId = true
                     }
 
                     currentLessonId = lessonResponse.id
                     LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
                             lessonImageList, accompaniments,
                             lessonResponse.duration - lessonResponse.getProgress(),
-                            lessonResponse.hasGuideMachine(), guideMachineStave)
+                            lessonResponse.hasGuideMachine(), guideMachineStave, shouldUseStaveId)
                 })
                 .subscribe({ screenData: LessonScreenData -> showLesson(screenData) },
                         { t: Throwable -> view.showError() }))
@@ -119,8 +123,10 @@ class LessonPresenter(private val view: LessonContract.View,
                             if (exercise.stave != null) {
                                 images.add(exercise.stave.file.id)
 
-                                if (exercise.stave.isGuideMachineStave())
+                                if (exercise.stave.isGuideMachineStave()) {
                                     guideMachineStave = exercise.stave
+                                    shouldUseStaveId = false
+                                }
                             }
 
                             if (exercise.accompaniment != null)
@@ -136,13 +142,14 @@ class LessonPresenter(private val view: LessonContract.View,
                     if (!lessonResponse.improvisations.isEmpty()) {
                         guideMachineStave = lessonResponse
                                 .improvisations[lessonResponse.improvisations.size - 1].stave
+                        shouldUseStaveId = true
                     }
 
                     currentLessonId = lessonResponse.id
                     LessonScreenData(lessonResponse.id, lessonResponse.name, methodList,
                             lessonImageList, accompaniments,
                             lessonResponse.duration - lessonResponse.getProgress(),
-                            lessonResponse.hasGuideMachine(), guideMachineStave)
+                            lessonResponse.hasGuideMachine(), guideMachineStave, shouldUseStaveId)
                 })
                 .subscribe({ screenData: LessonScreenData -> showLesson(screenData) },
                         { t: Throwable -> view.showError() }))
@@ -155,7 +162,7 @@ class LessonPresenter(private val view: LessonContract.View,
         view.setLessonTime(screenData.spendTime, screenData.id)
 
         if (screenData.hasGuideMachine)
-            view.showGuideMachine(screenData.guideMachineStave)
+            view.showGuideMachine(screenData.guideMachineStave, screenData.useOriginalStaveId)
         else
             view.showLessonImages(screenData.lessonImages)
 

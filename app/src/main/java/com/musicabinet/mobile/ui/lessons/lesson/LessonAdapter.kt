@@ -67,8 +67,8 @@ class LessonAdapter(private val context: Context, private val hasGuideMachine: B
         guideMachineView?.setAccompaniments(accompaniments)
     }
 
-    fun setStave(stave: Stave?) {
-        guideMachineView?.setStave(stave)
+    fun setStave(stave: Stave?, userStaveId: Boolean) {
+        guideMachineView?.setStave(stave, userStaveId)
     }
 
     fun onPause() {

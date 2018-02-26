@@ -12,4 +12,5 @@ data class LessonScreenData(val id: String, val title: String,
                             val accompaniments: Set<Accompaniment>,
                             val spendTime: Long,
                             val hasGuideMachine: Boolean,
-                            var guideMachineStave: Stave?)
+                            var guideMachineStave: Stave?,
+                            val useOriginalStaveId: Boolean)

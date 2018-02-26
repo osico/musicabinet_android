@@ -33,7 +33,7 @@ interface LessonContract {
 
         fun showAccompaniments(accompaniments: Set<Accompaniment>)
 
-        fun showGuideMachine(stave: Stave?)
+        fun showGuideMachine(stave: Stave?, userStaveId: Boolean)
 
         fun onLessonSelected(id: String)
     }

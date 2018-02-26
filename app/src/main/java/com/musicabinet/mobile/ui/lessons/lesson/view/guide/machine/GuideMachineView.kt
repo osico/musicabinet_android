@@ -59,8 +59,8 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
         soundView.setAccompaniments(accompaniments)
     }
 
-    fun setStave(stave: Stave?) {
-        presenter.subscribe(stave)
+    fun setStave(stave: Stave?, userStaveId: Boolean) {
+        presenter.subscribe(stave, userStaveId)
     }
 
     fun onPause() {

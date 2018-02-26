@@ -22,7 +22,7 @@ interface GuideMachineContract {
 
     interface Presenter {
 
-        fun subscribe(stave: Stave?)
+        fun subscribe(stave: Stave?, userStaveId: Boolean)
 
         fun addedRows(rowValue: Int)
 
