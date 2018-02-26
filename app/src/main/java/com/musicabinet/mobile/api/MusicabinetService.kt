@@ -19,7 +19,7 @@ import com.musicabinet.mobile.model.register.RegisterRequestBody
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import okhttp3.RequestBody
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -77,6 +77,11 @@ interface MusicabinetService {
     @GET("/platform/api/file-storage/{fileId}/download")
     fun downloadFile(@Path("fileId") fileId: String): Observable<Response<ResponseBody>>
 
+    @Streaming
+    @GET("/platform/api/file-storage/{fileId}/download")
+    fun downloadFileWithUUID(@Path("fileId") fileId: String,
+                             @Query("") randomString: String): Observable<Response<ResponseBody>>
+
     @GET("/api/tone")
     fun getTone(): Observable<List<ToneOrChord>>
 
@@ -111,10 +116,9 @@ interface MusicabinetService {
     @POST("/api/improvisation/save")
     fun saveImprovisation(@Body body: ImprovisationStaveResult): Single<ImprovisationStaveResult>
 
-
-    @POST("/platform/api/file-storage/{fileId}/upload")
+    @Multipart
+    @POST("/platform/api/file-storage/{fileId}/update")
     fun uploadImprovisation(@Path("fileId") fileId: String,
-                            @Query("filename") filename: String,
-                            @Body file: RequestBody)
+                            @Part file: MultipartBody.Part)
             : Completable
 }

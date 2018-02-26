@@ -52,6 +52,8 @@ interface MusicabinetRepository {
 
     fun downloadFile(fileId: String): Observable<Response<ResponseBody>>
 
+    fun downloadFileWithUUID(fileId: String): Observable<Response<ResponseBody>>
+
     fun getTone(): Observable<List<ToneOrChord>>
 
     fun getChordType(): Observable<List<ToneOrChord>>

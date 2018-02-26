@@ -2,6 +2,7 @@ package com.musicabinet.mobile.utils;
 
 import android.media.MediaScannerConnection;
 import android.os.Environment;
+import android.text.TextUtils;
 
 import com.musicabinet.mobile.MusicabinetApp;
 import com.musicabinet.mobile.model.lesson.machine.FileDataItem;
@@ -70,7 +71,13 @@ public class FileUtils {
                     continue;
                 }
 
-                writeToFile(improvisationItem.getFileDataItem());
+                if (improvisationItem.getFileDataItem() != null &&
+                        (!TextUtils.isEmpty(improvisationItem.getFileDataItem().getNoteInformation()) ||
+                                !TextUtils.isEmpty(improvisationItem.getFileDataItem().getTone()) ||
+                                !TextUtils.isEmpty(improvisationItem.getFileDataItem().getChord())))
+                    writeToFile(improvisationItem.getFileDataItem());
+                else
+                    writeToFile(EMPTY_ITEM);
 
             }
 
@@ -99,7 +106,10 @@ public class FileUtils {
 
     private static ArrayList<FileDataItem> splitString(String fileString, int line) {
         ArrayList<FileDataItem> fileDataItems = new ArrayList<>();
+        if (fileString.startsWith(" "))
+            fileString = fileString.substring(1, fileString.length());
         String[] stringArray = fileString.split(" ");
+
         for (int i = 0; i < stringArray.length; i++) {
 
             if (!stringArray[i].equals(EMPTY_ITEM)) {

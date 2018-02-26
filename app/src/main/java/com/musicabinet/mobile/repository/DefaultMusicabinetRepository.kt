@@ -13,9 +13,10 @@ import com.musicabinet.mobile.model.register.UserInfo
 import io.reactivex.Completable
 import io.reactivex.Single
 import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
-import java.io.FileInputStream
+import java.util.*
 
 /**
  * @author Kirchhoff-
@@ -82,6 +83,8 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
 
     override fun downloadFile(fileId: String) = ApiFactory.service.downloadFile(fileId)
 
+    override fun downloadFileWithUUID(fileId: String) = ApiFactory.service.downloadFileWithUUID(fileId, UUID.randomUUID().toString())
+
     override fun getTone() = ApiFactory.service.getTone()
 
     override fun getChordType() = ApiFactory.service.getChordType()
@@ -116,13 +119,9 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
     }
 
     override fun uploadImprovisation(id: String, file: File): Completable {
-        val inputStream = FileInputStream(file)
-        val buf: ByteArray
-        buf = ByteArray(inputStream.available())
-        while (inputStream.read(buf) !== -1);
-        val requestBody = RequestBody
-                .create(MediaType.parse("application/octet-stream"), buf)
-        return ApiFactory.service.uploadImprovisation(id, "test.txt", requestBody)
+        val multiPartBody = MultipartBody.Part.createFormData("content",
+                "content", RequestBody.create(MediaType.parse("text/plain"), file))
+        return ApiFactory.service.uploadImprovisation(id, multiPartBody)
     }
 
 }

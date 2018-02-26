@@ -67,7 +67,7 @@ class GuideMachinePresenter(private val view: GuideMachineContract.View,
 
 
     private fun downloadImprovisationFile(stave: Stave) {
-        subscriptions.add(repository.downloadFile(stave.file.id)
+        subscriptions.add(repository.downloadFileWithUUID(stave.file.id)
                 .flatMap { responseBodyResponse ->
                     object : Observable<File>() {
                         override fun subscribeActual(observer: Observer<in File>) {
