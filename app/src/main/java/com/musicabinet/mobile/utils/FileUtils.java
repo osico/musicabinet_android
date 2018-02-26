@@ -46,6 +46,13 @@ public class FileUtils {
     public static File createImprovisationFile(TreeMap<Integer,
             List<ImprovisationResultItem>> improvisationMap) {
 
+        //Remove last row from map if needed
+        boolean deleteRowResult = deleteRowIfNeeded(improvisationMap);
+
+        if (deleteRowResult) {
+            deleteRowIfNeeded(improvisationMap);
+        }
+
         clearFile();
 
         for (List<ImprovisationResultItem> improvisationList : improvisationMap.values()) {
@@ -217,6 +224,31 @@ public class FileUtils {
         File downloadedFile = new File(Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), fileName);
         return downloadedFile.exists();
+    }
+
+    private static boolean deleteRowIfNeeded(TreeMap<Integer,
+            List<ImprovisationResultItem>> improvisationMap) {
+        int lastKey = improvisationMap.lastKey();
+        List<ImprovisationResultItem> lastItemList = improvisationMap.get(lastKey);
+
+        boolean shouldLoadLastRow = false;
+        for (ImprovisationResultItem improvisationItem : lastItemList) {
+            if (improvisationItem.getFileDataItem() != null &&
+                    improvisationItem.getNoteElement() != null &&
+                    improvisationItem.getToneOrChordResult() != null &&
+                    (!TextUtils.isEmpty(improvisationItem.getFileDataItem().getNoteInformation()) ||
+                            !TextUtils.isEmpty(improvisationItem.getFileDataItem().getTone()) ||
+                            !TextUtils.isEmpty(improvisationItem.getFileDataItem().getChord()))) {
+                shouldLoadLastRow = true;
+            }
+        }
+
+        if (!shouldLoadLastRow) {
+            improvisationMap.remove(lastKey);
+            return true;
+        }
+
+        return false;
     }
 
 
