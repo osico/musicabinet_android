@@ -5,9 +5,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import com.musicabinet.mobile.R
+import com.musicabinet.mobile.extensions.closeKeyboard
 import com.musicabinet.mobile.extensions.toast
 import com.musicabinet.mobile.ui.cabinet.password.CabinetPasswordActivity
 import com.musicabinet.mobile.ui.instrument.InstrumentActivity
@@ -34,6 +36,19 @@ class CabinetActivity : SlideMenuActivity() {
             intent = Intent(this, SignUpUserActivity::class.java)
             startActivity(intent)
         }
+
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                currentFocus.closeKeyboard()
+            }
+
+        })
     }
 
     @SuppressLint("InflateParams")

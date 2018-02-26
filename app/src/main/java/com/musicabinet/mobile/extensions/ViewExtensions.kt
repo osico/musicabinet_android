@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.extensions
 
+import android.content.Context
 import android.graphics.PorterDuff
 import android.os.Build
 import android.support.annotation.ColorRes
@@ -9,6 +10,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.squareup.picasso.Picasso
 
@@ -75,4 +77,11 @@ fun CheckedTextView.configVisibility() {
         isEnabled = false
         alpha = 0.5f
     }
+}
+
+fun View.closeKeyboard() {
+    val imm: InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE)
+            as InputMethodManager
+    imm.hideSoftInputFromWindow(windowToken, 0)
+    imm.hideSoftInputFromWindow(applicationWindowToken, 0)
 }
