@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.lessons.lesson.note
 
+import com.musicabinet.mobile.model.lesson.machine.ToneOrChord
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItem
 import com.musicabinet.mobile.model.lesson.machine.note.NoteItemResponse
@@ -28,6 +29,50 @@ class NotePresenter(private val repository: MusicabinetRepository,
                            courseId: String?) {
         this.moduleId = moduleId
         this.courseId = courseId
+
+        if (toneOrChordResult.chord.id.isEmpty() && toneOrChordResult.tone.id.isEmpty()) {
+
+            subscriptions.add(Observable.zip(
+                    repository.getTone(), repository.getChordType(),
+                    BiFunction<List<ToneOrChord>, List<ToneOrChord>, Pair<List<ToneOrChord>, List<ToneOrChord>>>
+                    { toneList, chordList ->
+                        Collections.sort(toneList)
+                        Collections.sort(chordList)
+                        Pair(toneList, chordList)
+                    })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe { view.showLoading(true) }
+                    .subscribe({ pair: Pair<List<ToneOrChord>, List<ToneOrChord>> ->
+
+                        val toneList = pair.first
+                        val chordList = pair.second
+
+                        val toneItem = findItemInList(toneList, toneOrChordResult.tone.name)
+                        val chordItem = findItemInList(chordList, toneOrChordResult.chord.name)
+
+                        if (toneItem != null && chordItem != null) {
+                            getModuleAndCourse(ToneOrChordResult(toneItem, chordItem))
+                        } else {
+                            view.showError()
+                        }
+
+                    }, { t: Throwable -> view.showError() }))
+
+        } else {
+            getModuleAndCourse(toneOrChordResult)
+        }
+    }
+
+    private fun findItemInList(list: List<ToneOrChord>, code: String): ToneOrChord? {
+        for (item in list) {
+            if (item.code == code)
+                return item
+        }
+
+        return null
+    }
+
+    private fun getModuleAndCourse(toneOrChordResult: ToneOrChordResult) {
         subscriptions.add(Observable.zip(repository.getNoteModule(storage.getSelectedInstrumentId()),
                 repository.getNoteCourse(storage.getSelectedInstrumentId()),
                 BiFunction<NoteItemResponse, NoteItemResponse, Pair<List<NoteItem>, List<NoteItem>>>
@@ -49,16 +94,12 @@ class NotePresenter(private val repository: MusicabinetRepository,
                     view.showModule(pair.first, moduleId)
                     view.showInstrument(pair.second, courseId)
                     if (moduleId != null && courseId != null)
-                        getNoteDiagram(toneOrChordResult, moduleId, courseId)
+                        getNoteDiagram(toneOrChordResult, moduleId!!, courseId!!)
                     else if (!pair.first.isEmpty() && !pair.second.isEmpty())
                         getNoteDiagram(toneOrChordResult, pair.first[0].id, pair.second[0].id)
                     else
                         view.showLoading(false)
                 }, { t: Throwable -> view.showError() }))
-    }
-
-    override fun unsubscribe() {
-        subscriptions.clear()
     }
 
     fun getNoteDiagram(toneOrChordResult: ToneOrChordResult, moduleId: String,
@@ -82,6 +123,10 @@ class NotePresenter(private val repository: MusicabinetRepository,
                 }, { t: Throwable ->
                     view.showError()
                 }))
+    }
+
+    override fun unsubscribe() {
+        subscriptions.clear()
     }
 
     override fun getModuleId() = moduleId

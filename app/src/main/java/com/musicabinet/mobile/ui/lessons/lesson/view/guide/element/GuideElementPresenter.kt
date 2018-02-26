@@ -64,6 +64,9 @@ class GuideElementPresenter(private val view: GuideElementContract.View,
             view.setChord(item.chord!!)
             toneCode = item.tone
             chordCode = item.chord
+            val toneElement = ToneOrChord("", item.tone!!, "", 0)
+            val chordElement = ToneOrChord("", item.chord!!, "", 0)
+            toneOrChordResult = ToneOrChordResult(toneElement, chordElement)
         } else if (item.noteInformation != null) {
             view.showLoading(true)
             getDiagramImage(item.noteInformation!!)
