@@ -65,7 +65,7 @@ class NotePresenter(private val repository: MusicabinetRepository,
 
     private fun findItemInList(list: List<ToneOrChord>, code: String): ToneOrChord? {
         for (item in list) {
-            if (item.code == code)
+            if (item.code.equals(code, true))
                 return item
         }
 
