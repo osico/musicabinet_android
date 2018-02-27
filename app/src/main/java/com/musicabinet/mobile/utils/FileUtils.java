@@ -12,7 +12,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -97,7 +96,7 @@ public class FileUtils {
 
     private static ArrayList<FileDataItem> convertStreamToString(InputStream is) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        String line = null;
+        String line;
         ArrayList<FileDataItem> fileDataItems = new ArrayList<>();
         int lineCount = 0;
         while ((line = reader.readLine()) != null) {
@@ -247,30 +246,6 @@ public class FileUtils {
         }
 
         return false;
-    }
-
-
-    public static String readStringFromFile(File file) {
-        // File file = new File(Environment
-        //         .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), fileName);
-
-        //Read text from file
-        StringBuilder text = new StringBuilder();
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                text.append(line);
-                text.append('\n');
-            }
-            br.close();
-        } catch (IOException e) {
-            //You'll need to add proper error handling here
-        }
-
-        return text.toString();
     }
 
 }
