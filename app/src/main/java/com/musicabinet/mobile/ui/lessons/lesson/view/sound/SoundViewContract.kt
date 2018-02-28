@@ -34,7 +34,7 @@ interface SoundViewContract {
 
         fun stop()
 
-        fun getSoundsId(): List<String>
+        fun getSoundsId(): List<String?>
 
         fun unsubscribe()
     }
