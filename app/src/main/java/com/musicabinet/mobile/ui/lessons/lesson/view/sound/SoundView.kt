@@ -139,9 +139,36 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
 
         musicPlayerList = ArrayList()
         for (i in list.indices) {
-            musicPlayerList.add(MediaPlayer.create(context,
-                    Uri.parse(File(context.filesDir, list[i]).absolutePath)))
+            val media = MediaPlayer.create(context,
+                    Uri.parse(File(context.filesDir, list[i]).absolutePath))
+            if (media != null) {
+                musicPlayerList.add(media)
+            } else {
+                if (i == 2) {
+                    cKeys.isChecked = false
+                    cKeys.isEnabled = false
+                }
+
+                if (i == 1) {
+                    cKeys.isChecked = false
+                    cKeys.isEnabled = false
+                    cBass.isChecked = false
+                    cBass.isEnabled = false
+                }
+
+                if (i == 0) {
+                    cKeys.isChecked = false
+                    cKeys.isEnabled = false
+                    cBass.isChecked = false
+                    cBass.isEnabled = false
+                    cDrums.isChecked = false
+                    cDrums.isEnabled = false
+                    ivPlay.isEnabled = false
+                }
+            }
         }
+
+
     }
 
     override fun stopPlay() {
