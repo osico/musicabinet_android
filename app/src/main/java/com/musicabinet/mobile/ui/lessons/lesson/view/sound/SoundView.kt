@@ -16,6 +16,7 @@ import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import kotlinx.android.synthetic.main.view_sound.view.*
 import java.io.File
+import java.util.*
 
 
 /**
@@ -26,6 +27,15 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     private lateinit var presenter: SoundViewContract.Presenter
     private var musicPlayerList: MutableList<MediaPlayer> = java.util.ArrayList()
     private var check: Int = 0
+    private val HACK_loopTimer = Timer()
+    private val HACK_loopTask = object : TimerTask() {
+        override fun run() {
+            for (item in musicPlayerList) {
+                item.seekTo(0)
+            }
+        }
+    }
+    private var scheduleFirstTime = true
 
     constructor(context: Context) : super(context) {
         init()
@@ -162,12 +172,16 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
                         musicPlayerList[2].setVolume(0f, 0f)
 
                     //Start play all accompaniments
+                    //  musicPlayerList[i].isLooping = true
                     musicPlayerList[i].play()
+                    if (scheduleFirstTime) {
+                        val waitingTime = musicPlayerList[0].duration - 200
+                        HACK_loopTimer.schedule(HACK_loopTask, waitingTime.toLong(), waitingTime.toLong())
+                        scheduleFirstTime = false
+                    }
                 }
             }
         }
-
-
 
         ivPlay.setImageResource(R.drawable.ic_button_stop)
     }
