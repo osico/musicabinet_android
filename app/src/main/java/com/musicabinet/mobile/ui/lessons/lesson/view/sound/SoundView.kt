@@ -11,7 +11,6 @@ import android.widget.AdapterView
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.configVisibility
-import com.musicabinet.mobile.extensions.play
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import kotlinx.android.synthetic.main.view_sound.view.*
@@ -200,12 +199,17 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
 
                     //Start play all accompaniments
                     //  musicPlayerList[i].isLooping = true
-                    musicPlayerList[i].play()
-                    if (scheduleFirstTime) {
-                        val waitingTime = musicPlayerList[0].duration - 200
-                        HACK_loopTimer.schedule(HACK_loopTask, waitingTime.toLong(), waitingTime.toLong())
-                        scheduleFirstTime = false
+                    musicPlayerList[i].start()
+                    //  musicPlayerList[i].isLooping = false
+                    musicPlayerList[i].setOnCompletionListener {
+                        musicPlayerList[i].seekTo(0)
+                        musicPlayerList[i].start()
                     }
+                    /* if (scheduleFirstTime) {
+                         val waitingTime = musicPlayerList[0].duration - 200
+                         HACK_loopTimer.schedule(HACK_loopTask, waitingTime.toLong(), waitingTime.toLong())
+                         scheduleFirstTime = false
+                     } */
                 }
             }
         }
@@ -214,3 +218,4 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     }
 
 }
+
