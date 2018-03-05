@@ -17,7 +17,7 @@ class WebAuthorizationPresenter(private val view: WebAuthorizationContract.View,
     private val subscriptions = CompositeDisposable()
 
     companion object {
-        const val MUSICABINET_ENDPOINT = "https://app.musicabinet.com"
+        const val MUSICABINET_ENDPOINT = "https://musicabinet.com"
     }
 
     override fun shouldLoadUrl(url: String?): Boolean {
