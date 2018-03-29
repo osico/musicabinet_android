@@ -1,6 +1,5 @@
 package com.musicabinet.mobile.ui.courses
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
@@ -12,7 +11,7 @@ import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
 import com.musicabinet.mobile.ui.ActionBarActivity
 import com.musicabinet.mobile.ui.courses.adapter.CourseAdapter
-import com.musicabinet.mobile.ui.lessons.list.LessonListActivity
+import com.musicabinet.mobile.ui.lessons.list.LessonListActivityArgs
 import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_courses.*
 
@@ -84,11 +83,9 @@ class CoursesActivity : ActionBarActivity(), CoursesContract.View, BaseRecyclerA
     }
 
     override fun onItemClick(item: InstrumentCourse) {
-        val intent = Intent(this, LessonListActivity::class.java)
-        intent.putExtra(LessonListActivity.INSTRUMENT_COURSE_ARG, item)
-        intent.putExtra(LessonListActivity.INSTRUMENT_ID_ARG, this.intent.getStringExtra(INSTRUMENT_ID_ARG))
-        intent.putExtra(LessonListActivity.INSTRUMENT_NAME_ARG, this.intent.getStringExtra(INSTRUMENT_NAME_ARG))
-        startActivity(intent)
+        LessonListActivityArgs(item,
+                this.intent.getStringExtra(INSTRUMENT_ID_ARG),
+                this.intent.getStringExtra(INSTRUMENT_NAME_ARG)).launch(this)
     }
 
 }

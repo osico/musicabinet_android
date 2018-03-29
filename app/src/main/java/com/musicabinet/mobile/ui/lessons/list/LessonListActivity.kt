@@ -8,7 +8,6 @@ import com.musicabinet.mobile.extensions.createPaymentDialog
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.extensions.toast
 import com.musicabinet.mobile.model.instrument.matrix.LessonItem
-import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentCourse
 import com.musicabinet.mobile.model.instrument.matrix.local.InstrumentLessonList
 import com.musicabinet.mobile.ui.ActionBarActivity
 import com.musicabinet.mobile.ui.lessons.lesson.LessonActivity
@@ -22,13 +21,10 @@ import kotlinx.android.synthetic.main.activity_lesson_list.*
  */
 class LessonListActivity : ActionBarActivity(), LessonListContract.View, LessonListView.LessonBuyButtonListener {
 
-    companion object {
-        const val INSTRUMENT_COURSE_ARG = "INSTRUMENT_COURSE_ARG"
-        const val INSTRUMENT_NAME_ARG = "INSTRUMENT_NAME_ARG"
-        const val INSTRUMENT_ID_ARG = "INSTRUMENT_ID_ARG"
+    private val args by lazy {
+        LessonListActivityArgs.deserializeFrom(intent)
     }
 
-    private lateinit var instrumentCourse: InstrumentCourse
     private lateinit var presenter: LessonListContract.Presenter
     private lateinit var adapter: LessonListPagerAdapter
 
@@ -38,15 +34,13 @@ class LessonListActivity : ActionBarActivity(), LessonListContract.View, LessonL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lesson_list)
 
-        instrumentCourse = intent.getParcelableExtra(INSTRUMENT_COURSE_ARG)
-
-        title = intent.getStringExtra(INSTRUMENT_NAME_ARG)
+        title = args.instrumentName
 
         lessonLayout.setVisible(false)
 
         presenter = LessonListPresenter(this, Injection.provideRepository(),
-                Injection.provideStorage(), instrumentCourse)
-        presenter.getFilters(intent.getStringExtra(INSTRUMENT_ID_ARG))
+                Injection.provideStorage(), args.instrumentCourse)
+        presenter.getFilters(args.instrumentId)
     }
 
     override fun onPause() {
@@ -61,7 +55,7 @@ class LessonListActivity : ActionBarActivity(), LessonListContract.View, LessonL
     override fun showLessonFilter(list: List<InstrumentLessonList>) {
         progressBar.setVisible(false)
 
-        adapter = LessonListPagerAdapter(this, list, instrumentCourse, this)
+        adapter = LessonListPagerAdapter(this, list, args.instrumentCourse, this)
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
         lessonLayout.setVisible(true)
@@ -80,7 +74,7 @@ class LessonListActivity : ActionBarActivity(), LessonListContract.View, LessonL
     }
 
     override fun onBuyButtonClick() {
-        presenter.buyLesson(instrumentCourse.id)
+        presenter.buyLesson(args.instrumentCourse.id)
     }
 
     override fun onItemClick(item: LessonItem) {
@@ -111,8 +105,8 @@ class LessonListActivity : ActionBarActivity(), LessonListContract.View, LessonL
     }
 
     override fun showSuccessPayment() {
-        instrumentCourse.productAvailable = true
-        instrumentCourse.productActive = true
+        args.instrumentCourse.productAvailable = true
+        args.instrumentCourse.productActive = true
         adapter.notifyDataSetChanged()
     }
 }
