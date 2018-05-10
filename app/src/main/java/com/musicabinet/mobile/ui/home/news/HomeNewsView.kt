@@ -50,7 +50,6 @@ class HomeNewsView : FrameLayout, HomeNewsContract.View, BaseRecyclerAdapter.OnI
         recyclerView.setVisible(false)
         cvError.setVisible(false)
         cvLoading.setVisible(true)
-        presenter.loadItems()
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -66,7 +65,13 @@ class HomeNewsView : FrameLayout, HomeNewsContract.View, BaseRecyclerAdapter.OnI
         })
     }
 
-    fun onPause() {
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        presenter.loadItems()
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
         presenter.unsubscribe()
     }
 

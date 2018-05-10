@@ -44,9 +44,4 @@ class HomeAdapter(private val context: Context) : PagerAdapter() {
         else
             context.getString(R.string.tutorial_tab)
     }
-
-    fun onPause() {
-        homeNewsView.onPause()
-        homeTutorialView.onPause()
-    }
 }

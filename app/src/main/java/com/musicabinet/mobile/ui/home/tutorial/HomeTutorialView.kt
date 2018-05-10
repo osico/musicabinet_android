@@ -70,7 +70,13 @@ class HomeTutorialView : FrameLayout, HomeTutorialContract.View, BaseRecyclerAda
         })
     }
 
-    fun onPause() {
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        presenter.loadItems()
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
         presenter.unsubscribe()
     }
 

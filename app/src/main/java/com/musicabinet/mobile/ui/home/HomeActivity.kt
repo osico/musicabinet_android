@@ -29,11 +29,4 @@ class HomeActivity : SlideMenuActivity() {
 
         return inflater.inflate(R.layout.activity_home, null, false)
     }
-
-    override fun onPause() {
-        super.onPause()
-        homeVideoView.onPause()
-        adapter.onPause()
-    }
-
 }

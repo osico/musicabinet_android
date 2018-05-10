@@ -50,7 +50,6 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View, BaseRecyclerAdapter.O
         recyclerView.setVisible(false)
         cvError.setVisible(false)
         cvLoading.setVisible(true)
-        presenter.loadItems()
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -66,7 +65,13 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View, BaseRecyclerAdapter.O
         })
     }
 
-    fun onPause() {
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        presenter.loadItems()
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
         presenter.unsubscribe()
     }
 

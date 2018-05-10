@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.home.video
 
+import android.util.Log
 import com.musicabinet.mobile.model.home.HomeData
 import com.musicabinet.mobile.model.home.HomeDataElement
 import com.musicabinet.mobile.repository.MusicabinetRepository
@@ -50,6 +51,7 @@ class HomeVideoPresenter(private val repository: MusicabinetRepository,
     }
 
     override fun unsubscribe() {
+        Log.d("TAG", "Unsubscribe from HomeVideoPresenter")
         subscriptions.clear()
     }
 
