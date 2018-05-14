@@ -11,7 +11,7 @@ import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.home.HomeDataElement
-import com.musicabinet.mobile.ui.home.news.adapter.HomeNewsAdapter
+import com.musicabinet.mobile.ui.home.HomeItemAdapter
 import com.musicabinet.mobile.ui.web.WebVideoActivity
 import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 import kotlinx.android.synthetic.main.view_home_news.view.*
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.view_home_news.view.*
  */
 class HomeNewsView : FrameLayout, HomeNewsContract.View, BaseRecyclerAdapter.OnItemClickListener<HomeDataElement> {
 
-    private var homeNewsAdapter: HomeNewsAdapter? = null
+    private var homeNewsAdapter: HomeItemAdapter? = null
     private lateinit var presenter: HomeNewsContract.Presenter
     private var loading: Boolean = false
     private val linearLayoutManager = LinearLayoutManager(context,
@@ -93,7 +93,7 @@ class HomeNewsView : FrameLayout, HomeNewsContract.View, BaseRecyclerAdapter.OnI
 
     override fun setHomeNewsItem(videoList: List<HomeDataElement>, enablePagination: Boolean) {
         if (homeNewsAdapter == null) {
-            homeNewsAdapter = HomeNewsAdapter(videoList, enablePagination)
+            homeNewsAdapter = HomeItemAdapter(videoList, R.layout.item_home_news, enablePagination)
             recyclerView.layoutManager = linearLayoutManager
             recyclerView.adapter = homeNewsAdapter
         } else {

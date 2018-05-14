@@ -11,7 +11,7 @@ import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.home.HomeDataElement
-import com.musicabinet.mobile.ui.home.video.adapter.HomeVideoAdapter
+import com.musicabinet.mobile.ui.home.HomeItemAdapter
 import com.musicabinet.mobile.ui.web.WebVideoActivity
 import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 import kotlinx.android.synthetic.main.view_home_video.view.*
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.view_home_video.view.*
  */
 class HomeVideoView : FrameLayout, HomeVideoContract.View, BaseRecyclerAdapter.OnItemClickListener<HomeDataElement> {
 
-    private var homeVideoAdapter: HomeVideoAdapter? = null
+    private var homeVideoAdapter: HomeItemAdapter? = null
     private lateinit var presenter: HomeVideoContract.Presenter
     private var loading: Boolean = false
     private val linearLayoutManager = LinearLayoutManager(context,
@@ -93,7 +93,7 @@ class HomeVideoView : FrameLayout, HomeVideoContract.View, BaseRecyclerAdapter.O
 
     override fun setHomeVideoItem(videoList: List<HomeDataElement>, enablePagination: Boolean) {
         if (homeVideoAdapter == null) {
-            homeVideoAdapter = HomeVideoAdapter(videoList, enablePagination)
+            homeVideoAdapter = HomeItemAdapter(videoList, R.layout.item_home_video, enablePagination)
             recyclerView.layoutManager = linearLayoutManager
             recyclerView.adapter = homeVideoAdapter
         } else {
