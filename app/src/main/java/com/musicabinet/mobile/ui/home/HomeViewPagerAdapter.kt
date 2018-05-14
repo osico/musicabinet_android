@@ -13,7 +13,7 @@ import com.musicabinet.mobile.ui.home.tutorial.HomeTutorialView
  * @author Kirchhoff-
  */
 
-class HomeAdapter(private val context: Context) : PagerAdapter() {
+class HomeViewPagerAdapter(private val context: Context) : PagerAdapter() {
 
     private lateinit var homeNewsView: HomeNewsView
     private lateinit var homeTutorialView: HomeTutorialView

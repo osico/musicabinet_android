@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_home.*
  */
 class HomeActivity : SlideMenuActivity() {
 
-    private val adapter = HomeAdapter(this)
+    private val adapter = HomeViewPagerAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

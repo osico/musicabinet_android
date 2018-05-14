@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.inflate
 import com.musicabinet.mobile.model.home.HomeDataElement
-import com.musicabinet.mobile.ui.home.news.adapter.HomeNewsViewHolder
-import com.musicabinet.mobile.ui.home.tutorial.adapter.HomeTutorialViewHolder
-import com.musicabinet.mobile.ui.home.video.adapter.HomeVideoViewHolder
+import com.musicabinet.mobile.ui.home.news.HomeNewsViewHolder
+import com.musicabinet.mobile.ui.home.tutorial.HomeTutorialViewHolder
+import com.musicabinet.mobile.ui.home.video.HomeVideoViewHolder
 import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 
 /**
