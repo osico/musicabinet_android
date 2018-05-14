@@ -98,7 +98,7 @@ class HomeTutorialView : FrameLayout, HomeTutorialContract.View, BaseRecyclerAda
 
     override fun setHomeTutorialItem(videoList: List<HomeDataElement>, enablePagination: Boolean) {
         if (homeTutorialAdapter == null) {
-            homeTutorialAdapter = HomeItemAdapter(videoList, R.layout.item_home_tutorial, enablePagination)
+            homeTutorialAdapter = HomeItemAdapter(videoList, R.layout.item_home_tutorial)
             recyclerView.layoutManager = linearLayoutManager
             recyclerView.adapter = homeTutorialAdapter
         } else {

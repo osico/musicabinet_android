@@ -93,7 +93,7 @@ class HomeNewsView : FrameLayout, HomeNewsContract.View, BaseRecyclerAdapter.OnI
 
     override fun setHomeNewsItem(videoList: List<HomeDataElement>, enablePagination: Boolean) {
         if (homeNewsAdapter == null) {
-            homeNewsAdapter = HomeItemAdapter(videoList, R.layout.item_home_news, enablePagination)
+            homeNewsAdapter = HomeItemAdapter(videoList, R.layout.item_home_news)
             recyclerView.layoutManager = linearLayoutManager
             recyclerView.adapter = homeNewsAdapter
         } else {

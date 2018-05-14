@@ -16,9 +16,10 @@ import com.musicabinet.mobile.utils.BaseRecyclerAdapter
  *
  * General adapter for accumulate all logic for different type of view in HomeScreen.
  */
-class HomeItemAdapter(items: List<HomeDataElement>, @LayoutRes private val itemLayout: Int,
-                      private var shouldShowPaginationProgress: Boolean = true)
+class HomeItemAdapter(items: List<HomeDataElement>, @LayoutRes private val itemLayout: Int)
     : BaseRecyclerAdapter<RecyclerView.ViewHolder, HomeDataElement>(items) {
+
+    private var shouldShowPaginationProgress = true
 
     companion object {
         const val ITEM_FOOTER = 1
@@ -38,7 +39,6 @@ class HomeItemAdapter(items: List<HomeDataElement>, @LayoutRes private val itemL
         }
 
     }
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
