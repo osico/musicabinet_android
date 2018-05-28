@@ -13,15 +13,18 @@ class MethodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(element: MethodItem, listener: OnMethodItemClickListener) {
         with(element) {
+
             itemView.tvDescription.text = description
-            itemView.fabInfo.setVisible(element.information != null)
             itemView.tvMethodName.text = name
-            itemView.fabInfo.setOnClickListener {
+            itemView.videoLayout.setVisible(element.video != null)
+            itemView.videoLayout.setOnClickListener { listener.onVideoClick(element) }
+
+            itemView.bReadNow.setVisible(element.information != null)
+            itemView.bReadNow.setOnClickListener {
                 if (element.information != null)
                     listener.onInfoClick(element.information)
             }
 
-            itemView.setOnClickListener { listener.onVideoClick(element) }
         }
     }
 

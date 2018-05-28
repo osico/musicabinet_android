@@ -115,6 +115,7 @@
     <string name="sound_drums">Drums</string>
     <string name="sound_bass">Bass</string>
     <string name="sound_keys">Keys</string>
+    <string name="read_now">Read now</string>
 
 
     <!-- Resources for LessonInformationActivity -->

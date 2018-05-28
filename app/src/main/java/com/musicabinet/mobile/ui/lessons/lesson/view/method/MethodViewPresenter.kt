@@ -11,7 +11,9 @@ class MethodViewPresenter(private val view: MethodViewContract.View) : MethodVie
         var title = ""
         if (methodItem.name != null)
             title = methodItem.name!!
-        view.openVideo(methodItem.video.meta, title)
+
+        if (methodItem.video != null)
+            view.openVideo(methodItem.video.meta, title)
     }
 
     override fun onInfoClick(information: String) {
