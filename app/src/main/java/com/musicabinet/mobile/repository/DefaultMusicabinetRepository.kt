@@ -94,8 +94,7 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
     override fun getNoteModule(id: String) = ApiFactory.service.getNoteModule(id)
 
     override fun getNoteDiagram(moduleId: String, courseId: String, toneId: String,
-                                chordTypeId: String)
-            = ApiFactory.service.getNoteDiagram(moduleId, courseId, toneId, chordTypeId,
+                                chordTypeId: String) = ApiFactory.service.getNoteDiagram(moduleId, courseId, toneId, chordTypeId,
             true, true, 1, DEFAULT_REQUEST_COUNT,
             DEFAULT_SORT_FIELD, DEFAULT_SORT_DIR, true)
 
@@ -123,5 +122,9 @@ object DefaultMusicabinetRepository : MusicabinetRepository {
                 "content", RequestBody.create(MediaType.parse("text/plain"), file))
         return ApiFactory.service.uploadImprovisation(id, multiPartBody)
     }
+
+    override fun getAccompaniment(instrumentId: String, toneId: String, chordTypeId: String) =
+            ApiFactory.service.getAccompaniment(true, instrumentId,
+                    toneId, chordTypeId, true, true, 1)
 
 }

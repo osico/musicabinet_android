@@ -11,6 +11,7 @@ import com.musicabinet.mobile.model.lesson.machine.note.NoteItemResponse
 import com.musicabinet.mobile.model.lesson.machine.note.image.NoteImageResponse
 import com.musicabinet.mobile.model.lesson.machine.save.ImprovisationStaveResult
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
+import com.musicabinet.mobile.model.lesson.remote.prepared.PreparedAccompaniment
 import com.musicabinet.mobile.model.profile.UserProfile
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -70,4 +71,6 @@ interface MusicabinetRepository {
     fun saveImprovisation(id: String): Single<ImprovisationStaveResult>
 
     fun uploadImprovisation(id: String, file: File): Completable
+
+    fun getAccompaniment(instrumentId: String, toneId: String, chordTypeId: String): Single<PreparedAccompaniment>
 }

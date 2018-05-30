@@ -13,6 +13,7 @@ import com.musicabinet.mobile.model.lesson.machine.note.image.NoteImageResponse
 import com.musicabinet.mobile.model.lesson.machine.save.ImprovisationStaveResult
 import com.musicabinet.mobile.model.lesson.progress.LessonProgress
 import com.musicabinet.mobile.model.lesson.remote.LessonResponse
+import com.musicabinet.mobile.model.lesson.remote.prepared.PreparedAccompaniment
 import com.musicabinet.mobile.model.login.LoginRequestBody
 import com.musicabinet.mobile.model.profile.UserProfile
 import com.musicabinet.mobile.model.register.RegisterRequestBody
@@ -119,6 +120,15 @@ interface MusicabinetService {
     @Multipart
     @POST("/platform/api/file-storage/{fileId}/update")
     fun uploadImprovisation(@Path("fileId") fileId: String,
-                            @Part file: MultipartBody.Part)
-            : Completable
+                            @Part file: MultipartBody.Part): Completable
+
+    @GET("/api/accompaniment")
+    fun getAccompaniment(@Query("activeInLibrary") activeInLibrary: Boolean,
+                         @Query("instrumentId") instrumentId: String,
+                         @Query("toneId") toneId: String,
+                         @Query("chordTypeId") chordTypeId: String,
+                         @Query("enrich") enrich: Boolean,
+                         @Query("withSegments") withSegments: Boolean,
+                         @Query("count") count: Int): Single<PreparedAccompaniment>
+
 }
