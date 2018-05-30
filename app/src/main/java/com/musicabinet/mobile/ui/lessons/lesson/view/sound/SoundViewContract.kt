@@ -27,6 +27,8 @@ interface SoundViewContract {
         fun requestToneAndChord(requestCode: Int)
 
         fun restoreSelectedPosition(position: Int)
+
+        fun showError()
     }
 
     interface Presenter {

@@ -2,8 +2,12 @@ package com.musicabinet.mobile.ui.lessons.lesson.view.sound
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
+import com.musicabinet.mobile.Constants
+import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.repository.MusicabinetRepository
+import com.musicabinet.mobile.repository.keyvalue.KeyValueStorage
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,6 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger
  */
 class SoundViewPresenter(private val view: SoundViewContract.View,
                          private val repository: MusicabinetRepository,
+                         private val storage: KeyValueStorage,
                          private val internalDirectory: File) : SoundViewContract.Presenter {
 
     companion object {
@@ -172,10 +177,12 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_TONE_AND_CHORD_CODE) {
+        if (requestCode == REQUEST_TONE_AND_CHORD_CODE && data != null) {
 
             if (resultCode == Activity.RESULT_OK) {
-
+                val toneOrChordResult: ToneOrChordResult = data
+                        .getParcelableExtra(Constants.GUIDE_MACHINE_ELEMENT_RESULT_ARG)
+                getPreparedAccompaniment(toneOrChordResult.tone.id, toneOrChordResult.chord.id)
             } else {
                 //If user cancel selection should return to previous selected item
                 view.restoreSelectedPosition(currentSelectedPosition)
@@ -184,6 +191,25 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
             }
 
         }
+    }
+
+    private fun getPreparedAccompaniment(toneId: String, chordTypeId: String) {
+        view.showLoading(true)
+
+        subscriptions.add(repository.getAccompaniment(storage.getSelectedInstrumentId(),
+                toneId, chordTypeId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            Log.d("TAG", "Success")
+                        },
+                        {
+                            view.showError()
+                            //If user cancel selection should return to previous selected item
+                            view.restoreSelectedPosition(currentSelectedPosition)
+                            view.showAccompaniment(accompanimentsList[currentSelectedPosition])
+                            checkFileAvailable()
+                        }))
     }
 
     override fun unsubscribe() {

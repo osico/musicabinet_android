@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.configVisibility
@@ -77,7 +78,7 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
                 musicPlayerList[2].setVolume(0f, 0f)
         }
 
-        presenter = SoundViewPresenter(this, Injection.provideRepository(),
+        presenter = SoundViewPresenter(this, Injection.provideRepository(), Injection.provideStorage(),
                 context.filesDir)
 
         ivPlay.setOnClickListener { presenter.play() }
@@ -136,6 +137,10 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
         cDrums.isClickable = !show
         cBass.isClickable = !show
         cKeys.isClickable = !show
+    }
+
+    override fun showError() {
+        Toast.makeText(context, R.string.error_during_loading_accompaniment, Toast.LENGTH_LONG).show()
     }
 
     override fun requestToneAndChord(requestCode: Int) {
