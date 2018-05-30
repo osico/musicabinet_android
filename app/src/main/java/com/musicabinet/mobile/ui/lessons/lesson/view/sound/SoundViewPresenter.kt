@@ -29,6 +29,16 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
     override fun setAccompanimentsData(accompaniments: Set<Accompaniment>) {
         accompanimentsList = ArrayList(accompaniments)
 
+        //Need to move selectF from library element - to end
+        for (i in accompanimentsList.indices) {
+            if (accompanimentsList[i].id == "0") {
+                val bufElement = accompanimentsList[i]
+                accompanimentsList.removeAt(i)
+                accompanimentsList.add(bufElement)
+                break
+            }
+        }
+
         currentSelectedPosition = 0
         if (!accompaniments.isEmpty()) {
             view.setAccompanimentList(accompanimentsList)
