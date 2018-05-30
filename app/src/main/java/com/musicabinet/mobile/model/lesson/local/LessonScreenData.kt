@@ -9,7 +9,7 @@ import com.musicabinet.mobile.model.lesson.remote.Stave
 data class LessonScreenData(val id: String, val title: String,
                             val methodList: List<MethodItem>,
                             val lessonImages: List<LessonData>,
-                            val accompaniments: Set<Accompaniment>,
+                            val accompaniments: MutableSet<Accompaniment>,
                             val spendTime: Long,
                             val hasGuideMachine: Boolean,
                             var guideMachineStave: Stave?,

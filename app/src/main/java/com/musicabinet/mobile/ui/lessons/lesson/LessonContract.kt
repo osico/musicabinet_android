@@ -31,7 +31,7 @@ interface LessonContract {
 
         fun showLessonImages(lessonImagesList: List<LessonData>)
 
-        fun showAccompaniments(accompaniments: Set<Accompaniment>)
+        fun showAccompaniments(accompaniments: MutableSet<Accompaniment>)
 
         fun showGuideMachine(stave: Stave?, userStaveId: Boolean)
 

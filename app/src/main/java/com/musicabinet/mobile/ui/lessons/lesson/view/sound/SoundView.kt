@@ -81,8 +81,12 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     }
 
 
-    fun setAccompaniments(accompaniments: Set<Accompaniment>) {
+    fun setAccompaniments(accompaniments: MutableSet<Accompaniment>) {
+        //Added last item to Accompaniment for selecting item from library
 
+        val selectFromLibrary = Accompaniment("0",
+                resources.getString(R.string.sound_select_from_library), null, null, null)
+        accompaniments.add(selectFromLibrary)
         presenter.setAccompanimentsData(accompaniments)
     }
 

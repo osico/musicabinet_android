@@ -82,7 +82,7 @@ class LessonView : FrameLayout, LessonPagePresenter.OnPageClickListener {
 
     }
 
-    fun setAccompaniments(accompaniments: Set<Accompaniment>) {
+    fun setAccompaniments(accompaniments: MutableSet<Accompaniment>) {
         soundView.setAccompaniments(accompaniments)
     }
 

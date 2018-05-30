@@ -55,7 +55,7 @@ class GuideMachineView : LinearLayout, GuideMachineContract.View {
         guideMachineLayout.addView(rowView)
     }
 
-    fun setAccompaniments(accompaniments: Set<Accompaniment>) {
+    fun setAccompaniments(accompaniments: MutableSet<Accompaniment>) {
         soundView.setAccompaniments(accompaniments)
     }
 

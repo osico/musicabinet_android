@@ -109,7 +109,7 @@ class LessonActivity : AppCompatActivity(), LessonContract.View, MetronomeView.O
         timerView.setStartTime(time, lessonId)
     }
 
-    override fun showAccompaniments(accompaniments: Set<Accompaniment>) {
+    override fun showAccompaniments(accompaniments: MutableSet<Accompaniment>) {
         adapter?.setAccompaniments(accompaniments)
     }
 
