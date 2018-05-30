@@ -85,7 +85,7 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     }
 
 
-    fun setAccompaniments(accompaniments: MutableSet<Accompaniment>) {
+    override fun setAccompaniments(accompaniments: MutableSet<Accompaniment>) {
         //Added last item to Accompaniment for selecting item from library
 
         val selectFromLibrary = Accompaniment("0",

@@ -2,10 +2,10 @@ package com.musicabinet.mobile.ui.lessons.lesson.view.sound
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import com.musicabinet.mobile.Constants
 import com.musicabinet.mobile.model.lesson.machine.ToneOrChordResult
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
+import com.musicabinet.mobile.model.lesson.remote.prepared.PreparedAccompaniment
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import com.musicabinet.mobile.repository.keyvalue.KeyValueStorage
 import io.reactivex.Observable
@@ -200,8 +200,9 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
                 toneId, chordTypeId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        {
-                            Log.d("TAG", "Success")
+                        { preparedAccompaniment: PreparedAccompaniment ->
+                            view.showLoading(false)
+                            view.setAccompaniments(HashSet(preparedAccompaniment.preparedAccompaniment))
                         },
                         {
                             view.showError()
@@ -209,6 +210,7 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
                             view.restoreSelectedPosition(currentSelectedPosition)
                             view.showAccompaniment(accompanimentsList[currentSelectedPosition])
                             checkFileAvailable()
+                            view.showLoading(false)
                         }))
     }
 

@@ -20,6 +20,8 @@ interface SoundViewContract {
 
         fun setAudioFiles(list: List<String>)
 
+        fun setAccompaniments(accompaniments: MutableSet<Accompaniment>)
+
         fun stopPlay()
 
         fun startPlay()
