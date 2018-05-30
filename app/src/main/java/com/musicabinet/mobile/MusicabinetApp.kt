@@ -2,8 +2,6 @@ package com.musicabinet.mobile
 
 import android.app.Application
 import android.content.Context
-import com.crashlytics.android.Crashlytics
-import io.fabric.sdk.android.Fabric
 
 /**
  * @author Kirchhoff-
@@ -30,6 +28,6 @@ class MusicabinetApp : Application() {
 
         musicApp = this
         myApplicationContext = applicationContext
-        Fabric.with(this, Crashlytics())
+        // Fabric.with(this, Crashlytics())
     }
 }

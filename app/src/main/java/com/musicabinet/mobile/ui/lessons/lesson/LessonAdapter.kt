@@ -78,5 +78,6 @@ class LessonAdapter(private val context: Context, private val hasGuideMachine: B
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         guideMachineView?.onActivityResult(requestCode, resultCode, data)
+        lessonView?.onActivityResult(requestCode, resultCode, data)
     }
 }

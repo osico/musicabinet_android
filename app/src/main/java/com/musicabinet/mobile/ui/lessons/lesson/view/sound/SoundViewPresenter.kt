@@ -1,5 +1,7 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.sound
 
+import android.app.Activity
+import android.content.Intent
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import io.reactivex.Observable
@@ -17,6 +19,10 @@ import java.util.concurrent.atomic.AtomicInteger
 class SoundViewPresenter(private val view: SoundViewContract.View,
                          private val repository: MusicabinetRepository,
                          private val internalDirectory: File) : SoundViewContract.Presenter {
+
+    companion object {
+        private val REQUEST_TONE_AND_CHORD_CODE = 5000
+    }
 
     private lateinit var accompanimentsList: ArrayList<Accompaniment>
     private var currentSelectedPosition = 0
@@ -55,10 +61,17 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
     override fun showAccompaniment(position: Int) {
         view.stopPlay()
         isPlaying = false
-        currentSelectedPosition = position
-        view.showAccompaniment(accompanimentsList[currentSelectedPosition])
 
-        checkFileAvailable()
+
+        //User select another element or want to select new accompaniment from library
+        if (position != accompanimentsList.lastIndex) {
+            currentSelectedPosition = position
+            view.showAccompaniment(accompanimentsList[currentSelectedPosition])
+
+            checkFileAvailable()
+        } else {
+            view.requestToneAndChord(REQUEST_TONE_AND_CHORD_CODE)
+        }
     }
 
     override fun play() {
@@ -156,6 +169,21 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
     private fun isFileExist(id: String): Boolean {
         val file = File(internalDirectory, id)
         return file.exists()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_TONE_AND_CHORD_CODE) {
+
+            if (resultCode == Activity.RESULT_OK) {
+
+            } else {
+                //If user cancel selection should return to previous selected item
+                view.restoreSelectedPosition(currentSelectedPosition)
+                view.showAccompaniment(accompanimentsList[currentSelectedPosition])
+                checkFileAvailable()
+            }
+
+        }
     }
 
     override fun unsubscribe() {

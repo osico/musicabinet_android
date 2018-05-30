@@ -1,6 +1,8 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.sound
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.support.constraint.ConstraintLayout
@@ -13,6 +15,7 @@ import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.configVisibility
 import com.musicabinet.mobile.extensions.setVisible
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
+import com.musicabinet.mobile.ui.lessons.lesson.tonechord.ToneAndChordActivity
 import kotlinx.android.synthetic.main.view_sound.view.*
 import java.io.File
 import java.util.*
@@ -110,6 +113,12 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
         cKeys.configVisibility()
     }
 
+    override fun restoreSelectedPosition(position: Int) {
+        sRoad.onItemSelectedListener = null
+        sRoad.setSelection(position)
+        sRoad.onItemSelectedListener = this
+    }
+
     override fun setElementVisibility(visible: Boolean) {
         setVisible(visible)
     }
@@ -127,6 +136,10 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
         cDrums.isClickable = !show
         cBass.isClickable = !show
         cKeys.isClickable = !show
+    }
+
+    override fun requestToneAndChord(requestCode: Int) {
+        ToneAndChordActivity.requestToneAndChord(context as Activity, requestCode, null, null, null, "")
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -219,6 +232,10 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
         }
 
         ivPlay.setImageResource(R.drawable.ic_button_stop)
+    }
+
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        presenter.onActivityResult(requestCode, resultCode, data)
     }
 
 }

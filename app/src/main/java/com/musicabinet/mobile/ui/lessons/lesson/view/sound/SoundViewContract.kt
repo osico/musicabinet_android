@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.sound
 
+import android.content.Intent
 import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 
 /**
@@ -22,6 +23,10 @@ interface SoundViewContract {
         fun stopPlay()
 
         fun startPlay()
+
+        fun requestToneAndChord(requestCode: Int)
+
+        fun restoreSelectedPosition(position: Int)
     }
 
     interface Presenter {
@@ -35,6 +40,8 @@ interface SoundViewContract {
         fun stop()
 
         fun getSoundsId(): List<String?>
+
+        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
 
         fun unsubscribe()
     }

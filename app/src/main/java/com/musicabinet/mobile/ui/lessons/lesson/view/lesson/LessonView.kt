@@ -1,6 +1,7 @@
 package com.musicabinet.mobile.ui.lessons.lesson.view.lesson
 
 import android.content.Context
+import android.content.Intent
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -88,5 +89,9 @@ class LessonView : FrameLayout, LessonPagePresenter.OnPageClickListener {
 
     fun onPause() {
         soundView.onPause()
+    }
+
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        soundView.onActivityResult(requestCode, resultCode, data)
     }
 }
