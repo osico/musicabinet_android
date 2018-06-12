@@ -73,6 +73,7 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
                 context.filesDir)
 
         ivPlay.setOnClickListener { presenter.play() }
+        tvSelectFromLibrary.setOnClickListener { presenter.showAccompaniment(0) }
     }
 
 
@@ -118,6 +119,14 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     override fun setAccompanimentList(accompaniments: List<Accompaniment>) {
         val adapter = SoundViewAdapter(context, R.layout.item_sound_spinner, accompaniments)
         sRoad.adapter = adapter
+
+        if (accompaniments.size == 1) {
+            tvSelectFromLibrary.setVisible(true)
+            sRoad.isEnabled = false
+        } else {
+            tvSelectFromLibrary.setVisible(false)
+            sRoad.isEnabled = true
+        }
 
         sRoad.onItemSelectedListener = this
     }
