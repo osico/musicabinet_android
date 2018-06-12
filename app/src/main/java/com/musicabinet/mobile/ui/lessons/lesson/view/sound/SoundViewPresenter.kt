@@ -31,6 +31,7 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
 
     private lateinit var accompanimentsList: ArrayList<Accompaniment>
     private var currentSelectedPosition = 0
+    private var savedLoadedAccompanimentId: String? = null
     private lateinit var fileCounter: AtomicInteger
     private lateinit var musicListId: ArrayList<String>
     private var isPlaying = false
@@ -53,7 +54,21 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
         currentSelectedPosition = 0
         if (!accompaniments.isEmpty()) {
             view.setAccompanimentList(accompanimentsList)
-            view.showAccompaniment(accompanimentsList[currentSelectedPosition])
+
+            if (savedLoadedAccompanimentId == null) {
+                view.showAccompaniment(accompanimentsList[currentSelectedPosition])
+            } else {
+                var selectedPosition = 0
+                for (j in accompanimentsList.indices) {
+                    if (accompanimentsList[j].id == savedLoadedAccompanimentId) {
+                        selectedPosition = j
+                        break
+                    }
+                }
+                view.restoreSelectedPosition(selectedPosition)
+                view.showAccompaniment(accompanimentsList[selectedPosition])
+                savedLoadedAccompanimentId = null
+            }
 
             view.setElementVisibility(true)
 
@@ -202,7 +217,14 @@ class SoundViewPresenter(private val view: SoundViewContract.View,
                 .subscribe(
                         { preparedAccompaniment: PreparedAccompaniment ->
                             view.showLoading(false)
-                            view.setAccompaniments(HashSet(preparedAccompaniment.preparedAccompaniment))
+                            val resultSet = HashSet(preparedAccompaniment.preparedAccompaniment)
+
+                            if (!preparedAccompaniment.preparedAccompaniment.isEmpty()) {
+                                savedLoadedAccompanimentId = preparedAccompaniment.preparedAccompaniment[0].id
+                            }
+
+                            resultSet.addAll(accompanimentsList)
+                            view.setAccompaniments(resultSet)
                         },
                         {
                             view.showError()
