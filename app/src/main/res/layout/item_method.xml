@@ -7,10 +7,22 @@
     android:layout_marginTop="16dp"
     android:orientation="vertical">
 
-    <TextView
+	<TextView
+		android:id="@+id/tvPage"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:alpha="0.5"
+		android:textAllCaps="true"
+		android:textColor="@color/white"
+		android:textSize="14sp"
+		tools:text="page 1" />
+
+	<TextView
         android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
         android:gravity="center"
         tools:text="some long long text" />
 

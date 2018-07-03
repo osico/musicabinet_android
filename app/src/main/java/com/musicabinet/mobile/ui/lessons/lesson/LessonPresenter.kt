@@ -12,9 +12,7 @@ import com.musicabinet.mobile.model.lesson.remote.Stave
 import com.musicabinet.mobile.repository.MusicabinetRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashSet
+import java.util.Collections
 
 /**
  * @author Kirchhoff-
@@ -56,13 +54,13 @@ class LessonPresenter(private val view: LessonContract.View,
                     val lessonImageList = ArrayList<LessonData>()
                     val accompaniments = HashSet<Accompaniment>()
                     var guideMachineStave: Stave? = null
-                    for (lessonPart in lessonResponse.lessonParts) {
-                        if (lessonPart.video != null && lessonPart.video!!.video != null)
-                            methodList.add(MethodItem(lessonPart.video!!.description,
-                                    lessonPart.description, lessonPart.video!!.name, lessonPart.video!!.video!!))
-                    }
 
                     for (i in lessonResponse.lessonParts.indices) {
+
+	                    if (lessonResponse.lessonParts[i].video != null && lessonResponse.lessonParts[i].video!!.video != null)
+		                    methodList.add(MethodItem(lessonResponse.lessonParts[i].video!!.description,
+			                    lessonResponse.lessonParts[i].description, lessonResponse.lessonParts[i].video!!.name, lessonResponse.lessonParts[i].video!!.video!!, i + 1))
+
                         val images = ArrayList<String>()
                         val bufI = i
                         for (exercise in lessonResponse.lessonParts[i].exercisesList) {
@@ -110,13 +108,13 @@ class LessonPresenter(private val view: LessonContract.View,
                     val lessonImageList = ArrayList<LessonData>()
                     val accompaniments = HashSet<Accompaniment>()
                     var guideMachineStave: Stave? = null
-                    for (lessonPart in lessonResponse.lessonParts) {
-                        if (lessonPart.video != null && lessonPart.video!!.video != null)
-                            methodList.add(MethodItem(lessonPart.video!!.description,
-                                    lessonPart.description, lessonPart.video!!.name, lessonPart.video!!.video!!))
-                    }
 
                     for (i in lessonResponse.lessonParts.indices) {
+
+	                    if (lessonResponse.lessonParts[i].video != null && lessonResponse.lessonParts[i].video!!.video != null)
+		                    methodList.add(MethodItem(lessonResponse.lessonParts[i].video!!.description,
+			                    lessonResponse.lessonParts[i].description, lessonResponse.lessonParts[i].video!!.name, lessonResponse.lessonParts[i].video!!.video!!, i + 1))
+
                         val images = ArrayList<String>()
                         val bufI = i
                         for (exercise in lessonResponse.lessonParts[i].exercisesList) {
