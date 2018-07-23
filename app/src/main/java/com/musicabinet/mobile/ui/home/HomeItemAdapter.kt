@@ -33,7 +33,7 @@ class HomeItemAdapter(items: List<HomeDataElement>, @LayoutRes private val itemL
         return when (itemLayout) {
             R.layout.item_home_tutorial -> HomeTutorialViewHolder(parent.inflate(R.layout.item_home_tutorial))
             R.layout.item_home_video -> HomeVideoViewHolder(parent.inflate(R.layout.item_home_video))
-            else -> HomeTutorialViewHolder(parent.inflate(R.layout.item_home_news))
+            else -> HomeTutorialViewHolder(parent.inflate(R.layout.item_home_tutorial))
         }
 
     }
