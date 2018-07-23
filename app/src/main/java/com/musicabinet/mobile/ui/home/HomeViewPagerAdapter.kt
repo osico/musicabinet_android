@@ -4,9 +4,8 @@ import android.content.Context
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
-
 import com.musicabinet.mobile.R
-import com.musicabinet.mobile.ui.home.news.HomeNewsView
+import com.musicabinet.mobile.ui.home.tools.HomeToolsView
 import com.musicabinet.mobile.ui.home.tutorial.HomeTutorialView
 
 /**
@@ -15,18 +14,18 @@ import com.musicabinet.mobile.ui.home.tutorial.HomeTutorialView
 
 class HomeViewPagerAdapter(private val context: Context) : PagerAdapter() {
 
-    private lateinit var homeNewsView: HomeNewsView
+    private lateinit var homeToolsView: HomeToolsView
     private lateinit var homeTutorialView: HomeTutorialView
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         return if (position == 0) {
-            homeNewsView = HomeNewsView(context)
-            container.addView(homeNewsView)
-            homeNewsView
-        } else {
             homeTutorialView = HomeTutorialView(context)
             container.addView(homeTutorialView)
             homeTutorialView
+        } else {
+            homeToolsView = HomeToolsView(context)
+            container.addView(homeToolsView)
+            homeToolsView
         }
     }
 
@@ -40,8 +39,8 @@ class HomeViewPagerAdapter(private val context: Context) : PagerAdapter() {
 
     override fun getPageTitle(position: Int): CharSequence? {
         return if (position == 0)
-            context.getString(R.string.news_tab)
-        else
             context.getString(R.string.tutorial_tab)
+        else
+            context.getString(R.string.free_tools_tab)
     }
 }

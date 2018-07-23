@@ -22,8 +22,8 @@
     <string name="error_loading_home_news">Error during loading home news</string>
     <string name="error_loading_home_tutorial">Error during loading home tutorial</string>
     <string name="error_open_video">There are no application for open video</string>
-    <string name="news_tab">News</string>
     <string name="tutorial_tab">Tutorial</string>
+    <string name="free_tools_tab">Free tools</string>
 
     <!-- Resources for InstrumentScreen -->
     <string name="select_instrument">Select the instrument</string>

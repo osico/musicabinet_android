@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.extensions.inflate
 import com.musicabinet.mobile.model.home.HomeDataElement
-import com.musicabinet.mobile.ui.home.news.HomeNewsViewHolder
 import com.musicabinet.mobile.ui.home.tutorial.HomeTutorialViewHolder
 import com.musicabinet.mobile.ui.home.video.HomeVideoViewHolder
 import com.musicabinet.mobile.utils.BaseRecyclerAdapter
@@ -32,10 +31,9 @@ class HomeItemAdapter(items: List<HomeDataElement>, @LayoutRes private val itemL
         }
 
         return when (itemLayout) {
-            R.layout.item_home_news -> HomeNewsViewHolder(parent.inflate(R.layout.item_home_news))
             R.layout.item_home_tutorial -> HomeTutorialViewHolder(parent.inflate(R.layout.item_home_tutorial))
             R.layout.item_home_video -> HomeVideoViewHolder(parent.inflate(R.layout.item_home_video))
-            else -> HomeNewsViewHolder(parent.inflate(R.layout.item_home_news))
+            else -> HomeTutorialViewHolder(parent.inflate(R.layout.item_home_news))
         }
 
     }
@@ -43,8 +41,6 @@ class HomeItemAdapter(items: List<HomeDataElement>, @LayoutRes private val itemL
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
 
-        if (holder is HomeNewsViewHolder)
-            holder.bind(getItem(position))
         if (holder is HomeTutorialViewHolder)
             holder.bind(getItem(position))
         if (holder is HomeVideoViewHolder)
