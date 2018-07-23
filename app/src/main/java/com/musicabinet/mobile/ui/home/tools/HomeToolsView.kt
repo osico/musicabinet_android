@@ -1,5 +1,6 @@
 package com.musicabinet.mobile.ui.home.tools
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
@@ -7,8 +8,10 @@ import android.support.v7.widget.PagerSnapHelper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import com.musicabinet.mobile.Injection
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.model.home.HomeToolsElement
+import com.musicabinet.mobile.ui.cabinet.CabinetActivity
 import com.musicabinet.mobile.ui.lessons.lesson.LessonActivity
 import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 import kotlinx.android.synthetic.main.view_home_tools.view.*
@@ -35,7 +38,7 @@ class HomeToolsView : FrameLayout, HomeToolsContract.View, BaseRecyclerAdapter.O
     fun init() {
         LayoutInflater.from(context).inflate(R.layout.view_home_tools, this, true)
 
-        presenter = HomeToolsPresenter(this)
+        presenter = HomeToolsPresenter(this, Injection.provideStorage())
     }
 
     override fun onAttachedToWindow() {
@@ -61,5 +64,10 @@ class HomeToolsView : FrameLayout, HomeToolsContract.View, BaseRecyclerAdapter.O
         val intent = Intent(context, LessonActivity::class.java)
         intent.putExtra(LessonActivity.LESSON_ID_ARG, id)
         context.startActivity(intent)
+    }
+
+    override fun openRegistrationScreen() {
+        context.startActivity(Intent(context, CabinetActivity::class.java))
+        (context as Activity).finish()
     }
 }

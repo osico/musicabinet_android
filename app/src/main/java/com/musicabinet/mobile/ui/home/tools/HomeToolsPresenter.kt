@@ -1,11 +1,13 @@
 package com.musicabinet.mobile.ui.home.tools
 
 import com.musicabinet.mobile.model.home.HomeToolsElement
+import com.musicabinet.mobile.repository.keyvalue.KeyValueStorage
 
 /**
  * @author Kirchhoff-
  */
-class HomeToolsPresenter(private val view: HomeToolsContract.View) : HomeToolsContract.Presenter {
+class HomeToolsPresenter(private val view: HomeToolsContract.View,
+                         private val storage: KeyValueStorage) : HomeToolsContract.Presenter {
 
     override fun subscribe() {
         view.showTools(listOf(GYM_ITEM, REM_ITEM, SRM_ITEM))
@@ -18,6 +20,10 @@ class HomeToolsPresenter(private val view: HomeToolsContract.View) : HomeToolsCo
     }
 
     override fun onToolsClick(item: HomeToolsElement) {
-        view.openTools(item.id)
+
+        if (storage.isUserExist())
+            view.openTools(item.id)
+        else
+            view.openRegistrationScreen()
     }
 }

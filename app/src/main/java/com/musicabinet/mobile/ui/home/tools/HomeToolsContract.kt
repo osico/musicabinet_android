@@ -13,6 +13,8 @@ interface HomeToolsContract {
 
         fun openTools(id: String)
 
+        fun openRegistrationScreen()
+
     }
 
     interface Presenter {
