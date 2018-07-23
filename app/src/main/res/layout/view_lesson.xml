@@ -28,22 +28,30 @@
             <ImageView
                 android:id="@+id/ivLesson1"
                 android:layout_width="match_parent"
-                android:layout_height="180dp" />
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop" />
 
             <ImageView
                 android:id="@+id/ivLesson2"
                 android:layout_width="match_parent"
-                android:layout_height="180dp" />
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop" />
 
             <ImageView
                 android:id="@+id/ivLesson3"
                 android:layout_width="match_parent"
-                android:layout_height="180dp" />
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop" />
 
             <ImageView
                 android:id="@+id/ivLesson4"
                 android:layout_width="match_parent"
-                android:layout_height="180dp" />
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop" />
 
             <com.musicabinet.mobile.ui.lessons.lesson.view.lesson.page.LessonPageView
                 android:id="@+id/bottomPageView"
