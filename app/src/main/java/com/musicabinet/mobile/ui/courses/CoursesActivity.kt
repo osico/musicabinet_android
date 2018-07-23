@@ -65,7 +65,7 @@ class CoursesActivity : ActionBarActivity(), CoursesContract.View, BaseRecyclerA
     }
 
     override fun showPaymentDialog() {
-        createPaymentDialog()
+        createPaymentDialog(intent.getStringExtra(INSTRUMENT_ID_ARG))
     }
 
 

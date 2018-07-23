@@ -64,7 +64,7 @@ fun ImageView.loadLessonImage(url: String?) {
 }
 
 
-fun Activity.createPaymentDialog() {
+fun Activity.createPaymentDialog(id: String) {
     val title = getString(R.string.buy_dialog_title)
     val foregroundColorSpan = ForegroundColorSpan(Color.BLACK)
     val ssBuilder = SpannableStringBuilder(title)
@@ -79,7 +79,7 @@ fun Activity.createPaymentDialog() {
             .setMessage(R.string.buy_dialog_text)
             .setPositiveButton(R.string.go_to_site) { _, _ ->
                 val browserIntent = Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://app.musicabinet.com"))
+                        Uri.parse("https://musicabinet.com/pricing/$id"))
                 startActivity(browserIntent)
             }
             .setNegativeButton(R.string.cancel, null)

@@ -91,7 +91,7 @@ class LessonListActivity : ActionBarActivity(), LessonListContract.View, LessonL
     }
 
     override fun showPaymentDialog() {
-        createPaymentDialog()
+        createPaymentDialog(args.instrumentId)
     }
 
     override fun showAuthorizedError() {
