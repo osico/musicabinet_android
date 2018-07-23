@@ -1,6 +1,7 @@
 package com.musicabinet.mobile.ui.home.tools
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PagerSnapHelper
 import android.util.AttributeSet
@@ -8,12 +9,14 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.musicabinet.mobile.R
 import com.musicabinet.mobile.model.home.HomeToolsElement
+import com.musicabinet.mobile.ui.lessons.lesson.LessonActivity
+import com.musicabinet.mobile.utils.BaseRecyclerAdapter
 import kotlinx.android.synthetic.main.view_home_tools.view.*
 
 /**
  * @author Kirchhoff-
  */
-class HomeToolsView : FrameLayout, HomeToolsContract.View {
+class HomeToolsView : FrameLayout, HomeToolsContract.View, BaseRecyclerAdapter.OnItemClickListener<HomeToolsElement> {
 
     private lateinit var presenter: HomeToolsContract.Presenter
 
@@ -45,11 +48,18 @@ class HomeToolsView : FrameLayout, HomeToolsContract.View {
         recyclerView.layoutManager = LinearLayoutManager(context,
                 LinearLayoutManager.HORIZONTAL, false)
         val snapHelper = PagerSnapHelper()
+        adapter.setOnItemClickListener(this)
         snapHelper.attachToRecyclerView(recyclerView)
         recyclerView.adapter = adapter
     }
 
+    override fun onItemClick(item: HomeToolsElement) {
+        presenter.onToolsClick(item)
+    }
+
     override fun openTools(id: String) {
-        //Empty for now
+        val intent = Intent(context, LessonActivity::class.java)
+        intent.putExtra(LessonActivity.LESSON_ID_ARG, id)
+        context.startActivity(intent)
     }
 }

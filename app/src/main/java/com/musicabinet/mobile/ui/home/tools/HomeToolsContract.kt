@@ -19,5 +19,7 @@ interface HomeToolsContract {
 
         fun subscribe()
 
+        fun onToolsClick(item: HomeToolsElement)
+
     }
 }

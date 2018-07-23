@@ -17,4 +17,7 @@ class HomeToolsPresenter(private val view: HomeToolsContract.View) : HomeToolsCo
         private val SRM_ITEM = HomeToolsElement("SRM", "Sight reading machine", "e39b759a-33dc-4ee4-8541-8fc27b9a3fcf")
     }
 
+    override fun onToolsClick(item: HomeToolsElement) {
+        view.openTools(item.id)
+    }
 }

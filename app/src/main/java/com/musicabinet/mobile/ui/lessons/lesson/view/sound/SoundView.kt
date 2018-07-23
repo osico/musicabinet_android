@@ -123,9 +123,11 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
         if (accompaniments.size == 1) {
             tvSelectFromLibrary.setVisible(true)
             sRoad.isEnabled = false
+            sRoad.setVisible(false)
         } else {
             tvSelectFromLibrary.setVisible(false)
             sRoad.isEnabled = true
+            sRoad.setVisible(true)
         }
 
         sRoad.onItemSelectedListener = this
@@ -239,4 +241,3 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     }
 
 }
-
