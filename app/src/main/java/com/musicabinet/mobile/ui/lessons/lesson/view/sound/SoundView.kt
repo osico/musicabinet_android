@@ -7,6 +7,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
@@ -19,17 +20,22 @@ import com.musicabinet.mobile.model.lesson.remote.Accompaniment
 import com.musicabinet.mobile.ui.lessons.lesson.tonechord.ToneAndChordActivity
 import kotlinx.android.synthetic.main.view_sound.view.*
 import java.io.File
+import java.io.IOException
+import java.lang.IllegalStateException
 import java.util.*
 
 
 /**
  * @author Kirchhoff-
  */
-class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundViewContract.View {
+class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundViewContract.View, MediaPlayer.OnPreparedListener {
 
     private lateinit var presenter: SoundViewContract.Presenter
     private var musicPlayerList: MutableList<MediaPlayer> = java.util.ArrayList()
     private var check: Int = 0
+
+    private var preparedMediaPlayer: Int = 0
+    private var canPlay: Boolean = true
 
     constructor(context: Context) : super(context) {
         init()
@@ -195,45 +201,120 @@ class SoundView : ConstraintLayout, AdapterView.OnItemSelectedListener, SoundVie
     }
 
     override fun stopPlay() {
-        for (item in musicPlayerList)
+        canPlay = false
+        for (item in musicPlayerList) {
             item.stop()
+        }
+        for (item in musicPlayerList) {
+            if (item.isPlaying)
+                item.stop()
+        }
 
         ivPlay.setImageResource(R.drawable.ic_button_play)
+        canPlay = true
     }
 
+//    override fun startPlay() {
+//        musicPlayerList.clear()
+//        for (i in presenter.getSoundsId().indices) {
+//            if (presenter.getSoundsId()[i] != null) {
+//                val file = File(context.filesDir, presenter.getSoundsId()[i])
+//
+//                val mediaPlayer: MediaPlayer? = MediaPlayer.create(context,
+//                        Uri.parse(file.absolutePath))
+//                if (mediaPlayer != null) {
+//                    musicPlayerList.add(MediaPlayer.create(context,
+//                            Uri.parse(file.absolutePath)))
+//
+//                    //If accompaniment - don't check set sound to 0
+//                    if (i == 0 && !cDrums.isChecked)
+//                        musicPlayerList[0].setVolume(0f, 0f)
+//                    if (i == 1 && !cBass.isChecked)
+//                        musicPlayerList[1].setVolume(0f, 0f)
+//                    if (i == 2 && !cKeys.isChecked)
+//                        musicPlayerList[2].setVolume(0f, 0f)
+//
+//                    //Start play all accompaniments
+//                    //  musicPlayerList[i].isLooping = true
+//                    musicPlayerList[i].start()
+//                    //  musicPlayerList[i].isLooping = false
+//                    musicPlayerList[i].setOnCompletionListener {
+//                        musicPlayerList[i].seekTo(0)
+//                        musicPlayerList[i].start()
+//                    }
+//                }
+//            }
+//        }
+//
+//        ivPlay.setImageResource(R.drawable.ic_button_stop)
+//    }
+
     override fun startPlay() {
+        if (canPlay)
+            startPlayNew()
+    }
+
+    fun startPlayNew(){
         musicPlayerList.clear()
         for (i in presenter.getSoundsId().indices) {
-            if (presenter.getSoundsId()[i] != null) {
-                val file = File(context.filesDir, presenter.getSoundsId()[i])
+            presenter.getSoundsId()[i]?.let {
+                try {
+                    val file = File(context.filesDir, presenter.getSoundsId()[i])
 
-                val mediaPlayer: MediaPlayer? = MediaPlayer.create(context,
-                        Uri.parse(file.absolutePath))
-                if (mediaPlayer != null) {
-                    musicPlayerList.add(MediaPlayer.create(context,
-                            Uri.parse(file.absolutePath)))
+                    val mediaPlayer: MediaPlayer? = MediaPlayer.create(context,
+                            Uri.parse(file.absolutePath))
+                    mediaPlayer?.let {
+                        //                    musicPlayerList.add(MediaPlayer.create(context, Uri.parse(file.absolutePath)))
+                        musicPlayerList.add(it)
 
-                    //If accompaniment - don't check set sound to 0
-                    if (i == 0 && !cDrums.isChecked)
-                        musicPlayerList[0].setVolume(0f, 0f)
-                    if (i == 1 && !cBass.isChecked)
-                        musicPlayerList[1].setVolume(0f, 0f)
-                    if (i == 2 && !cKeys.isChecked)
-                        musicPlayerList[2].setVolume(0f, 0f)
+                        //If accompaniment - don't check set sound to 0
+                        if (i == 0 && !cDrums.isChecked)
+                            it.setVolume(0f, 0f)
+                        if (i == 1 && !cBass.isChecked)
+                            it.setVolume(0f, 0f)
+                        if (i == 2 && !cKeys.isChecked) {
+                            it.setVolume(0f, 0f)
+                        }
 
-                    //Start play all accompaniments
-                    //  musicPlayerList[i].isLooping = true
-                    musicPlayerList[i].start()
-                    //  musicPlayerList[i].isLooping = false
-                    musicPlayerList[i].setOnCompletionListener {
-                        musicPlayerList[i].seekTo(0)
-                        musicPlayerList[i].start()
+                        it.setOnCompletionListener {
+                            startAllMediaPlayers(musicPlayerList)
+                        }
+
+                        it.setOnPreparedListener(this)
                     }
+                } catch (e: IOException) {
+                    e.printStackTrace()
                 }
+
             }
         }
 
         ivPlay.setImageResource(R.drawable.ic_button_stop)
+    }
+
+    override fun onPrepared(mp: MediaPlayer?) {
+        mp?.let {
+            preparedMediaPlayer++
+            Log.d("SoundView", "preparedMediaPlayer= $preparedMediaPlayer")
+            if (preparedMediaPlayer == 3) {
+                startAllMediaPlayers(musicPlayerList)
+                preparedMediaPlayer = 0
+                Log.d("SoundView", "preparedMediaPlayer= $preparedMediaPlayer")
+            }
+        }
+    }
+
+    fun startAllMediaPlayers(musicPlayerList: MutableList<MediaPlayer>) {
+        for (i in musicPlayerList) {
+            //i.seekTo(0)
+            i.start()
+        }
+    }
+
+    fun stopAllMediaPlayers(musicPlayerList: MutableList<MediaPlayer>) {
+        for (i in musicPlayerList) {
+            i.stop()
+        }
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

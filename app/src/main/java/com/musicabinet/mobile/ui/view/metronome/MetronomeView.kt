@@ -1,7 +1,10 @@
 package com.musicabinet.mobile.ui.view.metronome
 
 import android.content.Context
+import android.media.AudioAttributes
+import android.media.AudioManager
 import android.media.MediaPlayer
+import android.media.SoundPool
 import android.os.Handler
 import android.os.Looper
 import android.support.constraint.ConstraintLayout
@@ -14,14 +17,15 @@ import kotlinx.android.synthetic.main.view_metronome.view.*
 /**
  * @author Kirchhoff-
  */
-class MetronomeView : ConstraintLayout, MetronomeContract.View {
+class MetronomeView : ConstraintLayout, MetronomeContract.View, SoundPool.OnLoadCompleteListener {
 
     private val presenter = MetronomePresenter(this)
 
-    private lateinit var mediaPlayer: MediaPlayer
+    private lateinit var soundPool: SoundPool
     private var tickRunnable: Runnable? = null
     private lateinit var tickHandler: Handler
     private var listener: OnMetronomeStatusChange? = null
+    private var soundId: Int? = null
 
     constructor(context: Context) : super(context) {
         init()
@@ -44,7 +48,22 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
         metronomeBackground.setOnClickListener { listener?.onMetronomeBackgroundClick() }
         actionLayout.setOnClickListener { }
 
-        mediaPlayer = MediaPlayer.create(context, R.raw.wood)
+        if(android.os.Build.VERSION.SDK_INT >= 21) {
+            val soundPoolBuilder = SoundPool.Builder()
+            soundPoolBuilder.setMaxStreams(1)
+            soundPoolBuilder.setAudioAttributes(
+                    AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_MEDIA)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .build()
+            )
+            soundPool = soundPoolBuilder.build()
+        } else {
+            soundPool = SoundPool(1, AudioManager.STREAM_MUSIC, 0)
+        }
+        soundPool.setOnLoadCompleteListener(this)
+        soundId = soundPool.load(context, R.raw.wood, 1)
+
         tickHandler = Handler(Looper.getMainLooper())
 
         presenter.subscribe()
@@ -70,7 +89,9 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
             tickHandler.removeCallbacks(tickRunnable)
 
         tickRunnable = Runnable {
-            mediaPlayer.start()
+            soundId?.let {
+                soundPool.play(it, 1f, 1f, 0, 0, 1f)
+            }
             tickHandler.postDelayed(tickRunnable, 60000 / period)
         }
 
@@ -81,16 +102,22 @@ class MetronomeView : ConstraintLayout, MetronomeContract.View {
 
     override fun stopTick() {
         tickHandler.removeCallbacks(tickRunnable)
-        mediaPlayer.stop()
+        soundId?.let {
+            soundPool.stop(it)
+        }
 
-        mediaPlayer = MediaPlayer.create(context, R.raw.wood)
         listener?.metronomeStatusChange(false)
     }
 
+    override fun onLoadComplete(soundPool: SoundPool?, sampleId: Int, status: Int) {
+
+    }
 
     fun setOnMetronomeStatusChange(callback: OnMetronomeStatusChange) {
         listener = callback
     }
+
+
 
 
     interface OnMetronomeStatusChange {
